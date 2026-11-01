@@ -55,8 +55,7 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
   return (
     <Shell lang={lang} section="prices" pathFor={path.prices} jsonld={ld}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Prices 2027')}</span>
+        <Crumbs lang={lang} items={crumbs} current={t(lang, 'Prices 2027')} />
         <h1 className="display">{t(lang, 'What it costs')}</h1>
         <p className="lead">{t(lang, 'All prices are in euros. Courses and passages are priced per person, with the boat, instructor and marina fees included; charter is the price of the whole boat for a week. For courses and passages you pay a 30% deposit to book and the rest six weeks before you sail.')}</p>
         <nav className="toc" aria-label={t(lang, 'On this page')}>{toc.map(([id, label]) => <a key={id} href={`#${id}`}><span className="chip">{label}</span></a>)}</nav>

@@ -33,8 +33,7 @@ export default async function Instructors({ params }: PageProps<'/[lang]/instruc
   return (
     <Shell lang={lang} section="instructors" pathFor={path.instructors} jsonld={ld}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Instructors and skippers')}</span>
+        <Crumbs lang={lang} items={crumbs} current={t(lang, 'Instructors and skippers')} />
         <h1 className="display">{t(lang, 'The people on board with you')}</h1>
         <p className="lead">{t(lang, 'Our instructors hold IYT instructor qualifications and teach at most four students at a time. Our skippers lead the training passages and sign your miles in the logbook.')}</p>
       </section>

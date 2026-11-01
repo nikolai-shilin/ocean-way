@@ -41,13 +41,14 @@ export function breadcrumbs(lang: Lang, items: [string, string][]) {
 }
 
 /** Visible breadcrumbs matching the BreadcrumbList. The last item is the current page. */
-export function Crumbs({ lang, items }: { lang: Lang; items: [string, string][] }) {
+/** Breadcrumb line. `current` replaces the last item's label, so the trail doubles as the page kicker ("Home / Our fleet"). */
+export function Crumbs({ lang, items, current }: { lang: Lang; items: [string, string][]; current?: React.ReactNode }) {
   return (
     <nav className="crumbs" aria-label={t(lang, 'Breadcrumb')}>
       <ol>
         {items.map(([name, href], i) => (
           <li key={href} aria-current={i === items.length - 1 ? 'page' : undefined}>
-            {i === items.length - 1 ? name : <a href={href}>{name}</a>}
+            {i === items.length - 1 ? (current ?? name) : <a href={href}>{name}</a>}
           </li>
         ))}
       </ol>

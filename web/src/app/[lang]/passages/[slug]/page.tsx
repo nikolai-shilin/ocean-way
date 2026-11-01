@@ -62,8 +62,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   return (
     <Shell lang={lang} section="passages" pathFor={(l) => path.passage(l, slug)} jsonld={ld}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Training passage')} · {when}</span>
+        <Crumbs lang={lang} items={crumbs} current={<>{t(lang, 'Training passage')} · {when}</>} />
         <h1 className="display">{route}</h1>
         <p className="lead">{summary}</p>
         <div className="facts">

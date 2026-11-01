@@ -25,8 +25,7 @@ export default async function Fleet({ params }: PageProps<'/[lang]/fleet'>) {
   return (
     <Shell lang={lang} section="fleet" pathFor={path.fleet} jsonld={ld}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Our fleet')}</span>
+        <Crumbs lang={lang} items={crumbs} current={t(lang, 'Our fleet')} />
         <h1 className="display">{t(lang, 'The boats we sail and teach on')}</h1>
         <p className="lead">{t(lang, 'Every course and passage runs on our own yachts, looked after by our own team between trips. When a boat is not out with students, you can charter it, bareboat or with a skipper.')}</p>
       </section>

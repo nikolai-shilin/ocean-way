@@ -54,8 +54,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
   return (
     <Shell lang={lang} section="fleet" pathFor={(l) => path.boat(l, slug)} jsonld={ld}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Our fleet')} · {t(lang, y.base)}</span>
+        <Crumbs lang={lang} items={crumbs} current={t(lang, y.base)} />
         <h1 className="display">{y.model}</h1>
         <p className="lead">{t(lang, y.description)}</p>
         <div className="facts">

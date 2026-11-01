@@ -35,8 +35,7 @@ export default async function Passages({ params }: PageProps<'/[lang]/passages'>
   return (
     <Shell lang={lang} section="passages" pathFor={path.passages} jsonld={ld} scripts={[MAP_JS]}>
       <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="kicker">{t(lang, 'Skipper practicum · 2027')}</span>
+        <Crumbs lang={lang} items={crumbs} current={t(lang, 'Skipper practicum · 2027')} />
         <h1 className="display">{t(lang, 'Training passages along the Turkish coast')}</h1>
         <p className="lead">{t(lang, 'One-way passages between ports in Turkey and Northern Cyprus, Saturday to Saturday, with an instructor on board. You plan the legs, stand watches and log the sea miles you need for Yachtmaster. Four places on each boat.')}</p>
       </section>
