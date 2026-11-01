@@ -1,0 +1,29 @@
+{
+  "slug": "dinghy-outboard",
+  "title": "Dinghy and outboard: using a yacht tender safely",
+  "h1": "The dinghy and its outboard",
+  "lead": "The tender takes you ashore for dinner, shopping and a swim, and it causes more small accidents than the yacht does. Here is how to rig it, drive it, land it and get back on board when the outboard stops.",
+  "description": "How to use a yacht tender: inflating and checking it, towing or lifting it aboard, fitting and starting a small outboard, loading, lifejackets and a torch, beaches and quays, theft, swimmers and rowing home.",
+  "summary": [
+    "Never tow the dinghy with the outboard on it, and lift it aboard before a rough passage.",
+    "Fit and remove the outboard with a person already in the dinghy and a safety line tied to the yacht.",
+    "Wear lifejackets in the dinghy, clip the kill cord to yourself and carry a torch after dark.",
+    "Go slowly in anchorages, lock the dinghy ashore and always carry oars, because an offshore wind can blow you out to sea."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Harbour and anchorage",
+  "toc": [
+    ["tender", "The tender and its kit"],
+    ["towing", "Towing or lifting"],
+    ["mount", "Fitting the outboard"],
+    ["start", "Starting the outboard"],
+    ["loading", "Loading and safety"],
+    ["driving", "Driving in an anchorage"],
+    ["landing", "Beaches and quays"],
+    ["theft", "Theft and the night"],
+    ["oars", "When the engine stops"],
+    ["practise", "Practise it on the water"]
+  ]
+}

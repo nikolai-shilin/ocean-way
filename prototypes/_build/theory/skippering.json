@@ -1,0 +1,30 @@
+{
+  "slug": "skippering",
+  "title": "Skippering a charter yacht: leading the crew",
+  "h1": "Taking command as skipper",
+  "lead": "On a bareboat charter the skipper is responsible for the yacht and for everyone on board, often with a crew of friends or family. Good skippering is mostly clear jobs, calm calls, honest decisions and looking after people.",
+  "description": "How to skipper a bareboat charter yacht: legal responsibility, choosing and briefing the crew, jobs and calls for manoeuvres, planning the day, saying no, chores, seasickness, heat, fatigue, children and the debrief.",
+  "summary": [
+    "The skipper named on the charter papers is responsible in law for the yacht and everyone on board.",
+    "Before every manoeuvre, give each person one job, and during it let only one voice give the calls.",
+    "Decide early and say no clearly when weather, alcohol or tiredness make a plan unsafe.",
+    "Watch your crew for seasickness, heat and fatigue, and debrief each manoeuvre calmly, without blame."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Skipper and crew",
+  "toc": [
+    ["command", "What the skipper is"],
+    ["crew", "Choosing the crew"],
+    ["briefing", "Briefings that work"],
+    ["jobs", "A job for everyone"],
+    ["calls", "Clear calls, one voice"],
+    ["day", "Planning the day"],
+    ["decisions", "Decisions and saying no"],
+    ["people", "Looking after people"],
+    ["children", "Children and nervous crew"],
+    ["debrief", "The debrief"],
+    ["practise", "Practise it on the water"]
+  ]
+}

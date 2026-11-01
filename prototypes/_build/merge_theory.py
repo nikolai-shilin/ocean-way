@@ -8,7 +8,7 @@ FIX = {
 }
 for l in ['ru', 'de', 'es']:
     out = {}
-    for part in ('a', 'b', 'c', 'd'):
+    for part in ('a', 'b', 'c', 'd', 'e'):
         p = f'{HERE}/tr-{l}-theory-{part}.json'
         if os.path.exists(p):
             out.update(json.load(open(p)))

@@ -1,0 +1,27 @@
+{
+  "slug": "sail-trim",
+  "title": "Sail trim on a cruising yacht: telltales, twist and balance",
+  "h1": "Trimming the sails",
+  "lead": "Good trim makes a cruising yacht faster, flatter and lighter on the helm, and it uses only a handful of lines. Here is what each control does, how to read the telltales, and how to stop the boat under sail by heaving-to.",
+  "description": "Sail trim on a cruising yacht: mainsheet, traveller, genoa cars, halyards, outhaul and kicker, reading telltales, twist, trim from close-hauled to a run, weather helm, heaving-to and short-handed tips.",
+  "summary": [
+    "The sheets set the angle of each sail, and the cars, kicker, outhaul and halyards set its shape.",
+    "Trim the genoa until the telltales on both sides stream back, and move the car until they break evenly.",
+    "A little weather helm is right; heavy weather helm means ease the traveller, flatten the main or reef.",
+    "To heave-to, tack without releasing the genoa sheet, then lock the wheel as if to head up."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Sailing basics",
+  "toc": [
+    ["controls", "The controls"],
+    ["telltales", "Reading the telltales"],
+    ["twist", "Twist"],
+    ["course", "Trim for each course"],
+    ["balance", "Weather helm and balance"],
+    ["heaveto", "Heaving-to"],
+    ["crew", "Sailing short-handed"],
+    ["practise", "Practise it on the water"]
+  ]
+}

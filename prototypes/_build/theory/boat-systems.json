@@ -1,0 +1,27 @@
+{
+  "slug": "boat-systems",
+  "title": "Charter yacht systems: batteries, water, gas and heads",
+  "h1": "Living with the boat's systems",
+  "lead": "On a charter yacht, electricity, water and gas all come from tanks and batteries you carry with you. Knowing how they work, and how fast they run out, makes a week at anchor comfortable and keeps the crew safe.",
+  "description": "A charter yacht's domestic systems: engine and service batteries, the battery switch, reading voltage, charging from the engine, shore power and solar, power use and the fridge, fresh water, gas safety, the heads and holding tank, bilge pumps and seacocks.",
+  "summary": [
+    "Read the service battery voltage at rest: about 12.7 V is full, and below 12.2 V it is half empty and needs charging.",
+    "Fresh water runs out in two or three days with a full crew, so fill up whenever you can and drink bottled water.",
+    "Turn the gas off at the solenoid or bottle after every use, and remember that leaked gas sinks into the bilge.",
+    "Put nothing in the marine toilet that you have not eaten, and use the holding tank in harbours and anchorages."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Boat and engine",
+  "toc": [
+    ["batteries", "Batteries and switches"],
+    ["charging", "Voltage and charging"],
+    ["power", "What uses power"],
+    ["water", "Fresh water"],
+    ["gas", "Gas"],
+    ["heads", "Heads and holding tank"],
+    ["bilge", "Bilge pumps and seacocks"],
+    ["practise", "Practise it on the water"]
+  ]
+}

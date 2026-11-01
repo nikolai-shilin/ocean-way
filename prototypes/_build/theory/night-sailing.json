@@ -1,0 +1,29 @@
+{
+  "slug": "night-sailing",
+  "title": "Night sailing on a yacht: watches, lookout and safety",
+  "h1": "Sailing at night",
+  "lead": "A night passage on a calm sea can be the best sailing of the week, but everything takes longer in the dark and other vessels are only lights. Here is how to prepare before sunset, keep a good lookout, run the watches and arrive safely.",
+  "description": "Night sailing on a yacht: preparing before dark, night vision, keeping a lookout and taking bearings on lights, watch systems, the skipper's night orders, staying clipped on, cold and tiredness, navigating by lighthouses and entering harbour at night.",
+  "summary": [
+    "Reef, cook, rig the jackstays and test every light before sunset, while you can still see what you are doing.",
+    "Protect your night vision with red light only, and take compass bearings on every light that comes closer.",
+    "Run a watch system so someone rested is always on deck, and write night orders that say when to call the skipper.",
+    "Wear a lifejacket and stay clipped on at night, and enter only a harbour you know or wait for daylight."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Rules of the road",
+  "toc": [
+    ["prepare", "Before dark"],
+    ["eyes", "Night vision"],
+    ["lookout", "Keeping a lookout"],
+    ["watches", "Watch systems"],
+    ["orders", "Night orders"],
+    ["deck", "Safety on deck"],
+    ["cold", "Cold and tiredness"],
+    ["lights", "Navigating by lights"],
+    ["harbour", "Entering harbour"],
+    ["practise", "Practise it on the water"]
+  ]
+}

@@ -12,13 +12,15 @@ UPDATED = ('2026-11-01', '1 Nov 2026')
 # Author of every article; the app serves the photo from web/public and the profile at /<lang>/instructors#<slug>.
 AUTHOR = {'slug': 'nikolai', 'name': 'Nikolai Shilin', 'photo': '/people/nikolai.webp', 'job': 'Skipper, IYT Bareboat Skipper'}
 
-ORDER = ['points-of-sail', 'knots', 'tacking-gybing', 'reefing', 'right-of-way', 'navigation-lights', 'buoyage',
-         'med-mooring', 'berthing-alongside', 'anchoring', 'charter-check-in', 'engine-checks', 'engine-handling', 'weather', 'position-fixing', 'tides', 'passage-planning',
+ORDER = ['points-of-sail', 'sail-trim', 'knots', 'tacking-gybing', 'reefing', 'right-of-way', 'navigation-lights', 'night-sailing', 'buoyage',
+         'med-mooring', 'berthing-alongside', 'anchoring', 'dinghy-outboard', 'charter-check-in', 'engine-checks', 'engine-handling', 'boat-systems',
+         'skippering', 'provisioning', 'weather', 'position-fixing', 'pilotage', 'tides', 'passage-planning', 'astronavigation',
          'vhf-procedure', 'man-overboard', 'safety-on-board']
 TOPICS = [('Sailing basics', 'basics', 'How a yacht moves and the handful of knots you use every day.'),
           ('Rules of the road', 'rules', 'Who gives way, what the lights at night are telling you and how to read the buoys.'),
           ('Harbour and anchorage', 'harbour', 'Getting in, tied up and settled for the night.'),
           ('Boat and engine', 'boat', 'Taking over a charter yacht, checking the engine every morning and handling her under power.'),
+          ('Skipper and crew', 'crew', 'Leading the crew, keeping everyone fed and well, and the decisions that are yours.'),
           ('Weather and navigation', 'weather', 'Knowing what the wind will do and where you are.'),
           ('Radio and safety', 'radio', 'What to say on the radio, the safety gear on board and what to do if someone falls in.')]
 PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close-hauled on open water'),
@@ -40,7 +42,15 @@ PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close
          'safety-on-board': ('1542405242-8217b4c9e34c', 'A crew in life jackets on deck'),
          'charter-check-in': ('1754353702475-f0c295d9eb77', 'Sailing yachts in a marina on a sunny day'),
          'engine-checks': ('1670711226713-599750185024', 'A wooden sailing yacht moored alongside a pontoon'),
-         'engine-handling': ('1743798574119-36a30e44799d', 'The wheel and compass of a sailing yacht')}
+         'engine-handling': ('1743798574119-36a30e44799d', 'The wheel and compass of a sailing yacht'),
+         'sail-trim': ('1474917518260-23f84bd71c75', 'A winch and sheets on a yacht under sail'),
+         'night-sailing': ('1787848438272-b08ca3161a2d', 'A sailing yacht with its masthead light on at night'),
+         'dinghy-outboard': ('1786339904188-562036aea403', 'Small boats and tenders moored in clear blue water'),
+         'boat-systems': ('1769655991158-094971dd1404', 'The cabin of a sailing yacht in daylight from the companionway'),
+         'skippering': ('1605387202149-47169c4ea58a', 'A crew on a yacht sailing into the evening sun'),
+         'provisioning': ('1760812875584-155ee59adac5', 'Grilling dinner on the deck of a boat'),
+         'pilotage': ('1776022699364-f2b02e0c66d3', 'A calm harbour entrance between two breakwaters'),
+         'astronavigation': ('1631599797710-83f1cbe65653', 'The Milky Way over the sea at night')}
 IMG = lambda pid, w=900: f'https://images.unsplash.com/photo-{pid}?w={w}&q=80&auto=format&fit=crop'
 COURSE_LINK = {'IYT International Bareboat Skipper': 'bareboat-skipper-course.html'}
 
@@ -175,10 +185,47 @@ def diagram_propwalk():
     g.append(f'<text class="dg-label" x="{X - 40}" y="{Y + 160}" text-anchor="middle">Stern swings out</text>')
     return f'<svg class="dg" viewBox="0 0 640 320" role="img" aria-label="Two yachts seen from above: going astern, prop walk kicks the stern to port; turning ahead, the yacht turns around a pivot point near the mast and the stern swings out">{"".join(g)}</svg>'
 
+def diagram_intercept():
+    """Intercept method on the plotting sheet, north up, with the article's example: azimuth 135°, intercept 8 miles
+    towards. From the assumed position the intercept runs towards the sun's geographical position, and the position
+    line crosses its end at right angles: a short piece of the huge circle of equal altitude."""
+    AZ = 135
+    az = math.radians(AZ); ux, uy = math.sin(az), -math.cos(az); px, py = -uy, ux  # along the azimuth / across it
+    AX, AY, I, R = 252, 100, 130, 720
+    TX, TY = AX + ux * I, AY + uy * I
+    CX, CY = TX + ux * R, TY + uy * R  # the sun's geographical position, far off the sheet
+    g = ['<line class="dg-ring" x1="24" y1="20" x2="24" y2="380"/>',
+         '<polygon class="dg-windhead" points="24,14 18,30 30,30"/>',
+         '<text class="dg-label" x="36" y="30">N</text>']
+    pts = []
+    for k in range(-14, 15):
+        a = math.atan2(TY - CY, TX - CX) + k * 0.022
+        pts.append(f'{CX + R * math.cos(a):.1f},{CY + R * math.sin(a):.1f}')
+    g.append(f'<path class="dg-ring" d="M{" L".join(pts)}"/>')
+    g.append(f'<line class="dg-ring" x1="{AX - ux * 50:.1f}" y1="{AY - uy * 50:.1f}" x2="{AX + ux * 320:.1f}" y2="{AY + uy * 320:.1f}"/>')
+    hx, hy = TX - ux * 8, TY - uy * 8
+    g.append(f'<path class="dg-move" d="M{AX:.1f},{AY:.1f} L{hx:.1f},{hy:.1f}"/>')
+    g.append(f'<polygon class="dg-movehead" points="{TX:.1f},{TY:.1f} {hx + px * 6:.1f},{hy + py * 6:.1f} {hx - px * 6:.1f},{hy - py * 6:.1f}"/>')
+    g.append(f'<line class="dg-pl" x1="{TX - px * 175:.1f}" y1="{TY - py * 175:.1f}" x2="{TX + px * 175:.1f}" y2="{TY + py * 175:.1f}"/>')
+    g.append(f'<circle class="dg-ap" cx="{AX}" cy="{AY}" r="6"/>')
+    g.append(f'<rect class="dg-outline" x="{TX - 5:.1f}" y="{TY - 5:.1f}" width="10" height="10" transform="rotate({AZ} {TX:.1f} {TY:.1f})"/>')
+    sx, sy = AX + ux * 320, AY + uy * 320
+    g.append(f'<circle class="dg-sun" cx="{sx + ux * 20:.1f}" cy="{sy + uy * 20:.1f}" r="13"/>')
+    mx, my = (AX + TX) / 2, (AY + TY) / 2
+    g += [f'<text class="dg-label" x="{AX - 14}" y="{AY - 26}" text-anchor="end">Assumed position</text>',
+          f'<text class="dg-label dg-muted" x="{AX - 14}" y="{AY - 8}" text-anchor="end">from the DR, rounded</text>',
+          f'<text class="dg-label" x="{mx + px * 18:.1f}" y="{my + py * 18 + 4:.1f}" text-anchor="end">Intercept, 8 nm towards</text>',
+          f'<text class="dg-label" x="{TX - px * 140 + 12:.1f}" y="{TY - py * 140 + 4:.1f}" text-anchor="start">Position line, 045°–225°</text>',
+          f'<text class="dg-label dg-muted" x="{TX + px * 150 - 18:.1f}" y="{TY + py * 150 + 4:.1f}" text-anchor="end">Circle of equal altitude</text>',
+          f'<text class="dg-label" x="{sx - 24:.1f}" y="{sy + 2:.1f}" text-anchor="end">Azimuth 135°</text>',
+          f'<text class="dg-label dg-muted" x="{sx - 24:.1f}" y="{sy + 20:.1f}" text-anchor="end">towards the sun</text>']
+    return f'<svg class="dg" viewBox="0 0 660 400" role="img" aria-label="Plotting a sun sight: from the assumed position, the azimuth line points towards the sun; the intercept of 8 miles is measured along it towards the sun, and the position line is drawn at right angles through its end">{"".join(g)}</svg>'
+
 DIAGRAMS = {'points-of-sail': (diagram_points, 'Points of sail with the wind from the top. No yacht can sail inside the no-go zone, about 45° either side of the wind; boats on the right have the wind over their port side (port tack), the faint ones on the left are on starboard tack.'),
             'cardinals': (diagram_cardinals, 'Cardinal marks around a danger, north at the top. Each mark sits on the side it is named after, so you pass on that side. The cones point to where the black is, and the white light flashes like a clock face: 3 at east, 6 at south, 9 at west.'),
             'lights': (diagram_lights, 'Light arcs seen from above. Where the arcs meet, you see two lights at once: from dead ahead, both red and green.'),
-            'propwalk': (diagram_propwalk, 'Seen from above, bow at the top. Left: with a right-handed propeller, going astern kicks the stern to port. Right: going ahead, the yacht turns around a point near the mast, so the stern swings out the opposite way.')}
+            'propwalk': (diagram_propwalk, 'Seen from above, bow at the top. Left: with a right-handed propeller, going astern kicks the stern to port. Right: going ahead, the yacht turns around a point near the mast, so the stern swings out the opposite way.'),
+            'intercept': (diagram_intercept, 'Plotting a sun sight, north at the top. The sun is far off the sheet along the azimuth. Its circle of equal altitude is so large that the short piece you need is drawn as a straight position line, at right angles to the azimuth. You are somewhere on that line.')}
 DIAGRAMS.update({f'knot-{k}': v for k, v in knot_diagrams.KNOTS.items()})
 
 # ---------- shared page parts ----------
@@ -267,6 +314,9 @@ CSS = r'''
 .dg-move { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .dg-movehead, .dg-pivot { fill: var(--accent); }
 .dg-prop { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.dg-pl { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.dg-ap { fill: var(--bg); stroke: var(--ink); stroke-width: 2.4; }
+.dg-sun { fill: #f2c230; stroke: var(--ink); stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
 ''' + knot_diagrams.CSS + r'''
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }

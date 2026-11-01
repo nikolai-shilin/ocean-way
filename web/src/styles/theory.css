@@ -491,6 +491,9 @@ html, body { overflow-x: clip; }
 .dg-move { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .dg-movehead, .dg-pivot { fill: var(--accent); }
 .dg-prop { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.dg-pl { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
+.dg-ap { fill: var(--bg); stroke: var(--ink); stroke-width: 2.4; }
+.dg-sun { fill: #f2c230; stroke: var(--ink); stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
 
 .kd .kr-halo { fill: none; stroke: var(--bg); stroke-width: 22; }

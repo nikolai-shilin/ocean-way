@@ -1,0 +1,121 @@
+<section id="why">
+<h2>Why learn astronavigation when there is GPS</h2>
+<p>Astronavigation, or celestial navigation, finds your position by measuring the angle of the sun, a star or a planet above the horizon. With a sextant, an accurate watch and a book of tables, you can fix your position anywhere at sea without power or satellites.</p>
+<p>GPS is far more accurate, and you will use it every day. But a lightning strike or a flooded chart table can take out every screen on board at once, and GPS signals can be jammed. Far from land, the sky is the only independent check you have. Astronavigation is part of the Yachtmaster Ocean syllabus.</p>
+</section>
+<section id="sextant">
+<h2>The sextant and index error</h2>
+<p>A sextant measures the angle between a heavenly body and the horizon. The index arm moves along the arc, which is marked in degrees, and the micrometer drum on the arm reads minutes of arc (sixtieths of a degree). The index mirror on the arm reflects the body into the horizon mirror, so through the telescope you see the body and the horizon together. Dark shades dim the sun.</p>
+<p>Check the index error before every set of sights. Set the sextant to 0°, look at the horizon and turn the drum until the direct and reflected horizons form one unbroken line. The reading is the index error. A reading above zero, such as 2.0', is "on the arc" and you subtract it from every sight. A reading below zero is "off the arc" and you add it. The old rule is: if it's on, take it off; if it's off, put it on.</p>
+</section>
+<section id="sight">
+<h2>Taking a sun sight</h2>
+<ol>
+<li>Swing the shades in, set the sextant to zero and look at the sun through the telescope.</li>
+<li>Squeeze the clamp and push the index arm slowly forward while you tip the sextant down. The sun's image comes down with you.</li>
+<li>When the horizon appears, release the clamp and turn the drum until the lower edge of the sun, its lower limb, sits on the horizon.</li>
+<li>Rock the sextant gently from side to side. The sun swings in a small arc like a pendulum, and at the lowest point of the arc the sextant is vertical. Adjust until the lower limb just touches the horizon there.</li>
+<li>Call out "Now" so that a helper notes the time to the second, then read the sextant.</li>
+</ol>
+<aside class="note warn">Watch out<p>Never look at the sun through a sextant without the shades in place. Even a moment can damage your eyes for good.</p></aside>
+<p>Take three to five sights in a row, so that a bad one stands out, and take each from the top of a wave.</p>
+</section>
+<section id="time">
+<h2>Time and the deck watch</h2>
+<p>The almanac uses Universal Time (UT), which for practical purposes is Greenwich Mean Time, so time every sight in UT. The Earth turns 15° every hour, so the sun's position moves west by 1 minute of arc every 4 seconds. At the equator 1 minute of longitude is 1 nautical mile. So an error of 4 seconds in your time puts your position about 1 mile too far east or west.</p>
+<p>The deck watch is the watch you use for sights, and a good quartz watch is fine. Check it every day against GPS time or a radio time signal, and write its error in the log. If the electronics fail, its daily rate tells you how much to allow.</p>
+</section>
+<section id="circles">
+<h2>Geographical position and circles of equal altitude</h2>
+<p>At any moment there is one point on the Earth where the sun is directly overhead, called its geographical position (GP). The almanac gives it as two numbers: declination, the latitude of the GP, and Greenwich hour angle (GHA), how far west of Greenwich it lies, from 0° to 360°.</p>
+<p>The further you are from the GP, the lower the sun. Everyone who sees the sun at the same altitude at the same moment stands on a circle around the GP, called a circle of equal altitude. Its radius is the zenith distance, which is 90° minus the altitude, and each minute of it is one nautical mile. If the sun is at 60°, you are 30° from its GP, which is 1,800 miles.</p>
+<p>Near you, the circle is close enough to a straight line. This is your position line: one sight tells you that you are somewhere on it. Two position lines that cross give a fix, just as two compass bearings do near the coast.</p>
+</section>
+<section id="corrections">
+<h2>From sextant altitude to observed altitude</h2>
+<p>The sextant reading, or sextant altitude (Hs), is corrected in three steps to the observed altitude (Ho), the true altitude of the body's centre:</p>
+<ul>
+<li><b>Index error.</b> The sextant's own error, as above.</li>
+<li><b>Dip.</b> Your eye is above the sea, so the visible horizon lies a little below the true horizontal. Dip is always subtracted: 2.8' at a height of eye of 2.5 metres. The result is the apparent altitude (Ha).</li>
+<li><b>Main correction.</b> The almanac's altitude correction tables combine refraction (the bending of light by the air, which makes every body look higher) with the sun's semidiameter, about 16'. You measured the sun's lower edge, and the tables want its centre.</li>
+</ul>
+<p>Avoid sights below about 15°, where refraction is large and changes with the weather. Here is a sun sight in early December, used again for the noon sight below:</p>
+<table class="tbl">
+<thead><tr><th>Step</th><th>Correction</th><th>Altitude</th></tr></thead>
+<tbody>
+<tr><td>Sextant altitude (Hs)</td><td>None</td><td>51° 35.0'</td></tr>
+<tr><td>Index error, 2.0' on the arc</td><td>−2.0'</td><td>51° 33.0'</td></tr>
+<tr><td>Dip, height of eye 2.5 m</td><td>−2.8'</td><td>51° 30.2' (Ha)</td></tr>
+<tr><td>Main correction, sun lower limb</td><td>+15.4'</td><td>51° 45.6' (Ho)</td></tr>
+</tbody>
+</table>
+</section>
+<section id="intercept">
+<h2>Sight reduction and the intercept method</h2>
+<p>Turning a sight into a position line is called sight reduction. The Nautical Almanac, a new one each year, gives the GHA and declination of each body for any moment of UT. Sight reduction tables, such as AP 3270 (HO 249 in the United States), do the trigonometry. A calculator or app does both, but carry the books too. The standard method is the intercept method:</p>
+<ol>
+<li>Choose an assumed position (AP) near your DR position, the position worked out from course and distance run. For the tables, give it a whole degree of latitude, and a longitude that makes the local hour angle (LHA, the GHA minus a west longitude) a whole degree.</li>
+<li>From the tables, take the calculated altitude (Hc), the altitude the body would have at the AP, and its azimuth (Zn), its true bearing from the AP.</li>
+<li>The difference between Ho and Hc, in minutes, is the intercept in nautical miles.</li>
+<li>If Ho is greater than Hc, you are closer to the GP than the AP is, so the intercept is towards the body. If Ho is smaller, it is away. Remember it as "Ho Mo To": Ho more, towards.</li>
+</ol>
+<p>To plot it, mark the AP on a plotting sheet (a blank chart of a small area of ocean) and draw the azimuth line through it. Measure the intercept along that line, towards or away from the body, and draw the position line through that point at right angles to the azimuth.</p>
+<p>Example: from an AP at 16° 00' N, 30° 12' W, the tables give Hc 35° 12.0' and azimuth 135°. Your Ho is 35° 20.0', 8' more, so the intercept is 8 miles towards. You measure 8 miles from the AP along 135°, towards the sun, and draw the position line across it, running 045° to 225°.</p>
+<figure data-diagram="intercept"></figure>
+</section>
+<section id="noon">
+<h2>The noon sight for latitude</h2>
+<p>Once a day the sun crosses your meridian, the north-south line through your position. At this meridian passage, or local noon, the sun is at its highest and bears due south or north, and a sight gives your latitude without sight reduction tables.</p>
+<p>The almanac gives the time of meridian passage at Greenwich. Add 4 minutes for every degree of longitude west, or subtract 4 minutes per degree east. Start 10 minutes early and keep the sun on the horizon as it climbs. When it stops rising and starts to drop, the highest reading is your noon altitude.</p>
+<ol>
+<li>Find the zenith distance: 90° minus Ho. Name it after where you are from the sun: if the sun bears south, the zenith distance is north.</li>
+<li>Take the sun's declination from the almanac.</li>
+<li>If both have the same name, add them. If they have contrary names, one north and one south, subtract the smaller from the larger, and the answer takes the name of the larger.</li>
+</ol>
+<p>Worked example: an Atlantic crossing in early December. The noon sight above gives Ho 51° 45.6' with the sun bearing south, and the sun's declination is 22° 15.0' S.</p>
+<table class="tbl">
+<thead><tr><th>Step</th><th>Working</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>Zenith distance</td><td>90° 00.0' − 51° 45.6', named north because the sun bears south</td><td>38° 14.4' N</td></tr>
+<tr><td>Declination</td><td>From the almanac</td><td>22° 15.0' S</td></tr>
+<tr><td>Contrary names, so subtract</td><td>38° 14.4' − 22° 15.0'</td><td>15° 59.4'</td></tr>
+<tr><td>Latitude</td><td>Named after the larger figure, the zenith distance</td><td>15° 59.4' N</td></tr>
+</tbody>
+</table>
+<p>You are just under 16° north, on a position line running east and west.</p>
+</section>
+<section id="running">
+<h2>A running fix from the morning sight and noon</h2>
+<p>To fix your position by the sun alone, you wait for its bearing to change, as in a running fix on one lighthouse.</p>
+<ol>
+<li>Take a morning sight two or three hours before noon, with the sun in the east or south-east. Its position line runs roughly north and south and tells you mainly about longitude.</li>
+<li>Keep a careful DR until the noon sight.</li>
+<li>Move the morning position line along your course by the distance run, keeping it parallel to itself. Your noon position is where it crosses the noon latitude.</li>
+</ol>
+<p>The fix is only as good as the DR between the sights, and the two lines should cross at 30° or more.</p>
+</section>
+<section id="stars">
+<h2>Stars, planets and Polaris at twilight</h2>
+<p>Stars and planets are worked by the same intercept method, and several taken in a few minutes give a fix straight away. You need the stars and a sharp horizon together, which only happens in nautical twilight, when the sun is 6° to 12° below the horizon. That is a window of about 20 to 30 minutes at dawn and dusk.</p>
+<p>Plan the sights beforehand with a star finder (a set of plastic discs) or an app. Choose three or four bright stars or planets, such as Venus and Jupiter, spread 90° to 120° apart in bearing and between 15° and 70° high. Their position lines form a cocked hat, as in a three-point bearing fix.</p>
+<p><b>Polaris</b>, the Pole Star, lies less than a degree from the celestial north pole, so its altitude is almost exactly your latitude. Correct the altitude like any star, subtract 1° and add the three small corrections from the almanac's Polaris tables. Polaris works only in the northern hemisphere.</p>
+</section>
+<section id="routine">
+<h2>A day's routine and the accuracy to expect</h2>
+<table class="tbl">
+<thead><tr><th>Time</th><th>Sight</th><th>What it gives</th></tr></thead>
+<tbody>
+<tr><td>Morning twilight</td><td>Stars or planets</td><td>A fix</td></tr>
+<tr><td>Mid-morning</td><td>Sun</td><td>A position line</td></tr>
+<tr><td>Local noon</td><td>Sun</td><td>Latitude and a running fix</td></tr>
+<tr><td>Mid-afternoon</td><td>Sun</td><td>A position line</td></tr>
+<tr><td>Evening twilight</td><td>Stars or planets</td><td>A fix</td></tr>
+</tbody>
+</table>
+<p>A morning sun sight and a noon sight are the usual minimum on a yacht. Write every sight in the log with its UT, Hs and DR, and compare each result with the GPS while it works. If a result is 30 miles from your DR, look for a slip, such as the wrong day in the almanac, before you believe it.</p>
+<p><b>Accuracy.</b> From the low, moving deck of a yacht, a practised navigator can expect a position within about 2 to 5 miles. That is plenty for crossing an ocean, but not for closing a coast at night, so plan to make your landfall in daylight.</p>
+</section>
+<section id="practise">
+<h2>Practise it on the water</h2>
+<p>On our Yachtmaster Ocean courses you take sun sights from the deck, work them out with the almanac and tables, and check each one against the GPS. On our training passages you keep the full daily routine at sea, from the morning sight to the noon latitude and star sights at twilight.</p>
+</section>

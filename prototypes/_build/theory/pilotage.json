@@ -1,0 +1,30 @@
+{
+  "slug": "pilotage",
+  "title": "Pilotage: entering a harbour or anchorage you don't know",
+  "h1": "Pilotage into a strange harbour",
+  "lead": "The last mile into a harbour you have never seen is where most groundings happen. Here is how to plan it, follow it by eye with transits, bearings and depth, and what to do when the view does not match the chart.",
+  "description": "Pilotage for yacht skippers: a pilotage plan from pilot book, chart and plotter, transits and leading lines, clearing bearings, depth contours, the limits of the plotter close in, notes and sketches, crew preparation, timing and night entries.",
+  "summary": [
+    "Plan the entry before you arrive, from the pilot book, the largest-scale chart and the plotter together.",
+    "Pilot by eye with transits, clearing bearings and a safe depth contour, and use the plotter only as a check.",
+    "Arrive in daylight with fenders, lines and the anchor ready, and the sails away before the entrance.",
+    "If what you see does not match the plan, slow down, turn back to safe water and work it out there."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Weather and navigation",
+  "toc": [
+    ["plan", "The pilotage plan"],
+    ["transits", "Transits and leading lines"],
+    ["clearing", "Clearing bearings"],
+    ["depth", "Depth as a handrail"],
+    ["plotter", "The plotter close in"],
+    ["notes", "Notes and a sketch"],
+    ["crew", "Boat and crew"],
+    ["timing", "Timing"],
+    ["unexpected", "When it looks wrong"],
+    ["night", "Night entries"],
+    ["practise", "Practise it on the water"]
+  ]
+}

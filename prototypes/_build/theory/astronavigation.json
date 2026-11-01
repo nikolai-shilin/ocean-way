@@ -1,0 +1,31 @@
+{
+  "slug": "astronavigation",
+  "title": "Astronavigation for yachtsmen: sextant, sun sights and the noon latitude",
+  "h1": "Finding your position by the sun and stars",
+  "lead": "Far from land with the electronics down, a sextant, an accurate watch and an almanac still tell you where you are. This guide explains celestial navigation at Yachtmaster Ocean level, from taking a sun sight to the noon latitude and a running fix.",
+  "description": "Celestial navigation for yacht skippers: the sextant and index error, time, circles of equal altitude, altitude corrections, the intercept method, the noon sight, running fixes, Polaris, star sights and accuracy.",
+  "summary": [
+    "Check the index error before every set of sights, and time each sight to the second in UT.",
+    "An error of 4 seconds in your time puts your position about a mile out east or west at the equator.",
+    "In the intercept method, if the observed altitude is greater than the calculated one, the intercept is towards the body.",
+    "A noon sight gives your latitude directly, and a morning sun sight crossed with it gives a running fix."
+  ],
+  "read_minutes": 8,
+  "level": "Ocean skipper",
+  "course": "IYT Yachtmaster Ocean",
+  "topic": "Weather and navigation",
+  "toc": [
+    ["why", "Why learn it"],
+    ["sextant", "The sextant"],
+    ["sight", "Taking a sight"],
+    ["time", "Time"],
+    ["circles", "Position circles"],
+    ["corrections", "Altitude corrections"],
+    ["intercept", "The intercept method"],
+    ["noon", "The noon sight"],
+    ["running", "Running fix"],
+    ["stars", "Stars and Polaris"],
+    ["routine", "A day at sea"],
+    ["practise", "Practise it on the water"]
+  ]
+}
