@@ -21,7 +21,6 @@ export default function Shell({ lang, section, pathFor, jsonld, children, script
         <div dangerouslySetInnerHTML={{ __html: header }} />
         <main>{children}</main>
         <FooterNav lang={lang} langLinks={langLinks(header)} />
-        <div dangerouslySetInnerHTML={{ __html: chrome.footer }} />
       </div>
       {jsonld ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld).replace(/</g, '\\u003c') }} /> : null}
       <Script id="chrome" strategy="afterInteractive">{CHROME_JS}</Script>

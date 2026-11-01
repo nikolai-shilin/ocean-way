@@ -17,7 +17,6 @@ export default function ProtoPage({ content, main, scripts, before, section = nu
       <div className="wrap" dangerouslySetInnerHTML={{ __html: html }} />
       <div className="wrap">
         <FooterNav lang={content.lang} langLinks={langLinks(header)} />
-        <div dangerouslySetInnerHTML={{ __html: content.footer }} />
       </div>
       {content.tail ? <div dangerouslySetInnerHTML={{ __html: content.tail }} /> : null}
       {ld.map((j, i) => (

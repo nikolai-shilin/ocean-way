@@ -94,7 +94,7 @@
      "caption": "The yacht's VHF: your link to marinas, other boats and the coastguard."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Every call, from booking a berth to a Mayday, follows a set format."
     },
@@ -274,7 +274,7 @@
      "caption": "Lunch at anchor in a quiet bay."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Your turn at the helm."
     },
@@ -704,7 +704,7 @@
      "caption": "The practical: leaving and coming back to the berth."
     },
     {
-     "photo_id": "1693800945608-9b4d21ebb0ad",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Steering to a set course under sail."
     },
@@ -878,7 +878,7 @@
      "caption": "Reefing early on a windy leg."
     },
     {
-     "photo_id": "1693800945608-9b4d21ebb0ad",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Each student skippers in turn."
     },
@@ -888,7 +888,7 @@
      "caption": "Night passage: lights, watches and lookout."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1630853239357-2300d9cd562f",
      "shape": "p",
      "caption": "Planning the next leg with the crew."
     },
@@ -1326,11 +1326,6 @@
      "caption": "Twilight: the time for star sights."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
-     "shape": "p",
-     "caption": "Working out a position by hand."
-    },
-    {
      "photo_id": "1604095070247-cbc9734e3251",
      "shape": "l",
      "caption": "Planning a first ocean crossing."
@@ -1403,48 +1398,7 @@
   "fethiye-kekova": "A week on the Lycian coast between Fethiye and Kekova: bays you can only reach by boat, the ruins of a sunken city and short legs that leave time for anchoring practice.",
   "finike-cyprus": "From Fenike on the Lycian coast across to Northern Cyprus: an open-sea crossing with watches through the night."
  },
- "boats": {
-  "bavaria-c42": {
-   "model": "Bavaria C42",
-   "beam_m": 4.3,
-   "draft_m": 2.1,
-   "heads": 2,
-   "engine_hp": 50,
-   "description": "Our Saronic Gulf course boat. Wide and stable, with twin wheels and a simple deck layout that makes mooring practice easy for four students and an instructor."
-  },
-  "dufour-430": {
-   "model": "Dufour 430",
-   "beam_m": 4.3,
-   "draft_m": 2.1,
-   "heads": 2,
-   "engine_hp": 50,
-   "description": "Based in Split for the Croatian course weeks. A quick, stiff boat with a big cockpit, good for learning sail trim."
-  },
-  "jeanneau-sun-odyssey-440": {
-   "model": "Jeanneau Sun Odyssey 440",
-   "beam_m": 4.5,
-   "draft_m": 2.2,
-   "heads": 2,
-   "engine_hp": 57,
-   "description": "Our training-passage boat in Fethiye. Walk-around decks and a comfortable cockpit for long watches, set up with jackstays, AIS and a liferaft for open-sea legs."
-  },
-  "beneteau-oceanis-46-1": {
-   "model": "Beneteau Oceanis 46.1",
-   "beam_m": 4.5,
-   "draft_m": 2.3,
-   "heads": 2,
-   "engine_hp": 57,
-   "description": "The biggest boat in the fleet, with four cabins. Used for Yachtmaster weeks and longer passages, and for charter by larger groups."
-  },
-  "hanse-418": {
-   "model": "Hanse 418",
-   "beam_m": 4.2,
-   "draft_m": 2.1,
-   "heads": 2,
-   "engine_hp": 40,
-   "description": "Based in Kuşadası for Introduction to Yachting. Light on the helm and easy to sail with a small crew, with all lines led to the cockpit."
-  }
- },
+ "boats": {},
  "passage_legs": [
   {
    "leg": "fethiye-bodrum",
@@ -1689,7 +1643,7 @@
      "caption": "Night watch: lookout, lights and the log."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Your turn at the helm on a long leg."
     },
@@ -1814,7 +1768,7 @@
      "caption": "Night watch: lookout, lights and the log."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Your turn at the helm on a long leg."
     },
@@ -2274,7 +2228,7 @@
      "caption": "Night watch: lookout, lights and the log."
     },
     {
-     "photo_id": "1594278337896-b4011763a8d7",
+     "photo_id": "1519801715040-6d1074715ca5",
      "shape": "p",
      "caption": "Your turn at the helm on a long leg."
     },

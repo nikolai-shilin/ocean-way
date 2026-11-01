@@ -11,8 +11,9 @@ out.append(',\n'.join(f"  ({q(p['key'])}, {q(p['starts_on'])}, {q(p['ends_on'])}
 for p in s['passages']:
     if p['return_key']:
         out.append(f"update public.passages set return_id = (select id from public.passages where key = {q(p['return_key'])}) where key = {q(p['key'])};")
-out.append('insert into public.yachts (sort, model, year, length_m, cabins, berths, base, used_for, charter_from_eur, photo_id, photo_alt) values')
-out.append(',\n'.join(f"  ({y['sort']}, {q(y['model'])}, {y['year']}, {y['length_m']}, {y['cabins']}, {y['berths']}, {q(y['base'])}, {q(y['used_for'])}, {y['charter_from_eur']}, {q(y['photo_id'])}, {q(y['photo_alt'])})" for y in s['yachts']) + ';')
+if s['yachts']:  # the fleet itself is in supabase/seed_fleet.sql
+    out.append('insert into public.yachts (sort, model, year, length_m, cabins, berths, base, used_for, charter_from_eur, photo_id, photo_alt) values')
+    out.append(',\n'.join(f"  ({y['sort']}, {q(y['model'])}, {y['year']}, {y['length_m']}, {y['cabins']}, {y['berths']}, {q(y['base'])}, {q(y['used_for'])}, {y['charter_from_eur']}, {q(y['photo_id'])}, {q(y['photo_alt'])})" for y in s['yachts']) + ';')
 out.append('commit;')
 open(f'{WEB}/supabase/seed.sql', 'w').write('\n'.join(out) + '\n')
 print('seed.sql written')

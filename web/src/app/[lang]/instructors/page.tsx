@@ -31,7 +31,7 @@ export default async function Instructors({ params }: PageProps<'/[lang]/instruc
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Instructors'), path.instructors(lang)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs)] };
   return (
-    <Shell lang={lang} section={null} pathFor={path.instructors} jsonld={ld}>
+    <Shell lang={lang} section="instructors" pathFor={path.instructors} jsonld={ld}>
       <section className="ow-hero">
         <Crumbs lang={lang} items={crumbs} />
         <span className="kicker">{t(lang, 'Instructors and skippers')}</span>

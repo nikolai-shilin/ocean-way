@@ -10,7 +10,8 @@ export const dynamicParams = false;
 
 // The icon files live in src/app (one set for every language); pages inherit these links.
 export const metadata = {
-  icons: { icon: [{ url: '/icon.svg', type: 'image/svg+xml' }], apple: [{ url: '/apple-icon.png', sizes: '180x180' }] },
+  // ?v= changes the address so browsers that cached the old Next.js icon fetch the new one.
+  icons: { icon: [{ url: '/icon.svg?v=2', type: 'image/svg+xml' }], shortcut: [{ url: '/favicon.ico?v=2' }], apple: [{ url: '/apple-icon.png?v=2', sizes: '180x180' }] },
 };
 
 export default async function LangLayout({ children, params }: LayoutProps<'/[lang]'>) {

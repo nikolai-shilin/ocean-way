@@ -51,14 +51,8 @@ export const catalog = (): Catalog => JSON.parse(fs.readFileSync(nodePath.join(p
 
 export async function getYachts(): Promise<Yacht[]> {
   const c = db();
-  if (!c) {
-    const boats = catalog().boats;
-    return seed().yachts.map((y, i) => {
-      const slug = Object.keys(boats).find((k) => boats[k].model === y.model) ?? `boat-${i}`;
-      const b = boats[slug];
-      return { ...y, ...b, id: `seed-${i}`, slug } as Yacht;
-    });
-  }
+  // offline fallback: the fleet as last exported from the database
+  if (!c) return JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', 'fleet.json'), 'utf8')) as Yacht[];
   const { data, error } = await c.from('yachts').select('*').order('sort');
   if (error) throw error;
   return data as Yacht[];

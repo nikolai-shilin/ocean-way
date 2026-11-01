@@ -1,9 +1,11 @@
 import type { Lang } from './site';
 
-export type Section = 'courses' | 'passages' | 'theory' | 'fleet' | 'prices' | null;
+export type Section = 'courses' | 'passages' | 'theory' | 'fleet' | 'instructors' | 'prices' | null;
 
 /** Point the header menu at the section pages (the prototypes link to anchors on the home page) and mark the
  *  current section. Also used for links inside prototype content that still point at home-page anchors. */
+const INSTRUCTORS: Record<Lang, string> = { en: 'Instructors', ru: 'Инструкторы', de: 'Ausbilder', es: 'Instructores' };
+
 export function fixNav(html: string, lang: Lang, active: Section = null): string {
   let out = html
     .replace(new RegExp(`href="/${lang}#courses"`, 'g'), `href="/${lang}/courses"`)
@@ -11,7 +13,9 @@ export function fixNav(html: string, lang: Lang, active: Section = null): string
     .replace(new RegExp(`href="/${lang}#fleet"`, 'g'), `href="/${lang}/fleet"`)
     .replace(/<a class="navl" href="#(courses|passages|fleet)">/g, (_, k: string) => `<a class="navl" href="/${lang}/${k}">`)
     .replace(/<a class="navl" href="#">/g, `<a class="navl" href="/${lang}/prices">`)
-    .replace(/class="navl on"/g, 'class="navl"');
+    .replace(/class="navl on"/g, 'class="navl"')
+    // Instructors page: added after Fleet (the prototype menus predate it)
+    .replace(new RegExp(`(<a class="navl" href="/${lang}/fleet">[^<]*</a>)(?![\\s\\S]*?/instructors")`), `$1\n      <a class="navl" href="/${lang}/instructors">${INSTRUCTORS[lang]}</a>`);
   if (active) {
     const href = `/${lang}/${active}`;
     out = out.replace(`<a class="navl" href="${href}">`, `<a class="navl on" href="${href}">`);
