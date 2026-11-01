@@ -9,8 +9,8 @@
    "scope": "Needed for all crew",
    "price_from_eur": 190,
    "price_unit": "per person",
-   "photo_id": "1594278337896-b4011763a8d7",
-   "photo_alt": "A smiling skipper at the helm",
+   "photo_id": "1769724839524-ea4bd870f813",
+   "photo_alt": "A marine VHF radio at a yacht's chart table",
    "summary": "The radio licence every crew member needs.",
    "description": "A one-day course on the marine VHF radio: how to call a marina or another yacht, how to send and answer distress, urgency and safety calls, and how DSC works. You practise on real radio sets and finish with the exam for the IYT VHF Radio Operator certificate.",
    "learn": [
@@ -24,7 +24,7 @@
     "Age 16 or over",
     "Enough English to follow standard radio phrases; we explain each one"
    ],
-   "certificate": "Lets you operate a marine VHF radio on a yacht. Most charter companies ask for at least one person aboard with this licence.",
+   "certificate": "Lets you operate a marine VHF radio, DSC included, on a yacht. Valid for 5 years, then you renew it. Most charter companies ask for at least one person aboard with this licence.",
    "theory": [
     "vhf-procedure"
    ],
@@ -35,7 +35,7 @@
    "program": [
     {
      "title": "09:00 · How the radio works",
-     "text": "Range, power settings, squelch and dual watch. Which channel to use for what: 16 for distress and calling, intership channels, marina and port channels."
+     "text": "Range, power settings, squelch and dual watch, which channel to use for what, and the licences you need: the yacht's radio licence and your own operator certificate."
     },
     {
      "title": "10:30 · Procedure and the phonetic alphabet",
@@ -62,7 +62,105 @@
     "Passport or ID card for the certificate",
     "A passport-size photo",
     "Pen and notebook"
-   ]
+   ],
+   "included": [
+    "Classroom day with an instructor",
+    "Training radios for every student",
+    "Course notes",
+    "Exam and certificate fee"
+   ],
+   "not_included": [
+    "Travel and accommodation",
+    "Lunch"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "IYT issues it after the exam. It is valid for five years."
+    },
+    {
+     "title": "Use it on your next charter",
+     "text": "Most charter companies want at least one licensed operator on board, and you can take that role."
+    },
+    {
+     "title": "Go on to a sailing course",
+     "text": "Many students add Introduction to Yachting or Flotilla Skipper in the same trip."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1769724839524-ea4bd870f813",
+     "shape": "l",
+     "caption": "The yacht's VHF: your link to marinas, other boats and the coastguard."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Every call, from booking a berth to a Mayday, follows a set format."
+    },
+    {
+     "photo_id": "1534447677768-be436bb09401",
+     "shape": "l",
+     "caption": "At night the radio tells you who is around you."
+    },
+    {
+     "photo_id": "1518837695005-2083093ee35b",
+     "shape": "p",
+     "caption": "Coastguard forecasts and safety messages come in on the VHF."
+    },
+    {
+     "photo_id": "1604095070247-cbc9734e3251",
+     "shape": "l",
+     "caption": "Most charter companies want one licensed operator on board."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-info",
+     "title": "The radio and the licences",
+     "items": [
+      "Range, power and squelch",
+      "Channels for each kind of call",
+      "The yacht's licence and your operator certificate"
+     ]
+    },
+    {
+     "icon": "i-guests",
+     "title": "Everyday calls",
+     "items": [
+      "The phonetic alphabet and procedure words",
+      "Calling a marina or another yacht",
+      "Radio checks and changing channel"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Distress, urgency and safety",
+     "items": [
+      "Mayday and Pan-Pan formats",
+      "Sécurité and safety broadcasts",
+      "What to do when you hear a Mayday"
+     ]
+    },
+    {
+     "icon": "i-light",
+     "title": "DSC and GMDSS",
+     "items": [
+      "The MMSI number and DSC calls",
+      "Sending and cancelling a distress alert",
+      "EPIRB, SART and NAVTEX"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "The course runs in the classroom at our base in Fethiye, next to Ece Marina."
+    }
+   ],
+   "route_nm": 0
   },
   {
    "slug": "introduction-to-yachting",
@@ -81,15 +179,18 @@
     "Steering under sail and under engine",
     "Trimming the sails on every point of sail",
     "Knots, lines, fenders and winches",
-    "Your role when mooring and anchoring"
+    "Your role when mooring and anchoring",
+    "Basic rules of the road and the weather forecast",
+    "Engine checks and handling the dinghy",
+    "Man overboard and safety on board"
    ],
    "requirements": [
     "No experience needed",
     "Able to swim",
-    "Age 12 or over; under 16s sail with a parent aboard",
+    "Age 16 or over; younger sailors can join with a parent aboard, ask us first",
     "Fit enough to step on and off a boat and move around the deck"
    ],
-   "certificate": "IYT International Crew: shows charter companies and skippers that you can work as active crew.",
+   "certificate": "IYT International Crew: active crew on yachts up to 24 m, up to 20 nm offshore, by day and in fair weather. It is the first step on the IYT ladder and the entry requirement for Flotilla and Bareboat Skipper.",
    "theory": [
     "points-of-sail",
     "knots"
@@ -117,7 +218,7 @@
     },
     {
      "title": "Day 5 · Your day at the helm",
-     "text": "You steer for most of the day, help plan the route, practise man overboard and finish with the certificate."
+     "text": "You steer for most of the day, help plan the route and practise man overboard. Then a short theory test and the instructor's practical assessment for the certificate."
     }
    ],
    "bring": [
@@ -128,13 +229,156 @@
     "Sun hat, sunglasses with a strap and high-factor sun cream",
     "Seasickness tablets if you need them, and your own medicines",
     "Passport and travel insurance details"
-   ]
+   ],
+   "included": [
+    "Instructor for the whole week, max 4 students",
+    "Yacht, fuel and marina fees on the course route",
+    "Course book, logbook and assessment",
+    "Certificate fee",
+    "Bed linen, towels and final cleaning"
+   ],
+   "not_included": [
+    "Flights and transfer to the marina",
+    "Food kitty, about €150 per person",
+    "VHF radio (SRC) course, €190, optional",
+    "Travel insurance"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "IYT International Crew, issued at the end of the course."
+    },
+    {
+     "title": "Sail as crew",
+     "text": "Join friends on a charter, or one of our training passages, to build days at sea."
+    },
+    {
+     "title": "Next step: Flotilla Skipper",
+     "text": "With International Crew and a VHF licence you can take the first skipper course."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1562862076-42e207f5561e",
+     "shape": "l",
+     "caption": "Day one: meet the crew and the boat."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Lines and knots: every rope has a name and a job."
+    },
+    {
+     "photo_id": "1519801584609-8ee5f072eddd",
+     "shape": "l",
+     "caption": "Lunch at anchor in a quiet bay."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Your turn at the helm."
+    },
+    {
+     "photo_id": "1777880652269-ff1dd5e65fbb",
+     "shape": "l",
+     "caption": "Tacking as a crew: helm, sheets and winches together."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-wheel",
+     "title": "Steering and boat handling",
+     "items": [
+      "Steering under sail and under engine",
+      "Turning and stopping the boat",
+      "Engine checks before you start"
+     ]
+    },
+    {
+     "icon": "i-sail",
+     "title": "Sails and trim",
+     "items": [
+      "Hoisting, reefing and lowering",
+      "Points of sail, tacking and gybing",
+      "Working the winches safely"
+     ]
+    },
+    {
+     "icon": "i-clip",
+     "title": "Lines and knots",
+     "items": [
+      "Six essential knots",
+      "Coiling and throwing a line",
+      "Fenders and mooring lines"
+     ]
+    },
+    {
+     "icon": "i-anchor",
+     "title": "Mooring and anchoring",
+     "items": [
+      "Your job when mooring stern-to",
+      "Letting go and weighing anchor",
+      "Handling the dinghy"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Safety on board",
+     "items": [
+      "Life jackets and harnesses",
+      "Man overboard recovery",
+      "Basic rules of the road"
+     ]
+    },
+    {
+     "icon": "i-wind",
+     "title": "Weather",
+     "items": [
+      "Reading a simple forecast",
+      "Wind strength and the Beaufort scale",
+      "When to stay in harbour"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    },
+    {
+     "name": "Gemiler Island",
+     "lon": 29.06,
+     "lat": 36.555,
+     "note": "An island with Byzantine church ruins; anchor in the channel with a line ashore."
+    },
+    {
+     "name": "Göcek islands",
+     "lon": 28.94,
+     "lat": 36.7,
+     "note": "Sheltered bays among pine-covered islands; a night at anchor with a line ashore."
+    },
+    {
+     "name": "Göcek",
+     "lon": 28.94,
+     "lat": 36.753,
+     "note": "A sheltered town marina, good for mooring practice."
+    },
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    }
+   ],
+   "route_nm": 40
   },
   {
    "slug": "international-flotilla-skipper",
    "sort": 3,
    "name": "International Flotilla Skipper",
-   "level": "Bareboat skipper",
+   "level": "Flotilla skipper",
    "duration": "5 days",
    "scope": "Up to 20 nm offshore",
    "price_from_eur": 1290,
@@ -147,15 +391,16 @@
     "Taking command and briefing a crew",
     "Planning the day's passage",
     "Mediterranean mooring and anchoring",
-    "Checking the weather before you leave"
+    "Checking the weather before you leave",
+    "Charts, buoyage and the rules of the road"
    ],
    "requirements": [
-    "IYT International Crew or similar experience",
-    "VHF licence (can be taken the same week)",
+    "IYT International Crew or an equivalent certificate",
+    "VHF licence, IYT or equivalent (can be taken the same week)",
     "Age 16 or over",
     "Able to swim"
    ],
-   "certificate": "IYT International Flotilla Skipper: command of a yacht up to 24 m as part of a flotilla, up to 20 nm offshore, by day and in fair weather.",
+   "certificate": "IYT International Flotilla Skipper: command of a sailing yacht up to 24 m as part of a flotilla, up to 20 nm offshore, in fair weather. Most charter companies only allow sailing by day. You can also get the ICC with it.",
    "theory": [
     "med-mooring",
     "anchoring",
@@ -176,7 +421,7 @@
     },
     {
      "title": "Day 3 · Planning the day",
-     "text": "Route, hazards, weather, fuel and a plan B. Then you sail the plan as skipper, with the lead boat on the radio."
+     "text": "Chartwork, buoyage, lights and the collision rules, then the route, hazards, weather, fuel and a plan B. You sail the plan as skipper, with the lead boat on the radio."
     },
     {
      "title": "Day 4 · Anchoring in bays",
@@ -184,7 +429,7 @@
     },
     {
      "title": "Day 5 · Skipper's day and assessment",
-     "text": "You run the whole day: briefing, passage and mooring. The instructor assesses you and signs the certificate."
+     "text": "You run the whole day: briefing, passage and mooring. Then the theory exam and the instructor's practical assessment."
     }
    ],
    "bring": [
@@ -196,7 +441,150 @@
     "Your logbook or a list of the days you have sailed",
     "VHF licence if you have one",
     "Passport and travel insurance that covers sailing"
-   ]
+   ],
+   "included": [
+    "Instructor for the whole week, max 4 students",
+    "Yacht, fuel and marina fees on the course route",
+    "Course book, logbook and assessment",
+    "Certificate fee",
+    "Bed linen, towels and final cleaning"
+   ],
+   "not_included": [
+    "Flights and transfer to the marina",
+    "Food kitty, about €150 per person",
+    "VHF radio (SRC) course, €190, optional",
+    "Travel insurance"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "Issued at the end of the course. You can also apply for the ICC with it."
+    },
+    {
+     "title": "Charter in a flotilla",
+     "text": "Your first holiday as skipper, with a lead boat nearby."
+    },
+    {
+     "title": "Next step: Bareboat Skipper",
+     "text": "Log 200 miles and 10 days at sea, then skipper a charter yacht on your own."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1776347652659-6645d9532767",
+     "shape": "l",
+     "caption": "Your own boat, with the lead boat nearby."
+    },
+    {
+     "photo_id": "1519801715040-6d1074715ca5",
+     "shape": "p",
+     "caption": "Briefing the crew before leaving the berth."
+    },
+    {
+     "photo_id": "1506929562872-bb421503ef21",
+     "shape": "l",
+     "caption": "Anchoring in a bay with a line ashore."
+    },
+    {
+     "photo_id": "1533105079780-92b9be482077",
+     "shape": "p",
+     "caption": "A new harbour every evening."
+    },
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "Stern-to in a busy harbour."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-guests",
+     "title": "Taking command",
+     "items": [
+      "Briefing the crew",
+      "Checking the boat like a charter skipper",
+      "Sharing out jobs on board"
+     ]
+    },
+    {
+     "icon": "i-wheel",
+     "title": "Boat handling under engine",
+     "items": [
+      "Prop walk and tight turns",
+      "Leaving and entering a berth",
+      "Stern-to and alongside"
+     ]
+    },
+    {
+     "icon": "i-chart",
+     "title": "Charts and navigation",
+     "items": [
+      "Reading a chart and the buoyage",
+      "Planning a short passage",
+      "Lights and the rules of the road"
+     ]
+    },
+    {
+     "icon": "i-anchor",
+     "title": "Anchoring",
+     "items": [
+      "Choosing a bay for the wind",
+      "Anchoring with a line ashore",
+      "A night at anchor"
+     ]
+    },
+    {
+     "icon": "i-wind",
+     "title": "Weather and decisions",
+     "items": [
+      "Checking the forecast before you leave",
+      "Go or no-go decisions",
+      "Ports of refuge"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Safety",
+     "items": [
+      "Man overboard under engine",
+      "First aid basics",
+      "Using the VHF in a flotilla"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    },
+    {
+     "name": "Göcek islands",
+     "lon": 28.94,
+     "lat": 36.7,
+     "note": "Sheltered bays among pine-covered islands; a night at anchor with a line ashore."
+    },
+    {
+     "name": "Ekincik",
+     "lon": 28.55,
+     "lat": 36.82,
+     "note": "A deep bay by the Dalyan river, close to rock tombs and loggerhead turtle beaches."
+    },
+    {
+     "name": "Göcek",
+     "lon": 28.94,
+     "lat": 36.753,
+     "note": "A sheltered town marina, good for mooring practice."
+    },
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    }
+   ],
+   "route_nm": 85
   },
   {
    "slug": "bareboat-skipper",
@@ -217,7 +605,14 @@
    "theory": [],
    "about": [],
    "program": [],
-   "bring": []
+   "bring": [],
+   "included": [],
+   "not_included": [],
+   "after": [],
+   "gallery": [],
+   "skills": [],
+   "route": [],
+   "route_nm": null
   },
   {
    "slug": "icc",
@@ -231,17 +626,19 @@
    "photo_id": "1542405242-8217b4c9e34c",
    "photo_alt": "A crew in life jackets on deck",
    "summary": "The licence most European waters ask for, sail or power.",
-   "description": "The International Certificate of Competence is accepted in most European coastal and inland waters. You can get it on the basis of a qualifying certificate such as IYT Bareboat Skipper, or by taking a short practical and theory assessment with us. It is valid for five years.",
+   "description": "The International Certificate of Competence is accepted in many European coastal waters, and on inland waterways if you also pass the CEVNI exam. You can get it on the basis of a qualifying certificate such as IYT Bareboat Skipper, or by taking a written and a practical exam with us. It is valid for five years.",
    "learn": [
     "Practical assessment under engine and under sail",
     "Rules of the road and navigation lights",
-    "Basic rules for inland waterways, for the inland endorsement",
+    "The CEVNI exam for the inland waterways endorsement",
     "Safety equipment and emergency procedures"
    ],
    "requirements": [
-    "A qualifying skipper certificate, or the assessment",
+    "A qualifying IYT skipper certificate, or the written and practical exams",
+    "VHF licence",
     "Age 16 or over",
-    "A passport-size photo"
+    "Not a citizen of a country that issues its own ICC (we check this with you)",
+    "Passport or ID card and a headshot photo"
    ],
    "certificate": "ICC: proof of competence for chartering in much of Europe. Check what the country you plan to sail in accepts.",
    "theory": [
@@ -250,12 +647,13 @@
    ],
    "about": [
     "Many charter companies in Croatia, Greece and other European countries ask for the ICC, and in some countries it is the licence the authorities expect to see. It is issued under a United Nations resolution, so it is recognised more widely than most national certificates.",
-    "If you already hold IYT Bareboat Skipper or a similar certificate, you can usually get the ICC without an assessment. If not, we run a short assessment on one of our boats, under engine and under sail, with a few theory questions."
+    "If you already hold IYT Flotilla Skipper, Bareboat Skipper or a Yachtmaster certificate, you can get the ICC without an exam. If not, you take a written and a practical exam with us.",
+    "Some charter companies and insurers also want a skipper certificate, so we recommend holding Flotilla or Bareboat Skipper as well as the ICC."
    ],
    "program": [
     {
-     "title": "Theory check",
-     "text": "Questions on rules of the road, lights and shapes, buoyage and safety equipment, asked as a conversation with the assessor."
+     "title": "Theory exam",
+     "text": "A written exam on the rules of the road, lights and shapes, buoyage and safety equipment."
     },
     {
      "title": "Under engine",
@@ -267,7 +665,7 @@
     },
     {
      "title": "Paperwork",
-     "text": "We send the application for you, with your photo and the assessment report."
+     "text": "We send the application for you. You add your signature in your IYT account, and we need a copy of your passport and a headshot photo."
     }
    ],
    "bring": [
@@ -276,7 +674,103 @@
     "Your skipper certificate, if you have one",
     "Your logbook, if you have one",
     "Deck shoes and a windproof jacket for the practical part"
-   ]
+   ],
+   "included": [
+    "Written and practical exams with an IYT instructor, if you need them",
+    "Use of a yacht for the practical part",
+    "Help with the IYT application"
+   ],
+   "not_included": [
+    "Travel and accommodation"
+   ],
+   "after": [
+    {
+     "title": "Receive your ICC",
+     "text": "IYT sends it once the application is approved. It is valid for five years."
+    },
+    {
+     "title": "Check the country",
+     "text": "Ask the charter company what it accepts before you book."
+    },
+    {
+     "title": "Keep logging miles",
+     "text": "Training passages and charters count towards Yachtmaster Coastal."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "The practical: leaving and coming back to the berth."
+    },
+    {
+     "photo_id": "1693800945608-9b4d21ebb0ad",
+     "shape": "p",
+     "caption": "Steering to a set course under sail."
+    },
+    {
+     "photo_id": "1542405242-8217b4c9e34c",
+     "shape": "l",
+     "caption": "Safety equipment and the man overboard drill."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing and handling the sails."
+    },
+    {
+     "photo_id": "1628609953303-934e6083b174",
+     "shape": "l",
+     "caption": "Lines, fenders and mooring."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-wheel",
+     "title": "Under engine",
+     "items": [
+      "Leaving and returning to the berth",
+      "Turning in a confined space",
+      "Man overboard recovery"
+     ]
+    },
+    {
+     "icon": "i-sail",
+     "title": "Under sail",
+     "items": [
+      "Hoisting and reefing",
+      "Tacking and gybing",
+      "Sailing to a set course"
+     ]
+    },
+    {
+     "icon": "i-light",
+     "title": "Rules of the road",
+     "items": [
+      "Collision rules",
+      "Lights and shapes",
+      "Buoyage"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Safety",
+     "items": [
+      "Safety equipment on board",
+      "Emergency procedures",
+      "The CEVNI rules for inland waters"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "The written exam at our base, then the practical on a yacht in Fethiye bay."
+    }
+   ],
+   "route_nm": 0
   },
   {
    "slug": "yachtmaster-coastal",
@@ -290,20 +784,20 @@
    "photo_id": "1777880652014-feee433c6be0",
    "photo_alt": "A sailor in a foul-weather jacket at the mast",
    "summary": "Command yachts up to 24 m, by day and night.",
-   "description": "For experienced skippers who want to take a yacht up to 60 nautical miles offshore, by day and by night. The week aboard sharpens passage planning, night navigation, heavy-weather handling and crew management, and ends with a practical exam.",
+   "description": "For experienced skippers who want to take a yacht up to 60 nautical miles offshore, by day and by night. The week aboard sharpens passage planning, night navigation, heavy-weather handling and crew management, and ends with written, oral and practical exams.",
    "learn": [
     "Planning longer passages",
     "Night navigation and keeping watch",
     "Heavy-weather tactics and reefing",
-    "Emergency drills: man overboard, fire, engine failure"
+    "Emergency drills: man overboard, fire, engine failure",
+    "Tides, the collision rules and chartwork"
    ],
    "requirements": [
-    "800 miles and 25 days at sea, including 2 days as skipper",
+    "800 miles and 25 days at sea, including 2 days as skipper or watch leader, before the exam",
     "12 hours of sailing at night",
-    "Age 18 or over",
-    "VHF licence and a first-aid certificate"
+    "Age 18 or over"
    ],
-   "certificate": "IYT Yachtmaster Coastal: command of yachts up to 24 m, up to 60 nm offshore. Not for commercial use.",
+   "certificate": "IYT Yachtmaster Coastal: command of yachts up to 24 m, up to 60 nm offshore, in moderate weather. For private use only: it is not a commercial licence and cannot be upgraded to one.",
    "theory": [
     "position-fixing",
     "weather",
@@ -311,7 +805,7 @@
    ],
    "about": [
     "Yachtmaster Coastal is for skippers who already charter on their own and want to go further: longer passages, sailing at night and crossings out of sight of the nearest harbour.",
-    "The week runs like a long assessment with coaching. Each student skippers in turn, plans the passages and takes the decisions, while the instructor watches, asks questions and shows better ways. It ends with a practical exam with an IYT examiner. Our training passages are a good way to build the miles and night hours you need before you apply."
+    "The week runs like a long assessment with coaching. Each student skippers in turn, plans the passages and takes the decisions, while the instructor watches, asks questions and shows better ways. It ends with a written theory paper and an oral and practical exam with an IYT examiner. Our training passages are a good way to build the miles and night hours you need before you apply."
    ],
    "program": [
     {
@@ -335,8 +829,8 @@
      "text": "Reefing early, heaving to, man overboard under sail and under engine, fire and engine failure drills."
     },
     {
-     "title": "Day 6 · Practical exam",
-     "text": "An IYT examiner joins the boat. You skipper and show what you have learned."
+     "title": "Day 6 · Exam",
+     "text": "A written theory paper, then the IYT examiner joins the boat for the oral and practical exam. You skipper and show what you have learned."
     }
    ],
    "bring": [
@@ -346,10 +840,159 @@
     "Non-marking deck shoes or sailing boots",
     "Head torch with a red light",
     "Your logbook with signed miles and night hours",
-    "VHF licence and first-aid certificate",
+    "VHF licence, if you have one",
     "Hand-bearing compass and dividers, if you own them",
     "Passport and travel insurance that covers sailing"
-   ]
+   ],
+   "included": [
+    "Instructor for the whole week, max 4 students",
+    "Yacht, fuel and marina fees on the course route",
+    "Course book, logbook and assessment",
+    "Certificate fee",
+    "Bed linen, towels and final cleaning"
+   ],
+   "not_included": [
+    "Flights and transfer to the marina",
+    "Food kitty, about €150 per person",
+    "VHF radio (SRC) course, €190, optional",
+    "Travel insurance"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "IYT issues it after the exam."
+    },
+    {
+     "title": "Sail longer passages",
+     "text": "Skipper crossings between islands and coasts, also at night."
+    },
+    {
+     "title": "Next step: Yachtmaster Offshore",
+     "text": "Build up to 3,000 miles and 50 days at sea; our training passages help."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1777880652014-feee433c6be0",
+     "shape": "l",
+     "caption": "Reefing early on a windy leg."
+    },
+    {
+     "photo_id": "1693800945608-9b4d21ebb0ad",
+     "shape": "p",
+     "caption": "Each student skippers in turn."
+    },
+    {
+     "photo_id": "1534447677768-be436bb09401",
+     "shape": "l",
+     "caption": "Night passage: lights, watches and lookout."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Planning the next leg with the crew."
+    },
+    {
+     "photo_id": "1777880652269-ff1dd5e65fbb",
+     "shape": "l",
+     "caption": "Pilotage into an unfamiliar harbour."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-chart",
+     "title": "Passage planning",
+     "items": [
+      "Longer passages and alternatives",
+      "Tides and currents",
+      "Pilotage plans for unfamiliar harbours"
+     ]
+    },
+    {
+     "icon": "i-compass",
+     "title": "Navigation",
+     "items": [
+      "Fixes by bearings and transits",
+      "Dead reckoning and estimated position",
+      "Keeping a proper log"
+     ]
+    },
+    {
+     "icon": "i-light",
+     "title": "Night sailing",
+     "items": [
+      "Watches and lookout",
+      "Identifying lights and ships",
+      "Keeping a tired crew safe"
+     ]
+    },
+    {
+     "icon": "i-wind",
+     "title": "Heavy weather",
+     "items": [
+      "Reefing early",
+      "Heaving to",
+      "Choosing a port of refuge"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Emergencies",
+     "items": [
+      "Man overboard under sail and under engine",
+      "Fire and engine failure",
+      "Calling for help"
+     ]
+    },
+    {
+     "icon": "i-guests",
+     "title": "Skippering",
+     "items": [
+      "Briefing and managing a crew",
+      "Making and explaining decisions",
+      "Skippering in turn, as in the exam"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    },
+    {
+     "name": "Ekincik",
+     "lon": 28.55,
+     "lat": 36.82,
+     "note": "A deep bay by the Dalyan river, close to rock tombs and loggerhead turtle beaches."
+    },
+    {
+     "name": "Marmaris",
+     "lon": 28.27,
+     "lat": 36.85,
+     "note": "A large natural harbour with a marina; a stop for fuel, water and provisions."
+    },
+    {
+     "name": "Bozburun",
+     "lon": 28.04,
+     "lat": 36.68,
+     "note": "A boatbuilding village where gulets are still built by hand; stern-to on the town quay."
+    },
+    {
+     "name": "Night passage",
+     "lon": null,
+     "lat": null,
+     "note": "Back along the coast through the night, navigating by lights."
+    },
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    }
+   ],
+   "route_nm": 160
   },
   {
    "slug": "yachtmaster-offshore",
@@ -371,24 +1014,25 @@
     "Weather routing over several days"
    ],
    "requirements": [
-    "3,000 miles and 50 days at sea",
-    "30 hours of sailing at night, 6 of them as skipper",
-    "VHF licence and a medical certificate",
-    "Age 18 or over"
+    "3,000 miles and 50 days at sea, at least 2,000 miles of them along coasts",
+    "30 hours on watch at night, 6 of them as skipper or watch leader",
+    "VHF licence, a medical certificate and an eyesight test for colour blindness",
+    "Age 18 or over",
+    "STCW Basic Safety recommended, not required"
    ],
-   "certificate": "IYT Yachtmaster Offshore: command of yachts up to 24 m, up to 150 nm offshore. Not for commercial use.",
+   "certificate": "IYT Yachtmaster Offshore: command of yachts up to 24 m, up to 150 nm offshore. For private use only: it is not a commercial licence and cannot be upgraded to one.",
    "theory": [
     "position-fixing",
     "weather"
    ],
    "about": [
     "Yachtmaster Offshore is for skippers who want to cross seas, not only follow coasts. Many people aim for it before delivering yachts or taking their own boat on a long voyage.",
-    "The theory part covers the chartwork, weather and safety knowledge an offshore skipper needs. At sea you put it into practice on a passage of several days, with a watch system, night sailing and drills, and finish with a practical exam with an IYT examiner."
+    "The theory part covers chartwork, weather, stability, maritime law and the safety knowledge an offshore skipper needs, and ends with written exams. At sea you put it into practice on a passage of several days, with a watch system, night sailing and drills, and finish with a practical exam with an IYT examiner."
    ],
    "program": [
     {
      "title": "Days 1–5 · Theory",
-     "text": "Chartwork, tides and currents, meteorology, passage planning, collision regulations and safety, in the classroom."
+     "text": "Chartwork, tides and currents, weather in both hemispheres, passage planning, collision rules, buoyage, stability and the engine, electronic aids and maritime law. Ends with written exams."
     },
     {
      "title": "Day 6 · Joining the boat",
@@ -408,7 +1052,7 @@
     },
     {
      "title": "Day 11 · Practical exam",
-     "text": "An IYT examiner joins the boat for the practical exam."
+     "text": "An IYT examiner joins the boat for the oral and practical exam."
     }
    ],
    "bring": [
@@ -421,14 +1065,171 @@
     "VHF licence and medical certificate",
     "Pencils, dividers and a plotter for the theory days",
     "Passport and travel insurance that covers sailing"
-   ]
+   ],
+   "included": [
+    "Five days of theory in the classroom",
+    "Six days aboard with an instructor, max 4 students",
+    "Yacht, fuel and marina fees on the course route",
+    "Course book, logbook and exams",
+    "Certificate fee",
+    "Bed linen, towels and final cleaning"
+   ],
+   "not_included": [
+    "Accommodation during the theory days",
+    "Flights and transfer to the marina",
+    "Food kitty, about €150 per person",
+    "Medical certificate and eyesight test",
+    "Travel insurance"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "IYT issues it after the exams."
+    },
+    {
+     "title": "Sail further",
+     "text": "Skipper passages up to 150 miles offshore and deliver your own boat."
+    },
+    {
+     "title": "Next step: Yachtmaster Ocean",
+     "text": "Learn celestial navigation for ocean crossings."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Several days out of sight of land."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing before the wind builds."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Watches through the night."
+    },
+    {
+     "photo_id": "1519801715040-6d1074715ca5",
+     "shape": "p",
+     "caption": "Navigating without the chartplotter."
+    },
+    {
+     "photo_id": "1777404380697-6b0725b148a7",
+     "shape": "l",
+     "caption": "Drills at sea: reefing, man overboard, steering failure."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-chart",
+     "title": "Offshore planning",
+     "items": [
+      "Planning and provisioning a passage of several days",
+      "Weather routing",
+      "Ports of refuge along the route"
+     ]
+    },
+    {
+     "icon": "i-compass",
+     "title": "Navigation without electronics",
+     "items": [
+      "Dead reckoning over long legs",
+      "Fixes by compass and depth",
+      "Electronic aids and their limits"
+     ]
+    },
+    {
+     "icon": "i-guests",
+     "title": "Watch systems and crew",
+     "items": [
+      "Setting up a watch system",
+      "Crew fatigue and morale",
+      "Handing over a watch"
+     ]
+    },
+    {
+     "icon": "i-boat",
+     "title": "Boat and engine",
+     "items": [
+      "Stability",
+      "Engine and systems at sea",
+      "Repairs underway"
+     ]
+    },
+    {
+     "icon": "i-buoy",
+     "title": "Emergencies at sea",
+     "items": [
+      "Man overboard at night",
+      "Abandoning ship and the liferaft",
+      "Steering failure"
+     ]
+    },
+    {
+     "icon": "i-cert",
+     "title": "Rules and maritime law",
+     "items": [
+      "Collision rules and IALA A and B buoyage",
+      "Maritime law for skippers",
+      "Safety equipment for offshore sailing"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    },
+    {
+     "name": "Kaş",
+     "lon": 29.64,
+     "lat": 36.2,
+     "note": "A lively harbour town facing the Greek island of Kastellorizo."
+    },
+    {
+     "name": "Open-sea crossing",
+     "lon": null,
+     "lat": null,
+     "note": "Usually 24 to 30 hours out of sight of land, with watches through the night."
+    },
+    {
+     "name": "Northern Cyprus",
+     "lon": 33.33,
+     "lat": 35.343,
+     "note": "Girne (Kyrenia), with its old harbour under the castle."
+    },
+    {
+     "name": "Open-sea crossing",
+     "lon": null,
+     "lat": null,
+     "note": "Usually 24 to 30 hours out of sight of land, with watches through the night."
+    },
+    {
+     "name": "Kekova",
+     "lon": 29.845,
+     "lat": 36.193,
+     "note": "A sound sheltered by Kekova island, with the ruins of a sunken city along the shore."
+    },
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "Ece Marina, where the course starts and finishes."
+    }
+   ],
+   "route_nm": 485
   },
   {
    "slug": "yachtmaster-ocean",
    "sort": 8,
    "name": "Yachtmaster Ocean",
    "level": "Yachtmaster",
-   "duration": "Theory course",
+   "duration": "6 days of theory",
    "scope": "Any ocean",
    "price_from_eur": 890,
    "price_unit": "per person",
@@ -440,19 +1241,21 @@
     "Using a sextant",
     "Sun and star sights",
     "Working out and plotting a position",
-    "Planning an ocean passage"
+    "Planning an ocean passage",
+    "Checking the compass by the sun and stars",
+    "Great circle routes and ocean weather"
    ],
    "requirements": [
     "IYT Yachtmaster Offshore",
     "Age 18 or over"
    ],
-   "certificate": "IYT Yachtmaster Ocean: command of yachts up to 24 m on any ocean. Not for commercial use.",
+   "certificate": "IYT Yachtmaster Ocean: command of yachts up to 24 m anywhere in the world, navigating by sextant. For private use only; not a commercial licence.",
    "theory": [
     "position-fixing"
    ],
    "about": [
     "Yachtmaster Ocean adds celestial navigation to the skills of an offshore skipper. Even with GPS aboard, ocean sailors carry a sextant: it works when the electronics fail and needs no power.",
-    "The course is taught in a classroom with real sextants, and you take your own sights from the shore. Depending on the route to the certificate, you may also need to show an ocean passage on which you navigated by the sun and stars; we tell you what applies before you book."
+    "The course is taught in a classroom with real sextants, and you take your own sights from the shore. It ends with a written exam; we tell you before you book if sights from a passage are also needed."
    ],
    "program": [
     {
@@ -465,15 +1268,15 @@
     },
     {
      "title": "Stars and planets",
-     "text": "Identifying stars, twilight sights and plotting a position from three stars."
+     "text": "Identifying stars, twilight sights, the pole star and moon sights, and plotting a position from three stars."
     },
     {
      "title": "Ocean passage planning",
-     "text": "Routeing charts, seasons and trade winds, provisioning and crew for a long passage."
+     "text": "Great circle sailing, routeing charts, seasons and trade winds, ocean weather, provisioning and crew for a long passage."
     },
     {
      "title": "Exam",
-     "text": "A written exam and a set of sights worked out from your own observations."
+     "text": "A written exam at the end of the course. We tell you before you book if any sights from a passage are needed."
     }
    ],
    "bring": [
@@ -481,7 +1284,114 @@
     "Pencils, dividers and a plotter",
     "A sextant if you have one; we lend one otherwise",
     "Your Yachtmaster Offshore certificate"
-   ]
+   ],
+   "included": [
+    "Six days of theory in the classroom",
+    "Sextants, almanacs and sight reduction tables to use during the course",
+    "Course notes and the written exam",
+    "Certificate fee"
+   ],
+   "not_included": [
+    "Accommodation and meals",
+    "Travel"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "IYT issues it after the written exam."
+    },
+    {
+     "title": "Practise your sights",
+     "text": "Take sights on every passage until working them out becomes routine."
+    },
+    {
+     "title": "Plan an ocean passage",
+     "text": "We help you plan a first crossing and find the crew for it."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1764726411645-744d48aa4497",
+     "shape": "l",
+     "caption": "Sextant, almanac and tables: the tools of celestial navigation."
+    },
+    {
+     "photo_id": "1518837695005-2083093ee35b",
+     "shape": "p",
+     "caption": "Sun sights from the shore."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Twilight: the time for star sights."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Working out a position by hand."
+    },
+    {
+     "photo_id": "1604095070247-cbc9734e3251",
+     "shape": "l",
+     "caption": "Planning a first ocean crossing."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "i-star",
+     "title": "The sextant",
+     "items": [
+      "Parts and adjustments",
+      "Index error",
+      "Taking and timing a sight"
+     ]
+    },
+    {
+     "icon": "i-light",
+     "title": "Sun sights",
+     "items": [
+      "The noon sight for latitude",
+      "Sun-run-sun",
+      "The almanac and sight reduction tables"
+     ]
+    },
+    {
+     "icon": "i-star",
+     "title": "Stars, planets and the moon",
+     "items": [
+      "Identifying stars",
+      "Twilight sights",
+      "The pole star and moon sights"
+     ]
+    },
+    {
+     "icon": "i-compass",
+     "title": "Compass and position",
+     "items": [
+      "Checking the compass by the sun and stars",
+      "Plotting a position line",
+      "A fix from three stars"
+     ]
+    },
+    {
+     "icon": "i-chart",
+     "title": "Ocean passages",
+     "items": [
+      "Great circle sailing",
+      "Routeing charts and seasons",
+      "Ocean weather and trade winds"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Fethiye",
+     "lon": 29.103,
+     "lat": 36.622,
+     "note": "The classroom at our base in Fethiye; sights are taken from the shore of the bay."
+    }
+   ],
+   "route_nm": 0
   }
  ],
  "legs": {
@@ -634,6 +1544,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "Joining the boat at the start marina."
+    },
+    {
+     "photo_id": "1519801715040-6d1074715ca5",
+     "shape": "p",
+     "caption": "The skipper of the day briefs the crew."
+    },
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Long legs out of sight of land."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing before the wind builds."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Night watch: lookout, lights and the log."
+    }
    ]
   },
   {
@@ -734,6 +1671,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Long legs out of sight of land."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing before the wind builds."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Night watch: lookout, lights and the log."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Your turn at the helm on a long leg."
+    },
+    {
+     "photo_id": "1777880652014-feee433c6be0",
+     "shape": "l",
+     "caption": "Fresh wind on the open stretch."
+    }
    ]
   },
   {
@@ -842,6 +1806,33 @@
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing",
     "Warm clothes: nights in the Sea of Marmara can be cool even in summer"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Night watch: lookout, lights and the log."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Your turn at the helm on a long leg."
+    },
+    {
+     "photo_id": "1777880652014-feee433c6be0",
+     "shape": "l",
+     "caption": "Fresh wind on the open stretch."
+    },
+    {
+     "photo_id": "1570077188670-e3a8d69ac5ff",
+     "shape": "p",
+     "caption": "Arriving in a new harbour at dusk."
+    },
+    {
+     "photo_id": "1519801584609-8ee5f072eddd",
+     "shape": "l",
+     "caption": "A swim stop at anchor between legs."
+    }
    ]
   },
   {
@@ -942,6 +1933,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1777880652014-feee433c6be0",
+     "shape": "l",
+     "caption": "Fresh wind on the open stretch."
+    },
+    {
+     "photo_id": "1570077188670-e3a8d69ac5ff",
+     "shape": "p",
+     "caption": "Arriving in a new harbour at dusk."
+    },
+    {
+     "photo_id": "1519801584609-8ee5f072eddd",
+     "shape": "l",
+     "caption": "A swim stop at anchor between legs."
+    },
+    {
+     "photo_id": "1533105079780-92b9be482077",
+     "shape": "p",
+     "caption": "Ashore for an evening in port."
+    },
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "Joining the boat at the start marina."
+    }
    ]
   },
   {
@@ -1024,6 +2042,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1519801584609-8ee5f072eddd",
+     "shape": "l",
+     "caption": "A swim stop at anchor between legs."
+    },
+    {
+     "photo_id": "1533105079780-92b9be482077",
+     "shape": "p",
+     "caption": "Ashore for an evening in port."
+    },
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "Joining the boat at the start marina."
+    },
+    {
+     "photo_id": "1519801715040-6d1074715ca5",
+     "shape": "p",
+     "caption": "The skipper of the day briefs the crew."
+    },
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Long legs out of sight of land."
+    }
    ]
   },
   {
@@ -1107,6 +2152,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1780335282813-db330424b1bd",
+     "shape": "l",
+     "caption": "Joining the boat at the start marina."
+    },
+    {
+     "photo_id": "1519801715040-6d1074715ca5",
+     "shape": "p",
+     "caption": "The skipper of the day briefs the crew."
+    },
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Long legs out of sight of land."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing before the wind builds."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Night watch: lookout, lights and the log."
+    }
    ]
   },
   {
@@ -1184,6 +2256,33 @@
     "Your logbook, if you already have one",
     "Passport, and a Turkish visa or e-Visa if your nationality needs one",
     "Travel insurance that covers sailing"
+   ],
+   "gallery": [
+    {
+     "photo_id": "1732267994253-4b9e4fd70a41",
+     "shape": "l",
+     "caption": "Long legs out of sight of land."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Reefing before the wind builds."
+    },
+    {
+     "photo_id": "1673263252923-deee17ca8cb2",
+     "shape": "l",
+     "caption": "Night watch: lookout, lights and the log."
+    },
+    {
+     "photo_id": "1594278337896-b4011763a8d7",
+     "shape": "p",
+     "caption": "Your turn at the helm on a long leg."
+    },
+    {
+     "photo_id": "1777880652014-feee433c6be0",
+     "shape": "l",
+     "caption": "Fresh wind on the open stretch."
+    }
    ]
   }
  ]

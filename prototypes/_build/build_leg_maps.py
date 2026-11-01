@@ -86,12 +86,14 @@ def build(key, leg):
         if i:
             seq += VIA.get((named[i - 1][0], name), [])
         seq.append((lon, lat))
-    line = route(seq)
+    line = route(seq) if len(seq) > 1 else seq
     dist = sum(nm(a, b) for a, b in zip(line, line[1:]))
     lons = [p[0] for p in line]; lats = [p[1] for p in line]
     span = max(max(lons) - min(lons), (max(lats) - min(lats)) * 1.25, 0.6)
     m = span * 0.14
     bbox = (min(lons) - m, min(lats) - m, max(lons) + m, max(lats) + m)
+    if len(line) == 1:  # one place: show the bay around it
+        bbox = (lons[0] - 0.35, lats[0] - 0.22, lons[0] + 0.35, lats[0] + 0.22)
     aspect = (math.radians(bbox[2]) - math.radians(bbox[0])) / (merc(bbox[3]) - merc(bbox[1]))
     svgs = {}
     for kind, w, hmin, hmax, pad, fs, r_end, r_mid in (('d', 820, 340, 640, 30, 13, 6, 4.5), ('m', 343, 250, 460, 14, 10, 4.5, 3.5)):
@@ -99,18 +101,22 @@ def build(key, leg):
         proj = Proj(bbox, w, h, pad)
         land = land_path(rings, proj, margin=20)
         xy = [proj(*p) for p in line]
-        items = []
+        items, seen = [], set()
         for i, (name, lon, lat) in enumerate(named):
+            if name in seen:
+                continue
+            seen.add(name)
             x, y = proj(lon, lat)
-            items.append((x, y, name, i in (0, len(named) - 1)))
+            items.append((x, y, name, i in (0, len(named) - 1) or named[-1][0] == name))
         labels = place_labels(items, w, h, fs, r_end, xy)
         dots = ''
         for (x, y, name, end), (tx, ty, anc) in zip(items, labels):
             dots += (f'<g class="pm-stop{" pm-end" if end else ""}"><circle cx="{x:.1f}" cy="{y:.1f}" r="{r_end if end else r_mid}"/>'
                      f'<text class="pm-label" x="{tx:.1f}" y="{ty:.1f}" text-anchor="{anc}">{name}</text></g>')
-        names = ', '.join(s[0] for s in named)
+        names = ', '.join(dict.fromkeys(s[0] for s in named))
+        leg_svg = f'<g class="rm-leg pm-leg on"><path class="rm-line" d="{smooth(xy)}"/></g>' if len(xy) > 1 else ''
         svgs[kind] = (f'<svg class="rm pm pm-{kind} pm-one" viewBox="0 0 {w} {h}" role="img" aria-label="Map of the route: {names}">'
-                      f'<path class="rm-land" d="{land}"/><g class="rm-leg pm-leg on"><path class="rm-line" d="{smooth(xy)}"/></g>{dots}</svg>')
+                      f'<path class="rm-land" d="{land}"/>{leg_svg}{dots}</svg>')
     return {'d': svgs['d'], 'm': svgs['m'], 'nm': int(round(dist / 5) * 5)}
 
 out = {}
@@ -118,3 +124,12 @@ for key, leg in SRC.items():
     out[key] = build(key, leg)
     print(key, out[key]['nm'], 'NM', len(out[key]['d']) + len(out[key]['m']), 'bytes', round(time.time() - t0, 1), 's')
 json.dump(out, open(os.path.join(WEB, 'content', 'passage_maps.json'), 'w'), ensure_ascii=False)
+
+# course routes (loops from the base, or one place for classroom courses)
+courses = json.load(open(os.path.join(WEB, 'content', 'catalog_extra.json')))['courses']
+cout = {}
+for slug, c in courses.items():
+    if c.get('route'):
+        cout[slug] = build(slug, {'stops': c['route']})
+        print(slug, cout[slug]['nm'], 'NM')
+json.dump(cout, open(os.path.join(WEB, 'content', 'course_maps.json'), 'w'), ensure_ascii=False)

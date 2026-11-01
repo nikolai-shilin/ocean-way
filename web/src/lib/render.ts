@@ -66,12 +66,28 @@ export function courseRows(lang: Lang, rows: CourseDate[]) {
   }).join('\n            ');
 }
 
+/** "2023 · 11.5 m · 3 cabins · 6 berths" and "From €2 000 a week to charter" in the page language, with plurals. */
+const plural = (n: number, one: string, few: string, many: string) => {
+  const a = n % 10, b = n % 100;
+  return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many;
+};
+export function boatSpec(lang: Lang, y: Pick<Yacht, 'year' | 'length_m' | 'cabins' | 'berths'>) {
+  const len = String(Number(y.length_m)), c = y.cabins, b = y.berths;
+  if (lang === 'ru') return `${y.year} · ${len.replace('.', ',')} м · ${c} ${plural(c, 'каюта', 'каюты', 'кают')} · ${b} ${plural(b, 'спальное место', 'спальных места', 'спальных мест')}`;
+  if (lang === 'de') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'Kabine' : 'Kabinen'} · ${b} ${b === 1 ? 'Koje' : 'Kojen'}`;
+  if (lang === 'es') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'camarote' : 'camarotes'} · ${b} ${b === 1 ? 'litera' : 'literas'}`;
+  return `${y.year} · ${len} m · ${c} ${c === 1 ? 'cabin' : 'cabins'} · ${b} ${b === 1 ? 'berth' : 'berths'}`;
+}
+export function boatPrice(lang: Lang, n: number) {
+  return { en: `From ${eur(n)} a week to charter`, ru: `Чартер от ${eur(n)} в неделю`, de: `Charter ab ${eur(n)} pro Woche`, es: `Chárter desde ${eur(n)} a la semana` }[lang];
+}
+
 export function fleetCards(lang: Lang, rows: Yacht[]) {
   return rows.map((y) => {
-    const spec = t(lang, `${y.year} · ${Number(y.length_m)} m · ${y.cabins} cabins · ${y.berths} berths`);
-    const price = t(lang, `From ${eur(y.charter_from_eur)} a week to charter`);
+    const spec = boatSpec(lang, y);
+    const price = boatPrice(lang, y.charter_from_eur);
     return `<a class="card" href="${path.boat(lang, y.slug)}">
-          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop" alt="${esc(t(lang, y.photo_alt))}" loading="lazy"></div></div>
+          <div class="photo"><div class="clip"><img src="${y.photo_id.startsWith('/') ? y.photo_id : `https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop`}" alt="${esc(t(lang, y.photo_alt))}" loading="lazy"></div></div>
           <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#i-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#i-sail"/></svg>${esc(t(lang, y.used_for))}</span></div></div>
         </a>`;
   }).join('\n        ');
@@ -112,15 +128,26 @@ export function passagesMap(homeMain: string, leg?: string) {
   return fig;
 }
 
-/** The map of one passage route (drawn by prototypes/_build/build_leg_maps.py): desktop and phone versions,
- *  stop names in the page language. */
-let legMaps: Record<string, { d: string; m: string; nm: number }> | undefined;
-export function legMap(lang: Lang, leg: string) {
-  legMaps ??= JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', 'passage_maps.json'), 'utf8'));
-  const m = legMaps![leg];
+/** The map of one passage route or course route (drawn by prototypes/_build/build_leg_maps.py): desktop and phone
+ *  versions, stop names in the page language. */
+const mapFiles: Record<string, Record<string, { d: string; m: string; nm: number }>> = {};
+function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string) {
+  mapFiles[file] ??= JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', `${file}.json`), 'utf8'));
+  const m = mapFiles[file][key];
   if (!m) return '';
   const tr = (svg: string) => svg
     .replace(/(<text class="pm-label"[^>]*>)([^<]+)(<\/text>)/g, (_, a: string, name: string, b: string) => a + esc(t(lang, name)) + b)
     .replace(/aria-label="Map of the route: ([^"]+)"/, (_, names: string) => `aria-label="${esc(t(lang, 'Map of the route'))}: ${esc(names.split(', ').map((n) => t(lang, n)).join(', '))}"`);
-  return `<figure class="pmap"><div class="rmap-frame">${tr(m.d)}${tr(m.m)}</div><figcaption class="disclaimer">${esc(t(lang, 'Lines show the usual sea route; the instructor plans each leg to the weather. Coastline: Natural Earth.'))}</figcaption></figure>`;
+  const note = m.d.includes('rm-line') ? 'Lines show the usual sea route; the instructor plans each leg to the weather. Coastline: Natural Earth.' : 'Coastline: Natural Earth.';
+  return `<figure class="pmap"><div class="rmap-frame">${tr(m.d)}${tr(m.m)}</div><figcaption class="disclaimer">${esc(t(lang, note))}</figcaption></figure>`;
+}
+export const legMap = (lang: Lang, leg: string) => mapFigure(lang, 'passage_maps', leg);
+export const courseMap = (lang: Lang, slug: string) => mapFigure(lang, 'course_maps', slug);
+
+/** Sideways photo gallery with captions, the same markup as the Bareboat Skipper page (home.css .gallery). */
+export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 'p'; caption: string }[]) {
+  if (!shots.length) return '';
+  const src = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+  const figs = shots.map((s, i) => `<figure class="g-${s.shape}"><div class="photo"><img src="${src(s.photo_id, s.shape === 'l' ? 1200 : 900)}" alt="${esc(t(lang, s.caption))}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption class="hint">${esc(t(lang, s.caption))}</figcaption></figure>`).join('');
+  return `<div class="gallery-wrap" data-row><div class="gallery-head"><span class="meta">${esc(t(lang, `${shots.length} photos · scroll sideways`))}</span><div class="gallery-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#i-arrow"/></svg></button></div></div><div class="gallery" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${figs}</div></div>`;
 }

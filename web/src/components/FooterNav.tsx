@@ -34,6 +34,7 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
         <h2>Ocean Way</h2>
         <ul>
           <li><a href={path.prices(lang)}>{t(lang, 'Prices')}</a></li>
+          <li><a href={path.instructors(lang)}>{t(lang, 'Instructors')}</a></li>
           <li><a href="#">{t(lang, 'About')}</a></li>
           <li><a href="#">Telegram</a></li>
           <li><a href="#">YouTube</a></li>

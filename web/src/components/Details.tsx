@@ -1,5 +1,5 @@
 import { t } from '@/lib/content';
-import type { Step, Stop } from '@/lib/db';
+import type { Skill, Step, Stop } from '@/lib/db';
 import type { Lang } from '@/lib/site';
 
 /** Building blocks of the course and passage pages: ticked lists, a day-by-day programme, the stops of a route. */
@@ -25,5 +25,20 @@ export function Stops({ lang, stops }: { lang: Lang; stops: Stop[] }) {
         );
       })}
     </ol>
+  );
+}
+
+/** Grouped skills, the same blocks as "What you'll learn" on the Bareboat Skipper page (home.css .mods). */
+export function Skills({ lang, skills }: { lang: Lang; skills: Skill[] }) {
+  return (
+    <div className="mods">
+      {skills.map((g, i) => (
+        <div className="mod" key={i}>
+          <span className="ico-c"><svg className="i"><use href={`#${g.icon}`} /></svg></span>
+          <h3>{t(lang, g.title)}</h3>
+          <ul>{g.items.map((x, j) => <li key={j}>{t(lang, x)}</li>)}</ul>
+        </div>
+      ))}
+    </div>
   );
 }

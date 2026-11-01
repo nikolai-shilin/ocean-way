@@ -40,4 +40,5 @@ export function Crumbs({ lang, items }: { lang: Lang; items: [string, string][] 
   );
 }
 
-export const photo = (id: string, w = 900) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+/** Unsplash photo by id, or a local file (fleet photos in /public start with '/'). */
+export const photo = (id: string, w = 900) => id.startsWith('/') ? id : `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;

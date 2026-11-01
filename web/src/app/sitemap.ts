@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     path.home, path.courses, ...courses.map((c) => (l: Lang) => path.courseItem(l, c.slug)),
     path.passages, ...passages.map((p) => (l: Lang) => path.passage(l, passageSlug(p))),
     path.fleet, ...yachts.map((y) => (l: Lang) => path.boat(l, y.slug)),
-    path.prices,
+    path.prices, path.instructors,
     path.theory, ...index.slugs.map((s) => (l: Lang) => path.article(l, s)),
   ];
   return routes.flatMap((r) => LANGS.map((l) => ({

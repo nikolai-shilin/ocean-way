@@ -3,10 +3,11 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
-import { catalog, getLegs, getPassages, passageSlug, stopsFor, type Passage } from '@/lib/db';
+import { catalog, getInstructors, getLegs, getPassages, passageSlug, stopsFor, type Passage } from '@/lib/db';
+import { peopleSection } from '@/lib/people';
 import { List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
-import { eur, legMap, range } from '@/lib/render';
+import { eur, galleryHtml, legMap, range } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -34,6 +35,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   const p = all.find((x) => passageSlug(x) === slug);
   if (!p) notFound();
   const leg = (await getLegs())[p.leg];
+  const skippers = (await getInstructors()).filter((x) => x.legs.includes(p.leg));
   const summary = t(lang, leg?.summary ?? catalog().legs[p.leg] ?? '');
   const back = p.return_id ? all.find((x) => x.id === p.return_id) : undefined;
   const route = t(lang, `${p.from_port} → ${p.to_port}`);
@@ -66,6 +68,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
           <span className="fact"><svg className="i"><use href="#i-guests" /></svg>{places}</span>
         </div>
       </section>
+      {leg?.gallery?.length ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, leg.gallery) }} /> : null}
       <div className="ow-item">
         <div className="ow-body">
           <div className="ow-map" dangerouslySetInnerHTML={{ __html: map }} />
@@ -76,6 +79,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
             <h2>{t(lang, 'What you do on board')}</h2>
             <List lang={lang} items={doList} />
           </section>
+          {skippers.length ? <div dangerouslySetInnerHTML={{ __html: peopleSection(lang, skippers, 'passage') }} /> : null}
           {leg ? (
             <div className="ow-two">
               <div className="band" id="requirements"><h3>{t(lang, 'Requirements')}</h3><List lang={lang} items={leg.requirements} /></div>

@@ -3,12 +3,13 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { index, loadPage, t } from '@/lib/content';
-import { getCourseDates, getCourses } from '@/lib/db';
+import { getCourseDates, getCourses, getInstructors } from '@/lib/db';
+import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, range } from '@/lib/render';
+import { courseMap, eur, galleryHtml, range } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
-import { List, Program } from '@/components/Details';
+import { List, Program, Skills, Stops } from '@/components/Details';
 
 export const revalidate = 300;
 // Bareboat Skipper has its own detailed page (courses/bareboat-skipper); every other course uses this one.
@@ -36,6 +37,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
   const c = courses.find((x) => x.slug === slug);
   if (!c) notFound();
   const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
+  const team = (await getInstructors()).filter((p) => p.courses.includes(slug));
   const titles = Object.fromEntries(index.slugs.map((s) => {
     const page = loadPage(`theory-${s}`, lang);
     return [s, page.title.replace(/ · Ocean Way$/, '')];
@@ -59,19 +61,39 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, c.duration)}</span>
           <span className="fact"><svg className="i"><use href="#i-compass" /></svg>{t(lang, c.scope)}</span>
           <span className="fact"><svg className="i"><use href="#i-cert" /></svg>IYT</span>
+          {c.route_nm ? <span className="fact"><svg className="i"><use href="#i-chart" /></svg>{t(lang, '{n} nautical miles', { n: c.route_nm })}</span> : null}
         </div>
       </section>
+      {c.gallery?.length
+        ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, c.gallery) }} />
+        : <div className="ow-photo" style={{ marginTop: 40 }}><img src={photo(c.photo_id, 1400)} alt={t(lang, c.photo_alt)} /></div>}
       <div className="ow-item">
         <div className="ow-body">
-          <div className="ow-photo"><img src={photo(c.photo_id, 1400)} alt={t(lang, c.photo_alt)} /></div>
           <section className="ow-text"><h2>{t(lang, 'About the course')}</h2><p>{t(lang, c.description)}</p>{(c.about ?? []).map((x, i) => <p key={i}>{t(lang, x)}</p>)}</section>
           {c.program?.length ? <section id="programme"><h2>{t(lang, 'Course programme')}</h2><Program lang={lang} steps={c.program} /></section> : null}
+          {c.skills?.length
+            ? <section id="syllabus"><h2>{t(lang, "What you'll learn")}</h2><Skills lang={lang} skills={c.skills} /></section>
+            : c.learn.length ? <section id="syllabus"><h2>{t(lang, "What you'll learn")}</h2><List lang={lang} items={c.learn} /></section> : null}
+          {c.route?.length ? (
+            <section id="route">
+              <h2>{t(lang, c.route.length > 1 ? 'Route and stops' : 'Where the course takes place')}</h2>
+              <div className="ow-map" dangerouslySetInnerHTML={{ __html: courseMap(lang, slug) }} />
+              <div style={{ marginTop: 24 }}><Stops lang={lang} stops={c.route} /></div>
+            </section>
+          ) : null}
           <div className="ow-two">
-            {c.learn.length ? <div className="band"><h3>{t(lang, "What you'll learn")}</h3><List lang={lang} items={c.learn} /></div> : null}
             {c.requirements.length ? <div className="band" id="requirements"><h3>{t(lang, 'Requirements')}</h3><List lang={lang} items={c.requirements} /></div> : null}
+            {c.bring?.length ? <div className="band" id="bring"><h3>{t(lang, 'What to bring')}</h3><List lang={lang} items={c.bring} /></div> : null}
           </div>
-          {c.bring?.length ? <section id="bring"><h2>{t(lang, 'What to bring')}</h2><List lang={lang} items={c.bring} cols /></section> : null}
+          {c.included?.length ? (
+            <div className="ow-two" id="included">
+              <div className="band"><h3>{t(lang, 'Included')}</h3><List lang={lang} items={c.included} /></div>
+              {c.not_included?.length ? <div className="band"><h3>{t(lang, 'Not included')}</h3><List lang={lang} items={c.not_included} icon="i-minus" /></div> : null}
+            </div>
+          ) : null}
           {c.certificate ? <section><h2>{t(lang, 'The certificate')}</h2><p>{t(lang, c.certificate)}</p></section> : null}
+          {c.after?.length ? <section id="after"><h2>{t(lang, 'After the course')}</h2><Program lang={lang} steps={c.after} /></section> : null}
+          {team.length ? <div dangerouslySetInnerHTML={{ __html: peopleSection(lang, team, 'course') }} /> : null}
           <section id="dates">
             <h2>{t(lang, 'Dates')}</h2>
             {dates.length ? (
@@ -90,7 +112,9 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
         <aside className="band ow-box" aria-label={t(lang, 'Price and dates')}>
           <div className="card-title">{c.name}</div>
           <div className="ow-price"><b>{eur(c.price_from_eur)}</b><span className="card-meta">{t(lang, c.price_unit)}</span></div>
-          <p className="ow-note">{t(lang, 'Instructor, yacht, fuel and marina fees on the course route, course book and certificate fee included.')}</p>
+          {c.included?.length
+            ? <p className="ow-note"><a href="#included">{t(lang, 'What the price includes')}</a></p>
+            : <p className="ow-note">{t(lang, 'Instructor, yacht, fuel and marina fees on the course route, course book and certificate fee included.')}</p>}
           <a className="pill pill-primary pill-wide" href="#">{t(lang, 'Ask about dates')}</a>
           <a className="pill pill-quiet pill-wide" href={path.courses(lang)}>{t(lang, 'All courses')}</a>
         </aside>

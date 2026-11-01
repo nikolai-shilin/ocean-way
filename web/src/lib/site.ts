@@ -20,4 +20,5 @@ export const path = {
   fleet: (l: Lang) => `/${l}/fleet`,
   boat: (l: Lang, slug: string) => `/${l}/fleet/${slug}`,
   prices: (l: Lang) => `/${l}/prices`,
+  instructors: (l: Lang) => `/${l}/instructors`,
 };

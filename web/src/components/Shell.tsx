@@ -37,7 +37,7 @@ const tb = document.getElementById('themeBtn');
 if (tb) tb.addEventListener('click', () => { if (root.dataset.theme === 'night') delete root.dataset.theme; else root.dataset.theme = 'night'; });
 if (new URLSearchParams(location.search).get('theme') === 'night') root.dataset.theme = 'night';
 document.querySelectorAll('[data-row]').forEach((row) => {
-  const g = row.querySelector('.hscroll'); if (!g) return;
+  const g = row.querySelector('.hscroll, .gallery'); if (!g) return;
   const btns = [...row.querySelectorAll('.round[data-dir]')]; if (btns.length < 2) return;
   const sync = () => { btns[0].disabled = g.scrollLeft <= 4; btns[1].disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4; };
   btns.forEach((b) => b.addEventListener('click', () => g.scrollBy({ left: Number(b.dataset.dir) * g.clientWidth * 0.7, behavior: 'smooth' })));

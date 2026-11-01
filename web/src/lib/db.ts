@@ -8,10 +8,13 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 export type CourseDate = { id: string; key: string; course_slug: string; starts_on: string; ends_on: string; area: string; boat: string; meeting_point: string; price_eur: number; places_total: number; places_left: number };
 export type Passage = { id: string; key: string; starts_on: string; ends_on: string; from_port: string; to_port: string; leg: string; waters: string; price_eur: number; places_total: number; places_left: number; return_id: string | null };
 export type Yacht = { id: string; slug: string; sort: number; model: string; year: number; length_m: number; beam_m: number | null; draft_m: number | null; cabins: number; berths: number; heads: number | null; engine_hp: number | null; base: string; used_for: string; charter_from_eur: number; photo_id: string; photo_alt: string; description: string };
-export type Course = { id: string; slug: string; sort: number; name: string; level: string; duration: string; scope: string; price_from_eur: number; price_unit: string; photo_id: string; photo_alt: string; summary: string; description: string; learn: string[]; requirements: string[]; certificate: string; theory: string[]; about: string[]; program: Step[]; bring: string[] };
+export type Course = { id: string; slug: string; sort: number; name: string; level: string; duration: string; scope: string; price_from_eur: number; price_unit: string; photo_id: string; photo_alt: string; summary: string; description: string; learn: string[]; requirements: string[]; certificate: string; theory: string[]; about: string[]; program: Step[]; bring: string[]; included?: string[]; not_included?: string[]; after?: Step[]; gallery?: Shot[]; skills?: Skill[]; route?: Stop[]; route_nm?: number | null };
+export type Shot = { photo_id: string; shape: 'l' | 'p'; caption: string };
+export type Skill = { icon: string; title: string; items: string[] };
 export type Step = { title: string; text: string };
+export type Instructor = { slug: string; sort: number; name: string; role: 'Lead instructor' | 'Instructor' | 'Skipper'; photo_id: string; photo_alt: string; qualification: string; seasons: number | null; languages: string[]; bio: string; courses: string[]; legs: string[]; sample: boolean };
 export type Stop = { name: string; lon: number | null; lat: number | null; note: string };
-export type PassageLeg = { leg: string; summary: string; about: string[]; stops: Stop[]; distance_nm: number; program: Step[]; requirements: string[]; bring: string[] };
+export type PassageLeg = { leg: string; summary: string; about: string[]; stops: Stop[]; distance_nm: number; program: Step[]; requirements: string[]; bring: string[]; gallery?: Shot[] };
 
 let client: SupabaseClient | null | undefined;
 export function db(): SupabaseClient | null {
@@ -74,11 +77,23 @@ export async function getLegs(): Promise<Record<string, PassageLeg>> {
   let rows: PassageLeg[];
   if (!c) rows = catalog().passage_legs;
   else {
-    const { data, error } = await c.from('passage_legs').select('leg, summary, about, stops, distance_nm, program, requirements, bring');
+    const { data, error } = await c.from('passage_legs').select('leg, summary, about, stops, distance_nm, program, requirements, bring, gallery');
     if (error) throw error;
     rows = data as PassageLeg[];
   }
   return Object.fromEntries(rows.map((r) => [r.leg, r]));
+}
+
+/** Instructors (courses) and skippers (passages), in display order. */
+export async function getInstructors(): Promise<Instructor[]> {
+  const c = db();
+  if (!c) {
+    const rows = JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', 'instructors.json'), 'utf8')) as Omit<Instructor, 'sample'>[];
+    return rows.map((r) => ({ ...r, sample: true }));
+  }
+  const { data, error } = await c.from('instructors').select('slug, sort, name, role, photo_id, photo_alt, qualification, seasons, languages, bio, courses, legs, sample').order('sort');
+  if (error) throw error;
+  return data as Instructor[];
 }
 
 /** Stops in the order this passage sails them (legs are stored from the first port in the key to the second). */

@@ -6,7 +6,7 @@ import { BoatCard } from '@/components/Cards';
 import { t } from '@/lib/content';
 import { getCourseDates, getYachts } from '@/lib/db';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, range } from '@/lib/render';
+import { eur, range, boatSpec } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 300;
@@ -81,7 +81,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
         </div>
         <aside className="band ow-box" aria-label={t(lang, 'Charter')}>
           <div className="card-title">{y.model}</div>
-          <div className="card-meta">{t(lang, `${y.year} · ${Number(y.length_m)} m · ${y.cabins} cabins · ${y.berths} berths`)}</div>
+          <div className="card-meta">{boatSpec(lang, y)}</div>
           <div className="ow-price"><b>{eur(y.charter_from_eur)}</b><span className="card-meta">{t(lang, 'a week, from')}</span></div>
           <p className="ow-note">{t(lang, 'Bareboat with a licence, or with one of our skippers. Final price depends on the week.')}</p>
           <a className="pill pill-primary pill-wide" href="#">{t(lang, 'Ask about charter weeks')}</a>
