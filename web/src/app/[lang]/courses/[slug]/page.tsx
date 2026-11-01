@@ -9,7 +9,7 @@ import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
 import { courseMap, eur, galleryHtml, range } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
-import { List, Program, Skills, Stops } from '@/components/Details';
+import { Faq, faqLd, List, Program, Skills, Stops } from '@/components/Details';
 
 export const revalidate = 300;
 // Bareboat Skipper has its own detailed page (courses/bareboat-skipper); every other course uses this one.
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/courses/[s
   const c = await find(slug);
   if (!c) return {};
   const l = lang as Lang;
-  return meta(l, { title: `${c.name}: ${t(l, c.summary).replace(/\.$/, '')}`, description: t(l, c.description).slice(0, 155), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
+  return meta(l, { title: t(l, '{name} course (IYT)', { name: c.name }), description: t(l, c.description), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
 }
 
 export default async function CourseItem({ params }: PageProps<'/[lang]/courses/[slug]'>) {
@@ -48,14 +48,14 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
     image: photo(c.photo_id, 1200), educationalCredentialAwarded: c.certificate ? t(lang, c.certificate).split(':')[0] : c.name,
     offers: { '@type': 'Offer', price: c.price_from_eur, priceCurrency: 'EUR', category: 'Paid', url: SITE + path.courseItem(lang, slug) },
     hasCourseInstance: dates.map((d) => ({ '@type': 'CourseInstance', courseMode: 'Onsite', startDate: d.starts_on, endDate: d.ends_on, location: { '@type': 'Place', name: t(lang, d.area) } })),
-  }] };
+  }, ...(c.faq?.length ? [faqLd(lang, c.faq)] : [])] };
   const others = courses.filter((x) => x.slug !== slug);
   return (
     <Shell lang={lang} section="courses" pathFor={(l) => path.courseItem(l, slug)} jsonld={ld}>
       <section className="ow-hero">
         <Crumbs lang={lang} items={crumbs} />
         <span className="lvl">{t(lang, c.level)}</span>
-        <h1 className="display">{c.name}</h1>
+        <h1 className="display">{t(lang, '{name} course', { name: c.name })}</h1>
         <p className="lead">{t(lang, c.summary)}</p>
         <div className="facts">
           <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, c.duration)}</span>
@@ -119,6 +119,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <a className="pill pill-quiet pill-wide" href={path.courses(lang)}>{t(lang, 'All courses')}</a>
         </aside>
       </div>
+      {c.faq?.length ? <Faq lang={lang} items={c.faq} /> : null}
       <section className="sec" data-row style={{ marginTop: 96 }}>
         <div className="sec-head row-head"><div><span className="kicker">{t(lang, 'Courses')}</span><h2 className="h2" style={{ marginTop: 12 }}>{t(lang, 'Other courses')}</h2></div>
           <div className="row-nav"><button className="round" type="button" data-dir="-1" aria-label={t(lang, 'Previous')}><svg className="i" style={{ transform: 'scaleX(-1)' }}><use href="#i-arrow" /></svg></button><button className="round" type="button" data-dir="1" aria-label={t(lang, 'Next')}><svg className="i"><use href="#i-arrow" /></svg></button></div></div>

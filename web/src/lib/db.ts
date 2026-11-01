@@ -8,13 +8,14 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 export type CourseDate = { id: string; key: string; course_slug: string; starts_on: string; ends_on: string; area: string; boat: string; meeting_point: string; price_eur: number; places_total: number; places_left: number };
 export type Passage = { id: string; key: string; starts_on: string; ends_on: string; from_port: string; to_port: string; leg: string; waters: string; price_eur: number; places_total: number; places_left: number; return_id: string | null };
 export type Yacht = { id: string; slug: string; sort: number; model: string; year: number; length_m: number; beam_m: number | null; draft_m: number | null; cabins: number; berths: number; heads: number | null; engine_hp: number | null; base: string; used_for: string; charter_from_eur: number; photo_id: string; photo_alt: string; description: string };
-export type Course = { id: string; slug: string; sort: number; name: string; level: string; duration: string; scope: string; price_from_eur: number; price_unit: string; photo_id: string; photo_alt: string; summary: string; description: string; learn: string[]; requirements: string[]; certificate: string; theory: string[]; about: string[]; program: Step[]; bring: string[]; included?: string[]; not_included?: string[]; after?: Step[]; gallery?: Shot[]; skills?: Skill[]; route?: Stop[]; route_nm?: number | null };
+export type Course = { id: string; slug: string; sort: number; name: string; level: string; duration: string; scope: string; price_from_eur: number; price_unit: string; photo_id: string; photo_alt: string; summary: string; description: string; learn: string[]; requirements: string[]; certificate: string; theory: string[]; about: string[]; program: Step[]; bring: string[]; included?: string[]; not_included?: string[]; after?: Step[]; gallery?: Shot[]; skills?: Skill[]; route?: Stop[]; route_nm?: number | null; faq?: Faq[] };
 export type Shot = { photo_id: string; shape: 'l' | 'p'; caption: string };
 export type Skill = { icon: string; title: string; items: string[] };
 export type Step = { title: string; text: string };
+export type Faq = { q: string; a: string };
 export type Instructor = { slug: string; sort: number; name: string; role: 'Lead instructor' | 'Instructor' | 'Skipper'; photo_id: string; photo_alt: string; qualification: string; seasons: number | null; languages: string[]; bio: string; courses: string[]; legs: string[]; sample: boolean };
 export type Stop = { name: string; lon: number | null; lat: number | null; note: string };
-export type PassageLeg = { leg: string; summary: string; about: string[]; stops: Stop[]; distance_nm: number; program: Step[]; requirements: string[]; bring: string[]; gallery?: Shot[] };
+export type PassageLeg = { leg: string; summary: string; about: string[]; stops: Stop[]; distance_nm: number; program: Step[]; requirements: string[]; bring: string[]; gallery?: Shot[]; faq?: Faq[] };
 
 let client: SupabaseClient | null | undefined;
 export function db(): SupabaseClient | null {
@@ -71,7 +72,7 @@ export async function getLegs(): Promise<Record<string, PassageLeg>> {
   let rows: PassageLeg[];
   if (!c) rows = catalog().passage_legs;
   else {
-    const { data, error } = await c.from('passage_legs').select('leg, summary, about, stops, distance_nm, program, requirements, bring, gallery');
+    const { data, error } = await c.from('passage_legs').select('leg, summary, about, stops, distance_nm, program, requirements, bring, gallery, faq');
     if (error) throw error;
     rows = data as PassageLeg[];
   }

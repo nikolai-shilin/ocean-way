@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/fleet/[slu
   const l = lang as Lang;
   const y = (await getYachts()).find((x) => x.slug === slug);
   if (!y) return {};
-  return meta(l, { title: `${y.model}, ${t(l, y.base)}`, description: t(l, y.description).slice(0, 155), pathFor: (x) => path.boat(x, slug), image: photo(y.photo_id, 1200) });
+  return meta(l, { title: `${y.model}, ${t(l, y.base)}`, description: t(l, y.description), pathFor: (x) => path.boat(x, slug), image: photo(y.photo_id, 1200) });
 }
 
 const LOC: Record<Lang, string> = { en: 'en-GB', ru: 'ru-RU', de: 'de-DE', es: 'es-ES' };
