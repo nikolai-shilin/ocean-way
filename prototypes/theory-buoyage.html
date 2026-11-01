@@ -583,6 +583,24 @@ html, body { overflow-x: clip; }
 .dg-water { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: .6; }
 .dg-green { fill: rgba(26, 158, 90, .22); stroke: #1a9e5a; stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
+
+.kd .kr-halo { fill: none; stroke: var(--bg); stroke-width: 22; }
+.kd .kr-halo-dot { fill: var(--bg); }
+.kd .kr-line { fill: none; stroke: var(--ink); stroke-width: 15; stroke-linejoin: round; }
+.kd .kr-line-dot { fill: var(--ink); }
+.kd .kr-core { fill: none; stroke: var(--bg); stroke-width: 10.5; stroke-linejoin: round; }
+.kd .kr-core-dot { fill: var(--bg); }
+.kd .kr-tint { stroke: var(--rope-tint); }
+.kd .kr-tint-dot { fill: var(--rope-tint); }
+.kd .kr-lay { fill: none; stroke: var(--ink); stroke-opacity: .16; stroke-width: 10.5; stroke-dasharray: 1.6 5.4; }
+.kd .kd-obj { fill: var(--band); stroke: var(--ink); stroke-width: 2; }
+.kd .kd-shine { stroke: var(--bg); stroke-width: 3; stroke-linecap: round; opacity: .9; }
+.kd .kd-bolt { fill: var(--bg); stroke: var(--ink); stroke-width: 1.5; }
+.kd .kd-tube-o { fill: none; stroke: var(--ink); stroke-linecap: round; stroke-linejoin: round; }
+.kd .kd-tube { fill: none; stroke: var(--band); stroke-linecap: round; stroke-linejoin: round; }
+.kd .kd-lead { stroke: var(--muted); stroke-width: 1.2; }
+.kd { --rope-tint: color-mix(in srgb, var(--accent) 34%, var(--bg)); }
+
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }
 @media (max-width: 1000px) {
   .art-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }

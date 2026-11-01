@@ -2,6 +2,7 @@
 (<slug>.json meta + <slug>.html body). Also adds the Theory teaser row to home.html and theory links to the course page
 (idempotent). Shares head CSS, icons, header and footer with the course page. Run i18n_build.py afterwards."""
 import json, os, re, html, math
+import knot_diagrams
 HERE = os.path.dirname(os.path.abspath(__file__))
 P = os.path.dirname(HERE)
 C = os.path.join(HERE, 'theory')
@@ -131,6 +132,7 @@ def diagram_cardinals():
 DIAGRAMS = {'points-of-sail': (diagram_points, 'Points of sail with the wind from the top. No yacht can sail inside the no-go zone, about 45° either side of the wind; boats on the right have the wind over their port side (port tack), the faint ones on the left are on starboard tack.'),
             'cardinals': (diagram_cardinals, 'Cardinal marks around a danger, north at the top. Each mark sits on the side it is named after, so you pass on that side. The cones point to where the black is, and the white light flashes like a clock face: 3 at east, 6 at south, 9 at west.'),
             'lights': (diagram_lights, 'Light arcs seen from above. Where the arcs meet, you see two lights at once: from dead ahead, both red and green.')}
+DIAGRAMS.update({f'knot-{k}': v for k, v in knot_diagrams.KNOTS.items()})
 
 # ---------- shared page parts ----------
 src = open(f'{P}/bareboat-skipper-course.html').read()
@@ -216,6 +218,7 @@ CSS = r'''
 .dg-water { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: .6; }
 .dg-green { fill: rgba(26, 158, 90, .22); stroke: #1a9e5a; stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
+''' + knot_diagrams.CSS + r'''
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }
 @media (max-width: 1000px) {
   .art-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
