@@ -3,13 +3,14 @@ import type { PageContent } from '@/lib/content';
 import { SITE } from '@/lib/site';
 import { addMobileMenu, fixNav, langLinks, splitFaq, type Section } from '@/lib/chrome';
 import { t } from '@/lib/content';
+import { responsiveImages } from '@/lib/images';
 import FooterNav from './FooterNav';
 
 /** Renders one extracted prototype page: icon sprite, header, main, footer, page scripts and JSON-LD.
  *  `main` and `scripts` can be passed in already modified (live data, booking hooks). */
 export default function ProtoPage({ content, main, scripts, before, section = null }: { content: PageContent; main?: string; scripts?: string[]; before?: string; section?: Section }) {
   const header = addMobileMenu(fixNav(content.header, content.lang, section), t(content.lang, 'Menu'));
-  const html = header + '<main>' + splitFaq(fixNav(main ?? content.main, content.lang)) + '</main>';
+  const html = header + '<main>' + responsiveImages(splitFaq(fixNav(main ?? content.main, content.lang)), { priorityFirst: true }) + '</main>';
   const ld = content.jsonld.map((j) => j.replace(/(\{\{SITE\}\}[^"]*?)\/"/g, '$1"').replaceAll('{{SITE}}', SITE));
   return (
     <>

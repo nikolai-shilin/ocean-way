@@ -72,10 +72,13 @@ export function responsiveImages(html: string, opts: { priorityFirst?: boolean }
     let a = attrs;
     const lazy = /\sloading="lazy"/.test(a);
     if (!/\sdecoding=/.test(a)) a += ' decoding="async"';
-    if (opts.priorityFirst && first && !lazy && !/\sfetchpriority=/.test(a)) a += ' fetchpriority="high"';
-    first = false;
     const src = /\ssrc="([^"]+)"/.exec(a)?.[1];
     const kind = frameOf(html.slice(Math.max(0, offset - 240), offset));
+    // Only the first photo in a frame (not an avatar or icon) is likely the largest thing on screen.
+    if (kind && first) {
+      first = false;
+      if (opts.priorityFirst && !lazy && !/\sfetchpriority=/.test(a)) a += ' fetchpriority="high"';
+    }
     if (src && kind && !/\ssrcset=/.test(a)) {
       const r = responsive(src.replace(/&amp;/g, '&'), kind, lazy);
       if (r) {

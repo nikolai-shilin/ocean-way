@@ -3,6 +3,7 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { index, loadPage, t } from '@/lib/content';
+import { photoProps } from '@/lib/images';
 import { getCourseDates, getCourses, getInstructors } from '@/lib/db';
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
@@ -68,7 +69,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
       </section>
       {c.gallery?.length
         ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, c.gallery) }} />
-        : <div className="ow-photo" style={{ marginTop: 40 }}><img src={photo(c.photo_id, 1400)} alt={t(lang, c.photo_alt)} /></div>}
+        : <div className="ow-photo" style={{ marginTop: 40 }}><img {...photoProps(photo(c.photo_id, 1400), 'wide', { priority: true })} alt={t(lang, c.photo_alt)} suppressHydrationWarning /></div>}
       <div className="ow-item">
         <div className="ow-body">
           <section className="ow-text"><h2>{t(lang, 'About the course')}</h2><p>{t(lang, c.description)}</p>{(c.about ?? []).map((x, i) => <p key={i}>{t(lang, x)}</p>)}</section>

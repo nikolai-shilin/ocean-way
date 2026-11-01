@@ -3,6 +3,7 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { BoatCard } from '@/components/Cards';
+import { photoProps } from '@/lib/images';
 import { t } from '@/lib/content';
 import { getCourseDates, getYachts } from '@/lib/db';
 import { usedForIcon } from '@/lib/icons';
@@ -64,7 +65,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
       </section>
       <div className="ow-item">
         <div className="ow-body">
-          <div className="ow-photo"><img src={photo(y.photo_id, 1400)} alt={t(lang, y.photo_alt)} /></div>
+          <div className="ow-photo"><img {...photoProps(photo(y.photo_id, 1400), 'wide', { priority: true })} alt={t(lang, y.photo_alt)} suppressHydrationWarning /></div>
           <section>
             <h2>{t(lang, 'Specifications')}</h2>
             <dl className="ow-specs">{specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>

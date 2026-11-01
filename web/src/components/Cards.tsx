@@ -1,6 +1,7 @@
 import { t } from '@/lib/content';
 import type { Course, Yacht } from '@/lib/db';
 import { scopeIcon, usedForIcon } from '@/lib/icons';
+import { photoProps } from '@/lib/images';
 import { photo } from '@/lib/meta';
 import { boatPrice, boatSpec, eur } from '@/lib/render';
 import { path, type Lang } from '@/lib/site';
@@ -8,7 +9,7 @@ import { path, type Lang } from '@/lib/site';
 export function CourseCard({ lang, c }: { lang: Lang; c: Course }) {
   return (
     <a className="card" href={path.courseItem(lang, c.slug)}>
-      <div className="photo"><div className="clip"><img src={photo(c.photo_id)} alt={t(lang, c.photo_alt)} loading="lazy" /></div></div>
+      <div className="photo"><div className="clip"><img {...photoProps(photo(c.photo_id), 'card', { lazy: true })} alt={t(lang, c.photo_alt)} suppressHydrationWarning /></div></div>
       <div className="card-body">
         <span className="lvl">{t(lang, c.level)}</span>
         <span className="card-title">{c.name}</span>
@@ -27,7 +28,7 @@ export function CourseCard({ lang, c }: { lang: Lang; c: Course }) {
 export function BoatCard({ lang, y }: { lang: Lang; y: Yacht }) {
   return (
     <a className="card" href={path.boat(lang, y.slug)}>
-      <div className="photo"><div className="clip"><img src={photo(y.photo_id)} alt={t(lang, y.photo_alt)} loading="lazy" /></div></div>
+      <div className="photo"><div className="clip"><img {...photoProps(photo(y.photo_id), 'card', { lazy: true })} alt={t(lang, y.photo_alt)} suppressHydrationWarning /></div></div>
       <div className="card-body">
         <span className="card-title">{y.model}</span>
         <span className="card-meta">{boatSpec(lang, y)}</span>
