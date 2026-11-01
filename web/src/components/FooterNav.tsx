@@ -4,7 +4,7 @@ import { path, type Lang } from '@/lib/site';
 
 const POPULAR = ['right-of-way', 'med-mooring', 'anchoring', 'weather', 'navigation-lights'];
 
-/** Site map in the footer: every course, the passages, every boat, popular theory, company links, languages. */
+/** Site map in the footer: every course, the passages, every boat, popular theory, company links; languages in a row below. */
 export default async function FooterNav({ lang, langLinks }: { lang: Lang; langLinks: [string, string, boolean][] }) {
   const [courses, yachts] = await Promise.all([getCourses(), getYachts()]);
   const articles = POPULAR.filter((s) => index.slugs.includes(s)).map((s) => [s, loadPage(`theory-${s}`, lang).title.replace(/ · Ocean Way$/, '')]);
@@ -31,12 +31,7 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
         </ul>
       </div>
       <div>
-        <div className="fnav-head">
-          <h2>Ocean Way</h2>
-          <div className="fnav-langs">
-            {langLinks.map(([l, href, current]) => <a key={l} href={href} hrefLang={l} lang={l} aria-current={current ? 'true' : undefined}>{l.toUpperCase()}</a>)}
-          </div>
-        </div>
+        <h2>Ocean Way</h2>
         <ul>
           <li><a href={path.prices(lang)}>{t(lang, 'Prices')}</a></li>
           <li><a href={path.instructors(lang)}>{t(lang, 'Instructors')}</a></li>
@@ -46,6 +41,9 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
           <li><a href="#">Instagram</a></li>
           <li><a href="#">{t(lang, 'Privacy')}</a></li>
         </ul>
+      </div>
+      <div className="fnav-langs">
+        {langLinks.map(([l, href, current]) => <a key={l} href={href} hrefLang={l} lang={l} aria-current={current ? 'true' : undefined}>{l.toUpperCase()}</a>)}
       </div>
     </nav>
   );
