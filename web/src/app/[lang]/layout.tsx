@@ -8,6 +8,11 @@ export function generateStaticParams() {
 }
 export const dynamicParams = false;
 
+// The icon files live in src/app (one set for every language); pages inherit these links.
+export const metadata = {
+  icons: { icon: [{ url: '/icon.svg', type: 'image/svg+xml' }], apple: [{ url: '/apple-icon.png', sizes: '180x180' }] },
+};
+
 export default async function LangLayout({ children, params }: LayoutProps<'/[lang]'>) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
