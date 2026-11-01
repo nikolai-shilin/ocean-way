@@ -3,9 +3,7 @@ begin;
 insert into public.course_dates (key, course_slug, starts_on, ends_on, area, boat, meeting_point, price_eur, places_total, places_held) values
   ('2027-05-01', 'bareboat-skipper', '2027-05-01', '2027-05-08', 'Saronic Gulf, Greece', 'Bavaria C38', 'Alimos Marina, Athens', 1590, 4, 2),
   ('2027-05-22', 'bareboat-skipper', '2027-05-22', '2027-05-29', 'Saronic Gulf, Greece', 'Bavaria C38', 'Alimos Marina, Athens', 1590, 4, 4),
-  ('2027-06-12', 'bareboat-skipper', '2027-06-12', '2027-06-19', 'Split, Croatia', 'Dufour 390', 'ACI Marina Split', 1690, 4, 0),
-  ('2027-09-11', 'bareboat-skipper', '2027-09-11', '2027-09-18', 'Saronic Gulf, Greece', 'Bavaria C38', 'Alimos Marina, Athens', 1590, 4, 1),
-  ('2027-10-02', 'bareboat-skipper', '2027-10-02', '2027-10-09', 'Split, Croatia', 'Dufour 390', 'ACI Marina Split', 1490, 4, 0)
+  ('2027-09-11', 'bareboat-skipper', '2027-09-11', '2027-09-18', 'Saronic Gulf, Greece', 'Bavaria C38', 'Alimos Marina, Athens', 1590, 4, 1)
 on conflict (course_slug, key) do nothing;
 insert into public.passages (key, starts_on, ends_on, from_port, to_port, leg, waters, price_eur, places_total) values
   ('2027-04-10', '2027-04-10', '2027-04-17', 'Fethiye', 'Bodrum', 'fethiye-bodrum', 'Turquoise Coast and Aegean', 890, 4),
