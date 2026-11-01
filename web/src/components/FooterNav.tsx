@@ -20,7 +20,7 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
           <li><a href={path.passages(lang)}>{t(lang, 'All passages')}</a></li>
           <li><a href={`${path.booking(lang)}?item=passage`}>{t(lang, 'Book a training passage')}</a></li>
         </ul>
-        <h2 style={{ marginTop: 28 }}><a href={path.fleet(lang)}>{t(lang, 'Fleet')}</a></h2>
+        <h2 style={{ marginTop: 22 }}><a href={path.fleet(lang)}>{t(lang, 'Fleet')}</a></h2>
         <ul>{yachts.map((y) => <li key={y.slug}><a href={path.boat(lang, y.slug)}>{y.model}</a></li>)}</ul>
       </div>
       <div>
