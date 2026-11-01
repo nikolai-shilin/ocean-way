@@ -1,0 +1,27 @@
+{
+  "slug": "engine-handling",
+  "title": "Handling a sailing yacht under engine",
+  "h1": "Handling a yacht under engine",
+  "lead": "A sailing yacht under power has no brakes, steers only when water flows past the rudder and kicks sideways in reverse. Once you know why, manoeuvring in a tight harbour becomes calm and predictable.",
+  "description": "How a single-engine sailing yacht handles under power: steering, the pivot point, prop wash, prop walk, going astern, stopping, the wind and turning in the boat's own length.",
+  "summary": [
+    "The rudder works only with water flowing past it, from boat speed or from a burst of propeller wash.",
+    "Going ahead, the boat turns around a point near the mast, so the stern swings out wide: watch it in tight spaces.",
+    "In reverse, prop walk kicks the stern sideways, usually to port. Test it in open water, then use it.",
+    "Change gear only at idle, pause in neutral, and use short, firm bursts of power rather than long, gentle ones."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Boat and engine",
+  "toc": [
+    ["how", "How she steers"],
+    ["pivot", "The pivot point"],
+    ["wash", "Prop wash"],
+    ["walk", "Prop walk"],
+    ["astern", "Going astern"],
+    ["stopping", "Stopping and the wind"],
+    ["turning", "Turning in a tight space"],
+    ["practise", "Practise it"]
+  ]
+}

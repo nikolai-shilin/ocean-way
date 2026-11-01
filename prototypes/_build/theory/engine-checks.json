@@ -1,0 +1,27 @@
+{
+  "slug": "engine-checks",
+  "title": "Daily engine checks on a sailing yacht",
+  "h1": "Engine checks before you leave",
+  "lead": "Most engine trouble on a charter yacht shows up in a five-minute check before you start. Here is what to look at, what to watch while the engine runs and what to do when an alarm goes off.",
+  "description": "Daily diesel checks on a sailing yacht: oil, coolant, raw water strainer, belt, bilge and fuel, starting and the exhaust water, gauges and alarms, fuel range and common faults.",
+  "summary": [
+    "Check the oil, coolant, raw water strainer, belt, bilge and fuel filter every morning, with the engine cold.",
+    "Start in neutral and look over the stern: cooling water must come out of the exhaust within a few seconds.",
+    "A temperature or oil pressure alarm means neutral, then stop the engine as soon as the boat is safe.",
+    "Never switch the batteries off while the engine runs, and plan fuel so a quarter of the tank is left on arrival."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Boat and engine",
+  "toc": [
+    ["why", "Why check every day"],
+    ["cold", "Checks with the engine cold"],
+    ["start", "Starting"],
+    ["running", "While it runs"],
+    ["alarms", "Alarms and what to do"],
+    ["fuel", "Fuel and batteries"],
+    ["stop", "Stopping"],
+    ["practise", "Practise it"]
+  ]
+}

@@ -1,4 +1,4 @@
-"""Merge tr-<lang>-theory-a/b.json (+ small fixes) into tr-<lang>-theory.json, which i18n_build.py loads."""
+"""Merge tr-<lang>-theory-a/b/c/d.json (+ small fixes) into tr-<lang>-theory.json, which i18n_build.py loads."""
 import json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 FIX = {
@@ -8,7 +8,7 @@ FIX = {
 }
 for l in ['ru', 'de', 'es']:
     out = {}
-    for part in ('a', 'b', 'c'):
+    for part in ('a', 'b', 'c', 'd'):
         p = f'{HERE}/tr-{l}-theory-{part}.json'
         if os.path.exists(p):
             out.update(json.load(open(p)))

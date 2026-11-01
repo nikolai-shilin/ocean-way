@@ -1,0 +1,27 @@
+{
+  "slug": "charter-check-in",
+  "title": "Charter yacht check-in: documents, inspection and inventory",
+  "h1": "Taking over a charter yacht",
+  "lead": "The first afternoon of a charter decides how smoothly the week goes and whether you get your deposit back. Here is the check-in step by step: papers at the office, the base briefing and your own inspection of the boat.",
+  "description": "How to check in on a charter yacht: documents and deposit, the base briefing, inspecting hull, sails, rigging, engine, anchor, dinghy and safety gear, recording damage, the crew briefing and check-out.",
+  "summary": [
+    "Bring your skipper licence and the crew's passport details, and send the crew list before you arrive.",
+    "Inspect the boat yourself with the checklist: hull, sails, rigging, engine, anchor, dinghy, safety gear and inventory.",
+    "Photograph every scratch and fault, and have the base write it on the check-in list before you sign.",
+    "Brief your crew before you leave the berth, and return the boat on time with full tanks."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "IYT International Bareboat Skipper",
+  "topic": "Boat and engine",
+  "toc": [
+    ["before", "Before you arrive"],
+    ["office", "At the office"],
+    ["briefing", "The base briefing"],
+    ["inspection", "Your own inspection"],
+    ["damage", "Recording damage"],
+    ["crew", "Briefing the crew"],
+    ["check-out", "Check-out"],
+    ["practise", "Practise it"]
+  ]
+}

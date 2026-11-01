@@ -13,11 +13,12 @@ UPDATED = ('2026-11-01', '1 Nov 2026')
 AUTHOR = {'slug': 'nikolai', 'name': 'Nikolai Shilin', 'photo': '/people/nikolai.webp', 'job': 'Skipper, IYT Bareboat Skipper'}
 
 ORDER = ['points-of-sail', 'knots', 'tacking-gybing', 'reefing', 'right-of-way', 'navigation-lights', 'buoyage',
-         'med-mooring', 'berthing-alongside', 'anchoring', 'weather', 'position-fixing', 'tides', 'passage-planning',
+         'med-mooring', 'berthing-alongside', 'anchoring', 'charter-check-in', 'engine-checks', 'engine-handling', 'weather', 'position-fixing', 'tides', 'passage-planning',
          'vhf-procedure', 'man-overboard', 'safety-on-board']
 TOPICS = [('Sailing basics', 'basics', 'How a yacht moves and the handful of knots you use every day.'),
           ('Rules of the road', 'rules', 'Who gives way, what the lights at night are telling you and how to read the buoys.'),
           ('Harbour and anchorage', 'harbour', 'Getting in, tied up and settled for the night.'),
+          ('Boat and engine', 'boat', 'Taking over a charter yacht, checking the engine every morning and handling her under power.'),
           ('Weather and navigation', 'weather', 'Knowing what the wind will do and where you are.'),
           ('Radio and safety', 'radio', 'What to say on the radio, the safety gear on board and what to do if someone falls in.')]
 PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close-hauled on open water'),
@@ -36,7 +37,10 @@ PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close
          'tides': ('1505118380757-91f5f5632de0', 'Waves meeting a sandy shore from above'),
          'passage-planning': ('1764726411645-744d48aa4497', 'A sextant, watch and dividers on a chart'),
          'man-overboard': ('1732267994253-4b9e4fd70a41', 'A crew in sailing jackets on deck in open water'),
-         'safety-on-board': ('1542405242-8217b4c9e34c', 'A crew in life jackets on deck')}
+         'safety-on-board': ('1542405242-8217b4c9e34c', 'A crew in life jackets on deck'),
+         'charter-check-in': ('1754353702475-f0c295d9eb77', 'Sailing yachts in a marina on a sunny day'),
+         'engine-checks': ('1670711226713-599750185024', 'A wooden sailing yacht moored alongside a pontoon'),
+         'engine-handling': ('1743798574119-36a30e44799d', 'The wheel and compass of a sailing yacht')}
 IMG = lambda pid, w=900: f'https://images.unsplash.com/photo-{pid}?w={w}&q=80&auto=format&fit=crop'
 COURSE_LINK = {'IYT International Bareboat Skipper': 'bareboat-skipper-course.html'}
 
@@ -129,9 +133,52 @@ def diagram_cardinals():
         g.append(f'<text class="dg-label dg-muted" x="{lx}" y="{ly + 18}" text-anchor="{anc}">{sub}</text>')
     return f'<svg class="dg" viewBox="0 0 640 470" role="img" aria-label="Four cardinal marks around a danger, each on the side named after it, with their colours, topmarks and quick-flashing light rhythms">{"".join(g)}</svg>'
 
+def diagram_propwalk():
+    """Two top views, bow at the top. Left: going astern, prop walk swings the stern to port. Right: going ahead,
+    the boat turns around a pivot point about a third back from the bow, so the stern swings out."""
+    S = 4.6
+    def hull(x, y, h, py, cls=''):
+        # The hull drawn so its point (0, py) sits at (x, y), rotated h degrees about it; the stroke stays thin when scaled.
+        return (f'<g class="{cls}" transform="translate({x} {y}) rotate({h}) scale({S}) translate(0 {-py})">'
+                f'<path class="dg-hull" vector-effect="non-scaling-stroke" d="M0,-17 C6.5,-8 6.5,8 4,15 L-4,15 C-6.5,8 -6.5,-8 0,-17Z"/>'
+                f'<line class="dg-mast" vector-effect="non-scaling-stroke" x1="0" y1="15" x2="0" y2="19.5"/>'
+                f'<line class="dg-prop" vector-effect="non-scaling-stroke" x1="-3.2" y1="17.5" x2="3.2" y2="17.5"/></g>')
+    def arrow(pts):
+        d = 'M' + ' L'.join(f'{x:.1f},{y:.1f}' for x, y in pts)
+        (x0, y0), (x1, y1) = pts[-2], pts[-1]; a = math.atan2(y1 - y0, x1 - x0)
+        head = [(x1 + 11 * math.cos(a), y1 + 11 * math.sin(a)), (x1 + 6 * math.cos(a + 2.1), y1 + 6 * math.sin(a + 2.1)), (x1 + 6 * math.cos(a - 2.1), y1 + 6 * math.sin(a - 2.1))]
+        return f'<path class="dg-move" d="{d}"/><polygon class="dg-movehead" points="{" ".join(f"{x:.1f},{y:.1f}" for x, y in head)}"/>'
+    def arc(cx, cy, r, a0, a1, below):
+        # Points on a circle round (cx, cy); angles in degrees from straight up (or straight down if below), clockwise on screen.
+        sgn = -1 if below else 1
+        return [(cx + sgn * r * math.sin(math.radians(a)), cy - sgn * r * math.cos(math.radians(a))) for a in [a0 + (a1 - a0) * k / 12 for k in range(13)]]
+    g = [f'<line class="dg-ring" x1="320" y1="24" x2="320" y2="310"/>']
+    # Left: prop walk going astern.
+    X, Y, PY = 160, 130, -8
+    g.append(hull(X, Y, 22, PY, 'dg-faint'))
+    g.append(hull(X, Y, 0, PY))
+    g.append(arrow(arc(X, Y, (15 - PY) * S + 16, 3, 26, True)))
+    g.append(arrow([(X + 82, Y - 20), (X + 82, Y + 62)]))
+    g.append(f'<text class="dg-label" x="{X}" y="30" text-anchor="middle">Going astern</text>')
+    g.append(f'<text class="dg-label dg-muted" x="{X + 96}" y="{Y + 30}" text-anchor="start">Astern</text>')
+    g.append(f'<text class="dg-label" x="{X - 20}" y="{Y + 160}" text-anchor="middle">Stern kicks to port</text>')
+    # Right: turning ahead around the pivot point.
+    X, Y, PY = 480, 130, -6
+    g.append(hull(X, Y, 0, PY, 'dg-faint'))
+    g.append(hull(X, Y, 30, PY))
+    g.append(arrow(arc(X, Y, (17 + PY) * S + 18, 4, 38, False)))
+    g.append(arrow(arc(X, Y, (15 - PY) * S + 16, 4, 34, True)))
+    g.append(f'<circle class="dg-pivot" cx="{X}" cy="{Y}" r="5"/>')
+    g.append(f'<text class="dg-label" x="{X}" y="30" text-anchor="middle">Turning ahead</text>')
+    g.append(f'<text class="dg-label dg-muted" x="{X + 36}" y="{Y + 28}" text-anchor="start">Pivot point</text>')
+    g.append(f'<text class="dg-label" x="{X + 62}" y="{Y - 60}" text-anchor="start">Bow</text>')
+    g.append(f'<text class="dg-label" x="{X - 40}" y="{Y + 160}" text-anchor="middle">Stern swings out</text>')
+    return f'<svg class="dg" viewBox="0 0 640 320" role="img" aria-label="Two yachts seen from above: going astern, prop walk kicks the stern to port; turning ahead, the yacht turns around a pivot point near the mast and the stern swings out">{"".join(g)}</svg>'
+
 DIAGRAMS = {'points-of-sail': (diagram_points, 'Points of sail with the wind from the top. No yacht can sail inside the no-go zone, about 45° either side of the wind; boats on the right have the wind over their port side (port tack), the faint ones on the left are on starboard tack.'),
             'cardinals': (diagram_cardinals, 'Cardinal marks around a danger, north at the top. Each mark sits on the side it is named after, so you pass on that side. The cones point to where the black is, and the white light flashes like a clock face: 3 at east, 6 at south, 9 at west.'),
-            'lights': (diagram_lights, 'Light arcs seen from above. Where the arcs meet, you see two lights at once: from dead ahead, both red and green.')}
+            'lights': (diagram_lights, 'Light arcs seen from above. Where the arcs meet, you see two lights at once: from dead ahead, both red and green.'),
+            'propwalk': (diagram_propwalk, 'Seen from above, bow at the top. Left: with a right-handed propeller, going astern kicks the stern to port. Right: going ahead, the yacht turns around a point near the mast, so the stern swings out the opposite way.')}
 DIAGRAMS.update({f'knot-{k}': v for k, v in knot_diagrams.KNOTS.items()})
 
 # ---------- shared page parts ----------
@@ -217,6 +264,9 @@ CSS = r'''
 .dg-cone { fill: #1d1d1f; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; }
 .dg-water { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: .6; }
 .dg-green { fill: rgba(26, 158, 90, .22); stroke: #1a9e5a; stroke-width: 1.5; }
+.dg-move { fill: none; stroke: var(--accent); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.dg-movehead, .dg-pivot { fill: var(--accent); }
+.dg-prop { stroke: var(--ink); stroke-width: 3; stroke-linecap: round; }
 .art-mobile-toc, .art-mobile-course { display: none; }
 ''' + knot_diagrams.CSS + r'''
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }
