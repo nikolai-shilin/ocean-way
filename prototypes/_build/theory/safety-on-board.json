@@ -1,0 +1,55 @@
+{
+  "slug": "safety-on-board",
+  "title": "Safety on board: lifejackets, liferafts and flares",
+  "h1": "Safety on board: the gear and the briefing",
+  "lead": "Every yacht carries safety equipment, and every crew member should know where it is and how to use it. This is what the skipper's briefing covers, from lifejackets to the liferaft.",
+  "description": "Yacht safety for crew: the skipper's briefing, 150N lifejackets and harnesses, the liferaft and grab bag, EPIRB and PLB, flares, fire, gas and seacocks.",
+  "summary": [
+    "The skipper's briefing shows every crew member where the safety gear is.",
+    "Wear a 150N lifejacket with crotch straps, and clip on at night and in rough weather.",
+    "Only take to the liferaft when the yacht is sinking: step up, never down.",
+    "Turn gas off at the bottle, and know where the extinguishers, seacocks and bungs are."
+  ],
+  "read_minutes": 6,
+  "level": "All crew",
+  "course": "Introduction to Yachting",
+  "topic": "Radio and safety",
+  "toc": [
+    [
+      "briefing",
+      "The safety briefing"
+    ],
+    [
+      "lifejackets",
+      "Lifejackets"
+    ],
+    [
+      "harness",
+      "Harnesses and jackstays"
+    ],
+    [
+      "liferaft",
+      "Liferaft and grab bag"
+    ],
+    [
+      "beacons",
+      "EPIRB and PLB"
+    ],
+    [
+      "flares",
+      "Flares"
+    ],
+    [
+      "fire-gas",
+      "Fire and gas"
+    ],
+    [
+      "water-first-aid",
+      "Leaks, pumps and first aid"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

@@ -6,7 +6,7 @@ The English pages are the source. After editing them, regenerate the other files
 python3 build_theory.py      # theory.html + theory-<slug>.html from theory/<slug>.json|html; theory row on home, links on course page
 python3 build_booking.py     # booking.html from the course page's styles, icons and header
 python3 build_flows.py       # user-flows.html
-python3 merge_theory.py      # tr-<lang>-theory-a/b.json → tr-<lang>-theory.json
+python3 merge_theory.py      # tr-<lang>-theory-a/b/c.json → tr-<lang>-theory.json
 python3 i18n_build.py        # all pages in ru, de, es + language switcher, hreflang, canonical
 ```
 

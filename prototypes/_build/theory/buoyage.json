@@ -1,0 +1,51 @@
+{
+  "slug": "buoyage",
+  "title": "IALA buoyage: lateral and cardinal marks explained",
+  "h1": "Buoys and marks: the IALA system",
+  "lead": "Buoys show where the channel runs and which side of a danger is safe. This guide covers the IALA marks you will meet in the Mediterranean, by day and at night.",
+  "description": "Lateral, cardinal, isolated danger, safe water and special marks in IALA Region A: colours, topmarks, light rhythms and how to read a light on the chart.",
+  "summary": [
+    "In Region A, coming in from sea, red can marks are left to port and green cones to starboard.",
+    "Cardinal topmarks point to the black on the mark. Pass on the side the mark is named after.",
+    "Cardinal lights follow a clock face: east 3 flashes, south 6 and a long flash, west 9, north continuous.",
+    "Buoys drag, go missing and may be unlit, so check every mark against the chart."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "International Bareboat Skipper",
+  "topic": "Rules of the road",
+  "toc": [
+    [
+      "regions",
+      "Regions A and B"
+    ],
+    [
+      "lateral",
+      "Lateral marks"
+    ],
+    [
+      "cardinals",
+      "Cardinal marks"
+    ],
+    [
+      "isolated-safe",
+      "Isolated danger and safe water"
+    ],
+    [
+      "special",
+      "Special and wreck marks"
+    ],
+    [
+      "lights",
+      "Reading lights"
+    ],
+    [
+      "real-life",
+      "Buoys in real life"
+    ],
+    [
+      "practise",
+      "Practise it"
+    ]
+  ]
+}

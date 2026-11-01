@@ -74,7 +74,7 @@ def main():
     for lang in LANGS[1:]:
         d = {}
         for f in sorted(glob.glob(f'{BUILD}/tr-{lang}*.json')):
-            if re.search(r'-theory-[ab]\.json$', f): continue
+            if re.search(r'-theory-[abc]\.json$', f): continue
             d.update(json.load(open(f)))
         json.dump(d, open(f'{WEB}/content/i18n/{lang}.json', 'w'), ensure_ascii=False)
     json.dump({'slugs': SLUGS, 'pages': list(PAGES)}, open(f'{WEB}/content/index.json', 'w'))

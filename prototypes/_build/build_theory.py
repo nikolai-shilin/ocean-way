@@ -9,12 +9,14 @@ BASE = 'https://www.rycrentals.com'
 BRAND = 'Ocean Way'
 UPDATED = ('2026-11-01', '1 Nov 2026')
 
-ORDER = ['points-of-sail', 'knots', 'right-of-way', 'navigation-lights', 'med-mooring', 'anchoring', 'weather', 'position-fixing', 'vhf-procedure']
+ORDER = ['points-of-sail', 'knots', 'tacking-gybing', 'reefing', 'right-of-way', 'navigation-lights', 'buoyage',
+         'med-mooring', 'berthing-alongside', 'anchoring', 'weather', 'position-fixing', 'tides', 'passage-planning',
+         'vhf-procedure', 'man-overboard', 'safety-on-board']
 TOPICS = [('Sailing basics', 'basics', 'How a yacht moves and the handful of knots you use every day.'),
-          ('Rules of the road', 'rules', 'Who gives way, and what the lights at night are telling you.'),
+          ('Rules of the road', 'rules', 'Who gives way, what the lights at night are telling you and how to read the buoys.'),
           ('Harbour and anchorage', 'harbour', 'Getting in, tied up and settled for the night.'),
           ('Weather and navigation', 'weather', 'Knowing what the wind will do and where you are.'),
-          ('Radio and safety', 'radio', 'What to say on the radio, and how to call for help.')]
+          ('Radio and safety', 'radio', 'What to say on the radio, the safety gear on board and what to do if someone falls in.')]
 PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close-hauled on open water'),
          'knots': ('1563296291-14f26f10c20f', 'A schooner with all sails set'),
          'right-of-way': ('1605281317010-fe5ffe798166', 'A motor yacht crossing open water'),
@@ -23,7 +25,15 @@ PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close
          'anchoring': ('1506929562872-bb421503ef21', 'Boats anchored in a turquoise cove'),
          'weather': ('1500375592092-40eb2168fd21', 'A wave breaking in clear water'),
          'position-fixing': ('1534008897995-27a23e859048', 'Boats in a bay between cliffs'),
-         'vhf-procedure': ('1528154291023-a6525fabe5b4', 'A boat seen from above on dark water')}
+         'vhf-procedure': ('1528154291023-a6525fabe5b4', 'A boat seen from above on dark water'),
+         'tacking-gybing': ('1777880652269-ff1dd5e65fbb', 'Two sailors at the wheel under sail'),
+         'reefing': ('1777404380697-6b0725b148a7', 'Two crew working at the mast in a fresh breeze'),
+         'buoyage': ('1780335282813-db330424b1bd', 'A skipper at the wheel leaving harbour'),
+         'berthing-alongside': ('1533105079780-92b9be482077', 'Whitewashed steps down to the sea'),
+         'tides': ('1505118380757-91f5f5632de0', 'Waves meeting a sandy shore from above'),
+         'passage-planning': ('1764726411645-744d48aa4497', 'A sextant, watch and dividers on a chart'),
+         'man-overboard': ('1732267994253-4b9e4fd70a41', 'A crew in sailing jackets on deck in open water'),
+         'safety-on-board': ('1542405242-8217b4c9e34c', 'A crew in life jackets on deck')}
 IMG = lambda pid, w=900: f'https://images.unsplash.com/photo-{pid}?w={w}&q=80&auto=format&fit=crop'
 COURSE_LINK = {'International Bareboat Skipper': 'bareboat-skipper-course.html'}
 
@@ -85,7 +95,39 @@ def diagram_lights():
         g.append(f'<text class="dg-label" x="{x}" y="{y}" text-anchor="{a}">{t}</text>')
     return f'<svg class="dg" viewBox="0 0 640 380" role="img" aria-label="Arcs of navigation lights seen from above: masthead light 225 degrees forward, red and green sidelights 112.5 degrees each, sternlight 135 degrees aft">{"".join(g)}</svg>'
 
+def diagram_cardinals():
+    cx, cy = 320, 250
+    def mark(x, y, bands, cones):
+        g = []
+        g.append(f'<line class="dg-water" x1="{x - 34}" y1="{y + 30}" x2="{x + 34}" y2="{y + 30}"/>')
+        h = 56 / len(bands)
+        for i, b in enumerate(bands):
+            g.append(f'<rect class="dg-{b}" x="{x - 13}" y="{y - 28 + i * h:.1f}" width="26" height="{h:.1f}"/>')
+        g.append(f'<rect class="dg-outline" x="{x - 13}" y="{y - 28}" width="26" height="56" rx="3"/>')
+        g.append(f'<line class="dg-mast" x1="{x}" y1="{y - 28}" x2="{x}" y2="{y - 38}"/>')
+        for k, up in enumerate(cones):  # k=0 lower cone, k=1 upper cone
+            b = y - 38 - k * 15
+            pts = f'{x - 9},{b} {x + 9},{b} {x},{b - 13}' if up else f'{x - 9},{b - 13} {x + 9},{b - 13} {x},{b}'
+            g.append(f'<polygon class="dg-cone" points="{pts}"/>')
+        return ''.join(g)
+    g = []
+    for a in (45, 135, 225, 315):
+        r = math.radians(a)
+        g.append(f'<line class="dg-ring" x1="{cx + 46 * math.sin(r):.1f}" y1="{cy - 46 * math.cos(r):.1f}" x2="{cx + 175 * math.sin(r):.1f}" y2="{cy - 175 * math.cos(r):.1f}"/>')
+    g.append(f'<path class="dg-nogo" d="M{cx - 30},{cy + 6} C{cx - 34},{cy - 14} {cx - 10},{cy - 26} {cx + 8},{cy - 20} C{cx + 30},{cy - 16} {cx + 34},{cy + 4} {cx + 22},{cy + 18} C{cx + 8},{cy + 30} {cx - 22},{cy + 26} {cx - 30},{cy + 6}Z"/>')
+    g.append(f'<text class="dg-label dg-muted" x="{cx}" y="{cy + 50}" text-anchor="middle">Danger</text>')
+    marks = [((cx, 100), ['blk', 'yel'], (True, True), (cx + 30, 70, 'start'), 'North cardinal', 'Q · pass north of it'),
+             ((510, cy), ['blk', 'yel', 'blk'], (False, True), (510, cy + 56, 'middle'), 'East cardinal', 'Q(3) · pass east of it'),
+             ((cx, 410), ['yel', 'blk'], (False, False), (cx + 30, 380, 'start'), 'South cardinal', 'Q(6)+LFl · pass south of it'),
+             ((130, cy), ['yel', 'blk', 'yel'], (True, False), (130, cy + 56, 'middle'), 'West cardinal', 'Q(9) · pass west of it')]
+    for (x, y), bands, cones, (lx, ly, anc), name, sub in marks:
+        g.append(mark(x, y, bands, cones))
+        g.append(f'<text class="dg-label" x="{lx}" y="{ly}" text-anchor="{anc}">{name}</text>')
+        g.append(f'<text class="dg-label dg-muted" x="{lx}" y="{ly + 18}" text-anchor="{anc}">{sub}</text>')
+    return f'<svg class="dg" viewBox="0 0 640 470" role="img" aria-label="Four cardinal marks around a danger, each on the side named after it, with their colours, topmarks and quick-flashing light rhythms">{"".join(g)}</svg>'
+
 DIAGRAMS = {'points-of-sail': (diagram_points, 'Points of sail with the wind from the top. No yacht can sail inside the no-go zone, about 45° either side of the wind; boats on the right have the wind over their port side (port tack), the faint ones on the left are on starboard tack.'),
+            'cardinals': (diagram_cardinals, 'Cardinal marks around a danger, north at the top. Each mark sits on the side it is named after, so you pass on that side. The cones point to where the black is, and the white light flashes like a clock face: 3 at east, 6 at south, 9 at west.'),
             'lights': (diagram_lights, 'Light arcs seen from above. Where the arcs meet, you see two lights at once: from dead ahead, both red and green.')}
 
 # ---------- shared page parts ----------
@@ -160,6 +202,12 @@ CSS = r'''
 .dg-windhead { fill: var(--ink); }
 .dg-white { fill: var(--band); stroke: var(--tag-line); }
 .dg-red { fill: rgba(208, 52, 44, .22); stroke: #d0342c; stroke-width: 1.5; }
+.dg-blk { fill: #1d1d1f; }
+.dg-yel { fill: #f2c230; }
+.dg-outline { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.dg-mast { stroke: var(--ink); stroke-width: 2; }
+.dg-cone { fill: #1d1d1f; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; }
+.dg-water { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: .6; }
 .dg-green { fill: rgba(26, 158, 90, .22); stroke: #1a9e5a; stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }
@@ -238,7 +286,7 @@ def build_hub(arts):
           {'@type': 'CollectionPage', 'name': 'Sailing theory, in plain words', 'url': BASE + '/en/theory/', 'inLanguage': 'en',
            'mainEntity': {'@type': 'ItemList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'url': f'{BASE}/en/theory/{a["slug"]}/', 'name': a['h1']} for i, a in enumerate(arts)]}}]
     out = page(f'Sailing Theory: Rules, Mooring, Weather, Radio · {BRAND}',
-               f'Free sailing theory from {BRAND} instructors: points of sail, knots, right of way, lights, mooring, anchoring, weather, navigation and VHF.',
+               f'Free sailing theory from {BRAND} instructors: points of sail, knots, tacking, reefing, right of way, buoys, mooring, anchoring, tides, weather, navigation, VHF and safety.',
                '/en/theory/', IMG(PHOTO['points-of-sail'][0], 1200), ld, body)
     open(f'{P}/theory.html', 'w').write(out)
 

@@ -1,0 +1,55 @@
+{
+  "slug": "tides",
+  "title": "Tides for sailors: heights, streams, rule of twelfths",
+  "h1": "Tides: heights, streams and the rule of twelfths",
+  "lead": "Even if you learn to sail where the tide barely moves, the Yachtmaster syllabus and northern waters expect you to work it out. Here is how tides rise and fall, how to read chart datum and tidal streams, and how to time a bar crossing.",
+  "description": "How tides work for sailors: springs and neaps, chart datum, drying heights, tide tables, the rule of twelfths, under-keel clearance and tidal streams.",
+  "summary": [
+    "The moon and sun cause the tides; springs follow full and new moon.",
+    "Depth of water is charted depth plus height of tide.",
+    "The rule of twelfths: 1, 2, 3, 3, 2, 1 twelfths of the range each hour.",
+    "Wind against tide makes short, steep seas."
+  ],
+  "read_minutes": 6,
+  "level": "Coastal skipper",
+  "course": "Yachtmaster Coastal",
+  "topic": "Weather and navigation",
+  "toc": [
+    [
+      "why-tides",
+      "Why there are tides"
+    ],
+    [
+      "springs-neaps",
+      "Springs and neaps"
+    ],
+    [
+      "chart-datum",
+      "Chart datum"
+    ],
+    [
+      "tide-tables",
+      "Tide tables"
+    ],
+    [
+      "twelfths",
+      "Rule of twelfths"
+    ],
+    [
+      "clearance",
+      "Crossing a bar"
+    ],
+    [
+      "streams",
+      "Tidal streams"
+    ],
+    [
+      "mediterranean",
+      "Our home waters"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

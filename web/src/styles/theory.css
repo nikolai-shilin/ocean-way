@@ -477,6 +477,12 @@ html, body { overflow-x: clip; }
 .dg-windhead { fill: var(--ink); }
 .dg-white { fill: var(--band); stroke: var(--tag-line); }
 .dg-red { fill: rgba(208, 52, 44, .22); stroke: #d0342c; stroke-width: 1.5; }
+.dg-blk { fill: #1d1d1f; }
+.dg-yel { fill: #f2c230; }
+.dg-outline { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.dg-mast { stroke: var(--ink); stroke-width: 2; }
+.dg-cone { fill: #1d1d1f; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; }
+.dg-water { stroke: var(--accent); stroke-width: 2; stroke-linecap: round; opacity: .6; }
 .dg-green { fill: rgba(26, 158, 90, .22); stroke: #1a9e5a; stroke-width: 1.5; }
 .art-mobile-toc, .art-mobile-course { display: none; }
 @supports (corner-shape: squircle) { .note, .dgfig .frame, .art-course, .lvl { corner-shape: squircle; } .note, .dgfig .frame { border-radius: 38px; } }
