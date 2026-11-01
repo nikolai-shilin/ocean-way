@@ -32,6 +32,10 @@ export function range(lang: Lang, a: string, b: string, nbsp = false) {
   const en = `${enDay(a, nbsp ? NB : ' ')} – ${enDay(b, nbsp ? NB : ' ')}`;
   return hasT(lang, en) ? t(lang, en) : lang === 'en' ? en : `${intlDay(lang, a)} – ${intlDay(lang, b)}`;
 }
+/** Compact date range for page titles: "10–17 Apr 2027" in the page language. */
+export function shortRange(lang: Lang, a: string, b: string) {
+  return new Intl.DateTimeFormat(LOCALE[lang], { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).formatRange(d(a), d(b));
+}
 export const eur = (n: number) => '€' + n.toLocaleString('en-US').replace(/,/g, NB);
 const nightsOf = (p: { starts_on: string; ends_on: string }) => Math.round((d(p.ends_on).getTime() - d(p.starts_on).getTime()) / 864e5);
 

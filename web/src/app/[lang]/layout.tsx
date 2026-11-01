@@ -1,7 +1,7 @@
 import '@/styles/chrome.css';
 import Script from 'next/script';
 import { notFound } from 'next/navigation';
-import { LANGS, isLang } from '@/lib/site';
+import { LANGS, SITE, isLang } from '@/lib/site';
 
 export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
@@ -10,6 +10,8 @@ export const dynamicParams = false;
 
 // The icon files live in src/app (one set for every language); pages inherit these links.
 export const metadata = {
+  // Relative image addresses in metadata (fleet photos in /public) resolve against the public site URL.
+  metadataBase: new URL(SITE),
   // ?v= changes the address so browsers that cached the old Next.js icon fetch the new one.
   icons: { icon: [{ url: '/icon.svg?v=2', type: 'image/svg+xml' }], shortcut: [{ url: '/favicon.ico?v=2' }], apple: [{ url: '/apple-icon.png?v=2', sizes: '180x180' }] },
 };

@@ -6,8 +6,8 @@ import { t } from '@/lib/content';
 import { catalog, getInstructors, getLegs, getPassages, passageSlug, stopsFor, type Passage } from '@/lib/db';
 import { peopleSection } from '@/lib/people';
 import { List, Program, Stops } from '@/components/Details';
-import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
-import { eur, galleryHtml, legMap, range } from '@/lib/render';
+import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
+import { eur, galleryHtml, legMap, range, shortRange } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -25,7 +25,12 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/passages/[
   if (!p) return {};
   const route = t(l, `${p.from_port} → ${p.to_port}`);
   const leg = (await getLegs())[p.leg];
-  return meta(l, { title: `${route}, ${range(l, p.starts_on, p.ends_on)}`, description: t(l, leg?.summary ?? catalog().legs[p.leg] ?? '').slice(0, 155), pathFor: (x) => path.passage(x, slug) });
+  const shot = leg?.gallery?.find((g) => g.shape === 'l') ?? leg?.gallery?.[0];
+  return meta(l, {
+    title: t(l, 'Training passage {route}, {dates}', { route, dates: shortRange(l, p.starts_on, p.ends_on) }),
+    description: t(l, leg?.summary ?? catalog().legs[p.leg] ?? ''), pathFor: (x) => path.passage(x, slug),
+    image: shot ? photo(shot.photo_id, 1200) : undefined,
+  });
 }
 
 export default async function PassageItem({ params }: PageProps<'/[lang]/passages/[slug]'>) {

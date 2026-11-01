@@ -2,21 +2,36 @@ import type { Metadata } from 'next';
 import { t } from './content';
 import { LANGS, OG_LOCALE, SITE, type Lang } from './site';
 
+/** Share image for pages without their own photo (the home page's Open Graph image). */
+export const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1563296291-14f26f10c20f?w=1200&h=630&fit=crop&q=80';
+
+/** Shorten text for a meta description without cutting a word: whole sentences if they fit, else whole words and "…". */
+export function clip(text: string, max = 158): string {
+  const s = text.replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const sentences = s.slice(0, max + 1).match(/^.*[.!?](?=\s)/);
+  if (sentences && sentences[0].length >= 70) return sentences[0];
+  const cut = s.slice(0, max).replace(/\s+\S*$/, '').replace(/[\s,;:–—-]+$/, '');
+  return `${cut}…`;
+}
+
 /** Metadata for the app's own pages: translated title and description, canonical, hreflang, Open Graph. */
 export function meta(lang: Lang, o: { title: string; description: string; pathFor: (l: Lang) => string; image?: string }): Metadata {
   const languages: Record<string, string> = Object.fromEntries(LANGS.map((l) => [l, SITE + o.pathFor(l)]));
   languages['x-default'] = SITE + o.pathFor('en');
   const title = `${o.title} · Ocean Way`;
+  const description = clip(o.description);
   return {
     title,
-    description: o.description,
+    description,
     alternates: { canonical: SITE + o.pathFor(lang), languages },
-    openGraph: { type: 'website', siteName: 'Ocean Way', title, description: o.description, url: SITE + o.pathFor(lang), images: o.image ? [o.image] : undefined, locale: OG_LOCALE[lang] },
+    openGraph: { type: 'website', siteName: 'Ocean Way', title, description, url: SITE + o.pathFor(lang), images: [o.image ?? DEFAULT_IMAGE], locale: OG_LOCALE[lang] },
     twitter: { card: 'summary_large_image' },
   };
 }
 
-export const ORG = { '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Ocean Way', url: `${SITE}/en` };
+/** The same organisation entity as the prototype pages, so every page describes Ocean Way the same way. */
+export const ORG = { '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Ocean Way', url: `${SITE}/en`, logo: `${SITE}/logo.png`, sameAs: ['https://t.me/rycrentals'] };
 
 export function breadcrumbs(lang: Lang, items: [string, string][]) {
   return {

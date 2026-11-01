@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/courses/[s
   const c = await find(slug);
   if (!c) return {};
   const l = lang as Lang;
-  return meta(l, { title: `${c.name}: ${t(l, c.summary).replace(/\.$/, '')}`, description: t(l, c.description).slice(0, 155), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
+  return meta(l, { title: t(l, '{name} course (IYT)', { name: c.name }), description: t(l, c.description), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
 }
 
 export default async function CourseItem({ params }: PageProps<'/[lang]/courses/[slug]'>) {
@@ -55,7 +55,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
       <section className="ow-hero">
         <Crumbs lang={lang} items={crumbs} />
         <span className="lvl">{t(lang, c.level)}</span>
-        <h1 className="display">{c.name}</h1>
+        <h1 className="display">{t(lang, '{name} course', { name: c.name })}</h1>
         <p className="lead">{t(lang, c.summary)}</p>
         <div className="facts">
           <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, c.duration)}</span>
