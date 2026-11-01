@@ -31,7 +31,12 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
         </ul>
       </div>
       <div>
-        <h2>Ocean Way</h2>
+        <div className="fnav-head">
+          <h2>Ocean Way</h2>
+          <div className="fnav-langs">
+            {langLinks.map(([l, href, current]) => <a key={l} href={href} hrefLang={l} lang={l} aria-current={current ? 'true' : undefined}>{l.toUpperCase()}</a>)}
+          </div>
+        </div>
         <ul>
           <li><a href={path.prices(lang)}>{t(lang, 'Prices')}</a></li>
           <li><a href={path.instructors(lang)}>{t(lang, 'Instructors')}</a></li>
@@ -41,9 +46,6 @@ export default async function FooterNav({ lang, langLinks }: { lang: Lang; langL
           <li><a href="#">Instagram</a></li>
           <li><a href="#">{t(lang, 'Privacy')}</a></li>
         </ul>
-        <div className="fnav-langs">
-          {langLinks.map(([l, href, current]) => <a key={l} href={href} hrefLang={l} lang={l} aria-current={current ? 'true' : undefined}>{l.toUpperCase()}</a>)}
-        </div>
       </div>
     </nav>
   );
