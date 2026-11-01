@@ -30,10 +30,11 @@ export default async function LangLayout({ children, params }: LayoutProps<'/[la
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   return (
-    // suppressHydrationWarning: the head script adds the ow-sk class before React hydrates.
+    // suppressHydrationWarning: the head scripts add the ow-sk class and data-theme before React hydrates.
     <html lang={lang} className={`${sans.variable} ${title.variable} ${sansItalic.variable}`} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://images.unsplash.com" />
+        <script dangerouslySetInnerHTML={{ __html: THEME_JS }} />
         <script dangerouslySetInnerHTML={{ __html: SKELETON_JS }} />
       </head>
       <body>
@@ -44,6 +45,11 @@ export default async function LangLayout({ children, params }: LayoutProps<'/[la
     </html>
   );
 }
+
+/** Remembered theme: applied in <head> before the first paint, so a night page never flashes light. The theme
+ *  button's own script (in every page) switches data-theme; this listener on document runs after it and saves the
+ *  result. Storage can be blocked (private mode), so both reads and writes are wrapped. */
+const THEME_JS = `(function(){var r=document.documentElement,k='ow-theme';try{if(localStorage.getItem(k)==='night')r.dataset.theme='night'}catch(e){}document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#themeBtn'))return;try{localStorage.setItem(k,r.dataset.theme==='night'?'night':'day')}catch(e){}})})();`;
 
 /** Photo skeletons (chrome.css): runs in <head> before any image, so it sees every load and error event
  *  (listening on document: image load events never reach window). */
