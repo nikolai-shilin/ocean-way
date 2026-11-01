@@ -49,7 +49,7 @@ CSS = r'''
 @media (max-width: 680px) { .flow { --gpad: 20px; } .fstep { width: 270px; } .lc { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 '''
 
-ARROW = '<span class="arrow" aria-hidden="true"><svg class="i"><use href="#i-arrow"/></svg></span>'
+ARROW = '<span class="arrow" aria-hidden="true"><svg class="i"><use href="#ow-arrow"/></svg></span>'
 
 def step(stage, page, href, want, ux, seo, built):
     title = f'<a href="{href}">{page}</a>' if href else page
@@ -109,7 +109,7 @@ PAGES = [
 page_rows = ''.join(f'<tr><td><b>{n}</b><span class="sub">{"In the prototype" if b else "To build"}</span></td><td>{u}</td><td>{i}</td><td class="wrap-c">{t}</td><td class="wrap-c">{s}</td><td>{c}</td></tr>' for n, u, i, t, s, c, b in PAGES)
 
 def cl(items, todo=False):
-    icon = 'i-minus' if todo else 'i-check'
+    icon = 'ow-minus' if todo else 'ow-check'
     return f'<ul class="cl{" todo" if todo else ""}">' + ''.join(f'<li><svg class="i"><use href="#{icon}"/></svg><span>{x}</span></li>' for x in items) + '</ul>'
 
 UX_DONE = ['<b>Entry point carries over:</b> the date or passage you clicked is already selected in the booking.',

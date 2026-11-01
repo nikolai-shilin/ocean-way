@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import nodePath from 'node:path';
 import { t, hasT } from './content';
 import { passageSlug, type CourseDate, type Passage, type Yacht } from './db';
+import { usedForIcon } from './icons';
 import { path, type Lang } from './site';
 
 /** HTML for the live parts of the prototype pages, built from database rows in the page's language.
@@ -92,7 +93,7 @@ export function fleetCards(lang: Lang, rows: Yacht[]) {
     const price = boatPrice(lang, y.charter_from_eur);
     return `<a class="card" href="${path.boat(lang, y.slug)}">
           <div class="photo"><div class="clip"><img src="${y.photo_id.startsWith('/') ? y.photo_id : `https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop`}" alt="${esc(t(lang, y.photo_alt))}" loading="lazy"></div></div>
-          <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#i-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#i-sail"/></svg>${esc(t(lang, y.used_for))}</span></div></div>
+          <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#ow-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#${usedForIcon(y.used_for)}"/></svg>${esc(t(lang, y.used_for))}</span></div></div>
         </a>`;
   }).join('\n        ');
 }
@@ -153,5 +154,5 @@ export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 
   if (!shots.length) return '';
   const src = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
   const figs = shots.map((s, i) => `<figure class="g-${s.shape}"><div class="photo"><img src="${src(s.photo_id, s.shape === 'l' ? 1200 : 900)}" alt="${esc(t(lang, s.caption))}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption class="hint">${esc(t(lang, s.caption))}</figcaption></figure>`).join('');
-  return `<div class="gallery-wrap" data-row><div class="gallery-head"><span class="meta">${esc(t(lang, `${shots.length} photos · scroll sideways`))}</span><div class="gallery-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#i-arrow"/></svg></button></div></div><div class="gallery" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${figs}</div></div>`;
+  return `<div class="gallery-wrap" data-row><div class="gallery-head"><span class="meta">${esc(t(lang, `${shots.length} photos · scroll sideways`))}</span><div class="gallery-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#ow-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#ow-arrow"/></svg></button></div></div><div class="gallery" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${figs}</div></div>`;
 }

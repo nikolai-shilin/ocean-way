@@ -1,5 +1,6 @@
 import { t } from '@/lib/content';
 import type { Course, Yacht } from '@/lib/db';
+import { scopeIcon, usedForIcon } from '@/lib/icons';
 import { photo } from '@/lib/meta';
 import { boatPrice, boatSpec, eur } from '@/lib/render';
 import { path, type Lang } from '@/lib/site';
@@ -14,8 +15,8 @@ export function CourseCard({ lang, c }: { lang: Lang; c: Course }) {
         <span className="card-meta">{t(lang, c.summary)}</span>
         <span className="card-price"><b>{eur(c.price_from_eur)}</b> {t(lang, c.price_unit)}</span>
         <div className="facts">
-          <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, c.duration)}</span>
-          <span className="fact"><svg className="i"><use href="#i-compass" /></svg>{t(lang, c.scope)}</span>
+          <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{t(lang, c.duration)}</span>
+          <span className="fact"><svg className="i"><use href={`#${scopeIcon(c.scope)}`} /></svg>{t(lang, c.scope)}</span>
         </div>
       </div>
     </a>
@@ -32,8 +33,8 @@ export function BoatCard({ lang, y }: { lang: Lang; y: Yacht }) {
         <span className="card-meta">{boatSpec(lang, y)}</span>
         <span className="card-price">{boatPrice(lang, y.charter_from_eur)}</span>
         <div className="facts">
-          <span className="fact"><svg className="i"><use href="#i-pin" /></svg>{t(lang, y.base)}</span>
-          <span className="fact"><svg className="i"><use href="#i-sail" /></svg>{t(lang, y.used_for)}</span>
+          <span className="fact"><svg className="i"><use href="#ow-pin" /></svg>{t(lang, y.base)}</span>
+          <span className="fact"><svg className="i"><use href={`#${usedForIcon(y.used_for)}`} /></svg>{t(lang, y.used_for)}</span>
         </div>
       </div>
     </a>

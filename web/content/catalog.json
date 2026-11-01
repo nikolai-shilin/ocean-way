@@ -3,7 +3,7 @@
   {
    "slug": "vhf-radio-operator",
    "sort": 1,
-   "name": "VHF Radio Operator",
+   "name": "IYT VHF Radio Operator",
    "level": "All crew",
    "duration": "1 day",
    "scope": "Needed for all crew",
@@ -185,13 +185,21 @@
     {
      "q": "Can I take it in the same week as a sailing course?",
      "a": "Yes. It takes one day in Fethiye, and many students add it to Introduction to Yachting or Flotilla Skipper in the same trip."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "introduction-to-yachting",
    "sort": 2,
-   "name": "Introduction to Yachting",
+   "name": "IYT Introduction to Yachting",
    "level": "Beginner",
    "duration": "5 days",
    "scope": "No experience needed",
@@ -227,8 +235,12 @@
    ],
    "program": [
     {
+     "title": "Saturday · Boarding from 17:00",
+     "text": "Find the boat in Fethiye, stow your bag and meet the instructor and the crew. Training starts the next morning."
+    },
+    {
      "title": "Day 1 · Getting to know the boat",
-     "text": "Join the boat in the afternoon. Safety briefing, life jackets, the parts of the yacht and the words sailors use, then a first short sail with the instructor beside you at the helm."
+     "text": "Safety briefing, life jackets, the parts of the yacht and the words sailors use, then a first short sail with the instructor beside you at the helm."
     },
     {
      "title": "Day 2 · Helm and sails",
@@ -245,6 +257,10 @@
     {
      "title": "Day 5 · Your day at the helm",
      "text": "You steer for most of the day, help plan the route and practise man overboard. Then a short theory test and the instructor's practical assessment for the certificate."
+    },
+    {
+     "title": "Saturday · Leaving by 09:00",
+     "text": "Pack your bag and leave the boat by 09:00. Dalaman airport is about an hour's drive from Fethiye."
     }
    ],
    "bring": [
@@ -266,6 +282,7 @@
    "not_included": [
     "Flights and transfer to the marina",
     "Food kitty, about €150 per person",
+    "Turkish transit log, split between the crew",
     "VHF radio (SRC) course, €190, optional",
     "Travel insurance"
    ],
@@ -427,13 +444,21 @@
     {
      "q": "What comes after this course?",
      "a": "With International Crew and a VHF licence you can take Flotilla Skipper, the first skipper course. Or sail as crew on a charter or one of our training passages to build days at sea."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "international-flotilla-skipper",
    "sort": 3,
-   "name": "International Flotilla Skipper",
+   "name": "IYT International Flotilla Skipper",
    "level": "Flotilla skipper",
    "duration": "5 days",
    "scope": "Up to 20 nm offshore",
@@ -468,8 +493,12 @@
    ],
    "program": [
     {
+     "title": "Saturday · Boarding from 17:00",
+     "text": "Find the boat in Fethiye, stow your bag and meet the instructor and the crew. Training starts the next morning."
+    },
+    {
      "title": "Day 1 · Briefing and boat checks",
-     "text": "Join the boat and do the check-in walk-round as you would on a charter: engine, gas, safety kit and inventory. Then learn to brief a crew."
+     "text": "Do the check-in walk-round as you would on a charter: engine, gas, safety kit and inventory. Then learn to brief a crew."
     },
     {
      "title": "Day 2 · Boat handling under engine",
@@ -486,6 +515,10 @@
     {
      "title": "Day 5 · Skipper's day and assessment",
      "text": "You run the whole day: briefing, passage and mooring. Then the theory exam and the instructor's practical assessment."
+    },
+    {
+     "title": "Saturday · Leaving by 09:00",
+     "text": "Pack your bag and leave the boat by 09:00. Dalaman airport is about an hour's drive from Fethiye."
     }
    ],
    "bring": [
@@ -508,6 +541,7 @@
    "not_included": [
     "Flights and transfer to the marina",
     "Food kitty, about €150 per person",
+    "Turkish transit log, split between the crew",
     "VHF radio (SRC) course, €190, optional",
     "Travel insurance"
    ],
@@ -665,13 +699,21 @@
     {
      "q": "Who else is on the boat?",
      "a": "Up to four students and the instructor. Most of the time you are at the helm or giving instructions to your crew, and on the last day you run the whole day as skipper."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "bareboat-skipper",
    "sort": 4,
-   "name": "International Bareboat Skipper",
+   "name": "IYT International Bareboat Skipper",
    "level": "Bareboat skipper",
    "duration": "5 days",
    "scope": "Up to 20 nm offshore",
@@ -878,13 +920,21 @@
     {
      "q": "Is the ICC enough on its own?",
      "a": "Some charter companies and insurers also want a skipper certificate, so we recommend holding Flotilla or Bareboat Skipper as well."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "yachtmaster-coastal",
    "sort": 6,
-   "name": "Yachtmaster Coastal",
+   "name": "IYT Yachtmaster Coastal",
    "level": "Coastal skipper",
    "duration": "6 days",
    "scope": "Up to 60 nm offshore",
@@ -918,7 +968,11 @@
    ],
    "program": [
     {
-     "title": "Day 1 · Joining and briefing",
+     "title": "Saturday · Boarding from 17:00",
+     "text": "Find the boat in Fethiye, stow your bag and meet the instructor and the crew. Training starts the next morning."
+    },
+    {
+     "title": "Day 1 · Briefing",
      "text": "Boat checks, safety briefing and a plan for the week. Everyone skippers in turn, as in the exam."
     },
     {
@@ -940,6 +994,10 @@
     {
      "title": "Day 6 · Exam",
      "text": "A written theory paper, then the IYT examiner joins the boat for the oral and practical exam. You skipper and show what you have learned."
+    },
+    {
+     "title": "Saturday · Leaving by 09:00",
+     "text": "Pack your bag and leave the boat by 09:00. Dalaman airport is about an hour's drive from Fethiye."
     }
    ],
    "bring": [
@@ -963,6 +1021,7 @@
    "not_included": [
     "Flights and transfer to the marina",
     "Food kitty, about €150 per person",
+    "Turkish transit log, split between the crew",
     "VHF radio (SRC) course, €190, optional",
     "Travel insurance"
    ],
@@ -1126,13 +1185,21 @@
     {
      "q": "What can I skipper with it?",
      "a": "Yachts up to 24 m, up to 60 nm offshore, in moderate weather, by day and by night."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "yachtmaster-offshore",
    "sort": 7,
-   "name": "Yachtmaster Offshore",
+   "name": "IYT Yachtmaster Offshore",
    "level": "Yachtmaster",
    "duration": "11 days",
    "scope": "Up to 150 nm offshore",
@@ -1171,7 +1238,7 @@
     },
     {
      "title": "Day 6 · Joining the boat",
-     "text": "Boat checks, safety briefing and provisioning for several days at sea."
+     "text": "Board from 17:00 on Saturday: boat checks, safety briefing and provisioning for several days at sea."
     },
     {
      "title": "Days 7–8 · Offshore passage",
@@ -1188,6 +1255,10 @@
     {
      "title": "Day 11 · Practical exam",
      "text": "An IYT examiner joins the boat for the oral and practical exam."
+    },
+    {
+     "title": "Saturday · Leaving by 09:00",
+     "text": "Pack your bag and leave the boat by 09:00. Dalaman airport is about an hour's drive from Fethiye."
     }
    ],
    "bring": [
@@ -1213,6 +1284,7 @@
     "Accommodation during the theory days",
     "Flights and transfer to the marina",
     "Food kitty, about €150 per person",
+    "Turkish transit log, split between the crew",
     "Medical certificate and eyesight test",
     "Travel insurance"
    ],
@@ -1386,13 +1458,21 @@
     {
      "q": "Is it a commercial licence?",
      "a": "No. It is for private use only and cannot be upgraded to a commercial licence."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   },
   {
    "slug": "yachtmaster-ocean",
    "sort": 8,
-   "name": "Yachtmaster Ocean",
+   "name": "IYT Yachtmaster Ocean",
    "level": "Yachtmaster",
    "duration": "6 days of theory",
    "scope": "Any ocean",
@@ -1576,6 +1656,14 @@
     {
      "q": "What is not included?",
      "a": "Accommodation, meals and travel. The course, the use of sextants and tables, the notes, the exam and the certificate fee are included."
+    },
+    {
+     "q": "Which language is the course taught in?",
+     "a": "In English and Russian. Tell us which you prefer when you book."
+    },
+    {
+     "q": "Do I need a visa for Turkey?",
+     "a": "It depends on your passport. Citizens of many countries, including most of the EU, the UK and Russia, can visit Turkey without a visa for a short stay. Others need an e-Visa, which you get online at evisa.gov.tr before you fly. Your passport should be valid for at least 150 days from the day you arrive. Check the current rules for your nationality before you book flights."
     }
    ]
   }

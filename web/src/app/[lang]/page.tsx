@@ -30,9 +30,10 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   fig(5, yachts.length);
   main = replaceInner(main, /<table class="tbl stack passages">[\s\S]*?<tbody>/, '</tbody>', passagesRows(lang, passages));
   main = replaceInner(main, /<section class="sec" id="fleet"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', fleetCards(lang, yachts));
-  // Course cards → course pages (names are the official IYT names, the same in every language).
+  // Course cards → course pages (names are the official IYT names, the same in every language; the "IYT " prefix is optional so the database and the page text can be renamed separately).
   for (const c of courses) {
-    main = main.replace(new RegExp(`<a class="card" href="[^"]*">(\\s*<div class="photo">(?:(?!</a>)[\\s\\S])*?<span class="card-title">${c.name}</span>)`), `<a class="card" href="${path.courseItem(lang, c.slug)}">$1`);
+    const name = `(?:IYT )?${c.name.replace(/^IYT /, '')}`;
+    main = main.replace(new RegExp(`<a class="card" href="[^"]*">(\\s*<div class="photo">(?:(?!</a>)[\\s\\S])*?<span class="card-title">${name}</span>)`), `<a class="card" href="${path.courseItem(lang, c.slug)}">$1`);
   }
   return <ProtoPage content={content} main={main} />;
 }

@@ -4,6 +4,7 @@ Writes:
   prototypes/icons/ow-icons.svg   sprite (<symbol id="ow-…">), drop into a page and use <use href="#ow-…">
   prototypes/icons/svg/<id>.svg   one file per icon (stroke 2, currentColor)
   prototypes/icons.html           study sheet: rules, all icons, where to use them
+  the sprite inside home.html and bareboat-skipper-course.html (then run the other builders, see README)
 
 Grid rules (the same ones the sheet explains):
   24 x 24 box, 2 px stroke, round caps and joins, content inside 2..22.
@@ -127,13 +128,45 @@ def globe():
 
 
 def points_of_sail():
-    cx, cy, r = 12, 14, 7
-    p = lambda deg: (cx + r*math.cos(math.radians(deg)), cy + r*math.sin(math.radians(deg)))
-    a, b = p(-130), p(-50)
-    boat = p(15)
-    return (f'<path d="M{a[0]:.2f} {a[1]:.2f}A{r} {r} 0 1 0 {b[0]:.2f} {b[1]:.2f}"/>'
-            '<path d="M12 2v7.5M9.5 7 12 9.5 14.5 7"/>'
-            f'<circle class="f" cx="{boat[0]:.2f}" cy="{boat[1]:.2f}" r="1.6"/>')
+    """Ring with the no-go zone filled at the top and a course line out of it."""
+    r = 9
+    a = (12 - r*math.sin(math.radians(38)), 12 - r*math.cos(math.radians(38)))
+    b = (12 + r*math.sin(math.radians(38)), 12 - r*math.cos(math.radians(38)))
+    return (f'<circle cx="12" cy="12" r="{r}"/>'
+            f'<path class="f" d="M12 12 {a[0]:.2f} {a[1]:.2f}A{r} {r} 0 0 1 {b[0]:.2f} {b[1]:.2f}z"/>'
+)
+
+
+def arrowhead(tip, frm, size=3.6, spread=40):
+    dx, dy = frm[0] - tip[0], frm[1] - tip[1]
+    L = math.hypot(dx, dy)
+    ux, uy = dx / L, dy / L
+    pts = []
+    for s in (spread, -spread):
+        c, si = math.cos(math.radians(s)), math.sin(math.radians(s))
+        pts.append((tip[0] + size*(ux*c - uy*si), tip[1] + size*(ux*si + uy*c)))
+    f = lambda q: f"{q[0]:.2f} {q[1]:.2f}"
+    return f"M{f(pts[0])} {f(tip)} {f(pts[1])}"
+
+
+def tacking():
+    pts = [(9, 21.5), (16, 16.5), (8, 11.5), (15.5, 5)]
+    d = "M" + " ".join(f"{x:g} {y:g}" for x, y in pts)
+    return f'<path d="{d}"/><path d="{arrowhead(pts[-1], pts[-2])}"/>'
+
+
+def fix():
+    """Three bearing lines that miss each other a little: the cocked hat."""
+    A, B, C = (12, 9.6), (14.4, 13.8), (9.6, 13.8)
+    out = []
+    for p, q in ((A, B), (B, C), (C, A)):
+        dx, dy = q[0] - p[0], q[1] - p[1]
+        L = math.hypot(dx, dy)
+        ux, uy = dx / L, dy / L
+        s, e = (p[0] - ux*6.5, p[1] - uy*6.5), (q[0] + ux*6.5, q[1] + uy*6.5)
+        out.append(f"M{s[0]:.2f} {s[1]:.2f} {e[0]:.2f} {e[1]:.2f}")
+    tri = f"M{A[0]} {A[1]} {B[0]} {B[1]} {C[0]} {C[1]}z"
+    return f'<path d="{"".join(out)}"/><path class="f" d="{tri}"/>'
 
 
 def lifebuoy(cy=11, r=7, ri=3):
@@ -173,7 +206,7 @@ def stars(cx, cy, r, inner=0.32):
 GROUPS = [
  ("brand", "Brand", "The mark and the signs taken from it. Use them where Ocean Way speaks for itself: section openers, own-boat badges, empty states.", [
   ("mark", "Mark", mark(), "Footer sign-off, “Ocean Way boat” badge on fleet cards, empty states"),
-  ("horizon", "Horizon", hz(2, 22, 12.6) + waves(17.5, 5, 19, 3), "Section divider on long pages, the theory hub header"),
+  ("horizon", "Horizon", '<g transform="rotate(-8.4 12 12)"><path class="f" d="M7.5 14.5a4.5 4.5 0 0 1 9 0z"/><path d="M2 14.5h20M7 19h10"/></g>', "Section divider on long pages, the theory hub header"),
   ("sail", "Sail", small_sail(7, 19, 15, fill=True) + '<path d="M7 19V3.6M4 21h13"/>', "Bullet for lists of skills and highlights"),
   ("theme", "Light and dark", theme(), "Theme button in the header (replaces i-theme)"),
  ]),
@@ -203,7 +236,7 @@ GROUPS = [
   ("crew", "Students", '<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20c.6-3.6 3.2-5.6 6.5-5.6s5.9 2 6.5 5.6M15.8 4.8a3.4 3.4 0 0 1 0 6.4M18.4 14.8c1.8.8 2.8 2.6 3.1 5.2"/>', "“4 students”, places left, berths"),
   ("licence", "Certificate", '<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 8h7M7 11.5h4"/><circle cx="16.5" cy="13.5" r="2.5"/><path d="m15 15.5-.8 5.2 2.3-1.3 2.3 1.3-.8-5.2"/>', "“IYT or RYA”, “Valid 5 years”, what you get"),
   ("level", "Level", '<path d="M3 20h5v-4.5h5V11h5V6.5h3"/>', "“No experience needed” → “Passages and Yachtmaster”, the course ladder"),
-  ("offshore", "Offshore range", '<circle class="f" cx="4.5" cy="19.5" r="1.8"/><path d="M11 19.5a6.5 6.5 0 0 0-6.5-6.5M17.5 19.5a13 13 0 0 0-13-13M4.5 2.5v2"/>', "“Up to 20 / 60 / 150 nm offshore”, “Any ocean”"),
+  ("offshore", "Offshore range", '<path class="f" d="M2 3h1.8c1.6 3 1.6 6 0 9s-1.6 6 0 9H2z"/><path d="M8.5 9v6M8.5 12h12M17.5 9l3 3-3 3"/>' + waves(19.5, 9, 21, 2), "“Up to 20 / 60 / 150 nm offshore”, “Any ocean”"),
   ("route", "Route", '<circle cx="5" cy="18.5" r="2"/><circle class="f" cx="19" cy="5.5" r="2"/><path d="M6.8 17.4c3-1.7 1.8-6 5.6-7.6 1.9-.8 3.4-.9 4.9-2.7"/>', "Passage cards: “Kuşadası → Bodrum”, distance in nm"),
   ("night", "Night sailing", '<path d="M14.5 3.5a6 6 0 1 0 5.5 8.6 4.8 4.8 0 0 1-5.5-8.6z"/>' + hz(2, 22, 19.2), "“The night passage”, passages with night legs"),
   ("read", "Reading time", '<path d="M12 6.5C10 5 7 4.5 3 5v13c4-.5 7 0 9 1.5 2-1.5 5-2 9-1.5V5c-4-.5-7 0-9 1.5zM12 6.5v13"/>', "“6 min read” on theory cards (replaces i-clip)"),
@@ -218,22 +251,22 @@ GROUPS = [
   ("bareboat", "Bareboat Skipper", '<circle cx="12" cy="12" r="6"/><circle class="f" cx="12" cy="12" r="1.6"/><path d="M12 2.5V6M12 18v3.5M2.5 12H6M18 12h3.5M5.3 5.3l2.5 2.5M16.2 16.2l2.5 2.5M18.7 5.3l-2.5 2.5M7.8 16.2l-2.5 2.5"/>', "Bareboat Skipper card and page header"),
   ("coastal", "Yachtmaster Coastal", '<path d="M9 21 10.2 9h3.6L15 21zM10 9V6h4v3M10 6l2-2.5L14 6M5 21h14M4.5 6.5 7.5 7M19.5 6.5l-3 .5"/><path class="f" d="M10.4 14h3.2l.3 3h-3.8z"/>', "Yachtmaster Coastal card, pilotage topics"),
   ("offshore-ym", "Yachtmaster Offshore", '<circle cx="12" cy="12" r="9"/><path class="f" d="M12 4.8 14 12h-4z"/><path d="M10 12h4l-2 7.2z"/>', "Yachtmaster Offshore card, navigation skills"),
-  ("ocean", "Yachtmaster Ocean", stars(12, 7.5, 5) + hz(2, 22, 15.5) + waves(19.5, 4, 20, 4), "Yachtmaster Ocean card, astro-navigation"),
+  ("ocean", "Yachtmaster Ocean", stars(12, 6.8, 4.6) + hz(2, 22, 15.5) + waves(19.5, 4, 20, 4), "Yachtmaster Ocean card, astro-navigation"),
  ]),
  ("theory", "Theory", "One sign per article. They head the article, mark the card on the hub and sit in the “Keep reading” list.", [
   ("points-of-sail", "Points of sail", points_of_sail(), "theory-points-of-sail"),
   ("knots", "Knots", '<path d="M12 12C8.2 9.6 7 8.1 7 6.6a5 5 0 0 1 10 0c0 1.5-1.2 3-5 5.4s-5 3.9-5 5.4a5 5 0 0 0 10 0c0-1.5-1.2-3-5-5.4z"/><path d="M12 1.6v-.1M12 22.4v.1"/>', "theory-knots"),
-  ("tacking", "Tacking and gybing", '<path d="M9 21.5 5 16.5l8-4-5-5.5 5.5-3.5"/><path d="M10.3 2.6 14 3.3l-.6 3.7"/>', "theory-tacking-gybing"),
+  ("tacking", "Tacking and gybing", tacking(), "theory-tacking-gybing"),
   ("reefing", "Reefing", '<path d="M7 3v16h12C16 13 12.5 7.5 7 3z"/><path d="M7 15h9.5M7 11.2h6.3"/><path d="M4 21h16"/>', "theory-reefing"),
   ("right-of-way", "Right of way", '<path d="M3 8h13M13 5l3 3-3 3"/><path d="M13 21v-3.5a4 4 0 0 1 4-4h3.5M18 10.5l3 3-3 3"/>', "theory-right-of-way"),
-  ("lights", "Navigation lights", '<path d="M12 5.5V16M6 16h12l-2 4H8z"/><circle cx="12" cy="3.6" r="1.6"/><circle class="f" cx="5.5" cy="12.5" r="1.7"/><circle cx="18.5" cy="12.5" r="1.7"/>', "theory-navigation-lights"),
+  ("lights", "Navigation lights", '<path d="M12 2.5c3 2.8 4.5 6.5 4.5 10.5v8h-9v-8c0-4 1.5-7.7 4.5-10.5z"/><circle class="f" cx="3.8" cy="12" r="1.7"/><circle cx="20.2" cy="12" r="1.7"/><path d="M12 9.5v.2"/>', "theory-navigation-lights"),
   ("buoyage", "Buoyage", '<path class="f" d="M12 2.2 14.3 6H9.7z"/><path d="M12 6v2.5M8.5 18 10 8.5h4l1.5 9.5zM9.3 13.2h5.4"/>' + hz(2, 22, 19.3), "theory-buoyage"),
-  ("med-mooring", "Med mooring", '<path d="M2 3h20M9 7.5 6.5 3M15 7.5 17.5 3"/><path d="M8.5 7.5h7v5c0 3.4-1.4 6.3-3.5 8.7-2.1-2.4-3.5-5.3-3.5-8.7z"/>', "theory-med-mooring"),
-  ("alongside", "Berthing alongside", '<path d="M2 20.5h20"/><path d="M4 9.5h10.5c3 0 5.3 1.7 6.5 3.75-1.2 2.05-3.5 3.75-6.5 3.75H4z"/><path d="M7.5 17v3.5M14 17v3.5"/>', "theory-berthing-alongside"),
+  ("med-mooring", "Med mooring", '<path d="M2 3h20M9 7 6.5 3M15 7l2.5-4"/><path d="M8.5 7h7v4.5c0 2.8-1.2 5.2-3.5 7.3-2.3-2.1-3.5-4.5-3.5-7.3z"/><path d="M12 18.8v2.7"/>', "theory-med-mooring"),
+  ("alongside", "Berthing alongside", '<path d="M2 21h20"/><path d="M11 2.5v10M11 10.5h6.5"/><path d="M3.5 12.5h17l-2.5 4.5H6z"/><path d="M2 21h20M6 17l-2.5 4M18 17l2.5 4"/>', "theory-berthing-alongside"),
   ("anchor", "Anchoring", '<circle cx="12" cy="4.8" r="2"/><path d="M12 6.8V21M8.5 10.5h7M4.5 13.5a7.5 7.5 0 0 0 15 0M3 15.2l1.5-1.7 1.8 1.4M21 15.2l-1.5-1.7-1.8 1.4"/>', "theory-anchoring, anchorage stops on passage maps"),
   ("tides", "Tides", '<path d="M8 10V3M5.5 5.5 8 3l2.5 2.5M16 3v7M13.5 7.5 16 10l2.5-2.5"/>' + waves(15, 2, 22, 4) + waves(19.5, 2, 22, 4), "theory-tides"),
   ("weather", "Weather", '<path d="M7 16.5h9.5a3.7 3.7 0 0 0 .6-7.4 5.7 5.7 0 0 0-10.9 1.5A2.95 2.95 0 0 0 7 16.5z"/><path d="M3 20.5h8.5M14.5 20.5H17"/>', "theory-weather, wind forecast on passage pages"),
-  ("fix", "Position fixing", '<path d="M3 16.5 20.5 8M4 7.5l16.5 9.5M12.4 2.5l.6 19"/><circle cx="12.5" cy="12.2" r="3.4"/>', "theory-position-fixing"),
+  ("fix", "Position fixing", fix(), "theory-position-fixing"),
   ("planning", "Passage planning", '<path d="M3 6l6-2.5 6 2.5 6-2.5v14l-6 2.5-6-2.5-6 2.5z"/><path d="M6.5 15.5 10 12.5l3 1.2 3.4-4.2"/><circle class="f" cx="17.2" cy="8.5" r="1.6"/>', "theory-passage-planning"),
   ("radio", "VHF procedure", '<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/>', "theory-vhf-procedure, Mayday calls"),
   ("lifejacket", "Safety on board", '<path d="M9 3 6 5v14.5A1.5 1.5 0 0 0 7.5 21H11V9.5zM15 3l3 2v14.5a1.5 1.5 0 0 1-1.5 1.5H13V9.5zM9 3c.6 2 1.6 3.4 3 3.4S14.4 5 15 3"/><path d="M6 14h12"/>', "theory-safety-on-board, safety briefing"),
@@ -249,7 +282,7 @@ GROUPS = [
   ("tool", "Boat systems", '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/>', "“Boat systems” skill, service history"),
   ("charter", "Charter", '<circle cx="8" cy="15.5" r="4"/><path d="M11 12.5l8.5-8.5M16 7.5l2.5 2.5M18.5 5 21 7.5"/>', "“Charter skills”, “From licence to your first charter”, charter prices"),
   ("meals", "Meals", '<path d="M7 3v6a2 2 0 0 0 4 0V3M9 11v10M17 21V3c-2 1.2-3 4-3 7.5h3"/>', "“Breakfast and lunch on board”, chef on premium passages"),
-  ("snorkel", "Swimming", '<path d="M3 8.5h13.5v4.5a2 2 0 0 1-2 2H12l-1.5-1.8h-1L8 15H5a2 2 0 0 1-2-2z"/><path d="M20 3.5v10.3c0 1.7-1.1 2.7-2.8 2.7"/>' + waves(20.5, 2, 22, 4), "Swim stops on passage itineraries"),
+  ("swim", "Swimming", '<circle class="f" cx="16.5" cy="6.5" r="2.2"/><path d="M3.5 13.5 9 9.8l3.2 2.7 3-2"/>' + waves(16.5, 2, 22, 4) + waves(20.8, 2, 22, 4), "Swim stops on passage itineraries"),
   ("bag", "What to bring", '<rect x="3" y="8" width="18" height="12" rx="3"/><path d="M8.5 8V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2M3 13h18"/>', "“What to bring”, kit list download"),
   ("sun", "Season", '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>', "Sailing season, “Sun cream and a hat” in kit list"),
  ]),
@@ -263,9 +296,13 @@ GROUPS = [
   ("chat", "Chat", '<path d="M5.5 4.5h13a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2H10l-4.5 3.5v-3.5h0a2 2 0 0 1-2-2V6.5a2 2 0 0 1 2-2z"/><path d="M8 9.5h8M8 12.5h5"/>', "“Ask a question” button, FAQ footer"),
   ("telegram", "Telegram", '<path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/><path d="m9 13 7-5"/>', "Footer, “New dates every day” channel"),
   ("instagram", "Instagram", '<rect x="3" y="3" width="18" height="18" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle class="f" cx="17.2" cy="6.8" r=".4"/>', "Footer"),
+  ("threads", "Threads", '<path d="M19 8.6C18 5.3 15.4 3.5 12 3.5 7.1 3.5 4.2 6.9 4.2 12s2.9 8.5 7.8 8.5c3.6 0 6.3-1.9 6.3-4.9 0-2.4-1.8-3.8-4.6-3.8-2.3 0-3.7 1.1-3.7 2.6 0 1.4 1.1 2.2 2.6 2.2 2.4 0 3.6-2 3.6-5.1 0-2.6-1.6-4.3-4.1-4.3-1.7 0-2.9.7-3.6 1.8"/>', "Footer"),
   ("youtube", "YouTube", '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path class="f" d="M10 9.3v5.4l4.6-2.7z"/>', "Footer, video lessons"),
  ]),
 ]
+
+SOURCE_PAGES = ["home.html", "bareboat-skipper-course.html"]
+ICON_SPRITE = re.compile(r'<svg[^>]*>\s*<symbol id="(?:i|ow)-.*?</svg>', re.S)
 
 SOLID = 'style="fill:var(--ow-2,currentColor);stroke:var(--ow-2,currentColor)"'
 
@@ -296,6 +333,17 @@ def main():
             '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" '
             'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
             f"{body_standalone(b)}</svg>\n")
+
+    # The hand-edited source pages carry the sprite inline, right after <body>; booking, theory,
+    # flows and the translations copy it from them, and the web app extracts it from those.
+    for page in SOURCE_PAGES:
+        f = os.path.join(ROOT, page)
+        s = open(f).read()
+        head, rest = s.split('<div class="wrap">', 1)
+        # replace only the icon sprite; other hidden SVGs before .wrap (map coastlines) stay
+        head, n = ICON_SPRITE.subn(lambda m: sprite.strip(), head, count=1)
+        assert n == 1, f"no icon sprite in {page}"
+        open(f, "w").write(head + '<div class="wrap">' + rest)
 
     tpl = open(os.path.join(ROOT, "_build", "icons_sheet.html")).read()
     use = lambda i, cls="i": f'<svg class="{cls}" aria-hidden="true"><use href="#ow-{i}"/></svg>'

@@ -1,9 +1,10 @@
 import { t } from '@/lib/content';
 import type { Faq as FaqItem, Skill, Step, Stop } from '@/lib/db';
+import { skillIcon } from '@/lib/icons';
 import type { Lang } from '@/lib/site';
 
 /** Building blocks of the course and passage pages: ticked lists, a day-by-day programme, the stops of a route. */
-export function List({ lang, items, icon = 'i-check', cols = false }: { lang: Lang; items: string[]; icon?: string; cols?: boolean }) {
+export function List({ lang, items, icon = 'ow-check', cols = false }: { lang: Lang; items: string[]; icon?: string; cols?: boolean }) {
   return <ul className={cols ? 'ow-list ow-cols' : 'ow-list'}>{items.map((x, i) => <li key={i}><svg className="i"><use href={`#${icon}`} /></svg><span>{t(lang, x)}</span></li>)}</ul>;
 }
 
@@ -34,7 +35,7 @@ export function Skills({ lang, skills }: { lang: Lang; skills: Skill[] }) {
     <div className="mods">
       {skills.map((g, i) => (
         <div className="mod" key={i}>
-          <span className="ico-c"><svg className="i"><use href={`#${g.icon}`} /></svg></span>
+          <span className="ico-c"><svg className="i"><use href={`#${skillIcon(g.title, g.icon)}`} /></svg></span>
           <h3>{t(lang, g.title)}</h3>
           <ul>{g.items.map((x, j) => <li key={j}>{t(lang, x)}</li>)}</ul>
         </div>
@@ -50,7 +51,7 @@ export function Faq({ lang, items }: { lang: Lang; items: FaqItem[] }) {
     <div className="faq-col">
       {xs.map((x, i) => (
         <details className="faq-item" key={from + i} open={from + i === 0}>
-          <summary><span className="faq-q">{t(lang, x.q)}</span><svg className="i"><use href="#i-chev" /></svg></summary>
+          <summary><span className="faq-q">{t(lang, x.q)}</span><svg className="i"><use href="#ow-chevron" /></svg></summary>
           <p className="faq-a">{t(lang, x.a)}</p>
         </details>
       ))}

@@ -67,10 +67,10 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
         <h1 className="display">{route}</h1>
         <p className="lead">{summary}</p>
         <div className="facts">
-          <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, `${n} nights`)}</span>
-          {leg?.distance_nm ? <span className="fact"><svg className="i"><use href="#i-chart" /></svg>{t(lang, '{n} nautical miles', { n: leg.distance_nm })}</span> : null}
-          <span className="fact"><svg className="i"><use href="#i-compass" /></svg>{t(lang, p.waters)}</span>
-          <span className="fact"><svg className="i"><use href="#i-guests" /></svg>{places}</span>
+          <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{t(lang, `${n} nights`)}</span>
+          {leg?.distance_nm ? <span className="fact"><svg className="i"><use href="#ow-route" /></svg>{t(lang, '{n} nautical miles', { n: leg.distance_nm })}</span> : null}
+          <span className="fact"><svg className="i"><use href="#ow-horizon" /></svg>{t(lang, p.waters)}</span>
+          <span className="fact"><svg className="i"><use href="#ow-crew" /></svg>{places}</span>
         </div>
       </section>
       {leg?.gallery?.length ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, leg.gallery) }} /> : null}
@@ -100,7 +100,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
           {same.length ? (
             <section>
               <h2>{t(lang, 'Other dates on this route')}</h2>
-              <ul className="ow-list">{same.map((x) => <li key={x.id}><svg className="i"><use href="#i-cal" /></svg><span><a href={path.passage(lang, passageSlug(x))}>{t(lang, `${x.from_port} → ${x.to_port}`)}, {range(lang, x.starts_on, x.ends_on)}</a></span></li>)}</ul>
+              <ul className="ow-list">{same.map((x) => <li key={x.id}><svg className="i"><use href="#ow-calendar" /></svg><span><a href={path.passage(lang, passageSlug(x))}>{t(lang, `${x.from_port} → ${x.to_port}`)}, {range(lang, x.starts_on, x.ends_on)}</a></span></li>)}</ul>
             </section>
           ) : null}
         </div>
