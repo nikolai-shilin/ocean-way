@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Days Under Sail · v3 · RYC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap">
+<style>
+/* Tokens from ryc-rentals hotweb/src/app/ryc.css (day and night). Playfair Display for titles and large text only; Carlito (ryc label font, Lato-based, has Cyrillic) for text, buttons and UI. */
+:root {
+  --bg: #ffffff; --ink: #000000; --muted: #5e6b6f; --faint: #b8c2c6;
+  --band: #f2f7f9; --line: #eef2f4; --tag-line: #dfe5e8; --photo-bg: #e6ebee;
+  --accent: #0077b6; --on-accent: #ffffff; --sel-bg: #000000; --sel-ink: #ffffff; --sel-muted: #b8c2c6;
+  --danger: #d40000;
+  --sans: 'Carlito', 'Lato', Arial, sans-serif;
+  --title: 'Playfair Display', Georgia, serif;
+  --title-w: 400; --title-track: -0.02em; --title-lh: 1;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  color-scheme: light;
+}
+:root[data-theme="night"] {
+  --bg: #000000; --ink: #ffffff; --muted: #a8b9c9; --faint: #5c6f80;
+  --band: #14191e; --line: #1f2830; --tag-line: #43586b; --photo-bg: #14191e;
+  --accent: #35b0f2; --on-accent: #00131f; --sel-bg: #ffffff; --sel-ink: #000000; --sel-muted: #5c6f80;
+  --danger: #ff6a5c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.6 var(--sans); -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
+a { color: var(--accent); text-decoration: none; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* Type */
+.display em { font-style: italic; }
+.display { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); line-height: var(--title-lh); margin: 0; text-wrap: balance; }
+.h2 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-size: clamp(30px, 3.4vw, 44px); line-height: 1; margin: 0; text-wrap: balance; }
+.h3 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-size: clamp(22px, 2vw, 26px); line-height: 1.15; margin: 0; }
+.kicker { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: -.02em; text-transform: uppercase; color: var(--ink); }
+.meta { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+.lead { font-family: var(--sans); font-size: 21px; line-height: 1.45; max-width: 56ch; margin: 0; }
+.hint { font-family: var(--sans); font-size: 13px; line-height: 1.35; color: var(--muted); margin: 10px 0 0; }
+.card-title { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.15; color: var(--ink); }
+.card-meta { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.25; }
+
+/* Controls (ryc.css) */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 28px; border-radius: 54px; border: 2px solid var(--accent); color: var(--accent); background: var(--bg); font-family: var(--sans); font-weight: 700; font-size: 18px; letter-spacing: .01em; line-height: 1; white-space: nowrap; cursor: pointer; transition: transform .15s var(--ease-out), background .15s, color .15s; }
+.pill:hover { transform: translateY(-1px); }
+.pill-primary { background: var(--accent); color: var(--on-accent); }
+.pill-quiet { border-color: var(--tag-line); color: var(--ink); height: 52px; font-size: 17px; }
+.pill-quiet:hover { border-color: var(--muted); }
+.pill-wide { width: 100%; padding: 0 14px; font-size: 17px; }
+.round { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--tag-line); color: var(--ink); background: var(--bg); cursor: pointer; }
+.round:hover { border-color: var(--muted); }
+.tag { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 54px; border: 2px solid var(--tag-line); background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1; cursor: pointer; white-space: nowrap; }
+.tag:hover { border-color: var(--muted); }
+.tag-on { background: var(--sel-bg); border-color: var(--sel-bg); color: var(--sel-ink); }
+.tag-count { font-family: var(--sans); font-weight: 700; font-size: 12px; color: var(--muted); }
+.tag-on .tag-count { color: var(--sel-muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 16px; background: var(--band); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 12px; white-space: nowrap; }
+.chip-on { background: var(--sel-bg); color: var(--sel-ink); }
+.band { background: var(--band); border-radius: 28px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.fact { display: inline-flex; align-items: center; gap: 5px; font-family: var(--sans); font-size: 14px; line-height: 1.2; color: var(--muted); white-space: nowrap; }
+.fact svg.i { width: 15px; height: 15px; }
+.photo { border-radius: 28px; overflow: hidden; background: var(--photo-bg); position: relative; display: block; corner-shape: squircle; }
+.photo img { transition: transform .5s var(--ease-out); }
+
+/* Price tag (ryc.css .ptag) */
+.ptag { display: inline-flex; flex-direction: column; width: var(--ptag); height: var(--ptag); text-align: center; line-height: 1; font-family: var(--sans); font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,.22); font-variant-numeric: tabular-nums; }
+.ptag-off { flex: 0 0 50%; display: flex; align-items: center; justify-content: center; background: #ffa800; color: #000; }
+.ptag-price { flex: 0 0 50%; line-height: .95; background: #d40000; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ptag-old { text-decoration: line-through; }
+.ptag-per { text-transform: uppercase; }
+.ptag-m { --ptag: 112px; } .ptag-m .ptag-off { font-size: 32px; } .ptag-m .ptag-old { font-size: 13px; } .ptag-m .ptag-now { font-size: 25px; } .ptag-m .ptag-per { font-size: 12px; }
+.ptag-l { --ptag: 152px; } .ptag-l .ptag-off { font-size: 44px; } .ptag-l .ptag-old { font-size: 16px; } .ptag-l .ptag-now { font-size: 34px; } .ptag-l .ptag-per { font-size: 13px; }
+.ptag-corner { position: absolute; top: -24px; right: -12px; box-shadow: 0 10px 28px rgba(0,0,0,.28); z-index: 2; }
+.fav { position: absolute; top: 14px; left: 14px; z-index: 3; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.94); color: #0c1015; box-shadow: 0 4px 14px rgba(0,0,0,.22); opacity: .7; cursor: pointer; }
+.fav:hover { opacity: 1; }
+
+/* Header */
+.site-head { display: flex; align-items: center; gap: 28px; min-height: 76px; padding-block: 12px; }
+.logo { display: block; width: 52px; height: 25px; flex: none; }
+.logo img { object-fit: contain; }
+:root[data-theme="night"] .logo img { filter: invert(1); }
+.site-nav { display: flex; align-items: center; gap: 24px; flex: 1 1 auto; }
+.navl { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.navl:hover { color: var(--accent); }
+.navl.on { border-bottom-color: var(--ink); }
+.site-tools { display: flex; align-items: center; gap: 10px; flex: none; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 26px; padding: 32px 0 8px; }
+.hero .display { font-size: clamp(44px, 6.2vw, 84px); max-width: 14ch; }
+.byline { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-photo { margin-top: 44px; aspect-ratio: 16 / 7.5; overflow: visible; }
+.hero-photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; }
+.photo.hero-photo { overflow: visible; background: transparent; }
+
+/* In short (RYC "Коротко") */
+.short { margin-top: 56px; padding: 32px 36px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 28px 56px; align-items: center; }
+.short p { margin: 10px 0 0; font-size: 19px; line-height: 1.45; }
+.figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.fig { display: flex; flex-direction: column; gap: 8px; padding-left: 16px; border-left: 1px solid var(--tag-line); min-width: 0; }
+.fig b { font-family: var(--title); font-weight: var(--title-w); font-size: 36px; line-height: 1; letter-spacing: var(--title-track); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.fig .meta { line-height: 1.25; }
+
+/* Article + side */
+.article { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px 72px; margin-top: 72px; align-items: start; }
+.prose { max-width: 680px; }
+.prose p { margin: 0 0 1.15em; }
+.sec { margin-top: 64px; }
+.sec-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.side { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.side .band { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.side .photo { aspect-ratio: 342 / 210; overflow: visible; }
+.side .photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; }
+.side .photo.photo { background: transparent; }
+.price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.price-row b { font-family: var(--title); font-weight: var(--title-w); font-variant-numeric: lining-nums; font-size: 34px; letter-spacing: var(--title-track); line-height: 1; }
+.price-row s { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+.tg-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 2px solid var(--tag-line); border-radius: 22px; font-family: var(--sans); font-size: 14px; line-height: 1.3; color: var(--muted); }
+.tg-row b { display: block; font-family: var(--sans); font-weight: 700; font-size: 16px; color: var(--ink); }
+.tg-dot { width: 36px; height: 36px; border-radius: 50%; background: #ffa800; color: #000; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+
+/* Table (RYC .tbl) */
+.tbl-wrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 15px; }
+.tbl caption { caption-side: top; text-align: left; padding-bottom: 6px; }
+.tbl th { text-align: left; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); padding: 14px 12px 10px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.tbl td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink); }
+.tbl td:first-child { font-size: 16px; }
+.tbl .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted); }
+.tbl .day { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sel-bg); color: var(--sel-ink); font-family: var(--sans); font-weight: 700; font-size: 13px; margin-right: 12px; vertical-align: middle; }
+.tbl .island { font-weight: 700; font-size: 16px; white-space: nowrap; }
+.tbl .hl { color: var(--muted); }
+.tbl .yes { color: var(--accent); font-weight: 700; }
+.tbl .no { color: var(--faint); }
+.tbl tfoot td { border-bottom: 0; padding-top: 18px; font-variant-numeric: lining-nums; font-family: var(--title); font-weight: var(--title-w); font-size: 26px; letter-spacing: var(--title-track); }
+.tbl tfoot td:first-child { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+
+/* Photos + quote */
+.pair { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; margin-top: 72px; align-items: end; }
+.pair .a { aspect-ratio: 5 / 4; }
+.pair .b { aspect-ratio: 4 / 5; }
+.quote { margin: 88px 0 0; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; align-items: start; }
+.quote .mark { font-family: var(--title); font-weight: var(--title-w); font-size: 140px; line-height: .8; color: var(--accent); }
+.quote blockquote { margin: 0; font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-size: clamp(32px, 4vw, 56px); line-height: 1.08; text-wrap: balance; max-width: 20ch; }
+.quote blockquote { font-style: italic; }
+.quote .meta { display: block; margin-top: 20px; }
+.wide-photo { margin-top: 72px; aspect-ratio: 21 / 8; }
+
+/* Options (RYC cards with price tags) */
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 32px; margin-top: 32px; }
+.card { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--ink); }
+.card .photo { aspect-ratio: 342 / 210; overflow: visible; background: transparent; }
+.card .photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: var(--photo-bg); }
+.card:hover .photo img { transform: scale(1.03); }
+.card-body { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.opt .pill { margin-top: 12px; align-self: flex-start; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 32px; margin-top: 32px; }
+
+/* FAQ */
+.faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary svg { color: var(--muted); transition: transform .2s var(--ease-out); }
+.faq-item[open] summary svg { transform: rotate(180deg); }
+.faq-q { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.3; }
+.faq-a { margin: 0 0 18px; font-size: 16px; line-height: 1.55; max-width: 60ch; }
+
+/* Footer */
+.site-foot { margin-top: 96px; border-top: 1px solid var(--line); padding: 32px 0 40px; }
+.foot-row { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+.foot-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.foot-links a { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--ink); }
+
+/* Mobile bar */
+.mbar { display: none; }
+
+@media (max-width: 1000px) {
+  .site-nav .navl { display: none; }
+  .site-nav { flex: 1 1 auto; }
+  .article { grid-template-columns: minmax(0, 1fr); }
+  .side { display: none; }
+  .short { grid-template-columns: minmax(0, 1fr); }
+  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); }
+  .mbar b { display: block; font-variant-numeric: lining-nums; font-family: var(--title); font-weight: var(--title-w); font-size: 24px; letter-spacing: var(--title-track); line-height: 1; }
+  .mbar .pill { height: 52px; font-size: 17px; padding: 0 24px; }
+  body { padding-bottom: 84px; }
+}
+@media (max-width: 680px) {
+  .wrap { padding: 0 20px; }
+  .hero-photo { aspect-ratio: 4 / 3.4; margin-top: 36px; }
+  .hero-photo .ptag-l { --ptag: 112px; } .hero-photo .ptag-l .ptag-off { font-size: 32px; } .hero-photo .ptag-l .ptag-old { font-size: 13px; } .hero-photo .ptag-l .ptag-now { font-size: 25px; } .hero-photo .ptag-l .ptag-per { font-size: 12px; }
+  .ptag-corner { right: -6px; top: -18px; }
+  .short { padding: 24px 22px; }
+  .figs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
+  .pair { grid-template-columns: 1fr; }
+  .pair .b { aspect-ratio: 4 / 3; }
+  .quote { grid-template-columns: 1fr; gap: 0; }
+  .quote .mark { font-size: 100px; height: 60px; }
+  .wide-photo { aspect-ratio: 4 / 3; }
+  .opts, .grid3, .faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .tbl .hl, .tbl th.hl { display: none; }
+  .ctas .pill { flex: 1 1 auto; }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-boat" viewBox="0 0 24 24"><path d="M12 3v12M12 3l6 10h-6M12 5 7 13h5M3 17h18l-2 3H5z"/></symbol>
+  <symbol id="i-cabin" viewBox="0 0 24 24"><path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-guests" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.8.8 2.8 2.6 3 5.2"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="site-head">
+    <a class="logo" href="#" aria-label="RYC"><img src="data:image/png;base64,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" alt="RYC"></a>
+    <nav class="site-nav" aria-label="Main">
+      <a class="navl" href="#">Hot deals</a>
+      <a class="navl" href="#">Destinations</a>
+      <a class="navl on" href="#">Journeys</a>
+      <a class="navl" href="#">Prices</a>
+      <a class="navl" href="#">How it works</a>
+    </nav>
+    <div class="site-tools">
+      <button class="round" type="button" id="themeBtn" aria-label="Theme"><svg class="i"><use href="#i-theme"/></svg></button>
+      <button class="round" type="button" aria-label="Saved"><svg class="i"><use href="#i-heart"/></svg></button>
+      <button class="round" type="button" aria-label="Account"><svg class="i"><use href="#i-user"/></svg></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="kicker">Journeys · The Cyclades, Greece</span>
+      <h1 class="display">Seven days under <em>sail</em></h1>
+      <p class="lead">A slow week through the Greek islands on a catamaran: quiet bays, long lunches, and the kind of light that makes everyone look like they've been on holiday for a month.</p>
+      <div class="byline"><span class="meta meta-ink" style="color:var(--ink)">Elena Marsh</span><span class="meta">Updated 31 Oct 2026</span><span class="meta">12 min read</span></div>
+      <div class="ctas">
+        <a class="pill pill-primary" href="#">Check availability <svg class="i"><use href="#i-arrow"/></svg></a>
+        <a class="pill pill-quiet" href="#route">See the route</a>
+      </div>
+    </section>
+
+    <div class="photo hero-photo">
+      <div class="clip"><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=2200&q=80&auto=format&fit=crop" alt="White houses and blue domes above the sea in Santorini"></div>
+      <span class="fav" aria-label="Save"><svg class="i"><use href="#i-heart"/></svg></span>
+      <span class="ptag ptag-l ptag-corner"><span class="ptag-off">−15%</span><span class="ptag-price"><span class="ptag-old">€1&nbsp;700</span><span class="ptag-now">€1&nbsp;450</span><span class="ptag-per">per guest</span></span></span>
+    </div>
+    <p class="hint">Oia, Santorini. Day four of seven, seen from the water after the day boats leave.</p>
+
+    <section class="band short">
+      <div>
+        <span class="kicker">In short</span>
+        <p>A skippered catamaran week from Paros: seven islands and about 118 nautical miles, from €1&nbsp;450 per guest in July 2027.</p>
+      </div>
+      <div class="figs">
+        <div class="fig"><b>7</b><span class="meta">islands, Paros to Paros</span></div>
+        <div class="fig"><b>118 nm</b><span class="meta">sailed in a week</span></div>
+        <div class="fig"><b>3–4 h</b><span class="meta">at sea each day</span></div>
+        <div class="fig"><b>8</b><span class="meta">guests, 4 cabins</span></div>
+      </div>
+    </section>
+
+    <div class="article">
+      <div class="prose">
+        <p>The first thing you notice is the quiet. Not silence, exactly: there's the slap of water against the hulls, a halyard knocking somewhere on the mast, a gull arguing with another gull. But after the airport, the ferry terminal and the taxi with the radio turned all the way up, Paros at seven in the morning feels like someone has finally turned the volume down.</p>
+        <p>We came for a week, eight of us on a forty-two-foot catamaran, with a skipper named Nikos who has been sailing these waters since he was tall enough to see over the wheel. The plan was loose by design. Sail three or four hours a day, anchor somewhere sheltered, swim, eat, repeat. Nikos decided the route each morning based on the wind, which in the Cyclades in July means the meltemi, the strong northerly that can turn a pleasant crossing into a lively one.</p>
+        <p>By the second day, nobody was checking their phone. By the third, nobody knew what day it was. By the fourth, a debate broke out over whether we should simply never go home.</p>
+
+        <section class="sec" id="route">
+          <div class="sec-head">
+            <span class="kicker">The route</span>
+            <h2 class="h2">Seven islands, day by day</h2>
+          </div>
+          <div class="tags" style="margin-bottom:20px">
+            <span class="tag tag-on">All days <span class="tag-count">7</span></span>
+            <span class="tag">Swim stops <span class="tag-count">5</span></span>
+            <span class="tag">Long crossings <span class="tag-count">3</span></span>
+          </div>
+          <div class="tbl-wrap">
+            <table class="tbl">
+              <caption class="meta">Route, July 2027 · times depend on wind</caption>
+              <thead><tr><th>Island</th><th class="hl">Highlight</th><th style="text-align:right">Sailing</th></tr></thead>
+              <tbody>
+                <tr><td class="island"><span class="day">1</span>Paros</td><td class="hl">Boarding, sunset dinner in Naoussa</td><td class="num">—</td></tr>
+                <tr><td class="island"><span class="day">2</span>Antiparos</td><td class="hl">Swim stop at Despotiko</td><td class="num">2 h · 9 nm</td></tr>
+                <tr><td class="island"><span class="day">3</span>Ios</td><td class="hl">Manganari, four beaches in one bay</td><td class="num">4 h · 24 nm</td></tr>
+                <tr><td class="island"><span class="day">4</span>Santorini</td><td class="hl">Caldera at dusk, dinner below Oia</td><td class="num">3 h · 18 nm</td></tr>
+                <tr><td class="island"><span class="day">5</span>Folegandros</td><td class="hl">The quietest island, and the favourite</td><td class="num">4 h · 26 nm</td></tr>
+                <tr><td class="island"><span class="day">6</span>Sifnos</td><td class="hl">Cooking lesson and pottery in Vathi</td><td class="num">3 h · 19 nm</td></tr>
+                <tr><td class="island"><span class="day">7</span>Paros</td><td class="hl">Last swim, back to the marina</td><td class="num">4 h · 22 nm</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <aside class="side" aria-label="Boat">
+        <div class="band">
+          <div class="photo">
+            <div class="clip"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80&auto=format&fit=crop" alt="Catamaran anchored in a turquoise cove"></div>
+          </div>
+          <div>
+            <div class="card-title">Lagoon 42 · 2023</div>
+            <div class="card-meta" style="margin-top:4px">Paros, Greece · with skipper</div>
+          </div>
+          <div class="facts">
+            <span class="fact"><svg class="i"><use href="#i-cabin"/></svg>4 cabins</span>
+            <span class="fact"><svg class="i"><use href="#i-guests"/></svg>8 guests</span>
+            <span class="fact"><svg class="i"><use href="#i-cal"/></svg>Sat to Sat</span>
+          </div>
+          <div class="price-row"><b>€1&nbsp;450</b><span class="card-meta">per guest · <s>€1&nbsp;700</s></span></div>
+          <a class="pill pill-primary pill-wide" href="#">Check availability</a>
+          <a class="pill pill-quiet pill-wide" href="#">Ask a question</a>
+        </div>
+        <div class="tg-row"><span class="tg-dot"><svg class="i" style="width:18px;height:18px"><use href="#i-tg"/></svg></span><span><b>Similar deals in Telegram</b>Hot Cyclades weeks, once a day</span></div>
+      </aside>
+    </div>
+
+    <div class="pair">
+      <div>
+        <div class="photo a"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&q=80&auto=format&fit=crop" alt="Whitewashed steps leading down to the sea"></div>
+        <p class="hint">Oia from below. Take the steps down to the water after the crowds leave.</p>
+      </div>
+      <div>
+        <div class="photo b"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop" alt="Plated dish on a restaurant table"></div>
+        <p class="hint">Dinner ashore on Folegandros.</p>
+      </div>
+    </div>
+
+    <figure class="quote">
+      <span class="mark" aria-hidden="true">“</span>
+      <div>
+        <blockquote>By the third day nobody knew what day it was, and nobody wanted to.</blockquote>
+        <span class="meta">Day three, somewhere off Ios</span>
+      </div>
+    </figure>
+
+    <div class="article" style="margin-top:72px">
+      <div class="prose">
+        <div class="sec-head"><span class="kicker">On board</span><h2 class="h2">A floating apartment with two front porches</h2></div>
+        <p>The cabins are compact but private, each with its own small bathroom, and the deck is wide enough for eight people to sprawl without anyone touching. The net at the front became the most fought-over spot on the boat, especially at sunset.</p>
+        <p>Mornings started early. Someone would put the coffee on, someone else would jump straight off the back step into water so clear you could count the stones on the bottom. Lunch was usually at anchor: tomatoes that tasted like tomatoes, feta, bread from whatever bakery we'd found the night before.</p>
+        <h3 class="h3" style="margin-top:36px;margin-bottom:12px">The day that stood out</h3>
+        <p>Folegandros was the surprise. Smaller and steeper than its famous neighbour, it has a clifftop village that seems to hang over the sea and almost no traffic. We walked up at dusk, ate grilled octopus in a square lit with strings of bulbs, and walked back down in the dark, following the sound of the water to the harbour.</p>
+      </div>
+    </div>
+
+    <div class="photo wide-photo"><img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=2400&q=80&auto=format&fit=crop" alt="Deep blue sea meeting a sandy shore from above"></div>
+    <p class="hint">Crossing to Folegandros: four hours of open water and a steady northerly.</p>
+
+    <section class="sec" style="margin-top:88px">
+      <div class="sec-head"><span class="kicker">Two ways to go</span><h2 class="h2">Same islands, different boat</h2></div>
+      <div class="opts">
+        <div class="card opt">
+          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=900&q=80&auto=format&fit=crop" alt=""></div><span class="fav"><svg class="i"><use href="#i-heart"/></svg></span><span class="ptag ptag-m ptag-corner"><span class="ptag-off">−15%</span><span class="ptag-price"><span class="ptag-old">€1&nbsp;700</span><span class="ptag-now">€1&nbsp;450</span><span class="ptag-per">per guest</span></span></span></div>
+          <div class="card-body">
+            <span class="card-title">Classic · Lagoon 42</span>
+            <span class="card-meta">Skipper included, self-catered</span>
+            <div class="facts"><span class="fact"><svg class="i"><use href="#i-cabin"/></svg>4 cabins</span><span class="fact"><svg class="i"><use href="#i-guests"/></svg>8 guests</span><span class="fact"><svg class="i"><use href="#i-pin"/></svg>Paros</span></div>
+          </div>
+          <a class="pill pill-quiet" href="#">Check availability</a>
+        </div>
+        <div class="card opt">
+          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop" alt=""></div><span class="fav"><svg class="i"><use href="#i-heart"/></svg></span><span class="ptag ptag-m ptag-corner"><span class="ptag-off">−10%</span><span class="ptag-price"><span class="ptag-old">€2&nbsp;650</span><span class="ptag-now">€2&nbsp;390</span><span class="ptag-per">per guest</span></span></span></div>
+          <div class="card-body">
+            <span class="card-title">Premium · Bali 4.6</span>
+            <span class="card-meta">Skipper and private chef</span>
+            <div class="facts"><span class="fact"><svg class="i"><use href="#i-cabin"/></svg>4 cabins + crew</span><span class="fact"><svg class="i"><use href="#i-guests"/></svg>8 guests</span><span class="fact"><svg class="i"><use href="#i-pin"/></svg>Paros</span></div>
+          </div>
+          <a class="pill pill-quiet" href="#">Check availability</a>
+        </div>
+      </div>
+
+      <div class="tbl-wrap" style="margin-top:48px;max-width:860px">
+        <table class="tbl">
+          <caption class="meta">What's included · sample prices for July 2027</caption>
+          <thead><tr><th></th><th>Classic</th><th>Premium</th></tr></thead>
+          <tbody>
+            <tr><td>Cabins</td><td>4 double</td><td>4 double + crew</td></tr>
+            <tr><td>Skipper</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+            <tr><td>Private chef</td><td class="no">—</td><td class="yes">Included</td></tr>
+            <tr><td>Meals on board</td><td>Self-catered</td><td>Breakfast and lunch</td></tr>
+            <tr><td>Fuel and marina fees</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+            <tr><td>Water toys</td><td>1 paddleboard</td><td>2 paddleboards, snorkel kit</td></tr>
+          </tbody>
+          <tfoot><tr><td>Per guest, from</td><td>€1&nbsp;450</td><td>€2&nbsp;390</td></tr></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="sec" style="margin-top:88px">
+      <div class="sec-head"><span class="kicker">Questions</span><h2 class="h2">Before you go</h2></div>
+      <div class="faq-grid">
+        <details class="faq-item" open><summary><span class="faq-q">Do I need sailing experience?</span><svg class="i"><use href="#i-chev"/></svg></summary><p class="faq-a">No. The skipper handles the boat. You can help with ropes and the helm if you want to, or just swim and read.</p></details>
+        <details class="faq-item"><summary><span class="faq-q">When is the best time to go?</span><svg class="i"><use href="#i-chev"/></svg></summary><p class="faq-a">Late May to early October. July and August are windiest; June and September are calmer and quieter.</p></details>
+        <details class="faq-item"><summary><span class="faq-q">What should I pack?</span><svg class="i"><use href="#i-chev"/></svg></summary><p class="faq-a">Soft bags only, a hat, reef-safe sunscreen and one nice outfit for the evening in Oia.</p></details>
+        <details class="faq-item"><summary><span class="faq-q">Can we book the whole boat?</span><svg class="i"><use href="#i-chev"/></svg></summary><p class="faq-a">Yes. A full boat of eight gets the per-guest price shown above.</p></details>
+      </div>
+    </section>
+
+    <section class="sec" style="margin-top:88px">
+      <div class="sec-head"><span class="kicker">More journeys</span><h2 class="h2">Hot weeks this summer</h2></div>
+      <div class="tags">
+        <span class="tag tag-on">All <span class="tag-count">31</span></span>
+        <span class="tag">Greece <span class="tag-count">12</span></span>
+        <span class="tag">Croatia <span class="tag-count">11</span></span>
+        <span class="tag">Spain <span class="tag-count">8</span></span>
+      </div>
+      <div class="grid3">
+        <a class="card" href="#">
+          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&q=80&auto=format&fit=crop" alt=""></div><span class="fav"><svg class="i"><use href="#i-heart"/></svg></span><span class="ptag ptag-m ptag-corner"><span class="ptag-off">−22%</span><span class="ptag-price"><span class="ptag-old">€1&nbsp;650</span><span class="ptag-now">€1&nbsp;290</span><span class="ptag-per">per guest</span></span></span></div>
+          <div class="card-body"><span class="card-title">Dalmatian coast, Croatia</span><span class="card-meta">Split to Dubrovnik · 7 days</span><div class="facts"><span class="fact"><svg class="i"><use href="#i-boat"/></svg>Lagoon 40</span><span class="fact"><svg class="i"><use href="#i-cal"/></svg>Jun 2027</span></div></div>
+        </a>
+        <a class="card" href="#">
+          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800&q=80&auto=format&fit=crop" alt=""></div><span class="fav"><svg class="i"><use href="#i-heart"/></svg></span><span class="ptag ptag-m ptag-corner"><span class="ptag-off">−18%</span><span class="ptag-price"><span class="ptag-old">€1&nbsp;450</span><span class="ptag-now">€1&nbsp;190</span><span class="ptag-per">per guest</span></span></span></div>
+          <div class="card-body"><span class="card-title">Ionian islands, Greece</span><span class="card-meta">Lefkada loop · 7 days</span><div class="facts"><span class="fact"><svg class="i"><use href="#i-boat"/></svg>Bali 4.2</span><span class="fact"><svg class="i"><use href="#i-cal"/></svg>Sep 2027</span></div></div>
+        </a>
+        <a class="card" href="#">
+          <div class="photo"><div class="clip"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=800&q=80&auto=format&fit=crop" alt=""></div><span class="fav"><svg class="i"><use href="#i-heart"/></svg></span><span class="ptag ptag-m ptag-corner"><span class="ptag-off">−12%</span><span class="ptag-price"><span class="ptag-old">€1&nbsp;750</span><span class="ptag-now">€1&nbsp;540</span><span class="ptag-per">per guest</span></span></span></div>
+          <div class="card-body"><span class="card-title">Balearics, Spain</span><span class="card-meta">Ibiza and Formentera · 6 days</span><div class="facts"><span class="fact"><svg class="i"><use href="#i-boat"/></svg>Lagoon 46</span><span class="fact"><svg class="i"><use href="#i-cal"/></svg>Jul 2027</span></div></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="foot-row">
+      <span class="meta">Russian Yacht Centre · Layout prototype. Prices, people and discounts are sample content. Photos via Unsplash.</span>
+      <nav class="foot-links"><a href="#">About</a><a href="#">Telegram</a><a href="#">Privacy</a></nav>
+    </div>
+  </footer>
+</div>
+
+<div class="mbar"><div><b>€1&nbsp;450</b><span class="card-meta">per guest · Sat to Sat</span></div><a class="pill pill-primary" href="#">Check availability</a></div>
+
+<script>
+const root = document.documentElement;
+document.getElementById('themeBtn').addEventListener('click', () => {
+  if (root.dataset.theme === 'night') delete root.dataset.theme; else root.dataset.theme = 'night';
+});
+const q = new URLSearchParams(location.search);
+if (q.get('theme') === 'night') root.dataset.theme = 'night';
+</script>
+</body>
+</html>

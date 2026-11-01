@@ -1,0 +1,47 @@
+{
+  "slug": "weather",
+  "title": "Reading the weather: Beaufort, forecasts, meltemi",
+  "h1": "Reading the weather: Beaufort, forecasts, meltemi",
+  "lead": "Good skippers decide most of their day before they leave the berth. Here is how to read the Beaufort scale and a forecast, know the Mediterranean's local winds, and make a calm go or no-go call.",
+  "description": "Learn the Beaufort scale, where to get Mediterranean sailing forecasts, how to read gusts, and how the meltemi, sirocco and bora affect a 40 ft yacht.",
+  "summary": [
+    "Forecast wind is the mean; plan and reef for the gusts.",
+    "Use several sources: national services, NAVTEX, VHF and grib apps.",
+    "The meltemi builds through the day, so sail early.",
+    "If in doubt, wait in harbour."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "International Bareboat Skipper",
+  "topic": "Weather and navigation",
+  "toc": [
+    [
+      "beaufort",
+      "The Beaufort scale"
+    ],
+    [
+      "forecasts",
+      "Where to get a forecast"
+    ],
+    [
+      "reading",
+      "Reading the forecast"
+    ],
+    [
+      "local-winds",
+      "Local winds"
+    ],
+    [
+      "reefing",
+      "Reef early"
+    ],
+    [
+      "go-no-go",
+      "Go or no go"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

@@ -1,0 +1,796 @@
+<title>Ocean Way UX Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a nautical-chart report. Chart-water ground, buff "land" for missing things,
+   chart magenta for the one accent, soundings as quiet texture. Single 1100px column. */
+:root{
+  --bg:#f4f8fa;          /* chart paper, deep water */
+  --surface:#ffffff;
+  --ink:#0f2532;         /* chart ink */
+  --muted:#566b78;
+  --rule:#cddbe3;
+  --shoal:#d3e7f1;       /* shallow-water tint */
+  --shoal-2:#9fcbe0;
+  --deep:#1d5f86;
+  --land:#f0e3bf;        /* chart buff = drying / missing */
+  --land-ink:#7a6430;
+  --accent:#b0176c;      /* chart magenta: lights, hazards, the route */
+  --accent-soft:#f6dcea;
+  --on-deep:#ffffff;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b1820;--surface:#11222c;--ink:#e4edf2;--muted:#93a8b5;--rule:#23394a;
+  --shoal:#163447;--shoal-2:#235570;--deep:#4ea3d4;--land:#3a3220;--land-ink:#d9c38a;
+  --accent:#ff6db4;--accent-soft:#3d1830;--on-deep:#08141b;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1820;--surface:#11222c;--ink:#e4edf2;--muted:#93a8b5;--rule:#23394a;
+  --shoal:#163447;--shoal-2:#235570;--deep:#4ea3d4;--land:#3a3220;--land-ink:#d9c38a;
+  --accent:#ff6db4;--accent-soft:#3d1830;--on-deep:#08141b;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--deep);text-underline-offset:2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(2.1rem,5.4vw,3.9rem);font-variation-settings:"wdth" 118;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-variation-settings:"wdth" 112;font-weight:750}
+h3{font-size:1.15rem;font-variation-settings:"wdth" 100;font-weight:700}
+p{margin:0}
+.prose{max-width:66ch}
+.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.tabnum{font-variant-numeric:tabular-nums}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule);background:linear-gradient(180deg,var(--shoal) 0%,var(--bg) 100%)}
+.hero .wrap{padding-block:56px 44px;position:relative;display:grid;gap:22px}
+.soundings{position:absolute;inset:0;pointer-events:none;font:italic 400 13px var(--mono);color:var(--shoal-2)}
+.soundings span{position:absolute}
+.hero .lede{font-size:1.15rem;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font:400 .82rem var(--mono);color:var(--muted)}
+.route-svg{position:absolute;right:-40px;top:20px;width:420px;max-width:60%;opacity:.9}
+@media (max-width:1000px){.route-svg{display:none}}
+
+nav.toc{border-bottom:1px solid var(--rule);background:var(--surface)}
+nav.toc .wrap{display:flex;gap:6px 20px;flex-wrap:wrap;padding-block:12px;font:500 .82rem var(--mono)}
+nav.toc a{text-decoration:none;color:var(--ink)}
+nav.toc a:hover{color:var(--accent)}
+
+section{padding-block:56px;border-bottom:1px solid var(--rule)}
+section > .wrap{display:grid;gap:26px}
+.sec-head{display:grid;gap:10px}
+
+/* ---------- findings ---------- */
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px;counter-reset:f}
+.finding{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px 18px 16px;display:grid;gap:8px;align-content:start}
+.finding b{font-family:var(--display);font-variation-settings:"wdth" 105;font-size:1.05rem;line-height:1.25}
+.finding p{color:var(--muted);font-size:.95rem}
+
+/* ---------- scorecard ---------- */
+.table-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table.score{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+.score th,.score td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--rule)}
+.score thead th{font:500 .7rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);vertical-align:bottom}
+.score td.c{text-align:center;font:500 .85rem var(--mono);width:78px}
+.score .grp td{background:var(--bg);font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.score td.site a{font-weight:600}
+.score td.site small{display:block;color:var(--muted);font-size:.78rem}
+.s0{background:var(--land);color:var(--land-ink)}
+.s1{background:var(--shoal)}
+.s2{background:var(--shoal-2)}
+.s3{background:var(--deep);color:var(--on-deep)}
+.score td.tot{font:600 .95rem var(--mono);text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font:400 .8rem var(--mono);color:var(--muted);align-items:center}
+.legend i{display:inline-block;width:22px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+
+/* ---------- patterns ---------- */
+.patterns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:0;border-top:1px solid var(--rule)}
+.pattern{padding:18px 18px 18px 0;border-bottom:1px solid var(--rule);display:grid;gap:6px;align-content:start;min-width:0}
+.pattern .where{font:400 .78rem var(--mono);color:var(--muted)}
+.pattern .where a{color:var(--muted)}
+.pattern p{font-size:.95rem}
+@media (min-width:700px){.pattern{padding-right:26px}}
+
+/* ---------- gaps ---------- */
+.gaps{display:grid;gap:10px}
+.gap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:18px;padding:14px 16px;background:var(--surface);border:1px solid var(--rule);border-radius:10px}
+.gap .no{color:var(--muted);font-size:.93rem}
+.gap .yes{font-size:.95rem}
+.gap .yes::before{content:"Ocean Way → ";font:600 .72rem var(--mono);letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+@media (max-width:640px){.gap{grid-template-columns:1fr;gap:6px}}
+
+/* ---------- proposal ---------- */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px}
+.pillar{border-top:3px solid var(--accent);padding-top:12px;display:grid;gap:6px;align-content:start}
+.pillar p{font-size:.93rem;color:var(--muted)}
+
+.sitemap{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));gap:12px}
+.node{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px;display:grid;gap:6px;align-content:start}
+.node h3{font-size:1rem}
+.node ul{margin:0;padding-left:18px;font-size:.88rem;color:var(--muted)}
+
+.journey{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:0;counter-reset:j}
+.step{position:relative;padding:14px 16px 14px 0;border-top:2px dashed var(--accent);display:grid;gap:4px;align-content:start}
+.step::before{counter-increment:j;content:counter(j);position:absolute;top:-13px;left:0;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--surface);font:600 .75rem/24px var(--mono);text-align:center}
+.step h3{margin-top:12px;font-size:1rem}
+.step p{font-size:.88rem;color:var(--muted)}
+
+/* ---------- mockups ---------- */
+.frame{border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--surface);box-shadow:0 18px 40px -28px rgba(15,37,50,.45)}
+.chrome{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--rule);background:var(--bg);font:400 .74rem var(--mono);color:var(--muted)}
+.chrome i{width:9px;height:9px;border-radius:50%;background:var(--rule);display:inline-block}
+.chrome .url{margin-left:8px;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:2px 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;min-width:0}
+.mock-caption{font:400 .8rem var(--mono);color:var(--muted);margin-top:10px}
+.sample{font:500 .66rem var(--mono);letter-spacing:.1em;text-transform:uppercase;background:var(--land);color:var(--land-ink);padding:2px 6px;border-radius:4px}
+
+/* home mock */
+.m-nav{display:flex;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid var(--rule);font-size:.85rem;flex-wrap:wrap}
+.m-logo{font:800 1.05rem var(--display);font-variation-settings:"wdth" 125;letter-spacing:.02em}
+.m-logo span{color:var(--accent)}
+.m-nav .links{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted)}
+.m-nav .right{margin-left:auto;display:flex;gap:10px;align-items:center;font:400 .76rem var(--mono);color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:9px 16px;font:600 .85rem var(--body);cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--accent);color:var(--surface)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--rule)}
+.btn.small{padding:6px 12px;font-size:.78rem}
+.m-hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0;min-height:300px}
+.m-hero .copy{padding:30px 26px;display:grid;gap:14px;align-content:center}
+.m-hero h3{font-size:clamp(1.5rem,3vw,2.2rem);font-variation-settings:"wdth" 120;font-weight:800;line-height:1.05}
+.m-hero .copy p{color:var(--muted);font-size:.95rem}
+.m-hero .copy .ctas{display:flex;gap:8px;flex-wrap:wrap}
+.m-photo{position:relative;background:
+  radial-gradient(120% 80% at 70% 110%,var(--deep) 0%,transparent 60%),
+  linear-gradient(170deg,var(--shoal) 0%,var(--shoal-2) 55%,var(--deep) 100%);min-height:220px}
+.m-photo .tag{position:absolute;left:14px;bottom:14px;background:var(--surface);border-radius:8px;padding:8px 10px;font-size:.78rem;display:grid;gap:2px;box-shadow:0 6px 18px -10px rgba(0,0,0,.4)}
+.m-photo .tag b{font-family:var(--display);font-size:.9rem}
+.m-photo svg{position:absolute;inset:0;width:100%;height:100%}
+.m-proof{display:flex;flex-wrap:wrap;gap:8px 26px;padding:12px 18px;border-top:1px solid var(--rule);font:400 .78rem var(--mono);color:var(--muted)}
+.m-proof b{color:var(--ink);font-weight:500}
+.m-deps{padding:18px;display:grid;gap:12px;border-top:1px solid var(--rule)}
+.m-deps .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px}
+.dep{border:1px solid var(--rule);border-radius:10px;padding:12px;display:grid;gap:6px;font-size:.84rem}
+.dep .d{font:500 .76rem var(--mono);color:var(--muted)}
+.dep b{font-family:var(--display);font-size:.98rem}
+.berths{display:flex;gap:3px}
+.berths i{width:14px;height:8px;border-radius:2px;background:var(--accent)}
+.berths i.free{background:var(--shoal-2)}
+.dep .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;font:500 .8rem var(--mono)}
+@media (max-width:700px){.m-hero{grid-template-columns:1fr}}
+
+/* path mock */
+.pathwrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0}
+@media (max-width:820px){.pathwrap{grid-template-columns:1fr}}
+.ladder{padding:20px;display:grid;gap:8px;border-right:1px solid var(--rule)}
+.rung{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;width:100%;background:transparent;border:1px solid var(--rule);border-radius:10px;padding:10px 12px;cursor:pointer;color:var(--ink);font:inherit}
+.rung .lv{font:600 .78rem var(--mono);color:var(--muted);text-align:center}
+.rung b{font-family:var(--display);font-size:.98rem;display:block}
+.rung small{color:var(--muted);font-size:.8rem}
+.rung .from{font:500 .8rem var(--mono);color:var(--muted);white-space:nowrap}
+.rung[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.rung.rec::after{content:"Your start";grid-column:2/4;justify-self:start;font:600 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--surface);background:var(--accent);padding:2px 7px;border-radius:4px}
+.detail{padding:20px;display:grid;gap:12px;align-content:start}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.fact{background:var(--bg);border-radius:8px;padding:8px 10px;display:grid;gap:2px}
+.fact span{font:400 .68rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fact b{font:600 .92rem var(--body)}
+.cando{border-left:3px solid var(--accent);padding-left:12px;font-size:.92rem}
+.quiz{border-top:1px solid var(--rule);padding:18px 20px;display:grid;gap:12px;background:var(--bg)}
+.quiz fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
+.quiz legend{font-weight:600;font-size:.9rem;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chips span{display:inline-block;border:1px solid var(--rule);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:.82rem}
+.chips input:checked + span{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
+.chips input:focus-visible + span{outline:2px solid var(--accent);outline-offset:2px}
+.quiz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:14px}
+.quiz-out{font-size:.9rem;padding:10px 12px;border-radius:8px;background:var(--surface);border:1px dashed var(--accent)}
+
+/* course mock */
+.course{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:0}
+@media (max-width:860px){.course{grid-template-columns:1fr}}
+.course .main{padding:22px;display:grid;gap:16px;border-right:1px solid var(--rule);min-width:0}
+.crumb{font:400 .74rem var(--mono);color:var(--muted)}
+.keyfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,120px),1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.keyfacts div{background:var(--surface);padding:10px 12px;display:grid;gap:2px}
+.keyfacts span{font:400 .66rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.keyfacts b{font-size:.92rem}
+.dates{display:grid;gap:0;border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.date{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,.9fr) auto;gap:10px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--rule);font-size:.86rem}
+.date:last-child{border-bottom:0}
+.date .when{font:500 .84rem var(--mono)}
+.date .who{color:var(--muted);font-size:.8rem}
+.date .full{font:600 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--land-ink);background:var(--land);padding:3px 8px;border-radius:4px;justify-self:end}
+.date.sel{background:var(--accent-soft)}
+@media (max-width:560px){.date{grid-template-columns:1fr 1fr}.date .who{grid-column:1/3}}
+.daystrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;font:400 .72rem var(--mono);text-align:center}
+.daystrip div{background:var(--bg);border-radius:6px;padding:6px 2px;display:grid;gap:2px}
+.daystrip b{font:600 .78rem var(--mono);color:var(--ink)}
+.daystrip small{color:var(--muted);font-size:.66rem;line-height:1.25}
+@media (max-width:520px){.daystrip{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;font-size:.86rem}
+.incl ul{margin:6px 0 0;padding-left:18px}
+.incl h4{margin:0;font:600 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.incl .no h4{color:var(--land-ink)}
+.crew{display:flex;gap:12px;align-items:center;font-size:.86rem}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--shoal-2),var(--deep));flex:none}
+.side{padding:22px;display:grid;gap:14px;align-content:start;background:var(--bg)}
+.price-big{font:800 2rem var(--display);font-variation-settings:"wdth" 110}
+.breakdown{display:grid;gap:6px;font-size:.86rem}
+.breakdown div{display:flex;justify-content:space-between;gap:10px}
+.breakdown .tot{border-top:1px solid var(--rule);padding-top:6px;font-weight:700}
+.toggle{display:inline-flex;border:1px solid var(--rule);border-radius:999px;overflow:hidden;font:500 .74rem var(--mono)}
+.toggle button{background:transparent;border:0;padding:4px 10px;color:var(--muted);cursor:pointer;font:inherit}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.plan{font-size:.82rem;color:var(--muted);display:grid;gap:4px}
+.plan div{display:flex;justify-content:space-between}
+.reassure{font-size:.8rem;color:var(--muted);display:grid;gap:4px}
+.tg{display:flex;align-items:center;gap:8px;font-size:.84rem;border:1px solid var(--rule);border-radius:10px;padding:8px 10px;background:var(--surface)}
+
+/* phone mock */
+.phones{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:22px;align-items:start}
+.phone{border:1px solid var(--rule);border-radius:30px;padding:10px;background:var(--surface);max-width:300px;width:100%;justify-self:center;box-shadow:0 18px 40px -28px rgba(15,37,50,.5)}
+.screen{border-radius:22px;overflow:hidden;border:1px solid var(--rule);background:var(--bg);display:grid;min-height:470px;grid-template-rows:auto 1fr auto}
+.screen .top{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--rule);background:var(--surface)}
+.screen .body{padding:14px;display:grid;gap:10px;align-content:start;font-size:.82rem}
+.screen .bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid var(--rule);background:var(--surface)}
+.screen .bar b{font:700 1rem var(--display)}
+.screen .bar small{display:block;color:var(--muted);font:400 .68rem var(--mono)}
+.logline{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:8px}
+.logline .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.meter{height:8px;border-radius:99px;background:var(--shoal);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--accent);border-radius:99px}
+
+/* identity */
+.identity{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:22px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.sw{border-radius:10px;border:1px solid var(--rule);overflow:hidden;font-size:.78rem}
+.sw div{height:56px}
+.sw p{padding:6px 8px;display:grid;gap:1px;background:var(--surface)}
+.sw p span{font:400 .7rem var(--mono);color:var(--muted)}
+.typespec{display:grid;gap:12px}
+.typespec .t1{font:800 2.2rem/1 var(--display);font-variation-settings:"wdth" 122}
+.typespec .t2{font:400 1rem/1.5 var(--body)}
+.typespec .t3{font:400 .85rem var(--mono);color:var(--muted)}
+
+/* data model */
+.model{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;font:400 .8rem var(--mono)}
+.entity{border:1px solid var(--rule);border-radius:10px;background:var(--surface);overflow:hidden}
+.entity h4{margin:0;padding:8px 10px;background:var(--ink);color:var(--surface);font:600 .78rem var(--mono);letter-spacing:.04em}
+.entity.core h4{background:var(--accent)}
+.entity ul{list-style:none;margin:0;padding:8px 10px;display:grid;gap:3px;color:var(--muted)}
+
+/* roadmap */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.phase{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.phase ul{margin:0;padding-left:18px;font-size:.9rem}
+.phase .kpi{font:400 .78rem var(--mono);color:var(--muted);border-top:1px dashed var(--rule);padding-top:8px}
+
+/* refs */
+.refs{columns:2 300px;column-gap:32px;font-size:.88rem;padding:0;margin:0;list-style:none}
+.refs li{break-inside:avoid;padding:6px 0;border-bottom:1px solid var(--rule)}
+.refs li span{display:block;color:var(--muted);font-size:.8rem}
+footer{padding-block:28px 48px;font:400 .8rem var(--mono);color:var(--muted)}
+
+@media (prefers-reduced-motion:no-preference){
+  .rung,.chips span,.btn{transition:background-color .15s,border-color .15s}
+}
+</style>
+
+<header class="hero">
+  <div class="soundings" aria-hidden="true">
+    <span style="left:6%;top:18%">14</span><span style="left:21%;top:70%">23</span><span style="left:38%;top:12%">31</span>
+    <span style="left:52%;top:82%">18<sub>5</sub></span><span style="left:63%;top:30%">42</span><span style="left:77%;top:62%">27</span>
+    <span style="left:88%;top:16%">55</span><span style="left:92%;top:84%">38</span><span style="left:12%;top:44%">9<sub>2</sub></span>
+  </div>
+  <svg class="route-svg" viewBox="0 0 420 260" aria-hidden="true">
+    <path d="M30 210 C 110 180, 120 90, 210 100 S 330 60, 390 30" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 6"/>
+    <circle cx="30" cy="210" r="6" fill="var(--accent)"/><circle cx="210" cy="100" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/><circle cx="390" cy="30" r="6" fill="var(--accent)"/>
+    <text x="42" y="232" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">Competent Crew</text>
+    <text x="222" y="122" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">Bareboat Skipper</text>
+    <text x="300" y="20" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--muted)">Yachtmaster</text>
+  </svg>
+  <div class="wrap">
+    <span class="eyebrow">UX study and design proposal · Ocean Way</span>
+    <h1>What the best sailing school sites do well, and a design for Ocean Way</h1>
+    <p class="lede">We read 18 sailing school sites page by page across four markets: US, UK and Europe, liveaboard schools, and Russian-language schools. This page sums up what works, what nobody does yet, and a site design built on those gaps.</p>
+    <div class="meta"><span>31 Oct 2026</span><span>18 sites reviewed · 2 unreachable</span><span>≈70 pages read</span></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Contents">
+  <div class="wrap">
+    <a href="#findings">Key findings</a><a href="#scorecard">Scorecard</a><a href="#patterns">Patterns to copy</a><a href="#gaps">Gaps</a><a href="#proposal">Design proposal</a><a href="#mockups">Mockups</a><a href="#identity">Identity</a><a href="#roadmap">Roadmap</a><a href="#refs">References</a>
+  </div>
+</nav>
+
+<section id="findings">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Key findings</span>
+      <h2>Most sailing school sites are brochures. The best few work like booking engines.</h2>
+    </div>
+    <div class="findings">
+      <div class="finding"><b>Live dates on the homepage sell courses</b><p>Sailing Virgins puts real departures on the homepage and every destination page, with spots left and a deposit to hold a place. Most schools hide dates behind a form or a "call for pricing" button.</p></div>
+      <div class="finding"><b>Nobody shows the learning path well</b><p>Of 18 sites, only Glénans explains levels as skills plus recommended weeks of practice. Nobody links the course ladder to the calendar. RYA, ASA and Offshore use plain card lists.</p></div>
+      <div class="finding"><b>Total cost is never in one place</b><p>Certificate fees, kitty, marina fees, membership and tips come out late or not at all. Moscow Sailing Academy adds 22,000 ₽ for the certificate. Glénans adds a €34 membership. No site shows an all-in total.</p></div>
+      <div class="finding"><b>People and boats are missing from the sale</b><p>No site ties a date to a specific instructor and boat. Instructor bios, where they exist, sit on separate pages. Reviews are rarely tied to a course and are often years old.</p></div>
+      <div class="finding"><b>The data contradicts itself everywhere</b><p>Different nights, crew sizes, miles, boat types, phone numbers and prices for the same course turned up on 13 of 18 sites. Running every page from one record per departure fixes this.</p></div>
+      <div class="finding"><b>Russian-speaking buyers want Telegram, clear licence advice and instalments</b><p>Messengers appear in most headers, yet every site still ends in "leave a form, we'll call back". The question "which licence is valid where?" is the biggest worry, and only Navigator answers it with a table.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="scorecard">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Scorecard</span>
+      <h2>How the 18 sites compare</h2>
+      <p class="prose muted">Our rating after reading each site's homepage, catalog, a course page and the dates or booking page. 0 means missing, 3 means best in this set. These are judgments, not measurements. Scroll the table sideways on a phone.</p>
+    </div>
+    <div class="legend"><span><i class="s0"></i>0 · missing</span><span><i class="s1"></i>1 · weak</span><span><i class="s2"></i>2 · good</span><span><i class="s3"></i>3 · best in set</span></div>
+    <div class="table-scroll">
+      <table class="score tabnum">
+        <thead><tr><th>Site</th><th>Learning path</th><th>Price shown</th><th>Dates &amp; booking</th><th>Course facts</th><th>Trust &amp; people</th><th>Sells the experience</th><th style="text-align:right">Total /18</th></tr></thead>
+        <tbody id="scorebody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="patterns">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Patterns to copy</span>
+      <h2>14 things the leaders do that Ocean Way should copy</h2>
+    </div>
+    <div class="patterns" id="patternlist"></div>
+  </div>
+</section>
+
+<section id="gaps">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Gaps</span>
+      <h2>What no site does yet</h2>
+      <p class="prose muted">Each of these was missing from all 18 sites, or done by one site badly. Together they set out the space for Ocean Way.</p>
+    </div>
+    <div class="gaps" id="gaplist"></div>
+  </div>
+</section>
+
+<section id="proposal">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Design proposal</span>
+      <h2>Ocean Way: learn to skipper on a real route, with every date, cost and person visible</h2>
+      <p class="prose muted">Assumptions to confirm: Ocean Way is an IYT-accredited school. Theory is taught online. Practice happens in liveaboard weeks on warm-water routes like Turkey, Sardinia, Seychelles and Phuket. The site is in Russian and English. All prices and dates in the mockups are sample data.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar"><h3>Show the path</h3><p>One interactive ladder from first sail to Yachtmaster. Each level says what you will be allowed to do, how long it takes, the price and the next date. A short quiz picks your starting level.</p></div>
+      <div class="pillar"><h3>Book from the date</h3><p>Every course card and course page lists real dates with berths left, the boat, the instructor and a Hold button with a 20% deposit. "Notify me" on full weeks, "suggest my dates" when nothing fits.</p></div>
+      <div class="pillar"><h3>One all-in price</h3><p>Course, certificate, logbook, kitty, marina fees and transfer added into one total, with the payment plan, cancellation terms and ₽/€ shown next to the button.</p></div>
+      <div class="pillar"><h3>Real people, one account</h3><p>Meet the instructor and crew before you sail. Online theory, booked weeks, sea miles and certificates live in one logbook account, which brings people back for the next level.</p></div>
+    </div>
+
+    <div class="sec-head"><h3>Site map</h3></div>
+    <div class="sitemap">
+      <div class="node"><h3>Home</h3><ul><li>Hero + "find your level"</li><li>Next departures (live)</li><li>Path preview</li><li>Reviews by course</li><li>Destinations</li></ul></div>
+      <div class="node"><h3>Path</h3><ul><li>Interactive ladder</li><li>Level quiz</li><li>Licence guide: IYT, RYA, ICC, ГИМС, and where each is accepted</li></ul></div>
+      <div class="node"><h3>Courses</h3><ul><li>Catalog with filters: level, place, month, budget, format</li><li>Course page</li><li>Bundles (Crew + Skipper)</li></ul></div>
+      <div class="node"><h3>Dates</h3><ul><li>12-month season calendar</li><li>Departure page: boat, cabins, crew</li><li>Suggest my dates</li></ul></div>
+      <div class="node"><h3>Destinations</h3><ul><li>Route map + miles</li><li>A day on board</li><li>Weather by month</li></ul></div>
+      <div class="node"><h3>School</h3><ul><li>Instructors</li><li>Fleet</li><li>Safety &amp; guarantees</li><li>Trip logs</li></ul></div>
+      <div class="node"><h3>Account</h3><ul><li>Bookings &amp; payments</li><li>Online theory</li><li>Digital logbook &amp; certificates</li></ul></div>
+      <div class="node"><h3>Always on</h3><ul><li>Telegram / WhatsApp</li><li>RU / EN · ₽ / €</li><li>Gift a course</li></ul></div>
+    </div>
+
+    <div class="sec-head"><h3>Main booking journey</h3></div>
+    <div class="journey">
+      <div class="step"><h3>Find my level</h3><p>3-question quiz on the homepage or the Path page. Result: a starting level plus a path.</p></div>
+      <div class="step"><h3>See the course</h3><p>Key facts in the first screen: what you'll be allowed to do, days, miles, boat, all-in price.</p></div>
+      <div class="step"><h3>Pick a date</h3><p>Rows with berths left, the instructor's face and the boat. Full weeks offer "notify me".</p></div>
+      <div class="step"><h3>Hold a berth</h3><p>20% deposit by card, or hold for 48 h via Telegram while the manager confirms.</p></div>
+      <div class="step"><h3>Prepare</h3><p>Account opens with online theory, a packing list and a crew chat 30 days out.</p></div>
+      <div class="step"><h3>Come back</h3><p>Miles logged, certificate issued, the next level and alumni dates suggested.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="mockups">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Mockups</span>
+      <h2>Key screens</h2>
+      <p class="prose muted">Low-fidelity layouts in the proposed visual style. The Path screen works: pick quiz answers or click a level.</p>
+    </div>
+
+    <!-- HOME -->
+    <div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">oceanway.school</span><span class="sample" style="margin-left:auto">sample data</span></div>
+        <div class="m-nav">
+          <span class="m-logo">OCEAN<span>·</span>WAY</span>
+          <span class="links"><span>Path</span><span>Courses</span><span>Dates</span><span>Destinations</span><span>School</span></span>
+          <span class="right"><span>RU / EN</span><span>₽ / €</span><span>Telegram</span><a class="btn primary small" href="#mockups">Find my level</a></span>
+        </div>
+        <div class="m-hero">
+          <div class="copy">
+            <span class="eyebrow">IYT sailing school · Turkey · Sardinia · Seychelles</span>
+            <h3>From first sail to skipper in one week on a real route</h3>
+            <p>Theory online at home, a week of practice on board, an internationally recognised licence at the end. Every date shows the boat, the instructor and berths left.</p>
+            <div class="ctas"><a class="btn primary" href="#mockups">Find my level · 1 min</a><a class="btn ghost" href="#mockups">See dates</a></div>
+          </div>
+          <div class="m-photo" role="img" aria-label="Photo placeholder: a yacht under sail with a student at the helm">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M200 70 L200 215 L120 215 Z" fill="var(--surface)" opacity=".92"/>
+              <path d="M206 85 L206 215 L262 215 Z" fill="var(--surface)" opacity=".75"/>
+              <path d="M100 222 L290 222 L272 240 L120 240 Z" fill="var(--ink)" opacity=".85"/>
+            </svg>
+            <div class="tag"><span class="mono" style="font-size:.7rem;color:var(--muted)">36°37′N 29°06′E · Göcek</span><b>Real photo of a real course</b><span>Not stock: shot on our own weeks</span></div>
+          </div>
+        </div>
+        <div class="m-proof"><span><b>4.9</b> · 212 Google reviews</span><span><b>IYT</b> school</span><span><b>1,900+</b> students since 2006</span><span><b>Retake free</b> if you don't pass</span></div>
+        <div class="m-deps">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap"><b style="font-family:var(--display);font-size:1.1rem">Next departures</b><span class="mono muted" style="font-size:.78rem">All 46 dates →</span></div>
+          <div class="row">
+            <div class="dep"><span class="d">SAT 14 NOV → SAT 21 NOV</span><b>Bareboat Skipper · Göcek</b><span class="muted">Bavaria C42 · Instructor Alexei M.</span><div class="berths" aria-label="4 of 6 berths booked"><i></i><i></i><i></i><i></i><i class="free"></i><i class="free"></i></div><div class="foot"><span>2 berths left</span><span>€1,510 all-in</span></div></div>
+            <div class="dep"><span class="d">SAT 05 DEC → SAT 12 DEC</span><b>Competent Crew · Seychelles</b><span class="muted">Lagoon 42 · Instructor Marina K.</span><div class="berths" aria-label="2 of 6 berths booked"><i></i><i></i><i class="free"></i><i class="free"></i><i class="free"></i><i class="free"></i></div><div class="foot"><span>4 berths left</span><span>€1,980 all-in</span></div></div>
+            <div class="dep"><span class="d">SAT 16 JAN → SAT 23 JAN</span><b>Yachtmaster Coastal · Phuket</b><span class="muted">Jeanneau 440 · Instructor Ilya S.</span><div class="berths" aria-label="5 of 5 berths booked"><i></i><i></i><i></i><i></i><i></i></div><div class="foot"><span style="color:var(--land-ink)">Full · notify me</span><span>€1,890 all-in</span></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="mock-caption">Home: thesis, one primary action, proof strip, then live departures. Borrowed from Sailing Virgins (live cards) and UKSA (audience routing), with an all-in price added.</p>
+    </div>
+
+    <!-- PATH -->
+    <div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">oceanway.school/path</span><span class="sample" style="margin-left:auto">sample data · interactive</span></div>
+        <div class="pathwrap">
+          <div class="ladder" id="ladder" role="group" aria-label="Course levels"></div>
+          <div class="detail" id="detail" aria-live="polite"></div>
+        </div>
+        <form class="quiz" id="quiz">
+          <b style="font-family:var(--display)">Where do I start? 3 questions</b>
+          <div class="quiz-grid">
+            <fieldset><legend>Have you sailed before?</legend><div class="chips">
+              <label><input type="radio" name="exp" value="0" id="exp0" checked><span>Never</span></label>
+              <label><input type="radio" name="exp" value="1" id="exp1"><span>As a guest</span></label>
+              <label><input type="radio" name="exp" value="2" id="exp2"><span>As crew, 1–2 weeks</span></label>
+              <label><input type="radio" name="exp" value="3" id="exp3"><span>I've skippered</span></label>
+            </div></fieldset>
+            <fieldset><legend>What do you want?</legend><div class="chips">
+              <label><input type="radio" name="goal" value="holiday" id="goal0" checked><span>A sailing holiday</span></label>
+              <label><input type="radio" name="goal" value="charter" id="goal1"><span>Charter my own yacht</span></label>
+              <label><input type="radio" name="goal" value="offshore" id="goal2"><span>Cross seas, sail at night</span></label>
+            </div></fieldset>
+            <fieldset><legend>How much time do you have?</legend><div class="chips">
+              <label><input type="radio" name="time" value="w" id="time0"><span>A weekend</span></label>
+              <label><input type="radio" name="time" value="1" id="time1" checked><span>One week</span></label>
+              <label><input type="radio" name="time" value="2" id="time2"><span>Two weeks+</span></label>
+            </div></fieldset>
+          </div>
+          <div class="quiz-out" id="quizout" aria-live="polite"></div>
+        </form>
+      </div>
+      <p class="mock-caption">Path: the ladder as levels you can click, each with "what you'll be allowed to do" (12 Knots, RYA), weeks and miles (Glénans) and the next date. No site in the study joins these three things.</p>
+    </div>
+
+    <!-- COURSE -->
+    <div>
+      <div class="frame">
+        <div class="chrome"><i></i><i></i><i></i><span class="url">oceanway.school/courses/bareboat-skipper</span><span class="sample" style="margin-left:auto">sample data</span></div>
+        <div class="course">
+          <div class="main">
+            <span class="crumb">Path / Level 3 / Bareboat Skipper (IYT)</span>
+            <div style="display:grid;gap:8px"><h3 style="font-size:1.7rem;font-variation-settings:'wdth' 118;font-weight:800">Bareboat Skipper</h3>
+            <p class="muted" style="font-size:.95rem">After this week you can charter a yacht up to 24 m and skipper it in coastal waters by day, anywhere IYT is accepted.</p></div>
+            <div class="keyfacts">
+              <div><span>On board</span><b>7 days</b></div><div><span>Theory</span><b>Online · 24 h</b></div><div><span>Sea miles</span><b>≈ 120 nm</b></div><div><span>Students</span><b>Max 4 + you</b></div><div><span>Needs</span><b>Competent Crew or 5 days at sea</b></div><div><span>You get</span><b>IYT Bareboat + ICC route</b></div>
+            </div>
+            <div style="display:grid;gap:8px"><b style="font-family:var(--display)">Dates · Göcek, Turkey</b>
+              <div class="dates">
+                <div class="date sel"><span class="when">14–21 Nov</span><span class="who">Bavaria C42 · Alexei M.</span><span>2 berths left</span><a class="btn primary small" href="#mockups">Hold</a></div>
+                <div class="date"><span class="when">28 Nov–05 Dec</span><span class="who">Bavaria C42 · Ilya S.</span><span>4 berths left</span><a class="btn ghost small" href="#mockups">Hold</a></div>
+                <div class="date"><span class="when">10–17 Apr</span><span class="who">Jeanneau 410 · Marina K.</span><span>Last berth</span><a class="btn ghost small" href="#mockups">Hold</a></div>
+                <div class="date"><span class="when">24 Apr–01 May</span><span class="who">Bavaria C42 · Alexei M.</span><span class="full">Full</span><a class="btn ghost small" href="#mockups">Notify me</a></div>
+              </div>
+            </div>
+            <div style="display:grid;gap:8px"><b style="font-family:var(--display)">A week on board</b>
+              <div class="daystrip">
+                <div><b>Sat</b><small>Board, safety brief</small></div><div><b>Sun</b><small>Mooring, Med-style</small></div><div><b>Mon</b><small>Passage plan, 25 nm</small></div><div><b>Tue</b><small>Man overboard</small></div><div><b>Wed</b><small>Anchoring, night entry</small></div><div><b>Thu</b><small>You skipper all day</small></div><div><b>Fri</b><small>Exam + dinner</small></div>
+              </div>
+            </div>
+            <div class="incl">
+              <div><h4>Included</h4><ul><li>Instructor &amp; boat</li><li>IYT certificate + logbook</li><li>Airport transfer</li><li>Online theory course</li></ul></div>
+              <div class="no"><h4>Not included</h4><ul><li>Flights</li><li>Kitty: food, fuel, marinas ≈ €180, shown in total</li><li>Tip for instructor (optional)</li></ul></div>
+            </div>
+            <div class="crew"><span class="avatar" aria-hidden="true"></span><div><b>Alexei M.</b> · IYT Yachtmaster Instructor · 31,000 nm<br><span class="muted">"Thursday is the day you take the boat out with me as crew only."</span></div></div>
+          </div>
+          <aside class="side" aria-label="Price and booking">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="eyebrow">14–21 Nov · Göcek</span><span class="toggle" role="group" aria-label="Currency"><button type="button" aria-pressed="true" data-cur="eur">€</button><button type="button" aria-pressed="false" data-cur="rub">₽</button></span></div>
+            <div><span class="price-big tabnum" id="pricebig">€1,510</span> <span class="muted">per person, all-in</span></div>
+            <div class="breakdown tabnum" id="breakdown"></div>
+            <a class="btn primary" href="#mockups" style="justify-content:center">Hold my berth · <span id="deposit">€302</span> today</a>
+            <div class="plan tabnum" id="plan"></div>
+            <div class="tg"><span class="sample" style="background:var(--shoal);color:var(--ink)">TG</span><span>Or hold for 48 h in Telegram: <b class="mono">@oceanway_school</b></span></div>
+            <div class="reassure"><span>✓ Free cancellation until 60 days before</span><span>✓ Retake free if you don't pass</span><span>✓ Solo? Share a cabin with someone of the same gender, no supplement</span></div>
+          </aside>
+        </div>
+      </div>
+      <p class="mock-caption">Course page: key facts in the first screen (Offshore, UKSA), a Hold button on every date row (UKSA, Glénans), a day-by-day strip (Sailing Virgins), included and not-included lists (12 Knots), and a single all-in price with the payment plan, which no site in the study has.</p>
+    </div>
+
+    <!-- PHONES -->
+    <div class="phones">
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="top"><span class="m-logo" style="font-size:.85rem">OCEAN<span>·</span>WAY</span><span class="mono muted" style="font-size:.7rem">RU · ₽</span></div>
+          <div class="body">
+            <span class="eyebrow">Bareboat Skipper</span>
+            <b style="font-family:var(--display);font-size:1.2rem;line-height:1.15">Charter and skipper a yacht by day, after one week</b>
+            <div class="keyfacts" style="grid-template-columns:1fr 1fr"><div><span>On board</span><b>7 days</b></div><div><span>Miles</span><b>≈120 nm</b></div><div><span>Max</span><b>4 students</b></div><div><span>Next</span><b>14 Nov</b></div></div>
+            <div class="dates"><div class="date sel" style="grid-template-columns:1fr auto"><span class="when">14–21 Nov</span><span>2 left</span></div><div class="date" style="grid-template-columns:1fr auto"><span class="when">28 Nov–05 Dec</span><span>4 left</span></div></div>
+          </div>
+          <div class="bar"><div><b>≈ 151 000 ₽</b><small>all-in · €1,510</small></div><a class="btn primary small" href="#mockups">Hold berth</a></div>
+        </div></div>
+        <p class="mock-caption" style="text-align:center">Phone: price and Hold button fixed at the bottom</p>
+      </div>
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="top"><b style="font-family:var(--display)">My logbook</b><span class="mono muted" style="font-size:.7rem">Anna P.</span></div>
+          <div class="body">
+            <div style="display:grid;gap:6px"><span class="mono muted" style="font-size:.7rem">TO YACHTMASTER COASTAL</span><div class="meter"><i style="width:58%"></i></div><span class="mono" style="font-size:.74rem">232 / 400 nm · 9 / 15 days</span></div>
+            <div class="logline"><span class="dot"></span><span>Bareboat Skipper · Göcek</span><span class="mono muted">126 nm</span></div>
+            <div class="logline"><span class="dot"></span><span>Competent Crew · Sardinia</span><span class="mono muted">78 nm</span></div>
+            <div class="logline"><span class="dot" style="background:var(--deep)"></span><span>Online theory · Navigation</span><span class="mono muted">done</span></div>
+            <div class="logline"><span class="dot" style="background:var(--shoal-2)"></span><span>Certificate IYT Bareboat</span><span class="mono muted">PDF</span></div>
+          </div>
+          <div class="bar"><div><b style="font-size:.9rem">Next: Coastal, Phuket</b><small>16 Jan · 1 berth left</small></div><a class="btn ghost small" href="#mockups">View</a></div>
+        </div></div>
+        <p class="mock-caption" style="text-align:center">Account: sea miles count toward the next level (the idea comes from NauticEd's eLogbook)</p>
+      </div>
+      <div>
+        <div class="phone"><div class="screen">
+          <div class="top"><b style="font-family:var(--display)">Licence guide</b><span class="mono muted" style="font-size:.7rem">Path</span></div>
+          <div class="body">
+            <span class="muted">Which licence works where you want to charter?</span>
+            <div class="table-scroll" style="border-radius:8px"><table class="score" style="min-width:0;font-size:.74rem"><thead><tr><th></th><th>TR</th><th>HR</th><th>GR</th><th>TH</th></tr></thead><tbody>
+              <tr><td>IYT Bareboat</td><td class="c s3">✓</td><td class="c s3">✓</td><td class="c s2">+VHF</td><td class="c s3">✓</td></tr>
+              <tr><td>RYA Day Skipper</td><td class="c s3">✓</td><td class="c s3">✓</td><td class="c s3">✓</td><td class="c s3">✓</td></tr>
+              <tr><td>ГИМС</td><td class="c s0">✕</td><td class="c s1">?</td><td class="c s0">✕</td><td class="c s0">✕</td></tr>
+            </tbody></table></div>
+            <span class="mono muted" style="font-size:.68rem">Illustrative layout only. Real data must be checked with charter companies.</span>
+          </div>
+          <div class="bar"><div><b style="font-size:.9rem">Not sure?</b><small>Ask an instructor in Telegram</small></div><a class="btn ghost small" href="#mockups">Ask</a></div>
+        </div></div>
+        <p class="mock-caption" style="text-align:center">Licence guide: a country-by-country version of Navigator's table</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="identity">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Visual identity</span>
+      <h2>Taken from the nautical chart</h2>
+      <p class="prose muted">Most competitors use navy-and-white sailing clichés or stock photos. Ocean Way's style comes from the chart students learn to read: chart-water blues, buff for land and missing items, and chart magenta, the colour of lights and routes, as the one accent. This page uses the same style.</p>
+    </div>
+    <div class="identity">
+      <div class="swatches">
+        <div class="sw"><div style="background:var(--ink)"></div><p>Chart ink<span>text, headers</span></p></div>
+        <div class="sw"><div style="background:var(--deep)"></div><p>Deep water<span>links, data</span></p></div>
+        <div class="sw"><div style="background:var(--shoal)"></div><p>Shoal<span>panels, tints</span></p></div>
+        <div class="sw"><div style="background:var(--land)"></div><p>Land buff<span>full, missing</span></p></div>
+        <div class="sw"><div style="background:var(--accent)"></div><p>Chart magenta<span>the one action</span></p></div>
+        <div class="sw"><div style="background:var(--bg)"></div><p>Chart paper<span>page ground</span></p></div>
+      </div>
+      <div class="typespec">
+        <div class="t1">Archivo Expanded</div>
+        <div class="t2">Public Sans for running text. Readable at small sizes on a phone in bright sun, and it covers Cyrillic.</div>
+        <div class="t3">IBM Plex Mono · 36°37′N 29°06′E · 120 nm · 14–21 Nov</div>
+        <p class="muted" style="font-size:.9rem">Rules: magenta only on the main action and the route line. Soundings and coordinates are used as texture. Photos come only from real courses, captioned with place and date. Archivo needs a Cyrillic check: if its Cyrillic is weak, use Unbounded or Golos Text for Russian headlines.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Data model and roadmap</span>
+      <h2>One record per departure feeds every page</h2>
+      <p class="prose muted">Contradictory facts were the most common flaw in the study. Store each fact once and generate cards, course pages, the calendar, the booking widget and JSON-LD from it. This matches the Supabase setup already used in the RYC site.</p>
+    </div>
+    <div class="model">
+      <div class="entity"><h4>level</h4><ul><li>order, name</li><li>can_do (text)</li><li>prereq_miles, prereq_days</li><li>next_level</li></ul></div>
+      <div class="entity"><h4>course</h4><ul><li>level_id, format</li><li>days, theory_hours</li><li>included[], excluded[]</li><li>day_plan[]</li></ul></div>
+      <div class="entity core"><h4>departure</h4><ul><li>course, route, dates</li><li>boat_id, instructor_id</li><li>berths_total / booked</li><li>price_lines[] → all-in</li><li>deposit_pct, cancel_rule</li></ul></div>
+      <div class="entity"><h4>boat · instructor</h4><ul><li>model, cabins, photos</li><li>bio, miles, credentials</li><li>reviews[]</li></ul></div>
+      <div class="entity"><h4>student</h4><ul><li>bookings, payments</li><li>log_entries (nm, nights)</li><li>certificates</li></ul></div>
+    </div>
+    <div class="phases">
+      <div class="phase"><span class="eyebrow">Phase 1 · launch</span><h3>Catalog that books</h3><ul><li>Path page + quiz</li><li>Course pages with key facts and date rows</li><li>All-in price, ₽/€</li><li>Hold via deposit or Telegram</li><li>Reviews tied to each course</li></ul><p class="kpi">Measure: quiz → course view, date → hold rate, first reply under 15 min</p></div>
+      <div class="phase"><span class="eyebrow">Phase 2</span><h3>Account and logbook</h3><ul><li>Bookings, payment plan</li><li>Online theory inside the account</li><li>Digital logbook and certificates</li><li>"Next level" suggestions</li></ul><p class="kpi">Measure: repeat booking rate, theory → practice conversion</p></div>
+      <div class="phase"><span class="eyebrow">Phase 3</span><h3>Crew and stories</h3><ul><li>Meet your crew 30 days out</li><li>Trip logs per departure</li><li>Season calendar heatmap</li><li>Gift a specific course</li><li>Alumni weeks</li></ul><p class="kpi">Measure: referral share, gift sales, SEO traffic to trip logs</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="refs">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">References</span>
+      <h2>Sites reviewed</h2>
+      <p class="prose muted">Read on 31 October 2026, mostly as page text, with a browser for pages that need scripts. We took no screenshots and did not test on a phone, so the notes on visuals are limited. Fair Wind Sailing and Club Nautique failed to load because of certificate errors.</p>
+    </div>
+    <ul class="refs" id="reflist"></ul>
+  </div>
+</section>
+
+<footer><div class="wrap">Ocean Way · UX study · prepared 31 Oct 2026. Mockup figures are sample data. Scores are our judgment from page reviews.</div></footer>
+
+<script>
+(function(){
+  // ---------- scorecard ----------
+  var groups=[
+    ["Liveaboard & experience schools",[
+      ["Sailing Virgins","https://www.sailingvirgins.com/","US · BVI, Thailand, Greece",[2,3,3,3,3,3]],
+      ["Sea|mester","https://www.seamester.com/","US · gap-year voyages",[1,2,1,2,2,3]],
+      ["NauticEd","https://www.nauticed.org/","Online theory + practice",[2,3,1,2,3,1]],
+      ["Mahina Expeditions","https://www.mahina.com/","Offshore training",[0,2,0,1,1,2]]]],
+    ["UK & Europe",[
+      ["Les Glénans","https://www.glenans.asso.fr/niveaux","France",[3,3,3,3,1,2]],
+      ["UKSA","https://uksa.org/course/rya-day-skipper/","UK · Cowes",[1,2,3,3,2,1]],
+      ["Flying Fish","https://www.flyingfishonline.com/","UK / Australia · careers",[1,2,2,3,2,1]],
+      ["Hamble School of Yachting","https://www.hamble.co.uk/rya-training-ladder-learn-to-sail","UK · Solent",[2,2,2,2,1,1]],
+      ["RYA","https://www.rya.org.uk/training","Governing body",[2,0,1,2,2,0]]]],
+    ["United States",[
+      ["Modern Sailing","https://www.modernsailing.com/specials-and-packages","San Francisco Bay",[1,3,2,2,2,1]],
+      ["J/World","https://sailing-jworld.com/pricing/","SF / San Diego",[1,3,1,2,2,1]],
+      ["American Sailing (ASA)","https://americansailing.com/learn-to-sail/","Certification body",[2,0,1,2,2,1]],
+      ["Offshore Sailing School","https://www.offshoresailing.com/","Florida & BVI",[1,0,0,2,2,1]]]],
+    ["Russian-language schools",[
+      ["Яхт-клуб «Навигатор»","https://ycn.su/yachtschool","Moscow · IYT, ВФПС, ГИМС",[3,1,2,2,2,1]],
+      ["Яхтенная академия Рябчикова","https://yacht-academy.ru/bbs_turkey","St Petersburg · Turkey",[1,3,2,2,1,1]],
+      ["12 Узлов","https://12knots.com/ru/sailing-school/","Charter + school",[2,1,1,2,2,1]],
+      ["RAYS · skippers.ru","https://skippers.ru/","National skippers' association",[2,0,1,2,2,0]],
+      ["Парусная Академия","https://yachtingacademy.ru/","Moscow",[1,2,0,2,1,1]]]]
+  ];
+  var tb=document.getElementById("scorebody"),h="";
+  groups.forEach(function(g){
+    h+='<tr class="grp"><td colspan="8">'+g[0]+'</td></tr>';
+    g[1].sort(function(a,b){return sum(b[3])-sum(a[3])}).forEach(function(r){
+      h+='<tr><td class="site"><a href="'+r[1]+'" target="_blank" rel="noopener">'+r[0]+'</a><small>'+r[2]+'</small></td>';
+      r[3].forEach(function(v){h+='<td class="c s'+v+'">'+v+'</td>'});
+      h+='<td class="tot">'+sum(r[3])+'</td></tr>';
+    });
+  });
+  tb.innerHTML=h;
+  function sum(a){return a.reduce(function(x,y){return x+y},0)}
+
+  // ---------- patterns ----------
+  var P=[
+    ["Live departures with spots left","Real dates, berths left and a deposit to hold, on the homepage and every destination page. Sold-out weeks get \"Notify me\".","Sailing Virgins","https://www.sailingvirgins.com/"],
+    ["A 12-month season calendar","Year grid filtered by boat and destination, coloured from Available to Sold Out, with a \"nothing fits my dates\" form.","Sailing Virgins /calendar","https://www.sailingvirgins.com/calendar"],
+    ["Levels as skills plus weeks","Each level lists the skills you need to enter it and the recommended total training time, with tabs for each boat type.","Les Glénans /niveaux","https://www.glenans.asso.fr/niveaux"],
+    ["A licence comparison table","Answers \"which licence do I need?\": recognition in Russia and abroad, sail or motor, practice needed.","Navigator","https://ycn.su/yachtschool"],
+    ["Certificates as permissions","Each certificate card says what you may legally do: yacht length, distance from shore, daylight only.","12 Узлов · RYA","https://12knots.com/ru/sailing-school/"],
+    ["Key facts first","Duration, hours on the water, format, prerequisites, certification and price in the first screen of the course page.","UKSA · Offshore · RYA","https://uksa.org/course/rya-day-skipper/"],
+    ["Book from the date row","Every date row has its own book button and a \"final places\" or \"Complet\" status.","UKSA · Glénans","https://www.glenans.asso.fr/stages"],
+    ["Included and not included","Two plain lists, naming kitty, tip, marina fees and certificate fees.","Sailing Virgins · 12 Узлов · Hamble","https://www.sailingvirgins.com/"],
+    ["A day in the life","A 07:00–19:00 timeline with tagged moments, plus a day-by-day route with total nautical miles.","Sailing Virgins","https://www.sailingvirgins.com/destinations/thailand"],
+    ["Next step and bundles","\"What's next\" cards on each course page, and bundles that show the money saved (101 + 103 + club).","ASA · Hamble · Modern Sailing","https://www.modernsailing.com/specials-and-packages"],
+    ["Comparable price tables","One table of course, instruction hours, standard price and alumni price. Member and non-member prices side by side.","J/World · Modern Sailing","https://sailing-jworld.com/pricing/"],
+    ["Taking the risk off the buyer","Free retake if not satisfied, no charge for damage, 48-hour space hold, 90-day flexible cancellation.","J/World · Рябчиков · Flying Fish · Sailing Virgins","https://yacht-academy.ru/bbs_turkey"],
+    ["Instalments in plain sight","Instalments \"from 5,000 ₽\" in the hero, and finance options in the main navigation.","Рябчиков · Flying Fish","https://www.flyingfishonline.com/"],
+    ["Trip logs and a free logbook","Daily logs from past runs of the same route. A free eLogbook as the reason to create an account.","Sea|mester · NauticEd","https://www.seamester.com/"]
+  ];
+  document.getElementById("patternlist").innerHTML=P.map(function(p){
+    return '<div class="pattern"><h3>'+p[0]+'</h3><p>'+p[1]+'</p><span class="where">Seen at <a href="'+p[3]+'" target="_blank" rel="noopener">'+p[2]+'</a></span></div>';
+  }).join("");
+
+  // ---------- gaps ----------
+  var G=[
+    ["The learning path and the calendar are separate. You read about levels in one place and hunt for dates in another.","An interactive ladder where every level shows its next dates, berths left and price."],
+    ["No site gives a total cost. Certificate fees, kitty, membership and tips come out late.","One all-in price per person, the breakdown on one tap, and the deposit and balance dates."],
+    ["Dates never show who teaches or which boat.","Every departure names the boat and the instructor, with a photo and logged miles."],
+    ["Solo travellers get no clear policy. Only Mahina says singles share.","A stated cabin-sharing rule, with same-gender matching and no single supplement or a clear one."],
+    ["Online theory, booked practice and logged miles live in different systems.","One account: theory → practice week → logbook → certificate → next level."],
+    ["Reviews are generic, old, or from other courses.","Reviews tied to the course, place and month, plus a Google aggregate."],
+    ["Russian-speaking buyers must leave a form and wait for a call.","Hold a berth in Telegram for 48 h, see prices in ₽ and €, and read a licence guide by country."],
+    ["Facts conflict between pages on 13 of 18 sites.","One record per departure feeds every card, page, calendar and schema."]
+  ];
+  document.getElementById("gaplist").innerHTML=G.map(function(g){
+    return '<div class="gap"><div class="no">'+g[0]+'</div><div class="yes">'+g[1]+'</div></div>';
+  }).join("");
+
+  // ---------- references ----------
+  var R=[
+    ["Sailing Virgins","https://www.sailingvirgins.com/","Home, Thailand destination, course week page, /calendar"],
+    ["Sea|mester","https://www.seamester.com/","Home, Caribbean→Med voyage, Plan & Apply"],
+    ["NauticEd","https://www.nauticed.org/","Home, Bareboat bundle, sailing opportunities"],
+    ["Mahina Expeditions","https://www.mahina.com/","Home, expedition intro, schedule"],
+    ["Les Glénans","https://www.glenans.asso.fr/","Home, /niveaux, /stages, Tenerife course"],
+    ["UKSA","https://uksa.org/","Home, /courses, RYA Day Skipper"],
+    ["Hamble School of Yachting","https://www.hamble.co.uk/","Home, training ladder, Day Skipper combined"],
+    ["RYA","https://www.rya.org.uk/training","Training hub, sail cruising, Day Skipper, course finder"],
+    ["Flying Fish","https://www.flyingfishonline.com/","Home, /rya, Yachtmaster Ocean"],
+    ["Offshore Sailing School","https://www.offshoresailing.com/","Home, courses, Learn to Sail, request a quote"],
+    ["American Sailing (ASA)","https://americansailing.com/","Home, learn to sail, certifications, ASA 101, find a school"],
+    ["Modern Sailing","https://www.modernsailing.com/","Home, instruction, ASA 101, specials, schedule"],
+    ["J/World","https://sailing-jworld.com/","Home, learn to sail, pricing"],
+    ["Яхт-клуб «Навигатор»","https://ycn.su/yachtschool","School, IYT, calendar"],
+    ["Яхтенная академия Д. Рябчикова","https://yacht-academy.ru/","Home, Bareboat Turkey"],
+    ["12 Узлов","https://12knots.com/ru/sailing-school/","School, Skipper sail practice, navigation theory"],
+    ["RAYS · Национальная ассоциация шкиперов","https://skippers.ru/","Home, BSS course, schedule"],
+    ["Парусная Академия","https://yachtingacademy.ru/","Home, Bareboat Skipper IYT, sea practice"],
+    ["Fair Wind Sailing (not loaded)","https://www.fairwindsailing.com/","Certificate error on 31 Oct 2026"],
+    ["Club Nautique (not loaded)","https://www.clubnautique.net/","Certificate error on 31 Oct 2026"]
+  ];
+  document.getElementById("reflist").innerHTML=R.map(function(r){
+    return '<li><a href="'+r[1]+'" target="_blank" rel="noopener">'+r[0]+'</a><span>'+r[2]+'</span></li>';
+  }).join("");
+
+  // ---------- path ladder + quiz ----------
+  var L=[
+    {lv:"0",name:"Taster weekend",sub:"2 days · no experience",from:"€390",can:"Help crew a yacht, steer and trim with an instructor beside you.",days:"2 days",miles:"≈ 30 nm",needs:"Nothing",next:"Sat 07 Nov · Göcek"},
+    {lv:"1",name:"Competent Crew",sub:"7 days · IYT",from:"€1,290",can:"Work as full crew: stand a watch, handle lines and sails, help with mooring and anchoring.",days:"7 days",miles:"≈ 100 nm",needs:"Nothing",next:"Sat 05 Dec · Seychelles"},
+    {lv:"2",name:"Bareboat Skipper",sub:"7 days + online theory · IYT",from:"€1,510",can:"Charter and skipper a yacht up to 24 m in coastal waters by day.",days:"7 days + 24 h online",miles:"≈ 120 nm",needs:"Competent Crew or 5 days at sea",next:"Sat 14 Nov · Göcek"},
+    {lv:"3",name:"Yachtmaster Coastal",sub:"7–10 days · IYT",from:"€1,890",can:"Skipper coastal passages by day and night, up to 60 nm from a safe haven.",days:"7–10 days",miles:"≈ 200 nm",needs:"Logged miles and night hours (per IYT)",next:"Sat 16 Jan · Phuket"},
+    {lv:"4",name:"Yachtmaster Offshore",sub:"Exam prep · IYT",from:"€2,150",can:"Skipper offshore passages, including overnight sailing far from land.",days:"10–14 days",miles:"≈ 400 nm",needs:"Coastal + logged offshore miles",next:"Sat 06 Mar · Sardinia"}
+  ];
+  var ladder=document.getElementById("ladder"),detail=document.getElementById("detail"),cur=2,rec=-1;
+  function renderLadder(){
+    ladder.innerHTML=L.map(function(l,i){
+      return '<button type="button" class="rung'+(i===rec?' rec':'')+'" aria-pressed="'+(i===cur)+'" data-i="'+i+'"><span class="lv">L'+l.lv+'</span><span><b>'+l.name+'</b><small>'+l.sub+'</small></span><span class="from">from '+l.from+'</span></button>';
+    }).join("");
+    var l=L[cur];
+    detail.innerHTML='<span class="eyebrow">Level '+l.lv+'</span><h3 style="font-size:1.35rem;font-variation-settings:\'wdth\' 115">'+l.name+'</h3>'+
+      '<p class="cando"><b>After this you can:</b> '+l.can+'</p>'+
+      '<div class="facts"><div class="fact"><span>Time</span><b>'+l.days+'</b></div><div class="fact"><span>Sea miles</span><b>'+l.miles+'</b></div><div class="fact"><span>You need</span><b>'+l.needs+'</b></div><div class="fact"><span>All-in from</span><b>'+l.from+'</b></div></div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span class="mono" style="font-size:.8rem">Next: '+l.next+'</span><a class="btn primary small" href="#mockups">See dates</a></div>';
+  }
+  ladder.addEventListener("click",function(e){var b=e.target.closest(".rung");if(!b)return;cur=+b.dataset.i;renderLadder()});
+  var quiz=document.getElementById("quiz"),out=document.getElementById("quizout");
+  function runQuiz(){
+    var f=new FormData(quiz),exp=+f.get("exp"),goal=f.get("goal"),time=f.get("time"),i,why;
+    if(exp===0){i=time==="w"?0:1;why=time==="w"?"Try a weekend first, then go on to Competent Crew.":"Start as crew. After this week you can go straight on to Bareboat Skipper."}
+    else if(exp===1){i=goal==="holiday"?1:(time==="2"?1:1);why=goal==="holiday"?"Competent Crew turns a holiday into real skills.":"Do Competent Crew first. Bareboat Skipper needs about 5 days at sea."; if(goal!=="holiday"&&time==="2"){why="Two weeks: Competent Crew, then Bareboat Skipper straight after (bundle saves €200)."}}
+    else if(exp===2){i=goal==="offshore"?2:2;why=goal==="offshore"?"Get your Bareboat first. Coastal and Offshore come next.":"You have enough days at sea for Bareboat Skipper."}
+    else {i=goal==="offshore"?4:3;why=goal==="offshore"?"Go for Offshore. Check your logged miles first.":"Coastal adds night passages and longer legs."}
+    rec=i;cur=i;renderLadder();
+    out.innerHTML='<b>Start at: '+L[i].name+'.</b> '+why+' <span class="mono muted" style="font-size:.78rem">Next: '+L[i].next+'</span>';
+  }
+  quiz.addEventListener("change",runQuiz);
+  quiz.addEventListener("submit",function(e){e.preventDefault()});
+  runQuiz();
+
+  // ---------- price breakdown ----------
+  var lines=[["Course, instructor, boat",1090],["IYT certificate + logbook",140],["Kitty: food, fuel, marinas (est.)",180],["Airport transfer",100]];
+  var rate=100,mode="eur";
+  function fmt(v){return mode==="eur"?"€"+v.toLocaleString("en-US"):(Math.round(v*rate/100)*100).toLocaleString("ru-RU")+" ₽"}
+  function renderPrice(){
+    var t=lines.reduce(function(s,l){return s+l[1]},0),dep=Math.round(t*0.2);
+    document.getElementById("breakdown").innerHTML=lines.map(function(l){return '<div><span>'+l[0]+'</span><span>'+fmt(l[1])+'</span></div>'}).join("")+'<div class="tot"><span>Total per person</span><span>'+fmt(t)+'</span></div>';
+    document.getElementById("pricebig").textContent=fmt(t);
+    document.getElementById("deposit").textContent=fmt(dep);
+    document.getElementById("plan").innerHTML='<div><span>Today · 20% deposit</span><span>'+fmt(dep)+'</span></div><div><span>Balance · 30 days before</span><span>'+fmt(t-dep)+'</span></div>'+(mode==="rub"?'<div><span>Rate</span><span>€1 ≈ '+rate+' ₽ (sample)</span></div>':'');
+  }
+  document.querySelectorAll(".toggle button").forEach(function(b){b.addEventListener("click",function(){
+    mode=b.dataset.cur;document.querySelectorAll(".toggle button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});renderPrice();
+  })});
+  renderPrice();
+})();
+</script>

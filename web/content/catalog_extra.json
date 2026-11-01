@@ -1,0 +1,253 @@
+{
+  "_note": "Source for the extra course and passage content (English). scripts/build_catalog_extra.py turns it into supabase/seed_extra.sql and the fallback in content/catalog.json; prototypes/_build/build_leg_maps.py draws a map per leg from the stops.",
+  "courses": {
+    "vhf-radio-operator": {
+      "about": [
+        "The VHF is the radio you use every day on a charter: to book a berth, talk to the marina, call another boat or hear the coastguard's weather and safety messages. In an emergency it is the fastest way to get help, and a DSC radio sends your position at the press of one button.",
+        "The course is taught in a classroom with training radios, so you can make every call, Mayday included, without going on air. It suits anyone who sails as crew, not only skippers, and many students take it in the same week as a sailing course."
+      ],
+      "program": [
+        ["09:00 · How the radio works", "Range, power settings, squelch and dual watch. Which channel to use for what: 16 for distress and calling, intership channels, marina and port channels."],
+        ["10:30 · Procedure and the phonetic alphabet", "Procedure words, spelling names and call signs, and the routine calls you make most: a marina, another yacht, the coastguard."],
+        ["12:00 · Distress, urgency and safety", "Mayday, Pan-Pan and Sécurité: when to use each one, the exact format, and what to do when you hear one."],
+        ["14:00 · DSC and GMDSS", "Digital Selective Calling, the MMSI number, sending and cancelling a distress alert, EPIRBs, SARTs and NAVTEX."],
+        ["15:30 · Practice on radio sets", "Every call made on training radios until the formats come without notes."],
+        ["16:30 · Exam", "A short written test and a practical test on the radio. You get the result the same day."]
+      ],
+      "requirements": ["No sailing experience needed", "Age 16 or over", "Enough English to follow standard radio phrases; we explain each one"],
+      "bring": ["Passport or ID card for the certificate", "A passport-size photo", "Pen and notebook"]
+    },
+    "introduction-to-yachting": {
+      "about": [
+        "The week is for people who have never been on a sailing yacht, or have only been aboard as passengers. You live on the boat with up to three other students and an instructor, sail every day and spend the nights in harbours and quiet bays.",
+        "Nothing is assumed. The instructor explains every rope and every manoeuvre, and you do each one yourself until it feels natural. By the end you are useful crew on any charter, and you know whether you want to go on to skipper your own boat."
+      ],
+      "program": [
+        ["Day 1 · Getting to know the boat", "Join the boat in the afternoon. Safety briefing, life jackets, the parts of the yacht and the words sailors use, then a first short sail with the instructor beside you at the helm."],
+        ["Day 2 · Helm and sails", "Steering under engine and under sail, hoisting and lowering the mainsail, unfurling the genoa, and tacking and gybing as a crew."],
+        ["Day 3 · Lines and knots", "The six knots you need, coiling and throwing a line, working the winches, fenders and mooring lines, and your first mooring in a harbour."],
+        ["Day 4 · Anchoring and points of sail", "Choosing a spot, letting go and weighing anchor. Trimming the sails on every point of sail and reefing when the wind picks up."],
+        ["Day 5 · Your day at the helm", "You steer for most of the day, help plan the route, practise man overboard and finish with the certificate."]
+      ],
+      "requirements": ["No experience needed", "Able to swim", "Age 12 or over; under 16s sail with a parent aboard", "Fit enough to step on and off a boat and move around the deck"],
+      "bring": ["Soft bag, not a suitcase: it has to fold into a locker", "Non-marking deck shoes or trainers with light soles", "Windproof jacket and a warm layer for the evenings", "Swimwear and a beach towel", "Sun hat, sunglasses with a strap and high-factor sun cream", "Seasickness tablets if you need them, and your own medicines", "Passport and travel insurance details"]
+    },
+    "international-flotilla-skipper": {
+      "about": [
+        "In a flotilla you skipper your own yacht while a lead boat with a professional crew sails the same route, helps in harbours and is on the radio if something goes wrong. It is the usual first step for new skippers who want to charter without carrying all the responsibility from day one.",
+        "The course is practical: most of the time you are at the helm or giving instructions to your crew. You finish able to take a charter yacht out on a flotilla holiday with family or friends."
+      ],
+      "program": [
+        ["Day 1 · Briefing and boat checks", "Join the boat and do the check-in walk-round as you would on a charter: engine, gas, safety kit and inventory. Then learn to brief a crew."],
+        ["Day 2 · Boat handling under engine", "Turning in tight spaces, prop walk, coming alongside and leaving, then stern-to mooring in a harbour."],
+        ["Day 3 · Planning the day", "Route, hazards, weather, fuel and a plan B. Then you sail the plan as skipper, with the lead boat on the radio."],
+        ["Day 4 · Anchoring in bays", "Choosing a bay for the wind, anchoring with a line ashore and a night at anchor."],
+        ["Day 5 · Skipper's day and assessment", "You run the whole day: briefing, passage and mooring. The instructor assesses you and signs the certificate."]
+      ],
+      "requirements": ["IYT International Crew or similar experience", "VHF licence (can be taken the same week)", "Age 16 or over", "Able to swim"],
+      "bring": ["Soft bag, not a suitcase: it has to fold into a locker", "Non-marking deck shoes or sailing boots", "Waterproof jacket and a warm layer", "Sun hat, sunglasses with a strap and high-factor sun cream", "Head torch", "Your logbook or a list of the days you have sailed", "VHF licence if you have one", "Passport and travel insurance that covers sailing"]
+    },
+    "icc": {
+      "about": [
+        "Many charter companies in Croatia, Greece and other European countries ask for the ICC, and in some countries it is the licence the authorities expect to see. It is issued under a United Nations resolution, so it is recognised more widely than most national certificates.",
+        "If you already hold IYT Bareboat Skipper or a similar certificate, you can usually get the ICC without an assessment. If not, we run a short assessment on one of our boats, under engine and under sail, with a few theory questions."
+      ],
+      "program": [
+        ["Theory check", "Questions on rules of the road, lights and shapes, buoyage and safety equipment, asked as a conversation with the assessor."],
+        ["Under engine", "Leaving and coming back to the berth, turning in a confined space and picking up a man-overboard dummy."],
+        ["Under sail", "Hoisting and reefing, tacking and gybing, and sailing to a set course."],
+        ["Paperwork", "We send the application for you, with your photo and the assessment report."]
+      ],
+      "requirements": ["A qualifying skipper certificate, or the assessment", "Age 16 or over", "A passport-size photo"],
+      "bring": ["Passport or ID card", "A passport-size photo", "Your skipper certificate, if you have one", "Your logbook, if you have one", "Deck shoes and a windproof jacket for the practical part"]
+    },
+    "yachtmaster-coastal": {
+      "about": [
+        "Yachtmaster Coastal is for skippers who already charter on their own and want to go further: longer passages, sailing at night and crossings out of sight of the nearest harbour.",
+        "The week runs like a long assessment with coaching. Each student skippers in turn, plans the passages and takes the decisions, while the instructor watches, asks questions and shows better ways. It ends with a practical exam with an IYT examiner. Our training passages are a good way to build the miles and night hours you need before you apply."
+      ],
+      "program": [
+        ["Day 1 · Joining and briefing", "Boat checks, safety briefing and a plan for the week. Everyone skippers in turn, as in the exam."],
+        ["Day 2 · Pilotage and boat handling", "Entering an unfamiliar harbour with a pilotage plan, mooring in a strong wind and picking up a buoy under sail."],
+        ["Day 3 · Passage planning and navigation", "Planning a longer passage, currents, fixes by bearings and transits, and keeping a proper log."],
+        ["Day 4 · Night passage", "Sailing through the night: lights, watches, identifying lights by their characteristics, and keeping a tired crew safe."],
+        ["Day 5 · Heavy weather and emergencies", "Reefing early, heaving to, man overboard under sail and under engine, fire and engine failure drills."],
+        ["Day 6 · Practical exam", "An IYT examiner joins the boat. You skipper and show what you have learned."]
+      ],
+      "requirements": ["800 miles and 25 days at sea, including 2 days as skipper", "12 hours of sailing at night", "Age 18 or over", "VHF licence and a first-aid certificate"],
+      "bring": ["Soft bag, not a suitcase: it has to fold into a locker", "Foul-weather jacket and trousers", "Warm layer and hat for night watches, even in summer", "Non-marking deck shoes or sailing boots", "Head torch with a red light", "Your logbook with signed miles and night hours", "VHF licence and first-aid certificate", "Hand-bearing compass and dividers, if you own them", "Passport and travel insurance that covers sailing"]
+    },
+    "yachtmaster-offshore": {
+      "about": [
+        "Yachtmaster Offshore is for skippers who want to cross seas, not only follow coasts. Many people aim for it before delivering yachts or taking their own boat on a long voyage.",
+        "The theory part covers the chartwork, weather and safety knowledge an offshore skipper needs. At sea you put it into practice on a passage of several days, with a watch system, night sailing and drills, and finish with a practical exam with an IYT examiner."
+      ],
+      "program": [
+        ["Days 1–5 · Theory", "Chartwork, tides and currents, meteorology, passage planning, collision regulations and safety, in the classroom."],
+        ["Day 6 · Joining the boat", "Boat checks, safety briefing and provisioning for several days at sea."],
+        ["Days 7–8 · Offshore passage", "A passage out of sight of land with a full watch system, by day and by night."],
+        ["Day 9 · Navigation without electronics", "Chartplotter off: dead reckoning, estimated positions and fixes by compass and depth."],
+        ["Day 10 · Emergencies at sea", "Man overboard at night, abandon-ship drill, steering failure and caring for a sick crew member."],
+        ["Day 11 · Practical exam", "An IYT examiner joins the boat for the practical exam."]
+      ],
+      "requirements": ["3,000 miles and 50 days at sea", "30 hours of sailing at night, 6 of them as skipper", "VHF licence and a medical certificate", "Age 18 or over"],
+      "bring": ["Soft bag, not a suitcase: it has to fold into a locker", "Foul-weather jacket and trousers", "Warm layer and hat for night watches, even in summer", "Non-marking deck shoes or sailing boots", "Head torch with a red light", "Your logbook with signed miles and night hours", "VHF licence and medical certificate", "Pencils, dividers and a plotter for the theory days", "Passport and travel insurance that covers sailing"]
+    },
+    "yachtmaster-ocean": {
+      "about": [
+        "Yachtmaster Ocean adds celestial navigation to the skills of an offshore skipper. Even with GPS aboard, ocean sailors carry a sextant: it works when the electronics fail and needs no power.",
+        "The course is taught in a classroom with real sextants, and you take your own sights from the shore. Depending on the route to the certificate, you may also need to show an ocean passage on which you navigated by the sun and stars; we tell you what applies before you book."
+      ],
+      "program": [
+        ["The sextant", "Parts of the sextant, index error, taking sights of the sun and timing them precisely."],
+        ["Sun sights", "The noon sight for latitude, sun-run-sun, and working sights with the nautical almanac and sight reduction tables."],
+        ["Stars and planets", "Identifying stars, twilight sights and plotting a position from three stars."],
+        ["Ocean passage planning", "Routeing charts, seasons and trade winds, provisioning and crew for a long passage."],
+        ["Exam", "A written exam and a set of sights worked out from your own observations."]
+      ],
+      "requirements": ["IYT Yachtmaster Offshore", "Age 18 or over"],
+      "bring": ["Scientific calculator", "Pencils, dividers and a plotter", "A sextant if you have one; we lend one otherwise", "Your Yachtmaster Offshore certificate"]
+    }
+  },
+  "passages": {
+    "program": [
+      ["Joining the boat", "Join the boat at the start marina from 17:00 on the first day. Meet the instructor and crew, stow your kit and walk through the boat."],
+      ["Safety briefing and first sail", "Life jackets, harnesses and jackstays, the liferaft, fire, man overboard and the radio. Then a short sail to settle in and share out the roles."],
+      ["Planning each leg", "Each evening the crew plans the next leg: currents where they matter, shipping lanes, ports of refuge and the forecast. In the morning the skipper of the day briefs everyone."],
+      ["Watches and night sailing", "On longer legs you keep a watch system, also at night, and log night hours for Yachtmaster. The instructor is on deck for every tricky part."],
+      ["Arrival, debrief and logbook", "On the last day you reach the end marina by the afternoon, tidy the boat and debrief. The instructor signs your miles, days and night hours in your logbook. Check-out is the next morning."]
+    ],
+    "requirements": ["Crew experience: you can steer, handle lines and work the winches", "Fit enough to stand a night watch and move around a heeling deck", "Able to swim", "Age 18 or over, or 16 with a parent aboard", "A VHF licence is useful and counts towards Yachtmaster"],
+    "bring": ["Soft bag, not a suitcase: it has to fold into a locker", "Foul-weather jacket and trousers", "Warm layer and hat for night watches, even in summer", "Non-marking deck shoes or sailing boots", "Sun hat, sunglasses with a strap and high-factor sun cream", "Head torch with a red light", "Seasickness tablets if you need them, and your own medicines", "Your logbook, if you already have one", "Passport, and a Turkish visa or e-Visa if your nationality needs one", "Travel insurance that covers sailing"],
+    "ports": {
+      "Fethiye": "Ece Marina in Fethiye bay, where our passages start and finish.",
+      "Bodrum": "The marina under Bodrum castle, one of the busiest on the coast.",
+      "Kuşadası": "The marina in Kuşadası, close to ancient Ephesus.",
+      "Istanbul": "A marina on the European side of the city, near the airport.",
+      "Kemer": "Kemer Marina, below the Taurus mountains.",
+      "Kekova": "Üçağız, a village on the sheltered Kekova sound.",
+      "Fenike": "The marina at Fenike, a town at the foot of the mountains.",
+      "Northern Cyprus": "Girne (Kyrenia), with its old harbour under the castle."
+    },
+    "legs": {
+      "fethiye-bodrum": {
+        "summary": "Along the Turquoise Coast between Fethiye and Bodrum, past the Göcek islands, Marmaris and the Datça peninsula: harbour nights, quiet anchorages and at least one long day.",
+        "about": [
+          "The route follows the coast, so land is never far and there is a harbour within reach most of the day. That makes it the easiest way to start logging miles: the instructor can push the pace when the weather is good and duck into a bay when it is not.",
+          "The Göcek islands give sheltered nights at anchor. Around Bozburun the coast turns rugged and the wind usually builds in the afternoon, so you learn to reef early and plan around the daily breeze. The stretch past Datça and Knidos, where the Aegean meets the Mediterranean, is often the windiest of the week."
+        ],
+        "stops": [
+          ["Fethiye", 29.103, 36.622],
+          ["Göcek islands", 28.94, 36.70, "Sheltered bays among pine-covered islands; a night at anchor with a line ashore."],
+          ["Ekincik", 28.55, 36.82, "A deep bay by the Dalyan river, close to rock tombs and loggerhead turtle beaches."],
+          ["Marmaris", 28.27, 36.85, "A large natural harbour with a marina; a stop for fuel, water and provisions."],
+          ["Bozburun", 28.04, 36.68, "A boatbuilding village where gulets are still built by hand; stern-to on the town quay."],
+          ["Datça", 27.69, 36.72, "The harbour town on the Datça peninsula, often where the afternoon wind is strongest."],
+          ["Knidos", 27.375, 36.685, "An ancient city at the tip of the peninsula, with an anchorage inside the old harbour walls."],
+          ["Bodrum", 27.426, 37.031]
+        ]
+      },
+      "fethiye-kusadasi": {
+        "summary": "Between Fethiye and Kuşadası along the southern and central Aegean coast, via Marmaris, Datça, Bodrum and Didim: short legs between bays and longer days on the open stretch north of Bodrum.",
+        "about": [
+          "One of the longest coastal passages of the season. It links the Turquoise Coast with the central Aegean: from the sheltered bays of the south to the open, windy coast north of Bodrum.",
+          "Expect a mix of short legs between anchorages and longer days with the summer wind on the beam or ahead, depending on the direction you sail. You practise entering busy marinas such as Bodrum and Didim, and the crew plans at least one long leg that starts before dawn or ends after dark."
+        ],
+        "stops": [
+          ["Fethiye", 29.103, 36.622],
+          ["Ekincik", 28.55, 36.82, "A deep bay by the Dalyan river, close to rock tombs and loggerhead turtle beaches."],
+          ["Marmaris", 28.27, 36.85, "A large natural harbour with a marina; a stop for fuel, water and provisions."],
+          ["Datça", 27.69, 36.72, "The harbour town on the Datça peninsula, often where the afternoon wind is strongest."],
+          ["Knidos", 27.375, 36.685, "An ancient city at the tip of the peninsula, with an anchorage inside the old harbour walls."],
+          ["Bodrum", 27.426, 37.031, "A busy marina under the castle: stern-to practice in a crowded harbour."],
+          ["Didim", 27.268, 37.338, "A large marina near the temple of Apollo at Didyma."],
+          ["Kuşadası", 27.256, 37.866]
+        ]
+      },
+      "kusadasi-istanbul": {
+        "summary": "Between Kuşadası and Istanbul through the northern Aegean, the Dardanelles and the Sea of Marmara: strong currents, busy shipping lanes and night watches.",
+        "about": [
+          "The most varied sailing of the year. The route runs along the Aegean coast past Çeşme and the island of Lesbos, through the Dardanelles, a narrow strait with a strong current and a constant stream of ships, and across the Sea of Marmara to Istanbul.",
+          "It is for crew who want serious experience: traffic separation schemes, reporting to vessel traffic services on the VHF, night watches with ships all around and timing the strait for the current. Northbound you often sail against the summer wind; southbound it is behind you, and the legs are longer and faster."
+        ],
+        "stops": [
+          ["Kuşadası", 27.256, 37.866],
+          ["Çeşme", 26.30, 38.32, "A marina at the western tip of the peninsula, open to the full strength of the summer wind."],
+          ["Ayvalık", 26.69, 39.31, "A sheltered bay behind a chain of islands, opposite Lesbos."],
+          ["Babakale", 26.07, 39.48, "A fishing harbour at the westernmost point of mainland Asia."],
+          ["Bozcaada", 26.07, 39.835, "A small island off the entrance to the Dardanelles, where you wait for the right current."],
+          ["Çanakkale", 26.405, 40.15, "The narrowest part of the Dardanelles, with ferries crossing and ships passing close by."],
+          ["Gelibolu", 26.67, 40.41, "The end of the strait on the Sea of Marmara side."],
+          ["Marmara Island", 27.55, 40.585, "Marble quarries and quiet harbours in the middle of the Sea of Marmara."],
+          ["Istanbul", 28.870, 40.966]
+        ]
+      },
+      "fethiye-kemer": {
+        "summary": "Along the Lycian coast between Fethiye and Kemer, via Kalkan, Kaş, Kekova and Cape Gelidonya: rocky shores, ruins at anchor and a headland where the wind funnels.",
+        "about": [
+          "The Lycian coast is steep and wild, with few marinas and many anchorages beside ancient ruins. You anchor most nights, so the week builds real confidence with ground tackle and lines ashore.",
+          "Between Fenike and Kemer the route rounds Cape Gelidonya, where the wind can accelerate around the headland. The crew plans this stretch for the right time of day and learns how a cape changes the wind and sea."
+        ],
+        "stops": [
+          ["Fethiye", 29.103, 36.622],
+          ["Gemiler Island", 29.06, 36.555, "An island with Byzantine church ruins; anchor in the channel with a line ashore."],
+          ["Kalkan", 29.415, 36.26, "A small harbour town below steep hills."],
+          ["Kaş", 29.64, 36.20, "A lively harbour town facing the Greek island of Kastellorizo."],
+          ["Kekova", 29.845, 36.193, "A sound sheltered by Kekova island, with the ruins of a sunken city along the shore."],
+          ["Fenike", 30.152, 36.294, "A marina town at the foot of the mountains; fuel and provisions."],
+          ["Adrasan", 30.47, 36.30, "A wide bay just short of Cape Gelidonya, where the wind can funnel round the headland."],
+          ["Kemer", 30.572, 36.600]
+        ]
+      },
+      "fethiye-kekova": {
+        "summary": "A week on the Lycian coast between Fethiye and Kekova: bays you can only reach by boat, a sunken city and short legs that leave time for anchoring practice.",
+        "about": [
+          "The shortest legs of the season, chosen for practice rather than distance. With only a few hours of sailing each day, there is time to anchor several times, try different techniques and moor stern-to in small harbours.",
+          "It suits crew who are new to passages and want to build confidence before a longer route, and it gives plenty of time to swim and explore the ruins ashore."
+        ],
+        "stops": [
+          ["Fethiye", 29.103, 36.622],
+          ["Gemiler Island", 29.06, 36.555, "An island with Byzantine church ruins; anchor in the channel with a line ashore."],
+          ["Kalkan", 29.415, 36.26, "A small harbour town below steep hills."],
+          ["Kaş", 29.64, 36.20, "A lively harbour town facing the Greek island of Kastellorizo."],
+          ["Kekova", 29.845, 36.193]
+        ]
+      },
+      "fethiye-cyprus": {
+        "summary": "An open-sea crossing between the Turkish coast and Girne in Northern Cyprus, with a night at sea, watches and navigation out of sight of land.",
+        "about": [
+          "The heart of this passage is the crossing: about a day and a night out of sight of land, with a watch system, navigation by log, compass and GPS cross-checked, and a careful look at the forecast before you leave.",
+          "The coastal days at the Turkish end are short and easy, so the crew is rested before the crossing. Arriving in Northern Cyprus includes entry formalities, which the instructor walks you through."
+        ],
+        "stops": [
+          ["Fethiye", 29.103, 36.622],
+          ["Kaş", 29.64, 36.20, "A lively harbour town facing the Greek island of Kastellorizo."],
+          ["Kekova", 29.845, 36.193, "A sound sheltered by Kekova island, with the ruins of a sunken city along the shore."],
+          ["Open-sea crossing", null, null, "Usually 24 to 30 hours out of sight of land, with watches through the night."],
+          ["Northern Cyprus", 33.330, 35.343]
+        ]
+      },
+      "finike-cyprus": {
+        "summary": "Between Fenike on the Lycian coast and Northern Cyprus: an open-sea crossing with watches through the night.",
+        "about": [
+          "A passage built around one long crossing. After a short first day along the coast, the crew waits for the right forecast and sets off on a leg of about a day and a night out of sight of land.",
+          "You keep watches through the night, navigate without the coast in view and arrive in Girne, where the instructor walks you through the entry formalities."
+        ],
+        "stops": [
+          ["Fenike", 30.152, 36.294],
+          ["Adrasan", 30.47, 36.30, "A wide bay just short of Cape Gelidonya, where the wind can funnel round the headland."],
+          ["Open-sea crossing", null, null, "Usually 24 to 30 hours out of sight of land, with watches through the night."],
+          ["Northern Cyprus", 33.330, 35.343]
+        ]
+      }
+    },
+    "extra_requirements": {
+      "fethiye-cyprus": ["A passport valid for at least six months after the trip, for the crossing to Northern Cyprus"],
+      "finike-cyprus": ["A passport valid for at least six months after the trip, for the crossing to Northern Cyprus"],
+      "kusadasi-istanbul": ["At least one week of passage experience, or a Day Skipper level certificate"]
+    },
+    "extra_bring": {
+      "kusadasi-istanbul": ["Warm clothes: nights in the Sea of Marmara can be cool even in summer"]
+    }
+  }
+}

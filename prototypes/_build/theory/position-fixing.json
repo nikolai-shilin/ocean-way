@@ -1,0 +1,59 @@
+{
+  "slug": "position-fixing",
+  "title": "Position fixing and dead reckoning for sailors",
+  "h1": "Where are we? Position fixing and dead reckoning",
+  "lead": "A chartplotter tells you where you are until it doesn't. This guide covers the chart, dead reckoning, bearing fixes, transits and compass corrections, so you can always find your position on paper.",
+  "description": "How to fix a yacht's position on a paper chart: latitude and longitude, dead reckoning, estimated position, bearing fixes, transits and compass error.",
+  "summary": [
+    "One minute of latitude is one nautical mile; measure on the side scale.",
+    "DR uses course and log distance; an EP adds leeway and current.",
+    "A small cocked hat means a good fix.",
+    "True, Variation, Magnetic, Deviation, Compass: add west, subtract east."
+  ],
+  "read_minutes": 6,
+  "level": "Coastal skipper",
+  "course": "Yachtmaster Coastal",
+  "topic": "Weather and navigation",
+  "toc": [
+    [
+      "chart-basics",
+      "Chart basics"
+    ],
+    [
+      "why-paper",
+      "Why paper still matters"
+    ],
+    [
+      "dead-reckoning",
+      "Dead reckoning"
+    ],
+    [
+      "estimated-position",
+      "Estimated position"
+    ],
+    [
+      "bearing-fix",
+      "Three-point bearing fix"
+    ],
+    [
+      "transits-depth",
+      "Transits and depth"
+    ],
+    [
+      "compass",
+      "Variation and deviation"
+    ],
+    [
+      "methods",
+      "Choosing a method"
+    ],
+    [
+      "logbook",
+      "Keeping a logbook"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

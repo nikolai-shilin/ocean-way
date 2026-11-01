@@ -1,0 +1,47 @@
+{
+  "slug": "points-of-sail",
+  "title": "Points of sail: how a yacht sails close to the wind",
+  "h1": "Points of sail: how a yacht sails close to the wind",
+  "lead": "A yacht cannot sail straight into the wind, but it can sail at almost any other angle. Here are the points of sail, how to trim for each, and how tacking differs from gybing.",
+  "description": "Learn the points of sail from close-hauled to running: the no-go zone, sail trim on each point, tacking and gybing, apparent wind and reading telltales.",
+  "summary": [
+    "No sail works within about 45° of the wind: this is the no-go zone.",
+    "As you head up, sheet in; as you bear away, ease out.",
+    "Tacking turns the bow through the wind; gybing turns the stern, and the boom swings right across.",
+    "Telltales show the airflow: trim or steer until both stream back."
+  ],
+  "read_minutes": 6,
+  "level": "Beginner",
+  "course": "Introduction to Yachting",
+  "topic": "Sailing basics",
+  "toc": [
+    [
+      "wind",
+      "The wind and the no-go zone"
+    ],
+    [
+      "points",
+      "The points of sail"
+    ],
+    [
+      "trim",
+      "Heading up and bearing away"
+    ],
+    [
+      "tacking-gybing",
+      "Tacking and gybing"
+    ],
+    [
+      "apparent-wind",
+      "True and apparent wind"
+    ],
+    [
+      "telltales",
+      "Reading the telltales"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

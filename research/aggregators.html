@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aggregator Channel Economics</title>
+<meta name="description" content="Fees, cost per booking and lead conversion for selling RYC courses and yacht weeks through Tripadvisor, Viator, GetYourGuide, TourRadar, Airbnb, Click&Boat, SamBoat, Sputnik8 and Tripster, compared with direct leads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Same nautical-chart report system as ux-study.html */
+:root{
+  --bg:#f4f8fa;--surface:#ffffff;--ink:#0f2532;--muted:#566b78;--rule:#cddbe3;
+  --shoal:#d3e7f1;--shoal-2:#9fcbe0;--deep:#1d5f86;--land:#f0e3bf;--land-ink:#7a6430;
+  --accent:#b0176c;--accent-soft:#f6dcea;--on-deep:#ffffff;--good:#1f7a55;--good-soft:#d9efe5;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0b1820;--surface:#11222c;--ink:#e4edf2;--muted:#93a8b5;--rule:#23394a;
+  --shoal:#163447;--shoal-2:#235570;--deep:#4ea3d4;--land:#3a3220;--land-ink:#d9c38a;
+  --accent:#ff6db4;--accent-soft:#3d1830;--on-deep:#08141b;--good:#5cc79a;--good-soft:#173a2c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1820;--surface:#11222c;--ink:#e4edf2;--muted:#93a8b5;--rule:#23394a;
+  --shoal:#163447;--shoal-2:#235570;--deep:#4ea3d4;--land:#3a3220;--land-ink:#d9c38a;
+  --accent:#ff6db4;--accent-soft:#3d1830;--on-deep:#08141b;--good:#5cc79a;--good-soft:#173a2c;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--deep);text-underline-offset:2px}
+a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(2.1rem,5.4vw,3.6rem);font-variation-settings:"wdth" 118;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);font-variation-settings:"wdth" 112;font-weight:750}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.prose{max-width:68ch;display:grid;gap:12px}
+.eyebrow{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--muted)}
+.tabnum{font-variant-numeric:tabular-nums}
+.hero{border-bottom:1px solid var(--rule);background:linear-gradient(180deg,var(--shoal) 0%,var(--bg) 100%)}
+.hero .wrap{padding-block:56px 44px;display:grid;gap:20px}
+.hero .lede{font-size:1.15rem;max-width:64ch}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;font:400 .82rem var(--mono);color:var(--muted)}
+nav.toc{border-bottom:1px solid var(--rule);background:var(--surface)}
+nav.toc .wrap{display:flex;gap:6px 20px;flex-wrap:wrap;padding-block:12px;font:500 .82rem var(--mono)}
+nav.toc a{text-decoration:none;color:var(--ink)}
+nav.toc a:hover{color:var(--accent)}
+section{padding-block:52px;border-bottom:1px solid var(--rule)}
+section > .wrap{display:grid;gap:24px}
+.sec-head{display:grid;gap:10px}
+.findings{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.finding{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:18px;display:grid;gap:8px;align-content:start}
+.finding b{font-family:var(--display);font-variation-settings:"wdth" 105;font-size:1.05rem;line-height:1.25}
+.finding p{color:var(--muted);font-size:.95rem}
+.table-scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font:500 .7rem/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);vertical-align:bottom}
+tbody tr:last-child td{border-bottom:0}
+.grp td{background:var(--bg);font:500 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+td.name b{display:block}
+td.name small{color:var(--muted);font-size:.78rem}
+td.num{font:500 .88rem var(--mono);white-space:nowrap;text-align:right}
+.fees{min-width:900px}
+.fit{display:inline-block;font:500 .72rem var(--mono);padding:2px 8px;border-radius:99px;white-space:nowrap}
+.fit.hi{background:var(--good-soft);color:var(--good)}
+.fit.mid{background:var(--shoal);color:var(--deep)}
+.fit.lo{background:var(--land);color:var(--land-ink)}
+.note{font-size:.85rem;color:var(--muted)}
+/* bar chart: cost per booking */
+.bars{display:grid;gap:10px;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px}
+.bar{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:12px;align-items:center;font-size:.88rem}
+.bar .track{position:relative;height:22px}
+.bar .rng{position:absolute;top:5px;height:12px;border-radius:3px;background:var(--shoal-2)}
+.bar .typ{position:absolute;top:0;width:3px;height:22px;background:var(--ink);border-radius:2px}
+.bar .val{position:absolute;top:2px;font:500 .78rem var(--mono);white-space:nowrap;padding-left:8px}
+.bar.direct .rng{background:var(--good)}
+.bar.free .rng{background:var(--deep)}
+.axis{display:grid;grid-template-columns:minmax(120px,190px) 1fr;gap:12px;font:400 .72rem var(--mono);color:var(--muted)}
+.axis .ticks{display:flex;justify-content:space-between}
+@media (max-width:600px){.bar,.axis{grid-template-columns:1fr}.axis > span:first-child{display:none}}
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:800px){.calc{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:20px;display:grid;gap:16px;align-content:start}
+.field{display:grid;gap:6px}
+.field label{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;font-weight:600}
+.field label output{font:500 .88rem var(--mono);color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.out{display:grid;gap:10px}
+.out div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--rule);padding-bottom:8px;font-size:.92rem}
+.out div span:last-child{font:500 .95rem var(--mono);white-space:nowrap}
+.verdict{border-radius:8px;padding:14px 16px;font-weight:600}
+.verdict.win{background:var(--good-soft);color:var(--good)}
+.verdict.lose{background:var(--accent-soft);color:var(--accent)}
+.big{font:800 2.2rem/1 var(--display);font-variation-settings:"wdth" 112}
+.recs{display:grid;gap:12px;counter-reset:r}
+.rec{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--accent);border-radius:10px;padding:16px 18px;display:grid;gap:6px}
+.rec b{font-family:var(--display);font-size:1.05rem}
+.rec p{color:var(--muted);font-size:.95rem}
+ol.src{display:grid;gap:6px;font-size:.88rem;padding-left:20px;margin:0}
+footer{padding-block:28px;font:400 .8rem var(--mono);color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="wrap">
+  <span class="eyebrow">Ocean Way · channel research</span>
+  <h1>Tripadvisor and other aggregators: what a booking costs</h1>
+  <p class="lede">Every marketplace that could sell an RYC course or yacht week takes 15–30% of the price. On a €1,590 Bareboat Skipper course that is €240–480 per booking. The useful question is not which platform is cheapest but how much a direct inquiry may cost before an aggregator becomes the better deal.</p>
+  <div class="meta"><span>Prepared 1 Nov 2026</span><span>Reference product: Bareboat Skipper, €1,590 pp</span><span>Fees from public pages and trade press</span></div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#summary">Summary</a><a href="#fees">Fees</a><a href="#cost">Cost per booking</a><a href="#conversion">Lead conversion</a><a href="#calc">Break-even calculator</a><a href="#recs">Recommendations</a><a href="#sources">Sources</a>
+</div></nav>
+
+<section id="summary"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Summary</span><h2>Five things to know</h2></div>
+  <div class="findings">
+    <div class="finding"><b>Tripadvisor is Viator</b><p>Bookable "things to do" on Tripadvisor are fulfilled by Viator at Viator's commission (20–30%, typically 25%). The free Tripadvisor listing is still worth having for reviews and trust.</p></div>
+    <div class="finding"><b>Commission is 15–30% everywhere</b><p>Lowest: Click&amp;Boat (15–18% plus a renter fee) and TourRadar (~19–20% all in). Highest: Viator, GetYourGuide, Sputnik8 (24%+). Viator and GYG let you pay more for better ranking.</p></div>
+    <div class="finding"><b>A direct inquiry may cost €40–80</b><p>If RYC turns 10–20% of inquiries into bookings, a direct lead costing under €40–80 beats a 25% platform on the €1,590 course. Above that, the platform is cheaper.</p></div>
+    <div class="finding"><b>The course ladder changes the maths</b><p>A student who starts on the €990 entry course via an OTA (€248 commission) and then books the next two courses direct costs 5.7% of €4,370 lifetime revenue. Platforms are a good first step and an expensive habit.</p></div>
+    <div class="finding"><b>Resold charters don't fit</b><p>Boat marketplaces take 15–20%. If RYC's agency margin on a fleet charter is in that range too (to confirm), listing resold boats leaves nothing. Use them only for RYC's own products: courses, cabin-based yacht weeks.</p></div>
+  </div>
+</div></section>
+
+<section id="fees"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Fees</span><h2>Platform by platform</h2>
+    <p class="prose muted">"Fit" is our judgment of how well the platform's buyers match a week-long liveaboard course or yacht week. Most platforms do not publish their supplier rates; where a figure comes from trade press or operator reports, the notes say so.</p></div>
+  <div class="table-scroll"><table class="fees">
+    <thead><tr><th>Platform</th><th>Model</th><th style="text-align:right">Supplier fee</th><th style="text-align:right">Cost on €1,590</th><th>Who owns the customer</th><th>Fit</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr class="grp"><td colspan="7">Experience marketplaces (instant booking)</td></tr>
+      <tr><td class="name"><b>Tripadvisor</b><small>listing + reviews</small></td><td>Free listing; bookings go through Viator</td><td class="num">0% / Viator rate</td><td class="num">€0 / €318–477</td><td>Platform (bookings); you (reviews)</td><td><span class="fit hi">High for reviews</span></td><td>Business Advantage (paid profile) priced per business; one guide says from ~$499/yr. No 2026 price found.</td></tr>
+      <tr><td class="name"><b>Viator</b><small>Tripadvisor group</small></td><td>Commission per booking</td><td class="num">20–30%</td><td class="num">€318–477</td><td>Platform</td><td><span class="fit mid">Medium</span></td><td>Not published; ~25% typical. "Accelerate" lets you raise commission for ranking. Reported: since Aug 2026 Viator can set the retail price.</td></tr>
+      <tr><td class="name"><b>GetYourGuide</b></td><td>Commission per booking</td><td class="num">20–30%</td><td class="num">€318–477</td><td>Platform</td><td><span class="fit mid">Medium</span></td><td>Published range, set by country. Some operators got mid-season increases in 2026. Buyers mostly look for day activities.</td></tr>
+      <tr><td class="name"><b>TourRadar</b><small>multi-day tours</small></td><td>Commission + tech + payment fee</td><td class="num">18.7–20%</td><td class="num">€297–318</td><td>Platform</td><td><span class="fit hi">High</span></td><td>Built for multi-day trips, which matches a week aboard. 15.25% + 1.75% tech fee + up to 3% payment fee.</td></tr>
+      <tr><td class="name"><b>Airbnb Experiences</b></td><td>Service fee</td><td class="num">20%</td><td class="num">€318</td><td>Platform</td><td><span class="fit lo">Low</span></td><td>Non-negotiable. Format favours short experiences, not week-long courses.</td></tr>
+      <tr class="grp"><td colspan="7">Russian-language marketplaces</td></tr>
+      <tr><td class="name"><b>Sputnik8</b></td><td>Commission per ticket</td><td class="num">from 24%</td><td class="num">€382+</td><td>Platform</td><td><span class="fit mid">Medium</span></td><td>Published: from 24%, minimum €4.50 per ticket in the EU. Good match for Russian-speaking buyers.</td></tr>
+      <tr><td class="name"><b>Tripster</b></td><td>Commission per booking</td><td class="num">not found</td><td class="num">—</td><td>Platform until paid</td><td><span class="fit mid">Medium</span></td><td>Rules: price must not be higher than on your own site; reply within 2 hours; no sharing contacts before payment. Check the rate in the guide account.</td></tr>
+      <tr class="grp"><td colspan="7">Boat rental marketplaces (request to book)</td></tr>
+      <tr><td class="name"><b>Click&amp;Boat</b><small>owns Nautal</small></td><td>Owner commission + renter fee</td><td class="num">15–18%</td><td class="num">€239–286</td><td>Platform</td><td><span class="fit mid">Medium</span></td><td>Renter also pays 10–15% on top, which raises the customer's price. Rates from a Mar 2026 trade blog, not official. Uber Boat partnership from 2026.</td></tr>
+      <tr><td class="name"><b>SamBoat</b></td><td>Owner commission</td><td class="num">20%</td><td class="num">€318</td><td>Platform</td><td><span class="fit mid">Medium</span></td><td>Official: 20% on the rental, 10% on extras paid online (skipper exempt). Payout within 24h of the first day.</td></tr>
+      <tr><td class="name"><b>Boataround</b></td><td>Commission from charter company</td><td class="num">not found</td><td class="num">—</td><td>Platform</td><td><span class="fit lo">Low</span></td><td>27,000+ fleet boats. Competes with RYC's own charter search rather than selling for it.</td></tr>
+      <tr><td class="name"><b>YachtCharterFleet</b></td><td>Free listing, broker leads</td><td class="num">0% listing</td><td class="num">€0</td><td>Broker</td><td><span class="fit lo">Low</span></td><td>Superyacht market: 15% broker + 5% central agent. Not the bareboat or course buyer.</td></tr>
+      <tr class="grp"><td colspan="7">Direct, for comparison</td></tr>
+      <tr><td class="name"><b>Paid search → own site</b></td><td>Cost per lead</td><td class="num">~12–15%</td><td class="num">€190–240</td><td>RYC</td><td><span class="fit hi">High</span></td><td>Vendor benchmark (unsourced): ~$45 per lead, 15–20% of leads book. Check against RYC's own ad data.</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="cost"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Cost per booking</span><h2>What one €1,590 booking costs by channel</h2>
+    <p class="prose muted">Bar shows the range; the dark tick marks the typical figure where one exists. Direct paid search is a vendor benchmark, not RYC data.</p></div>
+  <div class="bars" id="bars" role="img" aria-label="Cost per €1,590 booking by channel, from €0 for a free Tripadvisor listing to €477 on Viator or GetYourGuide"></div>
+</div></section>
+
+<section id="conversion"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Lead conversion</span><h2>How leads turn into bookings</h2>
+    <div class="prose muted"><p>The platforms don't publish view-to-booking rates, and nobody publishes an independent benchmark for sailing courses. The figures below are the best available reference points; replace them with RYC's own CRM numbers as soon as they exist.</p></div></div>
+  <div class="table-scroll"><table style="min-width:760px">
+    <thead><tr><th>Channel type</th><th>What counts as a lead</th><th style="text-align:right">Lead → booking</th><th>What RYC controls</th><th>Source quality</th></tr></thead>
+    <tbody>
+      <tr><td class="name"><b>Instant-book OTA</b><small>Viator, GYG, TourRadar, Sputnik8</small></td><td>The booking itself; RYC pays only when someone books</td><td class="num">n/a</td><td>Photos, title, reviews, instant confirmation, price; ranking rewards listings that convert</td><td class="note">Platforms show your own rate in the supplier dashboard</td></tr>
+      <tr><td class="name"><b>Request-to-book marketplace</b><small>Click&amp;Boat, SamBoat, Tripster</small></td><td>A booking request RYC must accept</td><td class="num">high*</td><td>Response time (Tripster requires &lt;2h), acceptance rate, availability accuracy</td><td class="note">*Requests are close to purchase; no public figure</td></tr>
+      <tr><td class="name"><b>Paid search → own site</b></td><td>Form, Telegram or WhatsApp inquiry</td><td class="num">15–20%</td><td>Everything: offer, follow-up, upsell to next course</td><td class="note">Vendor benchmark, unsourced</td></tr>
+      <tr><td class="name"><b>Yacht broker inquiries</b></td><td>Charter inquiry</td><td class="num">~10%</td><td>Speed and quality of the first reply</td><td class="note">Vendor's illustrative example</td></tr>
+      <tr><td class="name"><b>Luxury travel inquiries</b></td><td>Inquiry, tracked over 90 days</td><td class="num">~14%</td><td>Long follow-up</td><td class="note">Guide example</td></tr>
+      <tr><td class="name"><b>Referrals from past students</b></td><td>Introduced friend</td><td class="num">~25%</td><td>Referral offer, crew reunions</td><td class="note">Vendor benchmark</td></tr>
+      <tr><td class="name"><b>Email to past customers</b></td><td>Reply or click</td><td class="num">25%+</td><td>Next course on the ladder, new routes</td><td class="note">Vendor benchmark</td></tr>
+    </tbody>
+  </table></div>
+  <p class="prose note">Context: OTAs handled 37% of experience bookings in 2025, up from 28% in 2023, while direct online bookings fell from 29% to 25% (Arival survey of 5,664 operators, as cited by Samba).</p>
+</div></section>
+
+<section id="calc"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Break-even calculator</span><h2>When is a direct lead cheaper than the platform?</h2>
+    <p class="prose muted">Break-even cost per inquiry = platform commission per booking × your inquiry-to-booking rate. If a direct inquiry costs less than that, selling direct is cheaper.</p></div>
+  <div class="calc">
+    <div class="panel">
+      <div class="field"><label for="price">Price per person <output id="o-price"></output></label><input id="price" type="range" min="500" max="5000" step="10" value="1590"></div>
+      <div class="field"><label for="comm">Platform commission <output id="o-comm"></output></label><input id="comm" type="range" min="10" max="35" step="0.5" value="25"></div>
+      <div class="field"><label for="conv">Your inquiry → booking rate <output id="o-conv"></output></label><input id="conv" type="range" min="2" max="40" step="1" value="15"></div>
+      <div class="field"><label for="cpl">Your cost per direct inquiry <output id="o-cpl"></output></label><input id="cpl" type="range" min="5" max="200" step="1" value="42"></div>
+      <div class="field"><label for="ladder">Later courses booked direct <output id="o-ladder"></output></label><input id="ladder" type="range" min="0" max="3" step="1" value="0"></div>
+    </div>
+    <div class="panel" aria-live="polite">
+      <div><span class="note">Break-even cost per direct inquiry</span><div class="big tabnum" id="be"></div></div>
+      <div class="out">
+        <div><span>Platform cost per booking</span><span id="r-plat"></span></div>
+        <div><span>Direct cost per booking</span><span id="r-dir"></span></div>
+        <div><span>Platform cost as share of lifetime revenue</span><span id="r-ltv"></span></div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+      <p class="note">Lifetime revenue assumes each later course costs about the same as the first. Direct cost per booking = cost per inquiry ÷ booking rate.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="recs"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Recommendations</span><h2>What to do</h2></div>
+  <div class="recs">
+    <div class="rec"><b>1. Claim the free Tripadvisor listing now; skip Business Advantage</b><p>It costs nothing, collects reviews, and gives the brand a trust signal for buyers who check Tripadvisor before booking direct. Bookable listings there come through Viator anyway.</p></div>
+    <div class="rec"><b>2. Test TourRadar for the courses and yacht weeks</b><p>It is built for multi-day trips and charges the least among experience platforms (~19–20% all in). One season of listings for two or three course dates gives real conversion data.</p></div>
+    <div class="rec"><b>3. Use Viator/GYG for a day sail, not the full course</b><p>Their buyers look for day activities. A "taster day" sells to that audience and feeds the course ladder; the full course would sit among day trips at 25% commission.</p></div>
+    <div class="rec"><b>4. For Russian-speaking buyers, try Sputnik8 or Tripster with care</b><p>Audience fit is good, but Sputnik8 starts at 24% and Tripster requires the same price as on RYC's own site, so the commission can't be passed on. Confirm Tripster's rate in the guide account first.</p></div>
+    <div class="rec"><b>5. Keep resold fleet charters off boat marketplaces</b><p>Click&amp;Boat, SamBoat and Boataround already list the same fleets. List only RYC's own products there, such as cabin-based yacht weeks with an RYC skipper.</p></div>
+    <div class="rec"><b>6. Turn platform customers into direct customers</b><p>After the trip, offer the next course on the ladder through RYC's own channels. Check each platform's terms first: most forbid moving the original booking off-platform.</p></div>
+    <div class="rec"><b>7. Start measuring cost per inquiry and booking rate</b><p>Every number in this report is a benchmark until RYC tracks its own cost per inquiry, inquiry → booking rate and source of each booking. The calculator above then gives the answer per channel.</p></div>
+  </div>
+</div></section>
+
+<section id="sources"><div class="wrap">
+  <div class="sec-head"><span class="eyebrow">Sources</span><h2>Where the numbers come from</h2>
+    <p class="prose muted">Most rates are not published by the platforms. Vendor and agency pages sell software or services, and some contradict each other. Confirm rates in each supplier dashboard before signing.</p></div>
+  <ol class="src">
+    <li><a href="https://www.sambahq.com/ota-supplier-guide/ota-commission-rates">Samba: OTA commission rates 2026</a> (Viator, GYG, TourRadar, Airbnb, Klook; Tripadvisor via Viator)</li>
+    <li><a href="https://www.sambahq.com/ota-supplier-guide/ota-vs-direct-booking">Samba: OTA vs direct booking</a> (direct channel cost per lead and conversion; Arival market share)</li>
+    <li><a href="https://kijo-digital.com/guides/viator-getyourguide-commission/">Kijo: Viator &amp; GetYourGuide commission, real 2026 costs</a></li>
+    <li><a href="https://www.getyourguide.supply/join/how-much-does-getyourguide-charge">GetYourGuide: what commission does GetYourGuide charge</a></li>
+    <li><a href="https://arival.travel/article/getyourguide-commission-increasing-for-some-operators">Arival: GetYourGuide commission increasing for some operators</a></li>
+    <li><a href="https://operatorresources.viator.com/?p=38000">Viator operator resources: standard minimum commission</a></li>
+    <li><a href="https://www.samboat.com/help/operation-and-referencing-of-the-advertisements-133">SamBoat help centre: commission and payout</a></li>
+    <li><a href="https://boatcible.com/2026/03/25/louer-son-bateau-sur-samboat-et-clickboat/">Boatcible: renting on SamBoat and Click&amp;Boat (Mar 2026)</a></li>
+    <li><a href="https://nautal.com/terms-and-conditions">Nautal terms and conditions</a></li>
+    <li><a href="https://www.yacht.de/en/boataround-yacht-charter-as-easy-as-booking-a-hotel/">Yacht.de: Boataround</a></li>
+    <li><a href="https://help.yachtcharterfleet.com/article/33-how-does-listing-your-yacht-on-ycf-work">YachtCharterFleet: how listing works</a></li>
+    <li><a href="https://www.sputnik8.com/ru/pages/komissiya-sputnik8">Sputnik8: commission for guides</a></li>
+    <li><a href="https://experience.tripster.ru/help_center/guides/rules/">Tripster: rules for guides</a></li>
+    <li><a href="https://www.airbnb.si/help/article/1857">Airbnb help: service fees for experiences</a></li>
+    <li><a href="https://www.tripadvisor.com/BusinessListingSponsoredPlacements">Tripadvisor Business Advantage</a> and <a href="https://blog.guestrevu.com/a-guide-to-tripadvisors-premium-products">GuestRevu guide to Tripadvisor premium products</a></li>
+    <li><a href="https://charteriq.co/">CharterIQ</a> (illustrative 10% broker inquiry → booking) and <a href="https://www.causalfunnel.com/blog/lead-conversion-rate-for-travel-businesses-formula-complete-optimization-guide/">CausalFunnel: lead conversion for travel businesses</a></li>
+  </ol>
+</div></section>
+
+<footer><div class="wrap">Ocean Way · aggregator channel research · prepared 1 Nov 2026. Rates change often and most are not published; treat them as ranges to confirm. Course prices from prototypes/home.html.</div></footer>
+
+<script>
+(function(){
+  var P=1590, MAX=600;
+  // [label, low %, high %, typical %, kind]  kind: ota | direct | free
+  var rows=[
+    ["Tripadvisor free listing",0,0,null,"free"],
+    ["Click&Boat (owner side)",15,18,null,"ota"],
+    ["TourRadar",18.7,20,null,"ota"],
+    ["SamBoat",20,20,null,"ota"],
+    ["Airbnb Experiences",20,20,null,"ota"],
+    ["Sputnik8 (from 24%)",24,24,null,"ota","+"],
+    ["Viator / Tripadvisor booking",20,30,25,"ota"],
+    ["GetYourGuide",20,30,null,"ota"],
+    ["Paid search, direct (benchmark)",12,15,null,"direct"]
+  ];
+  var eur=function(v){return "€"+Math.round(v).toLocaleString("en-US")};
+  var html=rows.map(function(r){
+    var lo=P*r[1]/100, hi=P*r[2]/100, l=lo/MAX*100, w=Math.max((hi-lo)/MAX*100,0.8);
+    var label=(r[1]===r[2]?eur(lo):eur(lo)+"–"+eur(hi))+(r[5]||"");
+    var typ=r[3]!=null?'<span class="typ" style="left:'+(P*r[3]/100/MAX*100)+'%"></span>':"";
+    return '<div class="bar '+r[4]+'"><span>'+r[0]+'</span><div class="track"><span class="rng" style="left:'+l+'%;width:'+w+'%"></span>'+typ+'<span class="val" style="left:'+(l+w)+'%">'+label+'</span></div></div>';
+  }).join("");
+  html+='<div class="axis"><span></span><div class="ticks"><span>€0</span><span>€100</span><span>€200</span><span>€300</span><span>€400</span><span>€500</span><span>€600</span></div></div>';
+  document.getElementById("bars").innerHTML=html;
+
+  var $=function(id){return document.getElementById(id)};
+  function run(){
+    var price=+$("price").value, comm=+$("comm").value, conv=+$("conv").value, cpl=+$("cpl").value, ladder=+$("ladder").value;
+    $("o-price").textContent=eur(price); $("o-comm").textContent=comm+"%"; $("o-conv").textContent=conv+"%";
+    $("o-cpl").textContent=eur(cpl); $("o-ladder").textContent=ladder;
+    var plat=price*comm/100, be=plat*conv/100, dir=cpl/(conv/100), life=price*(1+ladder);
+    $("be").textContent=eur(be);
+    $("r-plat").textContent=eur(plat);
+    $("r-dir").textContent=eur(dir);
+    $("r-ltv").textContent=(plat/life*100).toFixed(1)+"%";
+    var v=$("verdict");
+    if(cpl<be){v.className="verdict win";v.textContent="Direct is cheaper: "+eur(dir)+" vs "+eur(plat)+" per booking.";}
+    else if(cpl>be){v.className="verdict lose";v.textContent="The platform is cheaper: "+eur(plat)+" vs "+eur(dir)+" per booking.";}
+    else{v.className="verdict win";v.textContent="Even: both cost "+eur(plat)+" per booking.";}
+  }
+  ["price","comm","conv","cpl","ladder"].forEach(function(id){$(id).addEventListener("input",run)});
+  run();
+})();
+</script>
+</body>
+</html>

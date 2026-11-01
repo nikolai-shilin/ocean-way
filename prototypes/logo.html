@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ocean Way Mark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=Merriweather:wght@300&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#fff; --ink:#0b2230; --muted:#5e6b6f; --band:#f2f7f9; --line:#e3eaee; --navy:#0d1b26;
+  --sans:'Carlito', 'Lato', system-ui, sans-serif; --title:'Merriweather', Georgia, serif; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.5; }
+.wrap { max-width:1180px; margin:0 auto; padding:56px 24px 72px; }
+.kicker { font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+h1 { font-family:var(--title); font-weight:300; font-size:44px; line-height:.98; letter-spacing:-.035em; margin:12px 0 12px; }
+h2 { font-family:var(--title); font-weight:300; font-size:30px; line-height:1.05; letter-spacing:-.03em; margin:64px 0 20px; }
+.lead { color:var(--muted); max-width:62ch; margin:0; }
+.hero { display:grid; grid-template-columns:minmax(0,1fr) 420px; gap:40px; align-items:center; }
+.hero-mark { background:var(--navy); border-radius:48px; aspect-ratio:1.25; display:flex; align-items:center; justify-content:center; }
+.hero-mark svg { width:40%; }
+.cmp { display:flex; align-items:flex-end; flex-wrap:wrap; gap:28px 72px; border:1px solid var(--line); border-radius:38px; padding:36px 40px; }
+.cmp-row { display:flex; align-items:center; gap:28px; }
+.cm svg { width:100%; height:100%; display:block; }
+.vars { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; }
+.pair { display:grid; grid-template-columns:1fr 1fr; border-radius:34px; overflow:hidden; border:1px solid var(--line); }
+.sw { aspect-ratio:.9; display:flex; align-items:center; justify-content:center; }
+.sw svg { width:56%; }
+.sw.dark { background:var(--navy); } .sw.light { background:#fff; }
+.var h3 { font-weight:700; font-size:18px; margin:14px 0 4px; }
+.var p { margin:0; font-size:15px; line-height:1.45; color:var(--muted); }
+.ramps { background:var(--band); border-radius:38px; padding:28px 32px; display:grid; gap:18px; }
+.ramp-row { display:grid; grid-template-columns:110px 1fr; align-items:center; }
+.lab { font-weight:700; font-size:14px; color:var(--muted); }
+.ramp { display:flex; align-items:flex-end; gap:36px; }
+.rs svg { width:100%; height:100%; display:block; }
+.locks { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+.lk { border-radius:38px; min-height:200px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); }
+.lk.dark { background:var(--navy); color:#fff; border-color:var(--navy); }
+.lk.band { background:var(--band); border-color:var(--band); }
+.lock { display:flex; align-items:center; gap:16px; }
+.lock .lm svg { width:60px; height:60px; display:block; }
+.lock.stack { flex-direction:column; gap:12px; }
+.lock.stack .lm svg { width:72px; height:72px; }
+.word { font-family:var(--title); font-weight:300; font-size:40px; letter-spacing:-.035em; line-height:1; }
+.caps { font-weight:700; font-size:34px; letter-spacing:.04em; text-transform:uppercase; }
+.lock.stack .word { font-size:30px; }
+.ctx { border-radius:38px; overflow:hidden; border:1px solid var(--line); }
+.nav { display:flex; align-items:center; justify-content:space-between; height:72px; padding:0 28px; border-bottom:1px solid var(--line); }
+.nav .brand { display:flex; align-items:center; gap:10px; font-family:var(--title); font-weight:300; font-size:22px; letter-spacing:-.03em; }
+.nav .brand svg { width:30px; height:30px; display:block; }
+.nav ul { display:flex; gap:28px; list-style:none; margin:0; padding:0; font-size:16px; }
+.nav .btn { background:var(--ink); color:#fff; border-radius:999px; padding:10px 18px; font-weight:700; font-size:15px; }
+.nav.dark { background:var(--navy); color:#fff; border-color:#1d2e3a; }
+.nav.dark .btn { background:#fff; color:var(--ink); }
+.tabs { display:flex; gap:12px; padding:20px 28px; background:var(--band); }
+.tab { display:flex; align-items:center; gap:8px; background:#fff; border-radius:12px 12px 0 0; padding:9px 14px; font-size:14px; }
+.tab svg { width:16px; height:16px; display:block; }
+.av { width:44px; height:44px; border-radius:50%; overflow:hidden; }
+.av svg { width:100%; height:100%; display:block; }
+.tg { display:flex; align-items:center; gap:12px; padding:0 0 0 12px; font-size:15px; }
+.tg b { display:block; } .tg span { color:var(--muted); font-size:13px; }
+@supports (corner-shape: squircle) {
+  .hero-mark, .pair, .ramps, .lk, .ctx, .cmp { corner-shape:squircle; }
+  .hero-mark { border-radius:82px; } .pair { border-radius:58px; } .ramps, .lk, .ctx, .cmp { border-radius:64px; }
+}
+@media (max-width:900px) {
+  .hero { grid-template-columns:1fr; } .vars { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .locks { grid-template-columns:1fr; } .nav ul { display:none; }
+}
+</style></head>
+<body><div class="wrap">
+<section class="hero">
+  <div>
+    <div class="kicker">Logo study</div>
+    <h1>Horizon and a sail, at RYC weight</h1>
+    <p class="lead">The mark redrawn with the same line weight as the RYC logo: ring, horizon and sail are as heavy as the flag outline and the letters. One colour by default, like RYC, plus a blue-sail, filled-sea and badge version.</p>
+  </div>
+  <div class="hero-mark"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c42"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c42)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg></div>
+</section>
+
+<h2>Next to RYC</h2>
+<div class="cmp"><div class="cmp-row"><span role="img" aria-label="RYC" style="display:block;height:96px;width:192px;background:url(data:image/png;base64,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) 50% 50%/262px no-repeat"></span><span class="cm" style="width:96px;height:96px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c15"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c15)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></span></div><div class="cmp-row"><span role="img" aria-label="RYC" style="display:block;height:48px;width:96px;background:url(data:image/png;base64,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) 50% 50%/131px no-repeat"></span><span class="cm" style="width:48px;height:48px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c16"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c16)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></span></div><div class="cmp-row"><span role="img" aria-label="RYC" style="display:block;height:25px;width:50px;background:url(data:image/png;base64,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) 50% 50%/68px no-repeat"></span><span class="cm" style="width:25px;height:25px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c17"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c17)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></span></div></div>
+
+<h2>Four styles</h2>
+<div class="vars"><article class="var">
+  <div class="pair"><div class="sw dark"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c7"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c7)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg></div><div class="sw light"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c8"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c8)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div>
+  <h3>One colour</h3><p>Same line weight as the RYC flag and letters. The main version: header, documents, stamps.</p>
+</article><article class="var">
+  <div class="pair"><div class="sw dark"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c9"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c9)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#5bb8e8"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg></div><div class="sw light"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c10"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c10)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div>
+  <h3>Blue sail</h3><p>The sail in the site blue. For places with room for colour: hero, posters, the booking card.</p>
+</article><article class="var">
+  <div class="pair"><div class="sw dark"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c11"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c11)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#5bb8e8"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg></div><div class="sw light"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c12"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c12)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div>
+  <h3>Sea</h3><p>Water below the horizon filled in. The heaviest silhouette; good on photos and merch.</p>
+</article><article class="var">
+  <div class="pair"><div class="sw dark"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c13"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s13" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w13" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c13)">
+<rect width="120" height="120" fill="url(#s13)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w13)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div class="sw light"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c14"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s14" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcecf3"/><stop offset="1" stop-color="#f4f9fb"/></linearGradient>
+<linearGradient id="w14" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c14)">
+<rect width="120" height="120" fill="url(#s14)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w14)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+</svg></div></div>
+  <h3>Badge</h3><p>Solid disc with sky and sea. For app icons, avatars and round social profile pictures.</p>
+</article></div>
+
+<h2>Sizes</h2>
+<div class="ramps"><div class="ramp-row"><span class="lab">One colour</span><div class="ramp"><div class="rs" style="width:64px;height:64px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c18"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c18)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:40px;height:40px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c19"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c19)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:32px;height:32px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c20"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c20)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:24px;height:24px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c21"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c21)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:16px;height:16px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c22"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c22)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div></div><div class="ramp-row"><span class="lab">Blue sail</span><div class="ramp"><div class="rs" style="width:64px;height:64px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c23"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c23)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:40px;height:40px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c24"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c24)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:32px;height:32px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c25"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c25)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:24px;height:24px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c26"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c26)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:16px;height:16px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c27"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c27)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div></div><div class="ramp-row"><span class="lab">Sea</span><div class="ramp"><div class="rs" style="width:64px;height:64px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c28"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c28)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:40px;height:40px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c29"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c29)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:32px;height:32px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c30"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c30)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:24px;height:24px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c31"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c31)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div><div class="rs" style="width:16px;height:16px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c32"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c32)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#0077b6"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></div></div></div><div class="ramp-row"><span class="lab">Badge</span><div class="ramp"><div class="rs" style="width:64px;height:64px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c33"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s33" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w33" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c33)">
+<rect width="120" height="120" fill="url(#s33)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w33)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div class="rs" style="width:40px;height:40px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c34"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s34" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w34" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c34)">
+<rect width="120" height="120" fill="url(#s34)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w34)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div class="rs" style="width:32px;height:32px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c35"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s35" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w35" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c35)">
+<rect width="120" height="120" fill="url(#s35)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w35)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div class="rs" style="width:24px;height:24px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c36"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s36" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w36" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c36)">
+<rect width="120" height="120" fill="url(#s36)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w36)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div class="rs" style="width:16px;height:16px"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c37"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s37" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w37" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c37)">
+<rect width="120" height="120" fill="url(#s37)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w37)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div></div></div></div>
+
+<h2>With the name</h2>
+<div class="locks"><div class="lk light"><div class="lock"><span class="lm"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c38"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c38)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></span><span class="caps">Ocean Way</span></div></div><div class="lk dark"><div class="lock"><span class="lm"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c39"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c39)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg></span><span class="caps">Ocean Way</span></div></div><div class="lk light"><div class="lock"><span class="lm"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c40"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c40)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0077b6"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg></span><span class="word">Ocean Way</span></div></div><div class="lk band"><div class="lock stack"><span class="lm"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c41"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s41" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w41" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c41)">
+<rect width="120" height="120" fill="url(#s41)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w41)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></span><span class="word">Ocean Way</span></div></div></div>
+
+<h2>In use</h2>
+<div class="ctx">
+  <div class="nav"><div class="brand"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c43"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c43)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg>Ocean Way</div>
+    <ul><li>Courses</li><li>Routes</li><li>Dates</li><li>FAQ</li></ul><span class="btn">Book a course</span></div>
+  <div class="nav dark"><div class="brand"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c44"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c44)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#fff" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg>Ocean Way</div>
+    <ul><li>Courses</li><li>Routes</li><li>Dates</li><li>FAQ</li></ul><span class="btn">Book a course</span></div>
+  <div class="tabs">
+    <div class="tab"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c45"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c45)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg>Ocean Way · Bareboat skipper</div>
+    <div class="tg"><div class="av"><svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<clipPath id="c46"><circle cx="60" cy="60" r="58"/></clipPath>
+<linearGradient id="s46" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#123247"/><stop offset="1" stop-color="#1c4a63"/></linearGradient>
+<linearGradient id="w46" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#0077b6"/><stop offset="1" stop-color="#04466e"/></linearGradient>
+</defs>
+<g clip-path="url(#c46)">
+<rect width="120" height="120" fill="url(#s46)"/>
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="url(#w46)"/>
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#9cc7d8" stroke-width="3"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+</svg></div><div><b>Ocean Way</b><span>New course dates, 2027</span></div></div>
+  </div>
+</div>
+</div></body></html>

@@ -1,0 +1,8 @@
+<svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c0"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c0)">
+<line x1="0" y1="72.3" x2="120" y2="54.6" stroke="#0b2230" stroke-width="11"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#0b2230"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#0b2230" stroke-width="11"/>
+</svg>

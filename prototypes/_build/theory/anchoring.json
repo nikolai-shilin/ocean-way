@@ -1,0 +1,47 @@
+{
+  "slug": "anchoring",
+  "title": "Anchoring: choosing a spot, scope and holding",
+  "h1": "Anchoring: the spot, the scope, the hold",
+  "lead": "A secure anchorage comes from three decisions: where you drop, how much chain you let out and whether the anchor has really set. This guide walks through each one.",
+  "description": "How to anchor a yacht: choosing a sheltered bay with good holding, how much chain to use, setting the anchor, checking it holds and taking shore lines.",
+  "summary": [
+    "Pick a bay sheltered from the forecast wind, with sand or mud and room to swing.",
+    "Let out at least 4 to 5 times the depth in chain, more if wind is coming.",
+    "Lower the anchor, lay chain while going astern, then set it under reverse power and check with a transit.",
+    "Rig a snubber, set an anchor alarm and, if you can, swim over the anchor to look."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "International Bareboat Skipper",
+  "topic": "Harbour and anchorage",
+  "toc": [
+    [
+      "choose-bay",
+      "Choosing the bay"
+    ],
+    [
+      "scope",
+      "Scope"
+    ],
+    [
+      "set",
+      "Setting the anchor"
+    ],
+    [
+      "secure",
+      "Securing for the night"
+    ],
+    [
+      "shore-lines",
+      "Shore lines"
+    ],
+    [
+      "weigh",
+      "Weighing anchor"
+    ],
+    [
+      "practise",
+      "Practise it"
+    ]
+  ]
+}

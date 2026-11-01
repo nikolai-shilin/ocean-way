@@ -1,0 +1,47 @@
+/* Site chrome shared by every page: mobile menu, footer menu, FAQ columns. Loaded once from the root layout. */
+
+/* Burger button and full-screen menu (shown where the header links are hidden) */
+.menu-btn, .round.menu-btn { display: none; }
+.menu-btn .x { display: none; }
+.menu-btn[aria-expanded="true"] .x { display: block; }
+.menu-btn[aria-expanded="true"] .bars { display: none; }
+.mnav { display: none; }
+@media (max-width: 1000px) {
+  .menu-btn, .round.menu-btn { display: inline-flex; }
+  .mnav.open { display: flex; flex-direction: column; position: fixed; left: 0; right: 0; bottom: 0; top: 76px; z-index: 60; background: var(--bg); padding: 8px 20px calc(32px + env(safe-area-inset-bottom, 0px)); overflow-y: auto; }
+  .mnav a { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); font-family: var(--title); font-weight: var(--title-w); font-size: 30px; line-height: 1.1; letter-spacing: var(--trk-2); color: var(--ink); }
+  .mnav a svg.i { width: 22px; height: 22px; color: var(--muted); }
+  .mnav a.on { color: var(--accent); }
+  .mnav .mnav-langs { display: flex; gap: 8px; margin-top: 28px; }
+  .mnav .mnav-langs a { font-family: var(--sans); font-weight: 700; font-size: 14px; letter-spacing: .02em; padding: 0 16px; height: 40px; border: 2px solid var(--tag-line); border-radius: 20px; }
+  .mnav .mnav-langs a[aria-current] { background: var(--sel-bg); color: var(--sel-ink); border-color: var(--sel-bg); }
+  body.menu-open { overflow: hidden; }
+  body.menu-open .site-head { position: fixed; top: 0; left: 0; right: 0; z-index: 61; background: var(--bg); padding-inline: 20px; }
+}
+
+/* Site name next to the logo mark (page stylesheets size .logo to the mark, so these rules are more specific) */
+.site-head .logo.has-word { display: inline-flex; align-items: center; gap: 10px; width: auto; text-decoration: none; }
+.site-head .logo.has-word svg { width: 28px; height: 28px; flex: none; }
+.logo-word { font-family: var(--sans); font-weight: 700; font-size: 21px; line-height: 1; letter-spacing: -.01em; white-space: nowrap; color: var(--ink); }
+@media (max-width: 560px) {
+  .site-head { gap: 12px; }
+  .logo-word { font-size: 18px; }
+  .site-tools > button.round:not(#themeBtn):not(.menu-btn) { display: none; }
+}
+
+/* Footer menu */
+.fnav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; margin-top: 96px; padding-top: 40px; border-top: 1px solid var(--line); }
+.fnav + div > .site-foot { margin-top: 40px; }
+.fnav h2 { margin: 0 0 14px; font-family: var(--sans); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+.fnav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.fnav a { font-family: var(--sans); font-size: 16px; line-height: 1.3; color: var(--ink); }
+.fnav a:hover { color: var(--accent); }
+.fnav .fnav-langs { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+.fnav .fnav-langs a { font-weight: 700; font-size: 14px; }
+.fnav .fnav-langs a[aria-current] { color: var(--muted); }
+@media (max-width: 1000px) { .fnav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px) { .fnav { margin-top: 72px; gap: 28px 16px; } }
+
+/* FAQ: two columns that open and close independently */
+.faq-grid { align-items: start; }
+.faq-col { min-width: 0; }

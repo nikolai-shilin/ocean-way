@@ -1,0 +1,43 @@
+{
+  "slug": "navigation-lights",
+  "title": "Navigation lights and day shapes explained",
+  "h1": "Navigation lights and day shapes",
+  "lead": "At night, lights are how you know what another vessel is, which way she is heading and who keeps clear. This guide covers the lights a yacht shows and the ones you will meet.",
+  "description": "Masthead, side and stern lights, tricolour, anchor light and day shapes under COLREG Part C, plus how to read fishing boats, tows and ships at night.",
+  "summary": [
+    "Each light covers a fixed arc: masthead 225°, sidelights 112.5° each, sternlight 135°.",
+    "Under sail: sidelights and sternlight, or a tricolour under 20 m. Under engine: add the masthead light and switch off the tricolour.",
+    "At anchor: one all-round white light by night, one black ball by day.",
+    "Green over white is a trawler, red over white other fishing, red-white-red a vessel restricted in ability to manoeuvre."
+  ],
+  "read_minutes": 6,
+  "level": "Bareboat skipper",
+  "course": "International Bareboat Skipper",
+  "topic": "Rules of the road",
+  "toc": [
+    [
+      "arcs",
+      "How the lights work"
+    ],
+    [
+      "under-sail",
+      "Under sail"
+    ],
+    [
+      "under-engine",
+      "Under engine"
+    ],
+    [
+      "at-anchor",
+      "At anchor and day shapes"
+    ],
+    [
+      "common-sights",
+      "Common sights at night"
+    ],
+    [
+      "practise",
+      "Practise it"
+    ]
+  ]
+}

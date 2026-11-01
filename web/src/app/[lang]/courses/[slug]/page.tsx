@@ -1,0 +1,105 @@
+import '@/styles/home.css';
+import '@/styles/app.css';
+import { notFound } from 'next/navigation';
+import Shell from '@/components/Shell';
+import { index, loadPage, t } from '@/lib/content';
+import { getCourseDates, getCourses } from '@/lib/db';
+import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
+import { eur, range } from '@/lib/render';
+import { path, SITE, type Lang } from '@/lib/site';
+import { CourseCard } from '@/components/Cards';
+import { List, Program } from '@/components/Details';
+
+export const revalidate = 300;
+// Bareboat Skipper has its own detailed page (courses/bareboat-skipper); every other course uses this one.
+export async function generateStaticParams() {
+  return (await getCourses()).filter((c) => c.slug !== 'bareboat-skipper').map((c) => ({ slug: c.slug }));
+}
+export const dynamicParams = false;
+
+async function find(slug: string) {
+  return (await getCourses()).find((c) => c.slug === slug);
+}
+
+export async function generateMetadata({ params }: PageProps<'/[lang]/courses/[slug]'>) {
+  const { lang, slug } = await params;
+  const c = await find(slug);
+  if (!c) return {};
+  const l = lang as Lang;
+  return meta(l, { title: `${c.name}: ${t(l, c.summary).replace(/\.$/, '')}`, description: t(l, c.description).slice(0, 155), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
+}
+
+export default async function CourseItem({ params }: PageProps<'/[lang]/courses/[slug]'>) {
+  const { lang: raw, slug } = await params;
+  const lang = raw as Lang;
+  const courses = await getCourses();
+  const c = courses.find((x) => x.slug === slug);
+  if (!c) notFound();
+  const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
+  const titles = Object.fromEntries(index.slugs.map((s) => {
+    const page = loadPage(`theory-${s}`, lang);
+    return [s, page.title.replace(/ · Ocean Way$/, '')];
+  }));
+  const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Courses'), path.courses(lang)], [c.name, path.courseItem(lang, slug)]];
+  const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
+    '@type': 'Course', name: c.name, description: t(lang, c.description), provider: { '@id': `${SITE}/#org` }, inLanguage: lang,
+    image: photo(c.photo_id, 1200), educationalCredentialAwarded: c.certificate ? t(lang, c.certificate).split(':')[0] : c.name,
+    offers: { '@type': 'Offer', price: c.price_from_eur, priceCurrency: 'EUR', category: 'Paid', url: SITE + path.courseItem(lang, slug) },
+    hasCourseInstance: dates.map((d) => ({ '@type': 'CourseInstance', courseMode: 'Onsite', startDate: d.starts_on, endDate: d.ends_on, location: { '@type': 'Place', name: t(lang, d.area) } })),
+  }] };
+  const others = courses.filter((x) => x.slug !== slug);
+  return (
+    <Shell lang={lang} section="courses" pathFor={(l) => path.courseItem(l, slug)} jsonld={ld}>
+      <section className="ow-hero">
+        <Crumbs lang={lang} items={crumbs} />
+        <span className="lvl">{t(lang, c.level)}</span>
+        <h1 className="display">{c.name}</h1>
+        <p className="lead">{t(lang, c.summary)}</p>
+        <div className="facts">
+          <span className="fact"><svg className="i"><use href="#i-cal" /></svg>{t(lang, c.duration)}</span>
+          <span className="fact"><svg className="i"><use href="#i-compass" /></svg>{t(lang, c.scope)}</span>
+          <span className="fact"><svg className="i"><use href="#i-cert" /></svg>IYT</span>
+        </div>
+      </section>
+      <div className="ow-item">
+        <div className="ow-body">
+          <div className="ow-photo"><img src={photo(c.photo_id, 1400)} alt={t(lang, c.photo_alt)} /></div>
+          <section className="ow-text"><h2>{t(lang, 'About the course')}</h2><p>{t(lang, c.description)}</p>{(c.about ?? []).map((x, i) => <p key={i}>{t(lang, x)}</p>)}</section>
+          {c.program?.length ? <section id="programme"><h2>{t(lang, 'Course programme')}</h2><Program lang={lang} steps={c.program} /></section> : null}
+          <div className="ow-two">
+            {c.learn.length ? <div className="band"><h3>{t(lang, "What you'll learn")}</h3><List lang={lang} items={c.learn} /></div> : null}
+            {c.requirements.length ? <div className="band" id="requirements"><h3>{t(lang, 'Requirements')}</h3><List lang={lang} items={c.requirements} /></div> : null}
+          </div>
+          {c.bring?.length ? <section id="bring"><h2>{t(lang, 'What to bring')}</h2><List lang={lang} items={c.bring} cols /></section> : null}
+          {c.certificate ? <section><h2>{t(lang, 'The certificate')}</h2><p>{t(lang, c.certificate)}</p></section> : null}
+          <section id="dates">
+            <h2>{t(lang, 'Dates')}</h2>
+            {dates.length ? (
+              <ul className="ow-list">{dates.map((d) => <li key={d.id}><svg className="i"><use href="#i-cal" /></svg><span>{range(lang, d.starts_on, d.ends_on)} · {t(lang, d.area)} · {eur(d.price_eur)}</span></li>)}</ul>
+            ) : (
+              <div className="band ow-empty"><p>{t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.')}</p></div>
+            )}
+          </section>
+          {c.theory.length ? (
+            <section>
+              <h2>{t(lang, 'Read the theory')}</h2>
+              <div className="ow-chips">{c.theory.filter((s) => titles[s]).map((s) => <a key={s} href={path.article(lang, s)}><span className="chip">{titles[s]}</span></a>)}</div>
+            </section>
+          ) : null}
+        </div>
+        <aside className="band ow-box" aria-label={t(lang, 'Price and dates')}>
+          <div className="card-title">{c.name}</div>
+          <div className="ow-price"><b>{eur(c.price_from_eur)}</b><span className="card-meta">{t(lang, c.price_unit)}</span></div>
+          <p className="ow-note">{t(lang, 'Instructor, yacht, fuel and marina fees on the course route, course book and certificate fee included.')}</p>
+          <a className="pill pill-primary pill-wide" href="#">{t(lang, 'Ask about dates')}</a>
+          <a className="pill pill-quiet pill-wide" href={path.courses(lang)}>{t(lang, 'All courses')}</a>
+        </aside>
+      </div>
+      <section className="sec" data-row style={{ marginTop: 96 }}>
+        <div className="sec-head row-head"><div><span className="kicker">{t(lang, 'Courses')}</span><h2 className="h2" style={{ marginTop: 12 }}>{t(lang, 'Other courses')}</h2></div>
+          <div className="row-nav"><button className="round" type="button" data-dir="-1" aria-label={t(lang, 'Previous')}><svg className="i" style={{ transform: 'scaleX(-1)' }}><use href="#i-arrow" /></svg></button><button className="round" type="button" data-dir="1" aria-label={t(lang, 'Next')}><svg className="i"><use href="#i-arrow" /></svg></button></div></div>
+        <div className="hscroll" tabIndex={0}>{others.map((x) => <CourseCard key={x.slug} lang={lang} c={x} />)}</div>
+      </section>
+    </Shell>
+  );
+}

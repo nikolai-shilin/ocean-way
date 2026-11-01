@@ -1,0 +1,55 @@
+{
+  "slug": "knots",
+  "title": "Sailing knots: six every crew member uses",
+  "h1": "Six knots every crew member uses",
+  "lead": "Six knots cover almost every job on a cruising yacht, from mooring to reefing. For each one: what it is for, how to tie it, how to check it and the mistake to avoid.",
+  "description": "Six sailing knots every crew member needs: bowline, clove hitch, round turn and two half hitches, cleat hitch, figure-of-eight and reef knot, step by step.",
+  "summary": [
+    "Bowline for a fixed loop; cleat hitch for making fast on a cleat.",
+    "Clove hitch for fenders; round turn and two half hitches for a loaded ring or post.",
+    "Figure-of-eight stoppers keep sheets from running out through blocks.",
+    "A reef knot is for reef points and sail ties only, never for joining loaded lines."
+  ],
+  "read_minutes": 6,
+  "level": "Beginner",
+  "course": "Introduction to Yachting",
+  "topic": "Sailing basics",
+  "toc": [
+    [
+      "rope-words",
+      "Rope words"
+    ],
+    [
+      "bowline",
+      "Bowline"
+    ],
+    [
+      "clove-hitch",
+      "Clove hitch"
+    ],
+    [
+      "round-turn",
+      "Round turn and two half hitches"
+    ],
+    [
+      "cleat-hitch",
+      "Cleat hitch"
+    ],
+    [
+      "figure-eight",
+      "Figure-of-eight stopper"
+    ],
+    [
+      "reef-knot",
+      "Reef knot"
+    ],
+    [
+      "coiling",
+      "Coiling and handing over"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

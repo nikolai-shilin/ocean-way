@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platz buchen · Ocean Way</title>
+<meta name="robots" content="noindex, follow">
+<meta name="description" content="Buche einen Kurs oder Ausbildungstörn bei Ocean Way: Termin und Kabine wählen, Daten eingeben, 30 % anzahlen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Carlito:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,300;1,300&display=swap">
+<style>
+/* Tokens from ryc-rentals hotweb/src/app/ryc.css (day and night). Merriweather Light (ryc-rentals title font) for titles and large text only; Carlito (ryc label font, Lato-based, has Cyrillic) for text, buttons and UI. */
+:root {
+  --bg: #ffffff; --ink: #000000; --muted: #5e6b6f; --faint: #b8c2c6;
+  --band: #f2f7f9; --line: #eef2f4; --tag-line: #dfe5e8; --photo-bg: #e6ebee;
+  --accent: #0077b6; --on-accent: #ffffff; --sel-bg: #000000; --sel-ink: #ffffff; --sel-muted: #b8c2c6;
+  --danger: #d40000;
+  --sans: 'Carlito', 'Lato', Arial, sans-serif;
+  --title: 'Merriweather', Georgia, serif;
+  --title-w: 300; --title-track: -0.02em; --title-lh: .98;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  color-scheme: light;
+}
+:root[data-theme="night"] {
+  --bg: #000000; --ink: #ffffff; --muted: #a8b9c9; --faint: #5c6f80;
+  --band: #14191e; --line: #1f2830; --tag-line: #43586b; --photo-bg: #14191e;
+  --accent: #35b0f2; --on-accent: #00131f; --sel-bg: #ffffff; --sel-ink: #000000; --sel-muted: #5c6f80;
+  --danger: #ff6a5c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.45 var(--sans); -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
+a { color: var(--accent); text-decoration: none; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* Type */
+.display em { font-style: normal; }
+.display { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-1); line-height: var(--title-lh); margin: 0; text-wrap: balance; }
+.h2 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-2); font-size: clamp(30px, 3.4vw, 44px); line-height: 1; margin: 0; text-wrap: balance; }
+.h3 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-3); font-size: clamp(22px, 2vw, 26px); line-height: 1.15; margin: 0; }
+.kicker { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: -.02em; text-transform: uppercase; color: var(--ink); }
+.meta { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+.lead { font-family: var(--sans); font-size: 21px; line-height: 1.35; max-width: 56ch; margin: 0; }
+.hint { font-family: var(--sans); font-size: 13px; line-height: 1.35; color: var(--muted); margin: 10px 0 0; }
+.card-title { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.15; color: var(--ink); }
+.card-meta { font-family: var(--sans); font-size: 14px; color: var(--muted); line-height: 1.2; }
+
+/* Controls (ryc.css) */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 28px; border-radius: 54px; border: 2px solid var(--accent); color: var(--accent); background: var(--bg); font-family: var(--sans); font-weight: 700; font-size: 18px; letter-spacing: .01em; line-height: 1; white-space: nowrap; cursor: pointer; transition: transform .15s var(--ease-out), background .15s, color .15s; }
+.pill:hover { transform: translateY(-1px); }
+.pill-primary { background: var(--accent); color: var(--on-accent); }
+.pill-quiet { border-color: var(--tag-line); color: var(--ink); height: 52px; font-size: 17px; }
+.pill-quiet:hover { border-color: var(--muted); }
+.pill-wide { width: 100%; padding: 0 14px; font-size: 17px; }
+.round { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--tag-line); color: var(--ink); background: var(--bg); cursor: pointer; }
+.round:hover { border-color: var(--muted); }
+.tag { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 54px; border: 2px solid var(--tag-line); background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1; cursor: pointer; white-space: nowrap; }
+.tag:hover { border-color: var(--muted); }
+.tag-on { background: var(--sel-bg); border-color: var(--sel-bg); color: var(--sel-ink); }
+.tag-count { font-family: var(--sans); font-weight: 700; font-size: 12px; color: var(--muted); }
+.tag-on .tag-count { color: var(--sel-muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border-radius: 16px; background: var(--band); color: var(--ink); font-family: var(--sans); font-weight: 700; font-size: 12px; white-space: nowrap; }
+.chip-on { background: var(--sel-bg); color: var(--sel-ink); }
+.band { background: var(--band); border-radius: 28px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.fact { display: inline-flex; align-items: center; gap: 5px; font-family: var(--sans); font-size: 14px; line-height: 1.2; color: var(--muted); white-space: nowrap; }
+.fact svg.i { width: 15px; height: 15px; }
+.photo { border-radius: 28px; overflow: hidden; background: var(--photo-bg); position: relative; display: block; }
+.photo img { transition: transform .5s var(--ease-out); }
+
+/* Price tag (ryc.css .ptag) */
+.ptag { display: inline-flex; flex-direction: column; width: var(--ptag); height: var(--ptag); text-align: center; line-height: 1; font-family: var(--sans); font-weight: 700; box-shadow: 0 6px 18px rgba(0,0,0,.22); font-variant-numeric: tabular-nums; }
+.ptag-off { flex: 0 0 50%; display: flex; align-items: center; justify-content: center; background: #ffa800; color: #000; }
+.ptag-price { flex: 0 0 50%; line-height: .95; background: #d40000; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.ptag-old { text-decoration: line-through; }
+.ptag-per { text-transform: uppercase; }
+.ptag-m { --ptag: 112px; } .ptag-m .ptag-off { font-size: 32px; } .ptag-m .ptag-old { font-size: 13px; } .ptag-m .ptag-now { font-size: 25px; } .ptag-m .ptag-per { font-size: 12px; }
+.ptag-l { --ptag: 152px; } .ptag-l .ptag-off { font-size: 44px; } .ptag-l .ptag-old { font-size: 16px; } .ptag-l .ptag-now { font-size: 34px; } .ptag-l .ptag-per { font-size: 13px; }
+.ptag-corner { position: absolute; top: -24px; right: -12px; box-shadow: 0 10px 28px rgba(0,0,0,.28); z-index: 2; }
+.fav { position: absolute; top: 14px; left: 14px; z-index: 3; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.94); color: #0c1015; box-shadow: 0 4px 14px rgba(0,0,0,.22); opacity: .7; cursor: pointer; }
+.fav:hover { opacity: 1; }
+
+/* Header */
+.site-head { display: flex; align-items: center; gap: 28px; min-height: 76px; padding-block: 12px; }
+.logo { display: block; width: 28px; height: 28px; flex: none; color: var(--ink); }
+.logo svg { display: block; width: 100%; height: 100%; }
+.site-nav { display: flex; align-items: center; gap: 24px; flex: 1 1 auto; }
+.navl { font-family: var(--sans); font-weight: 700; font-size: 13px; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.navl:hover { color: var(--accent); }
+.navl.on { border-bottom-color: var(--ink); }
+.site-tools { display: flex; align-items: center; gap: 10px; flex: none; }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: 26px; padding: 32px 0 8px; }
+.hero .display { font-size: 44px; max-width: 17ch; }
+.byline { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-photo { margin-top: 44px; aspect-ratio: 16 / 7.5; overflow: visible; }
+.hero-photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; }
+.photo.hero-photo { overflow: visible; background: transparent; }
+
+/* In short (RYC "Коротко") */
+.short { margin-top: 56px; padding: 32px 36px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 28px 56px; align-items: center; }
+.short p { margin: 10px 0 0; font-size: 19px; line-height: 1.35; }
+.figs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.fig { display: flex; flex-direction: column; gap: 8px; padding-left: 16px; border-left: 1px solid var(--tag-line); min-width: 0; }
+.fig b { font-family: var(--title); font-weight: var(--title-w); font-size: 36px; line-height: 1; letter-spacing: var(--title-track); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
+.fig .meta { line-height: 1.25; }
+
+/* Article + side */
+.article { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 40px 72px; margin-top: 72px; align-items: start; }
+.prose { max-width: 680px; }
+.prose p { margin: 0 0 1.15em; }
+.sec { margin-top: 64px; }
+.sec-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.side { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
+.side .band { padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.side .photo { aspect-ratio: 342 / 210; overflow: visible; }
+.side .photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; }
+.side .photo.photo { background: transparent; }
+.price-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.price-row b { font-family: var(--title); font-weight: var(--title-w); font-variant-numeric: lining-nums; font-size: 34px; letter-spacing: var(--title-track); line-height: 1; }
+.price-row s { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+.tg-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 2px solid var(--tag-line); border-radius: 22px; font-family: var(--sans); font-size: 14px; line-height: 1.3; color: var(--muted); }
+.tg-row b { display: block; font-family: var(--sans); font-weight: 700; font-size: 16px; color: var(--ink); }
+.tg-dot { width: 36px; height: 36px; border-radius: 50%; background: #ffa800; color: #000; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+
+/* Table (RYC .tbl) */
+.tbl-wrap { overflow-x: auto; }
+.tbl { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 15px; }
+.tbl caption { caption-side: top; text-align: left; padding-bottom: 6px; }
+.tbl th { text-align: left; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); padding: 14px 12px 10px 0; border-bottom: 2px solid var(--muted); white-space: nowrap; }
+.tbl td { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--line); vertical-align: middle; color: var(--ink); }
+.tbl td:first-child { font-size: 16px; }
+.tbl .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--muted); }
+.tbl .day { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sel-bg); color: var(--sel-ink); font-family: var(--sans); font-weight: 700; font-size: 13px; margin-right: 12px; vertical-align: middle; }
+.tbl .island { font-weight: 700; font-size: 16px; white-space: nowrap; }
+.tbl .hl { color: var(--muted); }
+.tbl .yes { color: var(--accent); font-weight: 700; }
+.tbl .no { color: var(--faint); }
+.tbl tfoot td { border-bottom: 0; padding-top: 18px; font-variant-numeric: lining-nums; font-family: var(--title); font-weight: var(--title-w); font-size: 26px; letter-spacing: var(--title-track); }
+.tbl tfoot td:first-child { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+
+/* Photos + quote */
+.pair { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; margin-top: 72px; align-items: end; }
+.pair .a { aspect-ratio: 5 / 4; }
+.pair .b { aspect-ratio: 4 / 5; }
+.quote { margin: 88px 0 0; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; align-items: start; }
+.quote .mark { font-family: var(--title); font-weight: var(--title-w); font-size: 140px; line-height: .8; color: var(--accent); }
+.quote blockquote { margin: 0; font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-size: clamp(32px, 4vw, 56px); line-height: 1.08; text-wrap: balance; max-width: 20ch; }
+.quote blockquote { font-style: italic; }
+.quote .meta { display: block; margin-top: 20px; }
+.wide-photo { margin-top: 72px; aspect-ratio: 21 / 8; }
+
+/* Options (RYC cards with price tags) */
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 52px 32px; margin-top: 32px; }
+.card { display: flex; flex-direction: column; gap: 8px; min-width: 0; color: var(--ink); }
+.card .photo { aspect-ratio: 342 / 210; overflow: visible; background: transparent; }
+.card .photo .clip { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: var(--photo-bg); }
+.card:hover .photo img { transform: scale(1.03); }
+.card-body { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
+.opt .pill { margin-top: 12px; align-self: flex-start; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 52px 32px; margin-top: 32px; }
+
+/* FAQ */
+.faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); padding: 4px 0; }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary svg { color: var(--muted); transition: transform .2s var(--ease-out); }
+.faq-item[open] summary svg { transform: rotate(180deg); }
+.faq-q { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.3; }
+.faq-a { margin: 0 0 18px; font-size: 16px; line-height: 1.4; max-width: 60ch; }
+
+/* Footer */
+.site-foot { margin-top: 96px; border-top: 1px solid var(--line); padding: 32px 0 40px; }
+.foot-row { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: center; }
+.foot-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.foot-links a { font-family: var(--sans); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: .02em; color: var(--ink); }
+
+/* Mobile bar */
+.mbar { display: none; }
+
+@media (max-width: 1000px) {
+  .site-nav .navl { display: none; }
+  .site-nav { flex: 1 1 auto; }
+  .article { grid-template-columns: minmax(0, 1fr); }
+  .side { display: none; }
+  .short { grid-template-columns: minmax(0, 1fr); }
+  .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 35; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 24px calc(14px + env(safe-area-inset-bottom, 0px)); background: var(--bg); border-top: 1px solid var(--line); }
+  .mbar b { display: block; font-variant-numeric: lining-nums; font-family: var(--title); font-weight: var(--title-w); font-size: 24px; letter-spacing: var(--title-track); line-height: 1; }
+  .mbar .pill { height: 52px; font-size: 17px; padding: 0 24px; }
+  body { padding-bottom: 84px; }
+}
+@media (max-width: 680px) {
+  .wrap { padding: 0 20px; }
+  .hero-photo { aspect-ratio: 4 / 3.4; margin-top: 36px; }
+  .hero-photo .ptag-l { --ptag: 112px; } .hero-photo .ptag-l .ptag-off { font-size: 32px; } .hero-photo .ptag-l .ptag-old { font-size: 13px; } .hero-photo .ptag-l .ptag-now { font-size: 25px; } .hero-photo .ptag-l .ptag-per { font-size: 12px; }
+  .ptag-corner { right: -6px; top: -18px; }
+  .short { padding: 24px 22px; }
+  .figs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 16px; }
+  .pair { grid-template-columns: 1fr; }
+  .pair .b { aspect-ratio: 4 / 3; }
+  .quote { grid-template-columns: 1fr; gap: 0; }
+  .quote .mark { font-size: 100px; height: 60px; }
+  .wide-photo { aspect-ratio: 4 / 3; }
+  .opts, .grid3, .faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .tbl .hl, .tbl th.hl { display: none; }
+  .ctas .pill { flex: 1 1 auto; }
+}
+
+/* Course page additions */
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.toc a { color: var(--ink); }
+.toc a:hover .chip { background: var(--sel-bg); color: var(--sel-ink); }
+.who { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.who .band { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+.who .band svg.i { width: 28px; height: 28px; color: var(--accent); }
+.who b { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.2; }
+.who p { margin: 0; font-size: 16px; line-height: 1.4; color: var(--muted); }
+.note-row { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; padding: 16px 20px; border: 2px solid var(--tag-line); border-radius: 22px; font-size: 16px; line-height: 1.35; }
+.note-row svg.i { color: var(--accent); margin-top: 2px; }
+.mods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; border-top: 1px solid var(--line); }
+.mod { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+.mod .ico-c { grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; background: var(--band); color: var(--accent); display: inline-flex; align-items: center; justify-content: center; }
+.mod h3 { margin: 0; font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.25; }
+.mod ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.mod li { font-size: 15px; line-height: 1.3; color: var(--muted); padding-left: 14px; position: relative; }
+.mod li::before { content: ""; position: absolute; left: 0; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: var(--faint); }
+.tbl .focus { color: var(--muted); min-width: 220px; }
+.tbl .sub { display: block; font-size: 13px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+.tbl td.wrap { white-space: normal; }
+.inc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+.inc .band { padding: 24px; }
+.inc h3 { margin: 0 0 12px; font-family: var(--sans); font-weight: 700; font-size: 18px; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.checks li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; line-height: 1.3; }
+.checks svg.i { width: 18px; height: 18px; margin-top: 2px; color: var(--accent); }
+.checks.minus svg.i { color: var(--muted); }
+.checks.cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; }
+.path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 28px; }
+.path li { display: flex; flex-direction: column; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+.path .step-n { width: 28px; height: 28px; border-radius: 50%; background: var(--sel-bg); color: var(--sel-ink); display: inline-flex; align-items: center; justify-content: center; font-family: var(--sans); font-weight: 700; font-size: 14px; }
+.path b { font-family: var(--sans); font-weight: 700; font-size: 18px; line-height: 1.25; }
+.path p { margin: 0; font-size: 15px; line-height: 1.4; color: var(--muted); }
+.inst { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 32px 56px; align-items: center; padding: 36px; }
+.inst-card { background: var(--bg); border-radius: 22px; padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.av { width: 96px; height: 96px; border-radius: 50%; background: #0b3a53; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: var(--title); font-size: 40px; margin-bottom: 8px; }
+.inst-card b { font-family: var(--title); font-weight: 400; font-size: 28px; line-height: 1.1; }
+.inst .facts { justify-content: center; margin-top: 8px; }
+.inst p { margin: 0 0 1em; }
+.reviews { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.review { border: 2px solid var(--tag-line); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+.review p { margin: 0; font-size: 16px; line-height: 1.4; }
+.review header { display: flex; align-items: center; gap: 12px; }
+.review .av { width: 40px; height: 40px; font-size: 17px; margin: 0; font-family: var(--sans); font-weight: 700; }
+.review header b { display: block; font-size: 16px; }
+.stars { display: inline-flex; gap: 2px; color: #ffa800; }
+.stars svg.i { width: 16px; height: 16px; fill: currentColor; stroke: none; }
+.knots td:first-child { font-weight: 700; white-space: nowrap; }
+.disclaimer { font-family: var(--sans); font-size: 13px; line-height: 1.35; color: var(--muted); margin: 12px 0 0; max-width: 80ch; }
+.avail { display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 14px; font-family: var(--sans); font-weight: 700; font-size: 12px; background: var(--band); color: var(--ink); white-space: nowrap; }
+.avail.low { background: #ffa800; color: #000; }
+.avail.full { background: var(--sel-bg); color: var(--sel-ink); }
+.tbl tr.is-full td { color: var(--faint); }
+.tbl tr.is-full td .avail { color: var(--sel-ink); }
+.field-box { border: 2px solid var(--tag-line); border-radius: 16px; padding: 10px 14px; }
+.field-box label { display: block; font-family: var(--sans); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); }
+.field-box div { font-size: 16px; margin-top: 2px; display: flex; justify-content: space-between; align-items: center; }
+@media (max-width: 1000px) {
+  .who, .reviews { grid-template-columns: minmax(0, 1fr); }
+  .path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .inst { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 680px) {
+  .mods, .inc, .checks.cols, .path { grid-template-columns: minmax(0, 1fr); }
+      .inst { padding: 22px; }
+  .tbl .focus, .tbl th.focus { display: none; }
+  .tbl.hide-m3 td:nth-child(3), .tbl.hide-m3 th:nth-child(3) { display: none; }
+}
+
+@media (max-width: 680px) {
+  .tbl.stack thead { display: none; }
+  .tbl.stack tr { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); }
+  .tbl.stack td { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; border: 0; padding: 4px 0; white-space: normal; font-size: 15px; }
+  .tbl.stack td::before { content: attr(data-label); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .02em; color: var(--muted); padding-top: 3px; }
+  .tbl.stack td:first-child { display: block; padding-bottom: 6px; font-size: 17px; }
+  .tbl.stack td:first-child::before { content: none; }
+}
+
+/* Route map: from ryc-rentals hotweb RouteMap.tsx + styles/routes.css */
+:root { --map-land: #e6ecef; --map-coast: #cdd6db; --map-inset: #d3dce0; }
+:root[data-theme="night"] { --map-land: #14191e; --map-coast: #2b3843; --map-inset: #222b33; }
+.route-grid { display: grid; grid-template-columns: 560px minmax(0, 1fr); gap: 40px 56px; align-items: start; }
+.rmap { position: sticky; top: 24px; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.rmap-frame { border: 1px solid var(--line); border-radius: 20px; overflow: hidden; background: var(--bg); }
+.rm { display: block; width: 100%; height: auto; font-family: var(--sans); font-weight: 700; }
+.rm-land { fill: var(--map-land); stroke: var(--map-coast); stroke-width: .8; stroke-linejoin: round; }
+.rm-line, .rm-arrow { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.rm text { paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; letter-spacing: .04em; }
+.rm-label { font-size: 11px; fill: var(--muted); }
+.rm-nm { font-size: 10px; fill: var(--faint); }
+.rm-night rect { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+.rm .rm-num { font-size: 11px; fill: var(--ink); stroke: none; letter-spacing: 0; }
+.rm-base circle { fill: var(--accent); }
+.rm-base .rm-label { fill: var(--ink); }
+.rm-anchor { fill: none; stroke: var(--on-accent); stroke-width: 1.7; stroke-linecap: round; }
+.rm-poi circle { fill: var(--muted); }
+.rm-alt circle { fill: var(--bg); stroke: var(--muted); stroke-width: 1.6; }
+.rm-alt .rm-label { font-size: 10px; fill: var(--muted); font-weight: 400; }
+.rm-scale path { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.rm-scale text, .rm-credit { font-size: 10px; fill: var(--faint); }
+.rm-inset-bg { fill: var(--bg); stroke: var(--line); }
+.rm-inset-land { fill: var(--map-inset); stroke: none; }
+.rm-inset-box { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+.rm-leg, .rm-stop { transition: opacity .18s ease; }
+.rm.has-on .rm-leg:not(.on) { opacity: .22; }
+.rm.has-on .rm-stop:not(.on):not(.from) { opacity: .4; }
+.rm-leg.on .rm-line, .rm-leg.on .rm-arrow { stroke-width: 3.4; }
+.rm-leg.on .rm-nm, .rm-stop.on .rm-label, .rm-stop.from-name .rm-label { fill: var(--ink); }
+.rm-night.on rect { fill: var(--accent); }
+.rm-night.on .rm-num { fill: var(--on-accent); }
+.rm-alt.on circle { stroke: var(--ink); }
+.rm:not(.has-on) .rm-stop:not(.rm-base) .rm-label:not(.rm-label-ov) { display: none; }
+.rm.has-on .rm-stop:not(.on):not(.from-name):not(.rm-base) .rm-label { display: none; }
+.rmap-m { display: none; }
+.rmap-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.rmap-chip { min-width: 40px; height: 40px; padding: 0 14px; border-radius: 20px; border: 2px solid var(--tag-line); background: var(--bg); color: var(--ink); font: 700 14px/1 var(--sans); cursor: pointer; }
+.rmap-chip:hover { border-color: var(--muted); }
+.rmap-chip[aria-pressed="true"] { background: var(--sel-bg); color: var(--sel-ink); border-color: var(--sel-bg); }
+.rmap-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.rmap-legend { display: flex; gap: 6px 18px; flex-wrap: wrap; }
+.rmap-legend span { display: inline-flex; gap: 7px; align-items: center; }
+.rmap-key { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--accent); box-sizing: border-box; }
+.rmap-key-base { background: var(--accent); }
+.rmap-key-alt { width: 9px; height: 9px; border: 1.6px solid var(--muted); background: var(--bg); }
+.route-days tbody tr { cursor: pointer; transition: background .15s; }
+.route-days tbody tr:hover td, .route-days tbody tr.on td { background: var(--band); }
+.route-days tbody tr.on .day { background: var(--accent); color: var(--on-accent); }
+.route-days td:first-child { padding-left: 8px; }
+.route-days th:first-child { padding-left: 8px; }
+@media (max-width: 1100px) {
+  .route-grid { grid-template-columns: minmax(0, 1fr); }
+  .rmap { position: static; max-width: 560px; }
+}
+@media (max-width: 600px) {
+  .rmap-d { display: none; }
+  .rmap-m { display: block; }
+  .rm.rmap-m:not(.has-on) .rm-stop:not(.rm-base) .rm-label { display: none; }
+  .rmap-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -20px; padding: 0 20px; }
+  .rmap-chips::-webkit-scrollbar { display: none; }
+  .rmap-chip { flex: none; }
+  .rmap-legend { display: none; }
+}
+.route-days .focus-m { display: none; }
+@media (max-width: 680px) { .route-days .focus-m { display: block; white-space: normal; margin-top: 4px; line-height: 1.35; } .route-days .island { white-space: normal; } }
+
+/* Squircle corners on everything except buttons (pills, round buttons, filter chips, map day chips, heart).
+   Same rule as ryc-rentals ryc.css: squircle reads tighter, so radii scale by 48/28 (photo 28px -> 48px).
+   Browsers without corner-shape keep the plain radii above. */
+@supports (corner-shape: squircle) {
+  .photo, .photo .clip, .card .photo .clip, .side .photo .clip, .hero-photo .clip,
+  .band, .rmap-frame, .note-row, .tg-row, .review, .inst-card, .field-box,
+  .avail, .av, .tbl .day, .step-n, .mod .ico-c, .tg-dot, .rmap-key { corner-shape: squircle; }
+  .photo, .photo .clip, .card .photo .clip, .side .photo .clip, .hero-photo .clip, .band,   .note-row, .tg-row, .review, .inst-card { border-radius: 38px; }
+  .rmap-frame { border-radius: 34px; }
+  .field-box { border-radius: 28px; }
+}
+.card-price { font-family: var(--sans); font-size: 16px; line-height: 1.2; color: var(--ink); }
+.card-price b { font-weight: 700; }
+.card-price s { color: var(--muted); font-size: 14px; margin-left: 2px; }
+.card-off { font-weight: 700; font-size: 13px; color: var(--accent); margin-left: 4px; }
+
+/* Gallery at the top: mixed landscape and portrait photos on one baseline, scrolls sideways */
+html, body { overflow-x: clip; }
+.gallery-wrap { margin-top: 44px; }
+.gallery-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.gallery-nav { display: flex; gap: 8px; }
+.gallery-nav .round:disabled { opacity: .35; cursor: default; }
+.gallery { --gpad: max(24px, calc((100vw - 1180px) / 2 + 24px)); display: flex; align-items: flex-end; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 var(--gpad); padding: 4px var(--gpad) 8px; margin: 0 calc(50% - 50vw); scrollbar-width: none; overscroll-behavior-x: contain; }
+.gallery::-webkit-scrollbar { display: none; }
+.gallery:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.gallery figure { flex: none; margin: 0; scroll-snap-align: start; }
+.gallery .g-l { width: 560px; } .gallery .g-l .photo { height: 448px; }
+.gallery .g-p { width: 432px; } .gallery .g-p .photo { height: 540px; }
+.gallery .hint { margin-top: 12px; }
+@media (max-width: 680px) {
+  .gallery { --gpad: 20px; gap: 14px; }
+  .gallery .g-l { width: 300px; } .gallery .g-l .photo { height: 240px; }
+  .gallery .g-p { width: 232px; } .gallery .g-p .photo { height: 290px; }
+  .gallery-nav { display: none; }
+  .gallery-wrap { margin-top: 32px; }
+}
+
+/* Title tracking per level (Merriweather Light, the ryc-rentals title font) */
+:root { --trk-1: -0.035em; --trk-2: -0.03em; --trk-3: -0.02em; }
+.ltitle, .inst-card b { font-weight: var(--title-w) !important; }
+.sec-lead { max-width: 64ch; margin: 0 0 24px; font-size: 18px; line-height: 1.4; }
+.side-note { font-family: var(--sans); font-size: 13px; line-height: 1.3; color: var(--muted); text-align: center; text-decoration: none; }
+.side-note:hover { text-decoration: underline; }
+
+/* Flow: small book buttons, breadcrumbs */
+.pill-sm { height: 40px; padding: 0 18px; font-size: 15px; gap: 6px; }
+.pill-sm svg.i { width: 16px; height: 16px; }
+.crumbs ol { display: flex; flex-wrap: wrap; gap: 4px 8px; list-style: none; margin: 0; padding: 0; font-family: var(--sans); font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: -.02em; color: var(--muted); }
+.crumbs li + li::before { content: "/"; margin-right: 8px; color: var(--faint); }
+.crumbs a { color: var(--ink); }
+.crumbs a:hover { color: var(--accent); }
+.tbl td.book { text-align: right; width: 1%; white-space: nowrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Language switcher */
+.lang { position: relative; }
+.lang summary { list-style: none; width: auto; min-width: 40px; padding: 0 12px; font: 700 13px/1 var(--sans); letter-spacing: .02em; cursor: pointer; }
+.lang summary::-webkit-details-marker { display: none; }
+.lang-menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 180px; margin: 0; padding: 8px; list-style: none; background: var(--bg); border: 1px solid var(--line); border-radius: 22px; box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+.lang-menu a { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 14px; font: 400 16px var(--sans); color: var(--ink); }
+.lang-menu a:hover { background: var(--band); }
+.lang-menu a[aria-current] { font-weight: 700; }
+.lang-menu a span { color: var(--muted); font-size: 13px; font-weight: 700; }
+@supports (corner-shape: squircle) { .lang-menu { corner-shape: squircle; border-radius: 38px; } .lang-menu a { corner-shape: squircle; border-radius: 24px; } }
+.theory-links { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+
+/* ---------- Booking ---------- */
+[hidden] { display: none !important; }
+.steps li span { white-space: nowrap; }
+.bk { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: start; margin-top: 16px; }
+.bk-back { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-weight: 700; font-size: 15px; color: var(--ink); }
+.bk-back svg.i { width: 16px; height: 16px; transform: scaleX(-1); }
+.bk h1 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-1); font-size: 44px; line-height: .98; margin: 14px 0 0; }
+.steps { display: flex; gap: 8px; list-style: none; margin: 24px 0 32px; padding: 0; counter-reset: s; }
+.steps li { flex: 1; display: flex; flex-direction: column; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 13px; color: var(--faint); }
+.steps li::before { content: ""; height: 4px; border-radius: 2px; background: var(--line); }
+.steps li.done, .steps li.now { color: var(--ink); }
+.steps li.done::before { background: var(--ink); }
+.steps li.now::before { background: var(--accent); }
+.step-title { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-2); font-size: 30px; line-height: 1.05; margin: 0 0 6px; }
+.step-lead { margin: 0 0 24px; color: var(--muted); font-size: 17px; }
+fieldset { border: 0; margin: 0 0 32px; padding: 0; min-width: 0; }
+legend { font-family: var(--sans); font-weight: 700; font-size: 18px; padding: 0; margin: 0 0 12px; }
+.choices { display: grid; gap: 10px; }
+.choice { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 4px 14px; align-items: start; padding: 16px 18px; border: 2px solid var(--tag-line); border-radius: 22px; cursor: pointer; background: var(--bg); }
+.choice:hover { border-color: var(--muted); }
+.choice input { position: absolute; opacity: 0; pointer-events: none; }
+.choice .dot { grid-row: span 2; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--tag-line); margin-top: 1px; }
+.choice.check .dot { border-radius: 7px; }
+.choice b { font-family: var(--sans); font-size: 17px; line-height: 1.25; }
+.choice .sub { grid-column: 2; font-size: 14px; line-height: 1.3; color: var(--muted); }
+.choice .end { grid-row: span 2; text-align: right; font-family: var(--sans); font-size: 16px; white-space: nowrap; }
+.choice .end .avail { margin-top: 6px; }
+.choice:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.choice:has(input:checked) .dot { border-color: var(--ink); background: radial-gradient(circle, var(--ink) 0 5px, transparent 6px); }
+.choice.check:has(input:checked) .dot { background: var(--ink); box-shadow: inset 0 0 0 3px var(--bg); }
+.choice:has(input:disabled) { cursor: not-allowed; opacity: .5; }
+.choice:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.stepper { display: inline-flex; align-items: center; gap: 14px; }
+.stepper output { min-width: 2ch; text-align: center; font-family: var(--sans); font-weight: 700; font-size: 20px; }
+.stepper .round:disabled { opacity: .35; cursor: default; }
+.hint { font-size: 14px; line-height: 1.35; color: var(--muted); margin: 8px 0 0; }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.fld { display: flex; flex-direction: column; gap: 6px; }
+.fld label { font-family: var(--sans); font-weight: 700; font-size: 14px; }
+.fld label .opt-l { font-weight: 400; color: var(--muted); }
+.fld input, .fld select { height: 52px; padding: 0 16px; border: 2px solid var(--tag-line); border-radius: 16px; background: var(--bg); color: var(--ink); font: 400 17px var(--sans); }
+.fld input:focus, .fld select:focus { outline: none; border-color: var(--accent); }
+.fld.bad input, .fld.bad select { border-color: #d0342c; }
+.fld .err { display: none; font-size: 14px; color: #d0342c; }
+.fld.bad .err { display: block; }
+.errsum { display: none; margin: 0 0 24px; padding: 16px 20px; border: 2px solid #d0342c; border-radius: 22px; }
+.errsum.on { display: block; }
+.errsum b { display: block; margin-bottom: 6px; }
+.errsum ul { margin: 0; padding-left: 18px; }
+.errsum a { color: #d0342c; text-decoration: underline; }
+.tick { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 1.35; cursor: pointer; }
+.tick input { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--ink); }
+.paybox { border: 2px dashed var(--tag-line); border-radius: 22px; padding: 20px; color: var(--muted); font-size: 15px; display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+.nav-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--line); }
+.nav-row .pill-primary { min-width: 240px; }
+.linkbtn { background: none; border: 0; padding: 0; font: 700 16px var(--sans); color: var(--ink); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.sum { position: sticky; top: 24px; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.sum .ph { aspect-ratio: 16 / 10; border-radius: 22px; overflow: hidden; }
+.sum .ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sum dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 16px; font-size: 15px; }
+.sum dt { color: var(--muted); }
+.sum dd { margin: 0; text-align: right; }
+.sum .line { border-top: 1px solid var(--tag-line); }
+.sum .total { display: flex; justify-content: space-between; align-items: baseline; }
+.sum .total b { font-family: var(--title); font-weight: var(--title-w); font-size: 30px; letter-spacing: var(--title-track); font-variant-numeric: lining-nums; }
+.sum .trust { display: grid; gap: 8px; font-size: 14px; color: var(--muted); list-style: none; padding: 0; margin: 0; }
+.sum .trust li { display: flex; gap: 8px; align-items: flex-start; }
+.sum .trust svg.i { width: 16px; height: 16px; color: var(--accent); margin-top: 1px; flex: none; }
+.done-hero { display: flex; flex-direction: column; gap: 12px; }
+.done-mark { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-flex; align-items: center; justify-content: center; }
+.done-mark svg.i { width: 28px; height: 28px; stroke-width: 2.4; }
+.ref { font-family: var(--sans); font-weight: 700; letter-spacing: .04em; }
+.timeline { list-style: none; margin: 8px 0 32px; padding: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.timeline .when { font-family: var(--sans); font-weight: 700; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .02em; }
+.timeline b { display: block; font-size: 17px; }
+.timeline p { margin: 2px 0 0; color: var(--muted); font-size: 15px; line-height: 1.35; }
+.acts { display: flex; flex-wrap: wrap; gap: 12px; }
+.msum { display: none; }
+@supports (corner-shape: squircle) { .choice, .paybox, .errsum, .fld input, .fld select, .sum .ph { corner-shape: squircle; } .choice, .paybox, .errsum { border-radius: 38px; } .fld input, .fld select { border-radius: 28px; } .sum .ph { border-radius: 38px; } }
+@media (max-width: 960px) {
+  .bk { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .bk aside { display: none; }
+  .msum { display: block; margin: 0 0 24px; }
+  .msum summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; font-family: var(--sans); font-size: 16px; }
+  .msum summary::-webkit-details-marker { display: none; }
+  .msum summary b { font-size: 18px; }
+  .msum .sum { position: static; padding: 0 18px 18px; }
+  .msum .sum .ph { display: none; }
+}
+@media (max-width: 680px) {
+  .bk h1 { font-size: 36px; }
+  .steps li span { display: none; }
+  .steps li.now span { display: inline; }
+  .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .timeline li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .nav-row { position: sticky; bottom: 0; background: var(--bg); padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 0px)); margin-inline: -20px; padding-inline: 20px; z-index: 5; }
+  .nav-row .pill-primary { min-width: 0; flex: 1; }
+  .choice { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+<svg id="route-coast" width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="land-d"><path d="M580,-20l0,680,0-680,0,278.8-6.1-2.1-3.7-8.9,.2-26.5-3.9,0-7.8,4.3-5.2-13.1-6.1-30-2.1,1.8-5.6,3.5-4-11.9-9.1-11.8-10.1-7.4-7.9,1.5-2.4-2.4-2.1-1.4-1.9-2-1.6-3.9-3.5,0-3.2,15-5.7,.1-5.9-2.6-4.3,7-.9-4.8-.4-3.7-1.7-1.9-5.1,.6,3.5-8.7-2.4-7.6-12.2-13.3-1.5-13.5-23.4-34.6-1.9-10.2-9.5-4.5-9.5,2.1-9.7,4.5-10,2.8-.3-3.5,.3-1.4,5.3-2.4,1.8-2,.5-4.9-8.5,3.6-4.8-4.1-4.3-6.3-7.1-3.4-8.1-.1-6.9-1.2-5.8-2.9-4.3-5.4,20.1-18.5,5.1-10.5-4.1-12.6-5.2-5.4-3.8-.3-3.6,1.8-4.7,1.2-21.4,0-5.8,1.5-3.7,3.4-2.8,3.3-2.9,1.5-13.4,.8-5.8,1.7-5.9,2.8-21.4,19.3-9.3,4.6,19.2,5.4-11.6,4.3-44.4-4.3-57.9,4.8-21.1,10.6-16.7,13-9.6,7.4-27.1,13.6-23.7-10.1-5.2,2.3-4.4-.2-4.9-1.3-6.2-.8-2,3.7,.1,8.2-.8,8.2-5,3.7-3.5,6.9,2.4,13.8,7.4,10.8,11-2.3,9.8,5.1,13.4,1.8,13.3-1.8,9.5-5.1,18.1,17.7,9.8,7.6,10.5,4.3-2.5,7-.9,6.6,.9,6,2.5,5.1-7.7,1.4-10.3,6.4-12.5,2.1-1.8,2.3-.5,4.5-1.7,7.1,13.9,10.7,7.6,3.6,9.1,.7-5.2,16.2-1.4,10.9,2,10.8,4.6,15.4-7.7,0,1.6,15.4,2.2,6.3,12.1,4.8,22.5,17.5,4.2-5.2,20.8,20.4,2.5,.9,2.9,.5,4.5,2.4,11.3,9.4,6,3.7,7.6,1.3,13.3-8.6-.6-18.9-10.5-18.4-15.9-7.3,0-4.8,9.5-7.7,10.5-4.4,28.6-2.5,5.8,8.5-2.7,18.9-7.6,19.8-9.2,11,5.6,6,6,4.2,7,2.8,8.2,1.4,0,5.3-10.9,3.9-4.1,.5,0,4.9,3.8,0,4.8,2.1,14.4,2.7,12.7,8.5,11.4,3.9,26.1,21.9-2.9,3.3-.9,1.4,1,1.5,2.8,3.5,0,4.8-11.4,6.2-33,11.2-2.7,.1-66.6,3.3-9.7-1.5,.8,2.5,.4,2.2,.7,2.3,1.6,2.6-20.3-2.8-7.5,.9,.9,7.2-19.2,4.4-.1,6.8,4,3.3,5.8,.6,5.7-1-3.5,5.2,0,4.4,4.3,.6,10.7,4.7-8.8,4.1-10.3,1.1-21-.9-11.6,2.2-.3,6,5.1,9.1,5.1,11.7-11.7,2.4-8-.2-6.9-2.5-8.3-4.5,0-4.9,11.4,0,0-4.8-6.5-1.8-7.9,1.4-7.2-.7-5.2-8.1,11.5,4.9-2.7-6.7-4.1-4.9-12.3-8.2-4.4,4.6-5.6,.2-5.4-3.3,0-1.5-1.7-22.3,1.4-8.7,6.3,4.7,6.3,3.5,5.7-5.2,4.1-9.9,.9-10.4,12.3,7.2,3.1,2.5,0-4.4-2.8-6.5-.8-4.4-.3-6.4-1.4-4.3-3.7-1.7-4.2-1.3-3.7-2.6-8-4-19.7,5.1-9.1-3.3,7.6-4.9-7.6-14.4-14,8.3-5.5,4.4-3.5,6.6-7.9-25.5-5.7-9.3-9.5-9.2-2.6-.7-6.5,1.1-2.7-.4-2.1-2.2-1-3.2-.3-2.9-.4-1.4-8.2-3.4-4.8-1.1-6.2,.2,7,2,2.3,2.3,2.2,5.3-11.2-4.8-5.6,.7,0,228.8,1.4,2.6,2,2,4.5,6.8,2.9,7.4-3.6,3.5-2.7,3.9-1.8,9.3-1.3,18.3,4.6,8.8,10.6,2.4,11.6-1.5,7.7-2.8,.4,3.3,1,2,1.3,1.8,1.5,2.6-3.7,2.3-36.4,0,0-589.3,3.2-.6,13.6-4.6,4.3-.2,4.7,.4,4.4-.2,3.8-2.2,11.3-17.3,1.3-3.8-5.6-8.4-8.1-8.3-6.5-3.8-8.8-2.9-13.8-11.4-3.8-.3,0-19.3,3.4-.7,7.4-2.8,4.1-4.3,54.6,0,1.6,.7,2.4-.7,14.4,0,11.1,5.2,18.1-2.5,9-2.7zM370.3,473.8l-9.1,8.9-13.1,6-13.7,2.2-10.2-2.2,2,14.1-6.7,6.9-11.6,2.4-12.7,.2-32.1,9.3-12.4,.4,0-4.8,50.2-33.8,13.4-4.4,25.3-.3,11.5-4.9,19.2,0zM347.2,187.8l9.6,4.4-3.6,7.5-6.7,8.9,.7,8.3-7.9,5.8-1.4,7.7,.3,8.2-2.5,7.4-4.7,3-12.7,3.4-5.9,3.3-4.3-4.4-2.9-2.3-7.9-3,0-4.8,6.6-4.1-.4-6.7-5.1-6.3-7.1-2.8-6.9-4.5-4.1-10.1-1.4-9.9,.6-4.6,67.7-4.4zM112.6,532.1l3.2,2.7,9.5,5.5,4.1,3.8,2.3,5,1.2,7.4-1.3,6.8-5.8,3-11.8-2.7-6.7-6.4-5.6-8-8.3-7.5,4-4.4,4.6-3.1,5-1.7,5.6-.4zM308.5,342.9l2.6-.4,.7,1,0,1.9,.6,2.3,4.4,7,5,4.7,6,2.5,7.9,.7,0,4.4-10.8,6.4-14.2,2.3-14.2-2.1-11-6.6,0-4.4,15.9-4.1,6.1-5,1-10.6zM269.8,99.5l-3.5-5.3,0-4.4,3.8-7,7.9-7.8,9.3-4.7,16.3,5.4,7.4-6.9,5.8-10.4,3.2-7.6-6.8,.5-4.9,3.6-4.3,4.2-4.9,1.9-4.9-1.1-10.5-4.3-6.2,.1,19.8-9.7-7.4-3.9-8.2-6.3,6.3-.6,6,.4,5.7,1.8,5,3.8,1.2-5.3,1.3-1.1-2.5-3.4,4.3-3.4,4.6-1.6,5-.5,12.9,2,6.9,3.2,3.6,4.7-2.8,5.4,.5,3.8,1.2,4.9,3.3,4.2,3.6,2.4-.9,1,.3,3.5,15.4,0-19.2,9.3,2.3,7.6-12.2,10.6-2,11-3.5,0-6-5.4-5.2,4.3-5.9,7.4-8.1,3.9-8.2-.8-17.5-5.4-7.3-4zM566.6,401.8l2.2,3.2,1.1,3.5-1.2,.8-3.5-.9-4.5-2.6-6-9.4-10.5-7,.7-3,5.7,3,6.4,1.4,8,6.9,1.6,4.1zM573.6,271.2l2.4,.1,3.5,3.9,0,6-4.2,.5-6.2,0-3.1-2.7,1.7-7.9,5.9,.1zM464.7,187.3l4.6-.6,1.8,4.6-1.9,3.9-3.8,.7-1.5-1.5-1-2.4-.3-.7,.7-.7,2.5,.3-.4-1.1-.7-2.5zM566.6,401.8l2.2,3.2,1.1,3.5-1.2,.8-3.5-.9-4.5-2.6-6-9.4-10.5-7,.7-3,5.7,3,6.4,1.4,8,6.9,1.6,4.1zM573.6,271.2l2.4,.1,3.5,3.9,0,6-4.2,.5-6.2,0-3.1-2.7,1.7-7.9,5.9,.1zM464.7,187.3l4.6-.6,1.8,4.6-1.9,3.9-3.8,.7-1.5-1.5-1-2.4-.3-.7,.7-.7,2.5,.3-.4-1.1-.7-2.5z" fill-rule="evenodd"/></g>
+<g id="inset-d"><path d="M98,-2l0,88,0-21.4-.5,.5-.5-.2-.6,.2-.7-.4-.5-.2-.8-.4-.5-.1-.9-.4-.7-.5-.5-.5,.1-.7-.1-.9-.7-.1-.1-.5,.6-.5-.5-.6-.7-.3-.5,.2-.3,.6,.1,.5-.5-.5-.9-.5-.5-.1-.2-.6-.1-.5-.5-.1-.6,.1-.1-.5-.6,.1,.1,.6-.7-.1-.5-.4-.1,.6,.4,.7-.5,0-.6,.5-.4,.7-.6,.2-.5,.3,.6-.5,.2-.5-.6-.2,.6-.5,.2-.6-.5,.2-.5,.1-.6,.1-.5,0-.6-.1-.5-.1-.4,.8-.6,0-1,.2-.5,0-.5-.2,.5-.4,.5-.3,.6-.1,.5-.2,.6-.1,.6,.1,1.1-.3,.6,.1,.5,.2-.1-.5,.4-.5-.3-.5,.6-.2,.5,.1,.5-.4,.7-.6-1-.1-.6,0-1,0-.6,.1-.9,.2-.6,.1-.7,0-.5,0-.5,.1-.6-.1-.5-.3-.5,.1-.3,.6-.5-.6-.1-.7,.6-.4,.5-.3,.6,.3,.5,.1,.6-.1-.2-.6,.5-.2,0-.5-.5-.2-.5,0,0-.7-.6,.2-.1-.6-.7,0-.5,.2-.6-.1,.3-.5,0-.7-.3-.6,.2-.6-.6-.5-.8-.2,.7-.4,.7-.3,.4-.7-.1-.5,.1-.6,.1-.7-.8-.3-.5-.1-.5-.6-.7-.2-.6,.1-.5-.7-.4-.5-.6-.4-.7,0-.1,.7-.6,.2-.3-.6-.7-.4-.4-.5-.5,.3-.8-.4,.6-.6-.1-.5,.5,.6,.5-.2,.5-.5,.2-.6-.6-.4-.5-.6,0-.5-.1-.6,.5-.5,.6,.2,.6,.6,.4,.8,.3,.5-.4,.6,.4,.6,.3,.7,0-.8,.4-.5,.4,.7,.5,0,.8-.1,.5-.3,.6-.1,.7-.2-.6-.2-.9,.1-.5-.6-.6-.3,.5,.2-.4-.6-.1-.5-.5-.1-.2-.5-.2-.6,.5-.2,.6-.1,.5-.1-.1-.6,.6-.1,.3-.5,.4-.5-.6-.1-.6-.1-.6,0-.4-.7,.3-.5,.2-.8-.6-.6-.4-.6-.7-.4-.2-.5,.7-.3,.9-.7,.4-.5,.5-.4,.2-.6-.7-.4-.5,.1-1.2,.2-1.7,.3-.8,.4-.6,0-.5,.1-.7,.2-.6-.2,.1-.8,.2-.5,.3-.6,.1-.6-.2-.5,.1-.8,0-.8,.1-.6,.3-.6,.6,.1,.7-.6,.1-.5,.3-.6,.6-.6,.8-.7,1.2-1.3,.5-.2,.8,.1,.6,.1,.6,0,.7-.7,.7,.1,.5-.1,.6,0,.1,.5,.6,.7,1.1,.4,.6-.2,.6,.1,.6,0,.6-.3,.6-.5-.5-.1-.5-.4-.6-.6,.6-.5,1.8,.4,.5,.3-.9,.6,.2,.6,.6-.1,.8-.3,1.9,0,1.2,0,.9,.2,.5,.2,.7-.3,.7,0,.7,.1,1.1,.2,.4-.6,.6-.2-.6-.5-.6,0-.8,.1-.7-.5,0-.6,.6-.2,.6-.5,2.6-.3,.7-.4,.5,.1,.5-.4,.6,.4,1.6-.4,.9,0-.5-.3-.6-.2-2.5-.1-.6,.2-.1-.5-.8,0,.1-.7-.5-.3-.6-.3-.9-.6-.1-.6,.4-.5,.2-.6,.1-.6,.6-.5,.6-.1,1.5,.3,1.7,.4,2,.3,0-13.3-17.4,0-.3,.6,.5,.7,.4,.5,.4,.6,.5,.4,.4,.5,0,.6,.2,.7-.5,.6,0,.5,.4,.6,.2,.5,.3,.6,.1,.5,.7,.8,1.7,1.3,1.9,.7,2.5,1.3,.9,.2,.5-.1,.1,.7-.2,.6-.1,.6-.5,.6-.5,.4-.6,.2-.5,.2-1.4-.1-.3-.6-.2-.5-.1,.6-.8-.2-1.1-.4-.6,0-.5-.1-.7,.1-.6,.2-.7,.6-.9,.2-.7-.4-2.1,.3-.4,.5-.2,.9-1,1.1-.4,.6-.7,.6-.7,.4-.6,.1-.5,.5-.6,.1-.6,.5-.7,.1-.5,.4-.3,.5-.4,.6-.6,.6-.6,.4-.6,.6-.3,.6-.4,.6-.6,.4-.6,.2,.2-.7,.5-.8,.1-.7-.4-.5,.2-.5,.6-.2,.6-.5,.9-.5,.6-.5,.8-.1,.6-.6,.7-.2-.2-.8-.7,0-.9,.2-.8,.4-.5-.2-.6,0-.6,.2-1.6,0-.5-.7-.1-.6-.1-.7,.2-.6-.6,0-.6-.2-.7,0-.8,0-.7-.2-.7,0-.6-.2-.5-.2-.8-.4-.6,.2-.7-.2-.3-.5-.8-.3-.5,.5-.7,.5-.7,.5-.5,.1-.7,.1-.5,0-.2-.6-.7-.5-.6,.1-.6,.4-.5,.4,0,.5-.9,.7-.8,.5-.7,0-1.3-.6-.6,0-.6,.3-.3,.6,.5,.6,.3,.6,.6,.3-.3,.6,0,.5,.3,.5,.8,.4,.3-.6,.5,.5,.6,.3,.6,.4,.6,.4,.4,.7,.6,.5-.2,.5-.5,.1-.4-.6-.5-.7-.6-.5-.7-.1-.7-.6-.6-.1-.9,.1-.5,.1-.2,.6,.5,.6,.9,.7,.6,.3,.4,.6,0,.5,0,.6-.5,.4-.5-.6-.6-.5-.1-.5-.9-1.3-1.1-.3-.9-.4-.6,.2-.2,.6,.2,.6,.9,1,1.1,.7,.6,.1,.3,.6-.8,.1-1.2-.5-.8,.1,0-.5-.2-.5-.4-.6,.2-.7-.2-.7-.6-.3-.6-.2-.5-.3-.6-.2-.6-.6-.6-.1-.2-.6-.4-.6,.8-.1,.5-.4-.2-.5-.3-.6-.5,.6-.5,.2-.4,.5-.5,0-.3,.6-.5-.1,.2,.6,.4,.5-.3,.8-.3,.7-.3,.9,.1,.6,0,.5,.3,.5,.5,.4,.5,.9,.5,.5,.5,.5,.2,.6,.3,1,.2,.7,.7,.6,.7,.4,.3,.5,.7,.9,.5,.6,.2,.6,.4,.8-.5,.5-.6,.1-.5,.4-.8,0,.2-.5,.8,.1,.3-.6-.2-.6-.4-.5-1-.3-.6-.4-.1,.5-.8,.2-.1,.6,.2,.9,.5,.1,.6,.7-.1,.5,.6-.1-.3,.7-.5,.3-.5,.3-.7,.3-.6,.2-.6-.1-.6-.2-.5,.3,.4,.5,.9-.2,.5,.5,.6,.1,.6,.2,.6,.2,.7,.1,.4,1.1,.6-.1,.6-.1,.6,.1,.2,.5-.4,.5,.7,.2,1.3,.6,.7,.1-.1,.5,.7,.8,.9,.1,1.1,.5,.7,.5,.6,.5,0,.5-.7,.4,.2,.7,.2,.5-.2,.5,.3,.6,.1,.5,.2,.6,0,.5-.1,.5-.3,.6-.5-.2-.2-.6-.4-.6-.6-.3-.5-.1-.2-.6-.4-.5-.6-.1-.5-.4,.3-.5-.7-.3-.5,.2-.5,.4-.6,.1-.9,.1-.5,.3-.6,.3-.5-.1-.3,.7,.7,.2,.6,.2,.3,.5-.5,.4,.3,.6,0,.6,.6,.4,.5,.3,.6,.1-.2-.6,.6-.2-.2,.5,.1,.6,.7,.3,.4,.5-.7,.3-1,.1-.5,.1,.1,.5-.6,.1-.6,.3-.3-.5,.1-.6-.1-.5-.7-.1-.5-.5-.6-.1-.6-.1-.2-.5-.6,.2,.1,.5,.1,.6,.1,.6,.5,.6,.3,.8,.4,.7,0,.8,.5,.1,.1,.6,.3,.6,.1,.5,.2,.8,.4,.6,.2,.5-.2,.5-.5,.2,0,.7,.3,.5,.6,.4,.1,.7,.4,.6-.9-.1-.1-.5-.7-.3-.5-.7-.5-.4-.3-.6-.3-.6-.1-.6-.9-.1-.5,0-.4,.7-.4,.6,0,.5-.4,.9,.2,.9,0,.5-.4-.5-.6-.2-.2-.5,.1-.5-.1-.6,.2-.7-.5-.6-.3-.6-.6-.8-.6-.1,0-.6,.1-.6-.6-.2-.8,.3-.6,1.3,.1,.5,0,.6-.3,.5-.6-.8-.6,0-.6-.4,.1-.6,.1-.6-.7-.6-.4-.6-.1-.9,.2-.6,.6-.5,.3-.6-.1-.6-.6-1.3-.5-.6-.8-.6-.5-.4-.6-.1-.1-.7-.3-.6-1.3-.6,.1-1.1,.6,0,.6-.6,.4-.7,.3-.6,.1-.9,.5,.1,.8,.3,.6,.2,.6-.3,.6-1,.8-.7,.6,.1,.6,0,.5,.5,.6,.1,.4,.6,.6,.3,.6,.1,.5,.2,.5,.2,.7,.1,1,.5,.5,.2,.8,.7,.6,.6,.6,0,.2-.6-.6-.3,.5-.5,.7,.1,.7,0,.6-.2,.2-.5-.6-.4-.5-.2-1-.4-.5-.2-.6,.1-.1-.5-.7-.3-.3-.6-.5,0-.2,.6-.6-.1-.4-.9-.7-.5-.1,.5,0,.5-.5,0-.6-.1-.6,.4-.4-.5-.7-.3-.6-.1-.8,.3-.9,.2-.5,.1-.7,0-.8,.4-.6,.1,.1-.7-.5-.2-.5-.8-.2,.6-.4,.5-.7,.4-.5,.1-.5-.3,.4-.6-.5-.3,.2-.5,0-.6-.5,.3-.1-.9-.3-.8-.6-.1-.3-1.1-.6,0-.7-.3,.2-.6,0-.5,.1-.6,.6,.3,.5,0,.7-.2,.4,.6,.5,.3,.1-.5,.6,.4-.3-.6,.2-.7-.6-.7-.3,.6-.5-.2-.6-.4-.6,.3-.1-.6-.5,0,0,.5,.2,.6-.6,.4-.2-.5,0-.6-.7-.6-.9-1-.3-.6-.6-.4-.7-.1-.3-.7-.4-.5,.2-.5,0-.5-.5-.2-.6-.1,.3-.5,.1-.5-.5-.4-.7-.2-.5-.2,.2-.6,.1-.9-.5-.5-.3-.5-.4-1.1-.6-.3-.5-.5-.7-.4-.8-.5-.7-.4-.8-.9-.3-.7-.4-.6,.7,.2,.2,.6,.6,0,0-1-.5-.6-.3-.6,.5,.4,0-.7-.5,.1-.6-.9,.3-.6,.1-1,.3-.6,0-.6,.4-.6-.1,.6,.6-.1,.1-.7-.5,.5,.2-.6-.3-.5,.1-.9,.1-.7,.3-.8,0-.6-.6-.2-.2-.8,.3-.7,.5-.5,0-.5-.5-.6,.7,.1,.5-.5-.1-.7,0-.8,.2-.5-1.1-.6-.9,0-.6-.5-.6-.2-.5-.6-.2-.8-.5-.6-.2-.5-.5-.3-.7-.7-.1-.5-.5-.1-.6-.2-6.9-.4,0,18.6,.5,.2,.3,.6,.7,1,.8,.5,.7,.7,.4,.5,.7,1,.6,1.2,.1,.5-.3,.6-.6,.8-.1,.6,0,.5-.1,.6-.9-.1-.6,0-.6-.5-1.1-1.2,.1-.5,0-.7-.4-.5-.2-24.4zM53.8,43.9l-.1,.5,.1,.5-.1,.6-.6,.5-.5-.5-.5,.1-.6-.3-.1-.5-.6-.2-.4-.5,.1-.6-.6-.2,.3-.6-.5,0-.2-.6-.2-.5-.6-.3-.6,.1-.6-.1-.5,0-.6-.1-.5,.1-.3-.6,.1-.6-.2-.6-.5-.1-.4-.6-.5-.5-.7-.5-1.3-1.1-.6-.2-.5,0-.6-.3-1.2,.5,.5-.6,.6-.2,.5-.4,.6-.5,.7-.2,.6-.3,.6,.1,.4,.6,.5,.8,.3,.6,.7,.5,.7,.3,.6,0,.4,.6,.7,.3,.6,.1,.7-.1,.6,0,.5,.2-.1,.6,.8,.7-.3,.7,.2,.6,0,.6,.2,.6,.2,.5,.1,.5,.5,.3,.5,.2,.6,.3,1.1-.2zM70.8,34.3l-.5,.4-.3-.5-.1-.5-.6,.1,.8,.8-.4,.6-.5,0-.7-.1-.6-.3-.9-.2-.5-.5,.5-.3,.5-.4,.6-.4-.6-.4-.5,.3-.6,.8-1.1-.1-.6-.3-.3-.6,0-.6,.5-.4,.8,.1,.5-.2,.6-.2,.2-.6,1.5-.1,.6,.6-.3,.5,.7,.5,.4,.6,.3,.5,.3,.7zM45.4,52.3l-.6,.2-.5,.3-.7,.2,.7-.6,.6-.1zM79.5,16.8l.6,.1-.6,.4-.6,.3-.4-.6,.6-.3zM75.8,71.6l-.3,.5-.2,.6-.5-.4,.1-.7-.2-.6,.1-.6,.3-.6,.3-.6-.1-.5,.6-.3-.1,.5,.1,.6-.4,.5-.2,.6,.5,.6zM40.5,63.4l.6,.4-.2,.6,0,.7-.5,.1-.5-.4-.1-.9-.2-.6,.3-.6,.5,.6zM68.7,60l.5,.2-.5,.6-.1,.5-.6-.3-.1-.6,.5,.2,.5-.1-.2-.5zM52.8,58.8l.6,0,0,.6-.5,.3-1,0-.2-.5,.6,0,.5,.1-.5-.5,.5,0zM76.4,57.1l.5,.3-1.1,.6-.7,.7-.6-.1-.5,.2-.3,.5-.3-.7,.5,0,.6-.7,.9-.6,.9-.1zM65.7,56.8l.6,.4-.6,.1-.6,.5-.5,.5-.7,.3-.5-.3,.6,0,.5-.4,.9-.7zM59.6,55.7l-.7,.6-.5,0-.2-.8,.3-.5,.5-.3,.5,0-.1,.5zM61.6,54.1l.6,.4,0,.6-.1,.7-.2,.7-.5,.4-.6-.3-.3-.5-.2-.5,.4-.7,.5-.4zM60.6,51.8l-.8,0,.2-.5,.6-.3,.5,.2-.5,.6zM58,50l-.7-.5-.1-.5,.5,0,.6,.3,.6,.1,.5,.4-.3,.7-.7-.2zM52,48.9l.2,.7-.5,.6-.5,.4,0-.7,.1-.5,.5-.4zM68.7,48.9l-.4,.6-.7,.6-.9,.2-.5,.4-.7,.1,.2-.7,.4-.6,.8,0,.6-.1,.8-.4zM74.4,48.5l-1.1,.5-1,.4-.4-.6-.5-.1-.5,.3-.4-.6,.5-.4,1.1-.4,.6,0,.6,.4,.6-.2,.7,.2-.2,.5zM22.8,47.8l.7,.7-.5,0-.5,.2-.1,.5-.6-.3-.6-.5-.5-.8-.2-.6,.5-.7,.4,.6,.7,.3,.6,.4zM57.2,48.1l-.2,.5-.6-.5-.6-.6-.6-.6-.5-.5,0-.5,.7-.3,.4,.5,1,.5,0,.7,.1,.6zM20.2,39l-.3,.5,.1-1.3,.2-.6,.3-.5,.5-.6,.3,.6,.1,.5-.2,.5,.1,.7-.6,.3-.5-.1zM54.5,36.9l-.5,.4-.7-.2,.2-.6-.6-.1-.2-.6,0-.6,.8,.3,.2,.6,.5,.5zM16,30.2l.3,.6-.6-.1-.7-.4-.6-.4-.4-.6-.2-.6-.5-.5-.4-.6-.3-.5-.2-.8,.9-.1,.7-.3,.6,.3,.1,.6-.7,.4,.1,.5,.6,.4,0,1.6,.6,.3,.5,.1zM61,23.6l0,.5-.5,.5-.3,.6,0,.5,0,.6-.5-.5-.2-.5-.6-.1-.2,.5-.9,0-.1-.5-.1-.6-.1-.6,.8-.1,.8,0,.5,.5,.6-.2,.5-.5zM65.7,22.2l-.9,.4-1.1,.3-.6-.2,.2-.8,.9-.3,.7-.3,.5,.6zM63,19.1l-.8,.5-1.1-.6,.5-.6,1.1,.1,.3,.6zM55.4,15.9l0,.5-.1,.6-.6,.4-.6,.1-.6-.4-.3-.7,.4-.7,.6-.6,.6,.2,.5,.4zM60.4,61.6l.6,.3,.4,.6-.3,.6-.7-.1,.4-.7-.5-.5zM73.3,56.7l.1-.5-.1-.5-.2-.5,.8,.5,.2,.5,.2,.5-.6,.2zM51.9,51.8l.5-.6,.5,.6-.3,.7-.7,.4,.2-.5,.1-.6zM21.3,41.4l.2,.5-.5-.1-.3-.5-.1-.5,.2-.6,.3,.6-.2,.8zM46.1,33.6l-.5-.6,.7,.2,.6,.3-.2,.5-.7-.1zM48.3,32.5l-.3,.6-.6,.2,.5-.8,.4-.7,.1,.6zM84.4,62.1l0,.6-.3,.6-.3,.7-.2,.6-.7,.8,.3,.6-.6-.1-.6,.3-.5,.7-.5,.6-.8,0-.1-.5,.3-.8-.1-.6-.3-.5,.5-.5,.2-.6,.7-.7,.7-.4,.9-.5,1-.2zM21.4,44.9l-.7-.5-.6,0-.6,0-.1-.5-.1-.5-.2-.6-.2,.5-.3,.6-.4-.6,.2-.6,.2-.7,.6,.1,.5-.1,0-.6,.1-.5,.7,.9-.2,.6,.4,.5,.5,.3,.5,.6,.3,.6-.1,.5-.5,0zM67,39.8l-.2,.5,0,.7,.1,.9-.3,.7,0,.6-.6,.3-.6,.3-.5-.5-.3-.6,.7-.3,.2-.6-.2-.5-.1-.5-.6-.4-.4-.6,1.4-.7,.6,.2,.3,.5zM68.3,73.7l-.4,.6,.1,.5,0,.6,0,.5-.3,.6-.8,.4-.6-.2-.5,0-.5-.1-.7,.1-.6,.2-1.7-.1-.5,.2-1.1,0-.5,0-.6,.2-.6,.2-.7,0-.6,.1-.6,.1-2.1,0,.2-.6,0-.6-1.2-.5-.5-.1-.6-.5-.7-.2-.9,0-.6-.1-.9-.1-.5,.1-.6-.5-.7,.1-.6-.3-1,.2-.8,0-.6-.4,0-.5,.1-.7,.1-.6,.1-.5,0-.6,.2-.5,.1,.6,.4,.5,.6-.3-.1-.7-.1-.5,.6-.3,0,.7,.2,.6,.8,.2,.8,.1,.6-.4,.8-.4,.3,.6-.5,.3-.5-.1,.8,.6,.5-.1,.3,.6,0,.5,.6,.2,.7-.3,1.2-.1,.7-.4,.6-.1,.8,.2,.7-.1,.5,.2,.5-.1,.3,.6,.8,.1,.6,.1,.7-.1,.5,.1,.7,.4,1.6-.5,.6,.1,.1,.6,0,.5-.1,.5,.6,.6,.5-.3,.6-.4,.5-.1,.6-.3,.6,.1,.5,.1,.5-.6,.6-.4z"/></g>
+<g id="land-m"><path d="M363,-20l0,380,0-380-30.1,0,.1,3.5,4.3,15.6,1.2,6.8,2.7,5,2.7,3.8,1.3,3.1-.7,3.4-3.9,7.8-1.4,3.7,.1,3.1,.7,3.6,.4,4-1.2,4.4,3.2-.2,3.3,1,2.6,2.4,.9,3.8-1.2,1.9-8.8,3.3,2.1,2.4,2.5,1.7,3.2,.9,4.1-.1-1.9,2.8,1.6,.3,4.2,1.9-1.7,3.2-.4,2.6,.7,2.1,1.4,2-1.4,.9-1.2,.9-.8,1.3-.5,2.1,6.8,4.2,2.2,3.4,.8,6-.3,7.8-1.3,4.1-6.4,6.9,3.9,2.2,0,2.7-3.9,0,0,2.3,1.8,.3,.3,1.1-.3,1.7,.3,2.1-.3-1-.1-1-1.7,2,3.6,3.5-2.4,4-4.9,4.6-4,5.2-3.2-2.3-11-4.5-4.5-.9-5-1.7-2-4.5,.1-13.6-1.9,0-4,2.2-2.7-6.7-3.1-15.3-1.1,1-2.8,1.8-2.1-6.1-4.6-6-5.1-3.8-4,.8-1.3-1.3-1.1-.7-.9-1-.9-2-1.7,0-1.7,7.7-2.9,0-3-1.3-2.2,3.5-.4-2.4-.3-1.9-.8-1-2.6,.4,1.8-4.5-1.3-3.9-6.2-6.7-.7-6.9-12-17.7-1-5.2-4.8-2.3-4.8,1.1-5,2.2-5.1,1.5-.1-1.8,.1-.7,2.7-1.2,.9-1.1,.3-2.4-4.3,1.8-2.5-2.1-2.2-3.2-3.6-1.7-4.1-.1-3.6-.6-2.9-1.5-2.2-2.8,10.2-9.4,2.6-5.4-2.1-6.4-2.6-2.7-2-.2-1.8,.9-2.4,.6-10.9,0-2.9,.8-1.9,1.7-1.5,1.8-1.5,.7-6.8,.4-3,.9-3,1.4-10.9,9.9-4.7,2.3,9.7,2.7-5.8,2.3-22.7-2.3-29.5,2.5-10.8,5.4-8.5,6.6-4.9,3.8-13.9,7-12-5.2-2.7,1.2-2.3-.1-2.4-.7-3.2-.4-1,1.9,0,4.2-.4,4.2-2.5,1.9-1.8,3.5,1.2,7,3.8,5.5,5.6-1.2,5,2.7,6.8,.8,6.8-.8,4.9-2.7,9.2,9.1,5,3.8,5.3,2.2-1.2,3.6-.5,3.4,.5,3.1,1.2,2.6-3.9,.7-5.2,3.3-6.4,1-.9,1.2-.3,2.2-.9,3.7,7.2,5.5,3.8,1.8,4.7,.3-2.7,8.3-.7,5.6,1,5.5,2.4,7.8-3.9,0,.7,7.9,1.2,3.2,6.2,2.5,11.4,8.9,2.2-2.7,10.6,10.4,1.2,.5,1.5,.3,2.3,1.2,5.8,4.8,3,1.8,4,.7,6.7-4.4-.3-9.6-5.3-9.4-8.2-3.7,0-2.5,4.9-3.9,5.4-2.2,14.5-1.3,3,4.3-1.4,9.7-3.8,10.1-4.8,5.6,2.9,3,3.1,2.2,3.5,1.4,4.2,.7,0,2.7-5.5,2-2.1,.3,0,2.5,1.9,0,2.5,1.1,7.3,1.3,6.5,4.4,5.8,1.9,13.3,11.2-1.5,1.7-.4,.7,.5,.8,1.4,1.8,0,2.4-5.8,3.2-16.9,5.7-1.3,.1-34,1.7-5-.8,.5,1.2,.2,1.2,.3,1.1,.8,1.4-10.3-1.4-3.8,.4,.4,3.7-9.8,2.2,0,3.5,2,1.7,3,.3,2.9-.5-1.8,2.6,0,2.3,2.2,.3,5.4,2.4-4.4,2.1-5.3,.5-10.7-.4-5.9,1.1-.2,3,2.6,4.7,2.6,6-5.9,1.2-4.1-.1-3.6-1.3-4.2-2.3,0-2.5,5.9,0,0-2.4-3.4-1-4,.8-3.7-.4-2.6-4.1,5.8,2.5-1.4-3.5-2.1-2.4-6.2-4.2-2.2,2.3-2.9,.1-2.8-1.7,0-.7-.9-11.4,.8-4.4,3.2,2.3,3.2,1.8,2.9-2.6,2.1-5.1,.5-5.3,6.2,3.7,1.6,1.3,0-2.3-1.4-3.3-.4-2.2-.2-3.3-.7-2.2-1.9-.9-2.1-.6-1.9-1.4-4.1-2-10.1,2.6-4.6-1.7,3.9-2.4-3.9-7.4-7.1,4.2-2.8,2.2-1.8,3.4-4-13-3-4.7-4.8-4.7-1.3-.4-3.4,.6-1.3-.2-1.1-1.2-.5-1.6-.2-1.4-.2-.8-4.1-1.7-2.5-.5-3.2,0,3.6,1,1.2,1.2,1.1,2.7-5.7-2.4-5,.6-4.5,2.7-4.4,3.9-1.9-2.2-8-5.3,.6-1.3,1.3-3.6-3.6-1.5-3.3-2.7-1.7-3,.8-2.6-3-4.5-2.9-3-5.7,2.4,0,55.8,1.9,1.5-.2,3.7-1.7,4.1,0,4.4,14.9,17.9,2.6,1.7-2,5.2,3.9,0,0,2.2-1.9,0,0,2.4,3,2.9,6.9,12.4,2,6.6,9.8,17.7,1,1,2.3,3.5,1.4,3.8-1.8,1.8-1.4,2-.9,4.7-.6,9.3,2.3,4.5,5.4,1.2,5.9-.7,4-1.4,.1,1.6,.6,1,.6,1,.8,1.3-2,1.3,2,1.2-2.1,2.6,4.9,1.8,2.3,3-.7,1.8-4.4-1.9,2.6,6.4,1,1.5-62.5,0,0-344.8,5.7,5.1,5.2,8.8,1.7,1.1,5.4,1.6,9,7.9,4.2,2.9,4.4,.7,4.5-.8,6.9-2.4,2.2-.1,2.4,.3,2.3-.1,1.9-1.2,5.8-8.8,.6-1.9-2.8-4.3-4.2-4.3-3.3-1.9-4.5-1.5-7-5.8-5.3-.4,1-1.2,.9-.5-9.6-.5,6.2-5.2,2.8-1.8,3.8-.7,3.7-1.5,6.4-6.6,2.6-1.9,7.7,.6,14.1,6.1,5.8-1.7,8.4,4,9.3-1.3,20.6-6.2,4.8-5.4,4.9-1.3,2.9-2-1.3-3zM217.5,248.5l-4.5,4.5-6.8,3.1-7,1.1-5.2-1.1,1.1,7.1-3.4,3.6-6,1.2-6.4,.1-16.4,4.8-6.4,.2,0-2.5,25.6-17.2,6.9-2.3,12.9-.1,5.9-2.5,9.7,0zM205.8,102.6l4.9,2.2-1.9,3.8-3.4,4.6,.4,4.2-4,2.9-.8,4,.2,4.1-1.3,3.9-2.4,1.5-6.5,1.7-3,1.7-2.1-2.2-1.5-1.2-4.1-1.5,0-2.5,3.4-2.1-.2-3.4-2.6-3.2-3.7-1.5-3.4-2.3-2.1-5.1-.8-5.1,.4-2.3,34.5-2.2zM86.1,278.2l1.6,1.4,4.9,2.8,2.1,1.9,1.1,2.6,.7,3.8-.7,3.4-3,1.5-6-1.3-3.4-3.3-2.9-4.1-4.2-3.8,2-2.2,2.4-1.6,2.5-.9,2.9-.2zM186.1,181.7l1.2-.2,.4,1.5,.3,1.1,2.3,3.6,2.5,2.4,3.1,1.3,4,.3,0,2.3-5.5,3.2-7.2,1.2-7.3-1.1-5.6-3.3,0-2.3,8.1-2,3.1-2.6,.6-5.4zM166.3,57.5l-1.8-2.7,0-2.3,2-3.5,4-4,4.7-2.4,8.3,2.7,3.8-3.5,3-5.3,1.6-3.8-3.5,.2-2.5,1.9-2.1,2.1-2.6,1-2.4-.6-5.4-2.2-3.2,.1,10.1-5-3.7-2-4.3-3.2,3.3-.3,3.1,.2,2.9,.9,2.5,1.9,.6-2.7,.7-.5-1.3-1.7,2.2-1.8,2.4-.8,2.5-.3,6.6,1.1,3.5,1.6,1.8,2.4-1.4,2.7,.2,2,.7,2.5,1.7,2.1,1.8,1.3-.3,2.3,7.8,0-9.8,4.7,1.2,3.9-6.2,5.4-1,5.6-1.8,0-3.1-2.7-2.6,2.1-3,3.8-4.2,2-4.2-.4-8.9-2.8-3.7-2zM317.7,211.7l1.1,1.7,.6,1.8-.6,.4-1.8-.5-2.3-1.3-3.1-4.8-5.3-3.6,.4-1.5,2.8,1.5,3.3,.7,4.1,3.5,.8,2.1zM321.3,145.1l1.2,.1,1.8,1.9,0,3.1-2.1,.3-3.2,0-1.6-1.4,.9-4,3,0zM265.7,102.3l2.4-.3,.9,2.3-1,2-1.9,.4-.8-.8-.5-1.2,.2-.7,1.3,.1-.6-1.8zM317.7,211.7l1.1,1.7,.6,1.8-.6,.4-1.8-.5-2.3-1.3-3.1-4.8-5.3-3.6,.4-1.5,2.8,1.5,3.3,.7,4.1,3.5,.8,2.1zM321.3,145.1l1.2,.1,1.8,1.9,0,3.1-2.1,.3-3.2,0-1.6-1.4,.9-4,3,0zM265.7,102.3l2.4-.3,.9,2.3-1,2-1.9,.4-.8-.8-.5-1.2,.2-.7,1.3,.1-.6-1.8z" fill-rule="evenodd"/></g></defs></svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></symbol>
+  <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c1-4 4-6 8-6s7 2 8 6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-boat" viewBox="0 0 24 24"><path d="M12 3v12M12 3l6 10h-6M12 5 7 13h5M3 17h18l-2 3H5z"/></symbol>
+  <symbol id="i-cabin" viewBox="0 0 24 24"><path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-guests" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.8.8 2.8 2.6 3 5.2"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 4z"/></symbol>
+  <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v14M8 11h8M4 13a8 8 0 0 0 16 0"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8"/></symbol>
+  <symbol id="i-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="m5.6 5.6 3.6 3.6M14.8 14.8l3.6 3.6M18.4 5.6l-3.6 3.6M9.2 14.8l-3.6 3.6"/></symbol>
+  <symbol id="i-sail" viewBox="0 0 24 24"><path d="M11 3v15H4zM13 6c4 3 6 7 6 12h-6zM2 20h20"/></symbol>
+  <symbol id="i-wheel" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.5"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M19.1 4.9l-2.9 2.9M7.8 16.2l-2.9 2.9"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></symbol>
+  <symbol id="i-light" viewBox="0 0 24 24"><path d="M9 21h6M10 18h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.5-2.5z"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-minus" viewBox="0 0 24 24"><path d="M6 12h12"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></symbol>
+  <symbol id="i-cert" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 8h10M7 11h6M15 16v5l2-1.5 2 1.5v-5"/></symbol>
+  <symbol id="i-family" viewBox="0 0 24 24"><circle cx="7" cy="6" r="2.5"/><circle cx="17" cy="6" r="2.5"/><circle cx="12" cy="12" r="2"/><path d="M3 20c0-4 2-7 4-7s4 3 4 7M13 20c0-4 2-7 4-7s4 3 4 7"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="site-head">
+    <a class="logo" href="home.de.html" aria-label="Ocean Way, Startseite"><svg viewBox="2 2 116 116" aria-hidden="true"><defs><clipPath id="logo-clip"><circle cx="60" cy="60" r="47.01"/></clipPath></defs><g clip-path="url(#logo-clip)" fill="currentColor"><line x1="0" y1="72.3" x2="120" y2="54.6" stroke="currentColor" stroke-width="11"/><path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z"/></g><circle cx="60" cy="60" r="52.5" fill="none" stroke="currentColor" stroke-width="11"/></svg></a>
+    <nav class="site-nav" aria-label="Hauptmenü">
+      <a class="navl" href="home.de.html#courses">Kurse</a>
+      <a class="navl" href="home.de.html#passages">Törns</a>
+      <a class="navl" href="theory.de.html">Theorie</a>
+      <a class="navl" href="home.de.html#fleet">Flotte</a>
+      <a class="navl" href="#">Preise</a>
+    </nav>
+    <div class="site-tools">
+      <details class="lang" translate="no"><summary class="round" aria-label="Sprache: Deutsch">DE</summary><ul class="lang-menu"><li><a href="booking.html" hreflang="en" lang="en">English<span>EN</span></a></li><li><a href="booking.ru.html" hreflang="ru" lang="ru">Русский<span>RU</span></a></li><li><a href="booking.de.html" hreflang="de" lang="de" aria-current="true">Deutsch<span>DE</span></a></li><li><a href="booking.es.html" hreflang="es" lang="es">Español<span>ES</span></a></li></ul></details>
+      
+      
+      
+      
+      
+      
+      
+      
+      <button class="round" type="button" id="themeBtn" aria-label="Farbschema"><svg class="i"><use href="#i-theme"/></svg></button>
+      <button class="round" type="button" aria-label="Gemerkt"><svg class="i"><use href="#i-heart"/></svg></button>
+      <button class="round" type="button" aria-label="Konto"><svg class="i"><use href="#i-user"/></svg></button>
+    </div>
+  </header>
+
+<main>
+  <div class="bk">
+    <div>
+      <a class="bk-back" id="back" href="bareboat-skipper-course.de.html#dates"><svg class="i"><use href="#i-arrow"/></svg><span>Zurück zum Kurs</span></a>
+      <h1 id="h1">Platz buchen</h1>
+      <ol class="steps" id="steps" aria-label="Buchungsschritte">
+        <li data-s="1"><span>1 · Termin</span></li><li data-s="2"><span>2 · Deine Daten</span></li><li data-s="3"><span>3 · Zahlung</span></li><li data-s="4"><span>4 · Fertig</span></li>
+      </ol>
+      <details class="msum band" id="msum"><summary><span id="msumLabel">Deine Buchung</span><b id="msumTotal"></b></summary><div class="sum" id="sumM"></div></details>
+      <div class="errsum" id="errsum" role="alert" tabindex="-1"><b>Bitte prüfe diese Felder</b><ul id="errlist"></ul></div>
+      <form id="form" novalidate>
+        <section data-step="1" aria-labelledby="t1">
+          <h2 class="step-title" id="t1">Termine wählen</h2>
+          <p class="step-lead" id="lead1"></p>
+          <fieldset><legend id="dateLegend">Starttermin</legend><div class="choices" id="dates"></div></fieldset>
+          <fieldset id="addFs" hidden><legend>Rückweg dazubuchen</legend><div class="choices" id="adds"></div></fieldset>
+          <fieldset><legend>Kabine</legend><div class="choices" id="cabins"></div></fieldset>
+          <fieldset><legend>Personen</legend>
+            <div class="stepper"><button class="round" type="button" id="minus" aria-label="Eine Person weniger">−</button><output id="ppl" aria-live="polite">1</output><button class="round" type="button" id="plus" aria-label="Eine Person mehr">+</button></div>
+            <p class="hint" id="pplHint"></p>
+          </fieldset>
+        </section>
+
+        <section data-step="2" aria-labelledby="t2" hidden>
+          <h2 class="step-title" id="t2">Deine Daten</h2>
+          <p class="step-lead">Kein Konto nötig. Wir nutzen die Angaben, um die Buchung zu bestätigen und dich mit deinem Ausbilder in Kontakt zu bringen.</p>
+          <fieldset><legend>Hauptperson</legend>
+            <div class="grid2">
+              <div class="fld"><label for="fname">Vorname</label><input id="fname" name="fname" autocomplete="given-name" required><span class="err">Gib deinen Vornamen ein</span></div>
+              <div class="fld"><label for="lname">Nachname</label><input id="lname" name="lname" autocomplete="family-name" required><span class="err">Gib deinen Nachnamen ein</span></div>
+              <div class="fld"><label for="email">E-Mail</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required><span class="err">Gib eine E-Mail-Adresse wie name@example.com ein</span></div>
+              <div class="fld"><label for="phone">Telefon</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required><span class="err">Gib eine Telefonnummer mit Ländervorwahl ein</span></div>
+              <div class="fld"><label for="tg">Telegram <span class="opt-l">(optional)</span></label><input id="tg" name="tg" autocomplete="off" placeholder="@username"></div>
+              <div class="fld"><label for="country">Land</label><select id="country" name="country" autocomplete="country-name"><option>Zypern</option><option>Deutschland</option><option>Israel</option><option>Russland</option><option>Serbien</option><option>Türkei</option><option>Vereinigtes Königreich</option><option>Andere</option></select></div>
+            </div>
+          </fieldset>
+          <fieldset><legend id="expLegend">Segelerfahrung</legend><div class="choices" id="exp"></div><p class="hint" id="expHint"></p></fieldset>
+          <fieldset id="othersFs"><legend>Weitere Personen <span class="opt-l" style="font-weight:400;color:var(--muted)">(Namen kannst du später ergänzen)</span></legend><div class="grid2" id="others"></div></fieldset>
+          <label class="tick"><input type="checkbox" id="news"> Schick mir neue Kurstermine und freie Plätze, etwa zweimal im Monat</label>
+        </section>
+
+        <section data-step="3" aria-labelledby="t3" hidden>
+          <h2 class="step-title" id="t3">Zahlung</h2>
+          <p class="step-lead">Jetzt wird nichts abgebucht. Wir bestätigen zuerst deinen Platz und schicken dir dann einen Zahlungslink oder die Bankdaten.</p>
+          <fieldset><legend>Was du zuerst zahlst</legend><div class="choices" id="plan"></div></fieldset>
+          <fieldset><legend>Zahlungsart</legend><div class="choices" id="method"></div>
+            <div class="paybox" id="paybox"><svg class="i"><use href="#i-info"/></svg><span id="payboxText">Sobald wir deinen Platz bestätigt haben, schicken wir dir einen sicheren Link zur Kartenzahlung. Heute wird nichts abgebucht.</span></div>
+          </fieldset>
+          <fieldset><legend>Stornierung</legend><p style="margin:0 0 14px;font-size:16px">Kostenlose Stornierung bis 6 Wochen vor Beginn. Danach wird die Anzahlung einbehalten, oder du kannst sie einmal auf einen anderen Termin im selben Jahr umbuchen.</p>
+            <label class="tick"><input type="checkbox" id="terms" required> Ich akzeptiere die <a href="#" style="text-decoration:underline">Buchungsbedingungen</a> und die <a href="#" style="text-decoration:underline">Datenschutzerklärung</a></label>
+            <div class="fld" id="termsFld"><span class="err">Bitte akzeptiere die Buchungsbedingungen</span></div>
+          </fieldset>
+        </section>
+
+        <div class="nav-row" id="navRow">
+          <button class="linkbtn" type="button" id="prev">Zurück</button>
+          <button class="pill pill-primary" type="submit" id="next">Weiter</button>
+        </div>
+      </form>
+
+      <section id="done" hidden aria-labelledby="t4">
+        <div class="done-hero">
+          <span class="done-mark"><svg class="i"><use href="#i-check"/></svg></span>
+          <h2 class="step-title" id="t4" tabindex="-1">Anfrage erhalten</h2>
+          <p class="step-lead" style="margin:0" id="doneLead"></p>
+          <span class="meta">Buchungsnummer <span class="ref" id="ref"></span></span>
+        </div>
+        <h3 class="h3" style="margin:40px 0 4px">Wie es weitergeht</h3>
+        <ol class="timeline" id="timeline"></ol>
+        <div class="acts">
+          <a class="pill pill-primary" id="ics" download="ocean-way-booking.ics" href="#"><svg class="i"><use href="#i-cal"/></svg>Zum Kalender hinzufügen</a>
+          <a class="pill pill-quiet" href="#"><svg class="i"><use href="#i-tg"/></svg>Zum Kurs-Chat</a>
+          <a class="pill pill-quiet" id="prep" href="bareboat-skipper-course.de.html#prepare">Packliste</a>
+        </div>
+        <div class="band" style="padding:24px 28px;margin-top:40px">
+          <span class="kicker">Nach dem Kurs</span>
+          <p style="margin:10px 0 0;font-size:17px" id="afterText"></p>
+        </div>
+      </section>
+    </div>
+    <aside aria-label="Buchungsübersicht"><div class="sum band" id="sumD"></div></aside>
+  </div>
+</main>
+
+  <footer class="site-foot">
+    <div class="foot-row">
+      <span class="meta">Ocean Way · Layout-Prototyp. Preise, Termine und Personen sind Beispielinhalte. Fotos über Unsplash.</span>
+      <nav class="foot-links"><a href="user-flows.html">User Flows</a><a href="#">Über uns</a><a href="#">Telegram</a><a href="#">Datenschutz</a></nav>
+    </div>
+  </footer>
+</div>
+
+<script>window.RYC_T = {"Sailing experience": "Segelerfahrung", "The instructor reads this before we take any money. If the course is too big a step, we suggest the right one and you pay nothing.": "Der Ausbilder liest das, bevor wir Geld nehmen. Ist der Kurs ein zu großer Schritt, schlagen wir dir den passenden vor, und du zahlst nichts.", "I have never sailed": "Ich bin noch nie gesegelt", "We will suggest Introduction to Yachting first": "Wir schlagen dir zuerst Introduction to Yachting vor", "A few days as crew": "Ein paar Tage als Crew", "Fine for this course if you can steer and handle lines": "Passt für diesen Kurs, wenn du steuern und mit Leinen umgehen kannst", "A week or more": "Eine Woche oder mehr", "Ideal": "Ideal", "I already skipper": "Ich skippere schon", "You may only need the assessment": "Vielleicht brauchst du nur die Prüfung", "Sea time so far": "Bisherige Seezeit", "Passages count towards Yachtmaster sea time. You need crew experience: you will stand watches, also at night.": "Törns zählen als Seezeit für den Yachtmaster. Du brauchst Crew-Erfahrung: Du gehst Wache, auch nachts.", "Crew level, under 300 miles": "Crew-Niveau, unter 300 Meilen", "You stand watches with the instructor": "Du gehst Wache mit dem Ausbilder", "Day Skipper or Bareboat certificate": "Zertifikat Day Skipper oder Bareboat", "You skipper legs under supervision": "Du skipperst Schläge unter Aufsicht", "Building miles for Yachtmaster": "Meilen sammeln für den Yachtmaster", "Tell us your logged miles in the chat": "Nenn uns deine geloggten Meilen im Chat", "Sat 10 Apr – Sat 17 Apr": "Sa. 10. Apr. – Sa. 17. Apr.", "Fethiye → Bodrum": "Fethiye → Bodrum", "Sat 17 Apr – Sat 24 Apr": "Sa. 17. Apr. – Sa. 24. Apr.", "Bodrum → Fethiye": "Bodrum → Fethiye", "Sat 1 May – Sat 8 May": "Sa. 1. Mai – Sa. 8. Mai", "Fethiye → Northern Cyprus": "Fethiye → Nordzypern", "Sat 15 May – Sat 22 May": "Sa. 15. Mai – Sa. 22. Mai", "Northern Cyprus → Fethiye": "Nordzypern → Fethiye", "Sat 5 Jun – Sat 12 Jun": "Sa. 5. Juni – Sa. 12. Juni", "Fethiye → Kuşadası": "Fethiye → Kuşadası", "Sat 12 Jun – Sat 26 Jun": "Sa. 12. Juni – Sa. 26. Juni", "Kuşadası → Istanbul": "Kuşadası → Istanbul", "Sat 10 Jul – Sat 17 Jul": "Sa. 10. Juli – Sa. 17. Juli", "Istanbul → Kuşadası": "Istanbul → Kuşadası", "Sat 17 Jul – Sat 24 Jul": "Sa. 17. Juli – Sa. 24. Juli", "Kuşadası → Fethiye": "Kuşadası → Fethiye", "Sat 7 Aug – Sat 14 Aug": "Sa. 7. Aug. – Sa. 14. Aug.", "Fethiye → Kemer": "Fethiye → Kemer", "Sat 14 Aug – Sat 21 Aug": "Sa. 14. Aug. – Sa. 21. Aug.", "Kemer → Fethiye": "Kemer → Fethiye", "Sat 4 Sep – Sat 11 Sep": "Sa. 4. Sept. – Sa. 11. Sept.", "Sat 11 Sep – Sat 18 Sep": "Sa. 11. Sept. – Sa. 18. Sept.", "Sat 2 Oct – Sat 9 Oct": "Sa. 2. Okt. – Sa. 9. Okt.", "Fethiye → Kekova": "Fethiye → Kekova", "Sat 9 Oct – Sat 16 Oct": "Sa. 9. Okt. – Sa. 16. Okt.", "Kekova → Fethiye": "Kekova → Fethiye", "Sat 13 Nov – Sat 20 Nov": "Sa. 13. Nov. – Sa. 20. Nov.", "Fenike → Northern Cyprus": "Fenike → Nordzypern", "Sat 20 Nov – Wed 24 Nov": "Sa. 20. Nov. – Mi. 24. Nov.", "Bareboat Skipper course": "Kurs Bareboat Skipper", "Book the Bareboat Skipper course": "Kurs Bareboat Skipper buchen", "Back to the course": "Zurück zum Kurs", "Saturday to Saturday, living aboard with an instructor and at most four students.": "Samstag bis Samstag, an Bord mit einem Ausbilder und höchstens vier Teilnehmern.", "Start date": "Starttermin", "Saronic Gulf, Greece · Bavaria C42": "Saronischer Golf, Griechenland · Bavaria C42", "Alimos Marina, Athens": "Marina Alimos, Athen", "Sat 22 May – Sat 29 May": "Sa. 22. Mai – Sa. 29. Mai", "Sat 12 Jun – Sat 19 Jun": "Sa. 12. Juni – Sa. 19. Juni", "Split, Croatia · Dufour 430": "Split, Kroatien · Dufour 430", "ACI Marina Split": "ACI Marina Split", "You get your IYT or RYA certificate on the last day. A week later we send your logbook summary and a suggestion for the next step: a first charter on one of our boats, or a training passage to build miles for Yachtmaster.": "Am letzten Tag bekommst du dein IYT- oder RYA-Zertifikat. Eine Woche später schicken wir dir eine Zusammenfassung deines Logbuchs und einen Vorschlag für den nächsten Schritt: einen ersten Charter auf einem unserer Boote oder einen Ausbildungstörn, um Meilen für den Yachtmaster zu sammeln.", "Training passage": "Ausbildungstörn", "Book a training passage": "Ausbildungstörn buchen", "Back to all passages": "Zurück zu allen Törns", "One-way passages, Saturday to Saturday, with an instructor on board. Four places on each boat.": "Streckentörns, Samstag bis Samstag, mit Ausbilder an Bord. Vier Plätze pro Boot.", "Passage": "Törn", "Ece Marina, Fethiye": "Ece Marina, Fethiye", "Your logged miles and night hours go into your logbook, signed by the instructor. When you have enough for Yachtmaster Coastal, we invite you to the exam week.": "Deine geloggten Meilen und Nachtstunden kommen ins Logbuch, vom Ausbilder unterschrieben. Wenn du genug für den Yachtmaster Coastal hast, laden wir dich zur Prüfungswoche ein.", "Shared double cabin": "Geteilte Doppelkabine", "With another student of the same gender": "Mit einem anderen Teilnehmer gleichen Geschlechts", "Double cabin for two": "Doppelkabine für zwei", "For couples and friends booking together": "Für Paare und Freunde, die zusammen buchen", "Cabin to yourself": "Kabine für dich allein", "Subject to availability": "Je nach Verfügbarkeit", "Return leg": "Rückweg", "Dates": "Termine", "Cabin": "Kabine", "People": "Personen", "Total": "Gesamt", "Due after confirmation": "Fällig nach Bestätigung", "30% deposit to book, the rest 6 weeks before. No card fees.": "30 % Anzahlung bei Buchung, der Rest 6 Wochen vorher. Keine Kartengebühren.", "Free cancellation until 6 weeks before": "Kostenlose Stornierung bis 6 Wochen vorher", "Instructor checks your experience before payment": "Der Ausbilder prüft deine Erfahrung vor der Zahlung", "Questions? Ask the instructor in Telegram": "Fragen? Frag den Ausbilder auf Telegram", "1 person": "1 Person", "{n} people": "{n} Personen", "Full": "Ausgebucht", "1 of 4 left": "Noch 1 von 4", "{n} of 4 left": "Noch {n} von 4", "Show all {n} passages": "Alle {n} Törns zeigen", "Most people sail both ways: twice the miles, one flight": "Die meisten segeln beide Strecken: doppelte Meilen, ein Flug", "Included": "Inklusive", "1 place left on this date.": "Noch 1 Platz frei an diesem Termin.", "{n} places left on this date.": "Noch {n} Plätze frei an diesem Termin.", "A double cabin is for two people.": "Eine Doppelkabine ist für zwei Personen.", "A cabin to yourself is for one person.": "Eine Kabine für dich allein ist für eine Person.", "Person {n}": "Person {n}", "(optional)": "(optional)", "Full name": "Vollständiger Name", "Deposit {amount}": "Anzahlung {amount}", "The rest, {amount}, is due 6 weeks before the start": "Der Rest, {amount}, ist 6 Wochen vor Beginn fällig", "Pay in full {amount}": "Komplett zahlen {amount}", "Nothing more to pay later": "Später nichts mehr zu zahlen", "Card, Apple Pay or Google Pay": "Karte, Apple Pay oder Google Pay", "Visa, Mastercard. Secure 3-D Secure check": "Visa, Mastercard. Sichere 3-D-Secure-Prüfung", "Bank transfer": "Banküberweisung", "We hold your place for 3 days while the money arrives": "Wir halten deinen Platz 3 Tage, bis das Geld eingeht", "After we confirm your place, we send a secure card payment link. Nothing is charged today.": "Sobald wir deinen Platz bestätigt haben, schicken wir dir einen sicheren Link zur Kartenzahlung. Heute wird nichts abgebucht.", "After we confirm your place, we send the bank details and your booking reference.": "Sobald wir deinen Platz bestätigt haben, schicken wir dir die Bankdaten und deine Buchungsnummer.", "your email": "deine E-Mail-Adresse", "Nothing has been charged.": "Es wurde nichts abgebucht.", "Your first payment will be {amount}.": "Deine erste Zahlung beträgt {amount}.", "We will check availability and send payment details to {email} within one working day.": "Wir prüfen die Verfügbarkeit und schicken die Zahlungsdetails innerhalb eines Werktags an {email}.", "Today": "Heute", "Request received": "Anfrage erhalten", "We check the boat and the instructor and reply within one working day.": "Wir prüfen Boot und Ausbilder und antworten innerhalb eines Werktags.", "Within a day": "Innerhalb eines Tages", "Confirmation and payment link": "Bestätigung und Zahlungslink", "We email the bank details and your booking reference.": "Wir mailen dir die Bankdaten und deine Buchungsnummer.", "We email a secure card payment link and your booking reference.": "Wir mailen dir einen sicheren Link zur Kartenzahlung und deine Buchungsnummer.", "After payment": "Nach der Zahlung", "Your instructor writes": "Dein Ausbilder meldet sich", "A hello in Telegram or WhatsApp, and a quick check of your experience.": "Ein Hallo auf Telegram oder WhatsApp und ein kurzer Check deiner Erfahrung.", "6 weeks before": "6 Wochen vorher", "Balance of {amount}": "Restbetrag {amount}", "We send a payment link a week before it is due. No card fees.": "Wir schicken eine Woche vor Fälligkeit einen Zahlungslink. Keine Kartengebühren.", "2 weeks before": "2 Wochen vorher", "Joining instructions": "Anreiseinfos", "Marina, berth, what to bring, flights and transfers. Meeting point: {place}.": "Marina, Liegeplatz, Packliste, Flüge und Transfers. Treffpunkt: {place}.", "Day 1": "Tag 1", "Aboard at 15:00": "An Bord um 15:00", "Safety briefing, cabins, dinner together. You sail on Sunday morning.": "Sicherheitseinweisung, Kabinen, gemeinsames Abendessen. Am Sonntagmorgen legt ihr ab.", "Choose your experience": "Wähle deine Erfahrung", "Please accept the booking terms": "Bitte akzeptiere die Buchungsbedingungen", "Booking request received": "Buchungsanfrage erhalten", "Continue to your details": "Weiter zu deinen Daten", "Continue to payment": "Weiter zur Zahlung", "Send booking request": "Buchungsanfrage senden", "Choose dates": "Termine wählen", "Your details": "Deine Daten", "Payment": "Zahlung", "4 nights": "4 Nächte", "7 nights": "7 Nächte", "14 nights": "14 Nächte"};</script>
+<script>
+const root = document.documentElement;
+document.getElementById('themeBtn').addEventListener('click', () => {
+  if (root.dataset.theme === 'night') delete root.dataset.theme; else root.dataset.theme = 'night';
+});
+const q = new URLSearchParams(location.search);
+if (q.get('theme') === 'night') root.dataset.theme = 'night';
+
+const T = window.RYC_T || {};
+const t = (s, v = {}) => (T[s] || s).replace(/\{(\w+)\}/g, (_, k) => v[k]);
+const LANG = document.documentElement.lang || 'en';
+const link = (f) => LANG === 'en' ? f : f.replace('.html', '.' + LANG + '.html');
+const IMG = (id) => `https://images.unsplash.com/photo-${id}?w=900&q=80&auto=format&fit=crop`;
+const EXP = {
+  course: { legend: t('Sailing experience'), hint: t('The instructor reads this before we take any money. If the course is too big a step, we suggest the right one and you pay nothing.'),
+    opts: [['none', t('I have never sailed'), t('We will suggest Introduction to Yachting first')], ['some', t('A few days as crew'), t('Fine for this course if you can steer and handle lines')], ['week', t('A week or more'), t('Ideal')], ['skipper', t('I already skipper'), t('You may only need the assessment')]] },
+  passage: { legend: t('Sea time so far'), hint: t('Passages count towards Yachtmaster sea time. You need crew experience: you will stand watches, also at night.'),
+    opts: [['crew', t('Crew level, under 300 miles'), t('You stand watches with the instructor')], ['day', t('Day Skipper or Bareboat certificate'), t('You skipper legs under supervision')], ['coastal', t('Building miles for Yachtmaster'), t('Tell us your logged miles in the chat')]] },
+};
+const P7 = 890, P14 = 1690, P4 = 590;
+const LEGS = [
+  ['2027-04-10', t('Sat 10 Apr – Sat 17 Apr'), t('Fethiye → Bodrum'), 7, '2027-04-17'], ['2027-04-17', t('Sat 17 Apr – Sat 24 Apr'), t('Bodrum → Fethiye'), 7, '2027-04-10'],
+  ['2027-05-01', t('Sat 1 May – Sat 8 May'), t('Fethiye → Northern Cyprus'), 7, '2027-05-15'], ['2027-05-15', t('Sat 15 May – Sat 22 May'), t('Northern Cyprus → Fethiye'), 7, '2027-05-01'],
+  ['2027-06-05', t('Sat 5 Jun – Sat 12 Jun'), t('Fethiye → Kuşadası'), 7, null], ['2027-06-12', t('Sat 12 Jun – Sat 26 Jun'), t('Kuşadası → Istanbul'), 14, '2027-07-10'],
+  ['2027-07-10', t('Sat 10 Jul – Sat 17 Jul'), t('Istanbul → Kuşadası'), 7, '2027-06-12'], ['2027-07-17', t('Sat 17 Jul – Sat 24 Jul'), t('Kuşadası → Fethiye'), 7, null],
+  ['2027-08-07', t('Sat 7 Aug – Sat 14 Aug'), t('Fethiye → Kemer'), 7, '2027-08-14'], ['2027-08-14', t('Sat 14 Aug – Sat 21 Aug'), t('Kemer → Fethiye'), 7, '2027-08-07'],
+  ['2027-09-04', t('Sat 4 Sep – Sat 11 Sep'), t('Fethiye → Kuşadası'), 7, '2027-09-11'], ['2027-09-11', t('Sat 11 Sep – Sat 18 Sep'), t('Kuşadası → Fethiye'), 7, '2027-09-04'],
+  ['2027-10-02', t('Sat 2 Oct – Sat 9 Oct'), t('Fethiye → Kekova'), 7, '2027-10-09'], ['2027-10-09', t('Sat 9 Oct – Sat 16 Oct'), t('Kekova → Fethiye'), 7, '2027-10-02'],
+  ['2027-11-13', t('Sat 13 Nov – Sat 20 Nov'), t('Fenike → Northern Cyprus'), 7, '2027-11-20'], ['2027-11-20', t('Sat 20 Nov – Wed 24 Nov'), t('Northern Cyprus → Fethiye'), 4, '2027-11-13'],
+].map(([id, when, route, n, pair]) => ({ id, label: when, sub: `${route} · ${t(n + ' nights')}`, route, nights: n, price: n === 14 ? P14 : n === 4 ? P4 : P7, left: 4, pair }));
+
+const CATALOG = {
+  bareboat: {
+    kind: 'course', title: t('Bareboat Skipper course'), h1: t('Book the Bareboat Skipper course'), img: IMG('1540946485063-a40da27545f8'),
+    back: [link('bareboat-skipper-course.html') + '#dates', t('Back to the course')], lead: t('Saturday to Saturday, living aboard with an instructor and at most four students.'),
+    dateLegend: t('Start date'), prep: link('bareboat-skipper-course.html') + '#prepare',
+    options: [
+      { id: '2027-05-01', label: t('Sat 1 May – Sat 8 May'), sub: t('Saronic Gulf, Greece · Bavaria C42'), price: 1590, left: 2, place: t('Alimos Marina, Athens') },
+      { id: '2027-05-22', label: t('Sat 22 May – Sat 29 May'), sub: t('Saronic Gulf, Greece · Bavaria C42'), price: 1590, left: 0, place: t('Alimos Marina, Athens') },
+      { id: '2027-06-12', label: t('Sat 12 Jun – Sat 19 Jun'), sub: t('Split, Croatia · Dufour 430'), price: 1690, left: 4, place: t('ACI Marina Split') },
+      { id: '2027-09-11', label: t('Sat 11 Sep – Sat 18 Sep'), sub: t('Saronic Gulf, Greece · Bavaria C42'), price: 1590, left: 3, place: t('Alimos Marina, Athens') },
+      { id: '2027-10-02', label: t('Sat 2 Oct – Sat 9 Oct'), sub: t('Split, Croatia · Dufour 430'), price: 1490, left: 4, place: t('ACI Marina Split') },
+    ],
+    after: t('You get your IYT or RYA certificate on the last day. A week later we send your logbook summary and a suggestion for the next step: a first charter on one of our boats, or a training passage to build miles for Yachtmaster.'),
+  },
+  passage: {
+    kind: 'passage', title: t('Training passage'), h1: t('Book a training passage'), img: IMG('1500375592092-40eb2168fd21'),
+    back: [link('home.html') + '#passages', t('Back to all passages')], lead: t('One-way passages, Saturday to Saturday, with an instructor on board. Four places on each boat.'),
+    dateLegend: t('Passage'), prep: link('home.html') + '#passages', options: LEGS, place: t('Ece Marina, Fethiye'),
+    after: t('Your logged miles and night hours go into your logbook, signed by the instructor. When you have enough for Yachtmaster Coastal, we invite you to the exam week.'),
+  },
+};
+const CABINS = [
+  { id: 'shared', label: t('Shared double cabin'), sub: t('With another student of the same gender'), add: 0 },
+  { id: 'two', label: t('Double cabin for two'), sub: t('For couples and friends booking together'), add: 0, min: 2 },
+  { id: 'single', label: t('Cabin to yourself'), sub: t('Subject to availability'), add: 450 },
+];
+
+const item = CATALOG[q.get('item')] || CATALOG.bareboat;
+const KEY = 'ryc-booking-' + (q.get('item') || 'bareboat');
+const st = { step: 1, date: null, add: false, cabin: 'shared', ppl: 1, exp: null, plan: 'deposit', method: 'card' };
+try { Object.assign(st, JSON.parse(sessionStorage.getItem(KEY) || '{}')); } catch (e) {}
+const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+const $ = (id) => document.getElementById(id);
+const eur = (n) => '€' + n.toLocaleString('en-US').replace(/,/g, ' ');
+const opt = (name, value, title, sub, end, checked, disabled, type = 'radio') =>
+  `<label class="choice${type === 'checkbox' ? ' check' : ''}"><input type="${type}" name="${name}" value="${value}"${checked ? ' checked' : ''}${disabled ? ' disabled' : ''}><span class="dot"></span><b>${title}</b>${end ? `<span class="end">${end}</span>` : ''}<span class="sub">${sub}</span></label>`;
+
+const pick = q.get('date') || q.get('id');
+if (pick && item.options.some((o) => o.id === pick && o.left > 0)) st.date = pick;
+if (!st.date) st.date = (item.options.find((o) => o.left > 0) || {}).id;
+const cur = () => item.options.find((o) => o.id === st.date);
+let showAll = !(q.get('date') || q.get('id'));
+const pair = () => { const c = cur(); return c && c.pair ? item.options.find((o) => o.id === c.pair) : null; };
+
+function totals() {
+  const c = cur(); const cab = CABINS.find((x) => x.id === st.cabin);
+  let base = c.price * st.ppl; const lines = [[`${c.label.split(' – ')[0]} · ${st.ppl} × ${eur(c.price)}`, base]];
+  if (item.kind === 'passage' && st.add && pair()) { const p = pair(); lines.push([`${t('Return leg')} · ${st.ppl} × ${eur(p.price)}`, p.price * st.ppl]); base += p.price * st.ppl; }
+  if (cab.add) { lines.push([t('Cabin to yourself'), cab.add]); base += cab.add; }
+  const deposit = Math.round(base * 0.3);
+  return { lines, total: base, deposit, now: st.plan === 'deposit' ? deposit : base };
+}
+
+function renderSummary() {
+  const c = cur(); const tt = totals(); const cab = CABINS.find((x) => x.id === st.cabin);
+  const html = `<div class="ph"><img src="${item.img}" alt=""></div>
+    <div><div class="card-title">${item.title}</div><div class="card-meta" style="margin-top:4px">${item.kind === 'passage' ? c.route : c.sub}</div></div>
+    <dl><dt>${t('Dates')}</dt><dd>${c.label}</dd><dt>${t('Cabin')}</dt><dd>${cab.label}</dd><dt>${t('People')}</dt><dd>${st.ppl}</dd>
+    ${tt.lines.map(([k, v]) => `<dt>${k}</dt><dd>${eur(v)}</dd>`).join('')}</dl>
+    <div class="line"></div>
+    <div class="total"><span>${t('Total')}</span><b>${eur(tt.total)}</b></div>
+    ${st.step >= 3 ? `<div class="total" style="margin-top:-6px"><span class="card-meta">${t('Due after confirmation')}</span><span><b style="font-size:20px">${eur(tt.now)}</b></span></div>` : `<span class="card-meta">${t('30% deposit to book, the rest 6 weeks before. No card fees.')}</span>`}
+    <ul class="trust"><li><svg class="i"><use href="#i-check"/></svg>${t('Free cancellation until 6 weeks before')}</li><li><svg class="i"><use href="#i-check"/></svg>${t('Instructor checks your experience before payment')}</li><li><svg class="i"><use href="#i-check"/></svg>${t('Questions? Ask the instructor in Telegram')}</li></ul>`;
+  $('sumD').innerHTML = html; $('sumM').innerHTML = html;
+  $('msumLabel').textContent = `${c.label.split(' – ')[0]} · ${st.ppl === 1 ? t('1 person') : t('{n} people', { n: st.ppl })}`;
+  $('msumTotal').textContent = eur(tt.total);
+}
+
+function renderStep1() {
+  $('lead1').textContent = item.lead; $('dateLegend').textContent = item.dateLegend;
+  const collapsed = item.kind === 'passage' && !showAll;
+  const list = collapsed ? [cur()] : item.options;
+  $('dates').innerHTML = list.map((o) => opt('date', o.id, o.label, o.sub, `${eur(o.price)}<br><span class="avail${o.left === 0 ? ' full' : o.left <= 2 ? ' low' : ''}">${o.left === 0 ? t('Full') : o.left === 1 ? t('1 of 4 left') : t('{n} of 4 left', { n: o.left })}</span>`, o.id === st.date, o.left === 0)).join('') + (collapsed ? `<button class="linkbtn" type="button" id="showAll" style="justify-self:start;margin-top:4px">${t('Show all {n} passages', { n: item.options.length })}</button>` : '');
+  if (collapsed) $('showAll').addEventListener('click', () => { showAll = true; renderStep1(); });
+  const p = item.kind === 'passage' ? pair() : null;
+  $('addFs').hidden = !p;
+  if (p) $('adds').innerHTML = opt('add', '1', `${p.route}, ${p.label}`, t('Most people sail both ways: twice the miles, one flight'), `+${eur(p.price)}`, st.add, false, 'checkbox');
+  $('cabins').innerHTML = CABINS.map((c) => opt('cabin', c.id, c.label, c.sub, c.add ? `+${eur(c.add)}` : t('Included'), c.id === st.cabin, false)).join('');
+  const max = st.cabin === 'single' ? 1 : Math.min(cur().left, 4);
+  st.ppl = Math.max(st.cabin === 'two' ? 2 : 1, Math.min(st.ppl, max));
+  $('ppl').textContent = st.ppl; $('minus').disabled = st.ppl <= (st.cabin === 'two' ? 2 : 1); $('plus').disabled = st.ppl >= max;
+  $('pplHint').textContent = (cur().left === 1 ? t('1 place left on this date.') : t('{n} places left on this date.', { n: cur().left })) + (st.cabin === 'two' ? ' ' + t('A double cabin is for two people.') : st.cabin === 'single' ? ' ' + t('A cabin to yourself is for one person.') : '');
+}
+
+function renderStep2() {
+  const e = EXP[item.kind];
+  $('expLegend').textContent = e.legend; $('expHint').textContent = e.hint;
+  $('exp').innerHTML = e.opts.map(([v, ti, s]) => opt('exp', v, ti, s, '', st.exp === v, false)).join('');
+  $('othersFs').hidden = st.ppl < 2;
+  $('others').innerHTML = Array.from({ length: st.ppl - 1 }, (_, i) => `<div class="fld"><label for="o${i}">${t('Person {n}', { n: i + 2 })} <span class="opt-l">${t('(optional)')}</span></label><input id="o${i}" autocomplete="off" placeholder="${t('Full name')}"></div>`).join('');
+}
+
+function renderStep3() {
+  const tt = totals();
+  $('plan').innerHTML = opt('plan', 'deposit', t('Deposit {amount}', { amount: eur(tt.deposit) }), t('The rest, {amount}, is due 6 weeks before the start', { amount: eur(tt.total - tt.deposit) }), '', st.plan === 'deposit', false)
+    + opt('plan', 'full', t('Pay in full {amount}', { amount: eur(tt.total) }), t('Nothing more to pay later'), '', st.plan === 'full', false);
+  $('method').innerHTML = opt('method', 'card', t('Card, Apple Pay or Google Pay'), t('Visa, Mastercard. Secure 3-D Secure check'), '', st.method === 'card', false)
+    + opt('method', 'bank', t('Bank transfer'), t('We hold your place for 3 days while the money arrives'), '', st.method === 'bank', false);
+  $('payboxText').textContent = st.method === 'card' ? t('After we confirm your place, we send a secure card payment link. Nothing is charged today.') : t('After we confirm your place, we send the bank details and your booking reference.');
+}
+
+function renderDone() {
+  const c = cur(); const tt = totals();
+  const ref = 'OW-' + c.id.slice(2).replace(/-/g, '') + '-' + String(47 + st.ppl).padStart(3, '0');
+  $('ref').textContent = ref;
+  const email = $('email').value || t('your email');
+  $('doneLead').textContent = `${item.title}, ${c.label}${c.label.endsWith('.') ? '' : '.'} ${t('Nothing has been charged.')} ${t('Your first payment will be {amount}.', { amount: eur(tt.now) })} ${t('We will check availability and send payment details to {email} within one working day.', { email })}`;
+  const place = c.place || item.place;
+  const steps = [
+    [t('Today'), t('Request received'), t('We check the boat and the instructor and reply within one working day.')],
+    [t('Within a day'), t('Confirmation and payment link'), st.method === 'bank' ? t('We email the bank details and your booking reference.') : t('We email a secure card payment link and your booking reference.')],
+    [t('After payment'), t('Your instructor writes'), t('A hello in Telegram or WhatsApp, and a quick check of your experience.')],
+    ...(st.plan === 'deposit' ? [[t('6 weeks before'), t('Balance of {amount}', { amount: eur(tt.total - tt.deposit) }), t('We send a payment link a week before it is due. No card fees.')]] : []),
+    [t('2 weeks before'), t('Joining instructions'), t('Marina, berth, what to bring, flights and transfers. Meeting point: {place}.', { place })],
+    [t('Day 1'), t('Aboard at 15:00'), t('Safety briefing, cabins, dinner together. You sail on Sunday morning.')],
+  ];
+  $('timeline').innerHTML = steps.map(([w, b, p]) => `<li><span class="when">${w}</span><div><b>${b}</b><p>${p}</p></div></li>`).join('');
+  $('afterText').textContent = item.after;
+  $('prep').href = item.prep;
+  const d = c.id.replace(/-/g, '');
+  const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Ocean Way//Booking//EN\nBEGIN:VEVENT\nUID:${ref}@oceanway\nDTSTART;VALUE=DATE:${d}\nSUMMARY:${item.title} (${ref})\nLOCATION:${place}\nEND:VEVENT\nEND:VCALENDAR`;
+  $('ics').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(ics);
+}
+
+function validate(step) {
+  const errs = [];
+  document.querySelectorAll('.fld.bad').forEach((f) => f.classList.remove('bad'));
+  if (step === 2) {
+    [['fname', (v) => v.trim()], ['lname', (v) => v.trim()], ['email', (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)], ['phone', (v) => v.replace(/\D/g, '').length >= 7]].forEach(([id, ok]) => {
+      const el = $(id); if (!ok(el.value)) { el.closest('.fld').classList.add('bad'); el.setAttribute('aria-invalid', 'true'); errs.push([id, el.closest('.fld').querySelector('.err').textContent]); } else el.removeAttribute('aria-invalid');
+    });
+    if (!st.exp) errs.push(['exp', t('Choose your experience')]);
+  }
+  if (step === 3 && !$('terms').checked) { $('termsFld').classList.add('bad'); errs.push(['terms', t('Please accept the booking terms')]); }
+  $('errlist').innerHTML = errs.map(([id, m]) => `<li><a href="#${id}">${m}</a></li>`).join('');
+  $('errsum').classList.toggle('on', errs.length > 0);
+  if (errs.length) $('errsum').focus();
+  return !errs.length;
+}
+
+function go(step, focus = true) {
+  st.step = step; save();
+  document.querySelectorAll('[data-step]').forEach((s) => { s.hidden = Number(s.dataset.step) !== step; });
+  $('form').hidden = step === 4; $('done').hidden = step !== 4;
+  document.querySelectorAll('#steps li').forEach((li) => { const n = Number(li.dataset.s); li.className = n < step ? 'done' : n === step ? 'now' : ''; if (n === step) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current'); });
+  $('errsum').classList.remove('on');
+  const tt = totals();
+  $('prev').style.visibility = step === 1 ? 'hidden' : 'visible';
+  $('h1').textContent = step === 4 ? t('Booking request received') : item.h1; $('back').hidden = step === 4; $('steps').hidden = step === 4;
+  $('next').textContent = step === 1 ? t('Continue to your details') : step === 2 ? t('Continue to payment') : t('Send booking request');
+  if (step === 1) renderStep1(); if (step === 2) renderStep2(); if (step === 3) renderStep3(); if (step === 4) renderDone();
+  renderSummary();
+  document.title = ['', t('Choose dates'), t('Your details'), t('Payment'), t('Booking request received')][step] + ' · ' + item.title + ' · Ocean Way';
+  if (focus) { window.scrollTo({ top: 0, behavior: 'smooth' }); const h = step === 4 ? $('t4') : $('t' + step); h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+}
+
+document.querySelectorAll('.lang-menu a').forEach((el) => { el.href = el.getAttribute('href') + location.search; });
+document.querySelectorAll('a[href]:not(.lang-menu a)').forEach((el) => { const h = el.getAttribute('href'); if (/^(home|bareboat-skipper-course|booking)\.html/.test(h)) el.setAttribute('href', link(h.split('#')[0].split('?')[0]) + h.slice(h.split('#')[0].split('?')[0].length)); });
+$('h1').textContent = item.h1; $('back').href = item.back[0]; $('back').querySelector('span').textContent = item.back[1];
+$('form').addEventListener('change', (e) => {
+  const n = e.target.name;
+  if (n === 'date') { st.date = e.target.value; st.add = false; renderStep1(); }
+  if (n === 'add') st.add = e.target.checked;
+  if (n === 'cabin') { st.cabin = e.target.value; renderStep1(); }
+  if (n === 'exp') st.exp = e.target.value;
+  if (n === 'plan') { st.plan = e.target.value; renderStep3(); go(3, false); }
+  if (n === 'method') { st.method = e.target.value; renderStep3(); go(3, false); }
+  save(); renderSummary();
+});
+document.querySelectorAll('.fld input').forEach((el) => el.addEventListener('blur', () => { if (el.closest('.fld').classList.contains('bad')) validate(st.step); }));
+$('minus').addEventListener('click', () => { st.ppl--; renderStep1(); renderSummary(); save(); });
+$('plus').addEventListener('click', () => { st.ppl++; renderStep1(); renderSummary(); save(); });
+$('prev').addEventListener('click', () => go(Math.max(1, st.step - 1)));
+$('form').addEventListener('submit', (e) => { e.preventDefault(); if (validate(st.step)) go(st.step + 1); });
+
+if (q.get('demo')) { $('fname').value = 'Anna'; $('lname').value = 'Sokolova'; $('email').value = 'anna@example.com'; $('phone').value = '+357 99 123 456'; st.exp = st.exp || (item.kind === 'course' ? 'some' : 'day'); }
+go(Number(q.get('step')) || 1, false);
+</script>
+</body>
+</html>

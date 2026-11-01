@@ -1,0 +1,7 @@
+prototypes
+research
+.claude
+web/node_modules
+web/.next
+web/.env*
+**/.env*

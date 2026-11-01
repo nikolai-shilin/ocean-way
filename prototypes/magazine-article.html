@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seven Days Under Sail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root {
+  --font-title: 'Playfair Display', Georgia, serif;
+  --font-text: 'Inter', system-ui, sans-serif;
+  --paper: #faf7f2;
+  --paper-2: #f1ece3;
+  --ink: #141414;
+  --ink-2: #4a4a48;
+  --ink-3: #8a8780;
+  --rule: #d9d3c7;
+  --accent: #9a7b4f;
+  --sea: #12303f;
+  --gutter: clamp(16px, 4vw, 48px);
+  --measure: 680px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 clamp(16px, 1.4vw, 17px)/1.65 var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; }
+
+/* Text styles */
+.display { font: 400 clamp(52px, 8vw, 112px)/0.98 var(--font-title); letter-spacing: -0.025em; margin: 0; }
+h2 { font: 500 clamp(32px, 3.6vw, 44px)/1.1 var(--font-title); letter-spacing: -0.01em; margin: 0 0 20px; }
+h3 { font: 500 clamp(24px, 2.4vw, 30px)/1.2 var(--font-title); letter-spacing: -0.005em; margin: 0 0 12px; }
+h4 { font: 600 clamp(20px, 1.9vw, 23px)/1.25 var(--font-title); margin: 0 0 10px; }
+.eyebrow { font: 500 12px/1.3 var(--font-text); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.lead { font: 400 clamp(19px, 1.8vw, 23px)/1.5 var(--font-title); font-style: italic; color: var(--ink-2); }
+.caption { font: 400 13px/1.45 var(--font-text); color: var(--ink-3); margin-top: 10px; }
+.caption b { font-weight: 600; color: var(--ink-2); }
+em.t { font-style: italic; }
+
+/* Masthead */
+.top { border-bottom: 1px solid var(--ink); }
+.top-inner { max-width: 1280px; margin: 0 auto; padding: 14px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { font: 600 clamp(22px, 2.4vw, 30px)/1 var(--font-title); letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; padding-left: 0.32em; }
+.nav { display: flex; gap: 24px; font: 500 12px/1 var(--font-text); letter-spacing: 0.14em; text-transform: uppercase; }
+.nav a { text-decoration: none; color: var(--ink-2); }
+.nav a[aria-current] { color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+.issue { font: 400 12px/1 var(--font-text); color: var(--ink-3); letter-spacing: 0.08em; }
+
+/* Hero */
+.hero { max-width: 1280px; margin: 0 auto; padding: clamp(32px, 5vw, 64px) var(--gutter) 0; }
+.hero-head { text-align: center; max-width: 980px; margin: 0 auto; }
+.hero-head .eyebrow { margin-bottom: 22px; }
+.hero-head .lead { max-width: 640px; margin: 26px auto 0; }
+.byline { margin: 28px 0 0; font: 500 12px/1.4 var(--font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.byline span { color: var(--ink-3); font-weight: 400; }
+.hero-photo { margin: clamp(32px, 5vw, 56px) 0 0; aspect-ratio: 16 / 8; overflow: hidden; }
+
+/* Article body */
+.article { padding: 0 var(--gutter); }
+.col { max-width: var(--measure); margin: 0 auto; }
+.body p { margin: 0 0 1.25em; }
+.section { margin-top: clamp(56px, 7vw, 88px); }
+.section-mark { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.section-mark .num { font: italic 400 20px/1 var(--font-title); color: var(--accent); }
+.section-mark .line { flex: 1; height: 1px; background: var(--rule); }
+
+/* Pull quote */
+.pull { max-width: 980px; margin: clamp(56px, 7vw, 96px) auto; text-align: center; padding: 0 var(--gutter); }
+.pull blockquote { margin: 0; font: italic 400 clamp(30px, 4.2vw, 54px)/1.18 var(--font-title); letter-spacing: -0.01em; }
+.pull blockquote::before { content: "\201C"; display: block; font: 400 1.6em/0.6 var(--font-title); color: var(--accent); margin-bottom: 0.15em; }
+.pull cite { display: block; margin-top: 22px; font: 500 12px/1.4 var(--font-text); font-style: normal; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+
+/* Figures */
+.wide { max-width: 1120px; margin: clamp(48px, 6vw, 80px) auto; }
+.full { margin: clamp(56px, 7vw, 96px) calc(-1 * var(--gutter)); }
+.full .ph { aspect-ratio: 21 / 9; }
+.full .caption { padding: 0 var(--gutter); max-width: 1280px; margin-left: auto; margin-right: auto; }
+.pair { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(12px, 2vw, 24px); align-items: end; }
+.pair .a { aspect-ratio: 4 / 5; }
+.pair .b { aspect-ratio: 3 / 4; }
+.ph { overflow: hidden; background: var(--paper-2); }
+
+/* Sidebar + text grid */
+.split { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, var(--measure)) 300px; gap: 64px; justify-content: center; }
+.aside { border-top: 2px solid var(--ink); padding-top: 18px; align-self: start; position: sticky; top: 24px; }
+.aside h4 { margin-bottom: 14px; }
+.facts { margin: 0; display: grid; gap: 14px; }
+.facts div { border-bottom: 1px solid var(--rule); padding-bottom: 12px; }
+.facts dt { font: 500 11px/1.3 var(--font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.facts dd { margin: 4px 0 0; font: 400 19px/1.3 var(--font-title); }
+
+/* Tables */
+.table-wrap { margin: 28px 0 8px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font: 400 15px/1.45 var(--font-text); }
+caption { text-align: left; caption-side: top; margin-bottom: 14px; }
+th { text-align: left; font: 500 11px/1.3 var(--font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); padding: 0 16px 12px 0; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td.day { font: italic 400 30px/1 var(--font-title); color: var(--accent); width: 56px; }
+td.place { font: 500 19px/1.3 var(--font-title); white-space: nowrap; }
+td.num { font: 400 15px/1.45 var(--font-text); font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--ink-2); }
+.compare th:not(:first-child), .compare td:not(:first-child) { text-align: right; }
+.compare thead th.plan { font: 500 22px/1.2 var(--font-title); letter-spacing: 0; text-transform: none; color: var(--ink); }
+.compare thead th.plan small { display: block; font: 400 12px/1.4 var(--font-text); color: var(--ink-3); margin-top: 4px; }
+.compare td:first-child { color: var(--ink-2); }
+.compare tr.total td { border-bottom: 2px solid var(--ink); font: 500 24px/1.2 var(--font-title); color: var(--ink); padding-top: 20px; }
+.compare tr.total td:first-child { font: 500 11px/1.3 var(--font-text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); vertical-align: bottom; }
+.yes { color: var(--sea); }
+.no { color: var(--ink-3); }
+.note { font: 400 12px/1.5 var(--font-text); color: var(--ink-3); }
+
+/* Author + related */
+.author { display: flex; gap: 18px; align-items: center; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); padding: 22px 0; margin-top: 64px; }
+.author .ph { width: 64px; height: 64px; border-radius: 50%; flex: none; }
+.author p { margin: 0; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+.author b { display: block; font: 500 18px/1.3 var(--font-title); color: var(--ink); margin-bottom: 2px; }
+.related { background: var(--paper-2); margin-top: clamp(64px, 8vw, 112px); padding: clamp(48px, 6vw, 72px) var(--gutter); }
+.related-inner { max-width: 1120px; margin: 0 auto; }
+.related h2 { text-align: center; margin-bottom: 36px; }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+.card { text-decoration: none; }
+.card .ph { aspect-ratio: 4 / 5; margin-bottom: 16px; }
+.card img { transition: transform 0.6s ease; }
+.card:hover img { transform: scale(1.04); }
+.card .eyebrow { margin-bottom: 8px; }
+.card h4 { font-weight: 500; }
+.foot { text-align: center; padding: 40px var(--gutter); font: 400 12px/1.5 var(--font-text); color: var(--ink-3); border-top: 1px solid var(--rule); }
+
+@media (max-width: 960px) {
+  .split { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .aside { position: static; }
+  .nav { display: none; }
+}
+@media (max-width: 640px) {
+  .hero-photo { aspect-ratio: 4 / 5; margin-left: calc(-1 * var(--gutter)); margin-right: calc(-1 * var(--gutter)); }
+  .pair { grid-template-columns: 1fr; }
+  .pair .b { aspect-ratio: 4 / 3; }
+  .full .ph { aspect-ratio: 4 / 3; }
+  .cards { grid-template-columns: 1fr; }
+  .card .ph { aspect-ratio: 16 / 10; }
+  .issue { display: none; }
+  td.place { white-space: normal; }
+  .itinerary td.note-col { display: none; }
+  .itinerary th.note-col { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <span class="issue">Issue 07 · Summer 2027</span>
+    <a class="logo" href="#">Ocean Way</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#" aria-current="page">Journeys</a>
+      <a href="#">Yachts</a>
+      <a href="#">Table</a>
+      <a href="#">Style</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-head">
+      <div class="eyebrow">Journeys · The Cyclades</div>
+      <h1 class="display">Seven days<br>under <em class="t">sail</em></h1>
+      <p class="lead">A slow week through the Greek islands on a catamaran: quiet bays, long lunches, and the kind of light that makes everyone look like they've been on holiday for a month.</p>
+      <p class="byline">Words by Elena Marsh <span>·</span> <span>Photographs via Unsplash</span> <span>·</span> <span>12 min read</span></p>
+    </div>
+    <figure class="hero-photo ph" style="margin-bottom:0">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=80&auto=format&fit=crop" alt="Turquoise water meeting a white sand beach">
+    </figure>
+    <p class="caption" style="text-align:right">Morning anchorage, first day out.</p>
+  </section>
+
+  <article class="article">
+    <div class="split section" style="margin-top:clamp(40px,5vw,64px)">
+      <div class="body">
+        <p>The first thing you notice is the quiet. Not silence, exactly: there's the slap of water against the hulls, a halyard knocking somewhere on the mast, a gull arguing with another gull. But after the airport, the ferry terminal, and the taxi with the radio turned all the way up, the island of Paros at seven in the morning feels like someone has finally turned the volume down.</p>
+        <p>We came for a week, eight of us on a forty-two-foot catamaran, with a skipper named Nikos who has been sailing these waters since he was tall enough to see over the wheel. The plan was loose by design. Sail three or four hours a day, anchor somewhere sheltered, swim, eat, repeat. Nikos would decide the route each morning based on the wind, which in the Cyclades in July means the meltemi, the strong northerly that can turn a pleasant crossing into a lively one.</p>
+        <p>By the second day, nobody was checking their phone. By the third, nobody knew what day it was. By the fourth, a debate broke out over whether we should simply never go home, which was settled only when someone pointed out that the boat had to go back eventually, and so, regrettably, did we.</p>
+
+        <div class="section">
+          <div class="section-mark"><span class="num">i.</span><span class="line"></span></div>
+          <h2>The route, day by day</h2>
+          <p>Nikos kept a rough outline in his head and adjusted it every morning over coffee. This is how the week actually played out, from the first anchorage to the last.</p>
+          <div class="table-wrap">
+            <table class="itinerary">
+              <thead>
+                <tr><th>Day</th><th>Island</th><th class="note-col">Highlight</th><th>Sailing</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="day">01</td><td class="place">Paros</td><td class="note-col">Boarding, sunset dinner in Naoussa harbour</td><td class="num">—</td></tr>
+                <tr><td class="day">02</td><td class="place">Antiparos</td><td class="note-col">Swim stop at Despotiko, the island's empty twin</td><td class="num">2 h · 9 nm</td></tr>
+                <tr><td class="day">03</td><td class="place">Ios</td><td class="note-col">Anchor at Manganari, four beaches in one bay</td><td class="num">4 h · 24 nm</td></tr>
+                <tr><td class="day">04</td><td class="place">Santorini</td><td class="note-col">Caldera at dusk, dinner below Oia</td><td class="num">3 h · 18 nm</td></tr>
+                <tr><td class="day">05</td><td class="place">Folegandros</td><td class="note-col">The quietest island of the week, and the favourite</td><td class="num">4 h · 26 nm</td></tr>
+                <tr><td class="day">06</td><td class="place">Sifnos</td><td class="note-col">Cooking lesson and pottery in Vathi</td><td class="num">3 h · 19 nm</td></tr>
+                <tr><td class="day">07</td><td class="place">Paros</td><td class="note-col">Last swim, return to the marina</td><td class="num">4 h · 22 nm</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">nm = nautical miles. Times depend on wind and are approximate.</p>
+        </div>
+      </div>
+
+      <aside class="aside" aria-label="At a glance">
+        <div class="eyebrow" style="margin-bottom:10px">At a glance</div>
+        <h4>The trip</h4>
+        <dl class="facts">
+          <div><dt>Route</dt><dd>Paros to Paros, 7 islands</dd></div>
+          <div><dt>Boat</dt><dd>Lagoon 42 catamaran</dd></div>
+          <div><dt>Guests</dt><dd>Up to 8, four cabins</dd></div>
+          <div><dt>Best season</dt><dd>Late May to early October</dd></div>
+          <div><dt>Distance</dt><dd>About 118 nautical miles</dd></div>
+        </dl>
+      </aside>
+    </div>
+
+    <figure class="wide">
+      <div class="pair">
+        <div>
+          <div class="ph a"><img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80&auto=format&fit=crop" alt="White houses and blue domes above the sea"></div>
+          <p class="caption"><b>Santorini.</b> The caldera is best seen from the water, after the day boats have gone home.</p>
+        </div>
+        <div>
+          <div class="ph b"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1000&q=80&auto=format&fit=crop" alt="Whitewashed village street at sunset"></div>
+          <p class="caption"><b>Oia.</b> Take the steps down to the water, then retreat to the boat.</p>
+        </div>
+      </div>
+    </figure>
+
+    <div class="pull">
+      <blockquote>By the third day nobody knew what day it was, and nobody wanted to.</blockquote>
+      <cite>Day three, somewhere off Ios</cite>
+    </div>
+
+    <div class="col body">
+      <div class="section-mark"><span class="num">ii.</span><span class="line"></span></div>
+      <h2>Life on board</h2>
+      <p>A catamaran is, in the most practical sense, a floating apartment with two front porches. The cabins are compact but private, each with its own small bathroom, and the deck is wide enough for eight people to sprawl without anyone touching. The net at the front, the trampoline, became the most fought-over spot on the boat, especially at sunset.</p>
+      <p>Mornings started early. Someone would put the coffee on, someone else would jump straight off the back step into water so clear you could count the stones on the bottom, and Nikos would study the sky and announce where we were going. Lunch was usually at anchor: tomatoes that tasted like tomatoes, feta, bread from whatever bakery we'd found the night before, and a bottle of something cold and local.</p>
+      <h3>The days that stood out</h3>
+      <p>Folegandros was the surprise. Smaller and steeper than its famous neighbour, it has a clifftop village that seems to hang over the sea and almost no traffic. We walked up at dusk, ate grilled octopus in a square lit with strings of bulbs, and walked back down in the dark, following the sound of the water to the harbour.</p>
+    </div>
+
+    <figure class="full">
+      <div class="ph"><img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=2400&q=80&auto=format&fit=crop" alt="Deep blue open sea"></div>
+      <p class="caption"><b>Crossing to Folegandros.</b> Four hours of open water and a steady northerly.</p>
+    </figure>
+
+    <div class="col body">
+      <div class="section-mark"><span class="num">iii.</span><span class="line"></span></div>
+      <h2>Two ways to go</h2>
+      <p>The trip comes in two versions. The classic week is what we did: a skippered catamaran where the group shares the shopping and the cooking. The premium week swaps in a larger boat and a private chef, which turns every lunch into a small event and frees up everyone's evenings entirely.</p>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="plan">Classic<small>Lagoon 42</small></th>
+              <th class="plan">Premium<small>Bali 4.6 + chef</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Cabins</td><td>4 double</td><td>4 double + crew</td></tr>
+            <tr><td>Skipper</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+            <tr><td>Private chef</td><td class="no">—</td><td class="yes">Included</td></tr>
+            <tr><td>Meals on board</td><td>Self-catered</td><td>Breakfast and lunch</td></tr>
+            <tr><td>Fuel and marina fees</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+            <tr><td>Paddleboards</td><td>1</td><td>2 + snorkel kit</td></tr>
+            <tr class="total"><td>Per guest, from</td><td>€1,450</td><td>€2,390</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Sample prices for layout purposes only, based on a full boat of 8 guests in July.</p>
+
+      <div class="section" style="margin-top:56px">
+        <h3>Before you go</h3>
+        <p>Pack less than you think. Soft bags only, because hard suitcases don't fit in the cabins. Bring a hat you don't mind losing to the wind, reef-safe sunscreen, and one nice outfit for the evening in Oia. Everything else, including the best version of yourself, tends to turn up on its own by day three.</p>
+      </div>
+
+      <div class="author">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=200&q=80&auto=format&fit=crop" alt=""></div>
+        <p><b>Elena Marsh</b>Travel editor at Ocean Way. She has crossed the Aegean eleven times and still gets seasick on ferries.</p>
+      </div>
+    </div>
+  </article>
+
+  <section class="related">
+    <div class="related-inner">
+      <h2>More <em class="t">journeys</em></h2>
+      <div class="cards">
+        <a class="card" href="#">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=900&q=80&auto=format&fit=crop" alt="Beach with turquoise water"></div>
+          <div class="eyebrow">Croatia</div>
+          <h4>The Dalmatian coast, one cove at a time</h4>
+        </a>
+        <a class="card" href="#">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop" alt="Restaurant table set for dinner"></div>
+          <div class="eyebrow">Table</div>
+          <h4>What a yacht chef cooks in a galley the size of a cupboard</h4>
+        </a>
+        <a class="card" href="#">
+          <div class="ph"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=900&q=80&auto=format&fit=crop" alt="Ocean wave"></div>
+          <div class="eyebrow">Yachts</div>
+          <h4>Catamaran or monohull? A first-timer's guide</h4>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">Ocean Way · Layout prototype · Photographs via Unsplash</footer>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "slug": "vhf-procedure",
+  "title": "VHF radio: Mayday, Pan-Pan and everyday calls",
+  "h1": "VHF radio: Mayday, Pan-Pan and everyday calls",
+  "lead": "The VHF radio is your link to rescue services, marinas and other boats. Learn the channels, the phonetic alphabet and the exact words for Mayday, Pan-Pan, Sécurité and a routine marina call.",
+  "description": "Marine VHF procedure in plain English: channel 16, DSC distress alerts, the phonetic alphabet, Mayday and Pan-Pan formats with examples, and marina calls.",
+  "summary": [
+    "Channel 16 is for distress, safety and calling; talk on a working channel.",
+    "The red DSC button sends your MMSI and position automatically.",
+    "Mayday for grave and imminent danger, Pan-Pan for urgency.",
+    "You need an SRC to operate; the boat needs a ship station licence."
+  ],
+  "read_minutes": 5,
+  "level": "All crew",
+  "course": "VHF Radio Operator",
+  "topic": "Radio and safety",
+  "toc": [
+    [
+      "channels",
+      "Channels and dual watch"
+    ],
+    [
+      "phonetic",
+      "Phonetic alphabet"
+    ],
+    [
+      "dsc",
+      "DSC distress button"
+    ],
+    [
+      "mayday",
+      "Mayday"
+    ],
+    [
+      "pan-pan",
+      "Pan-Pan"
+    ],
+    [
+      "securite",
+      "Sécurité"
+    ],
+    [
+      "everyday",
+      "Calling a marina"
+    ],
+    [
+      "prowords",
+      "Procedure words"
+    ],
+    [
+      "licence",
+      "Licences"
+    ],
+    [
+      "practise",
+      "Practise it on the water"
+    ]
+  ]
+}

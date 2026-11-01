@@ -1,0 +1,8 @@
+<svg viewBox="2 2 116 116" xmlns="http://www.w3.org/2000/svg">
+<defs><clipPath id="c5"><circle cx="60" cy="60" r="47.01"/></clipPath></defs>
+<g clip-path="url(#c5)">
+<path d="M-1 72.4 L121 54.5 L121 121 L-1 121Z" fill="#5bb8e8"/>
+<path d="M28 59 C36 36 72 23.5 118 32 L118 51 C84 41 47 43.5 28 59Z" fill="#fff"/>
+</g>
+<circle cx="60" cy="60" r="52.5" fill="none" stroke="#fff" stroke-width="11"/>
+</svg>

@@ -1,0 +1,34 @@
+{
+  "course_dates": [
+    {"key": "2027-05-01", "course_slug": "bareboat-skipper", "starts_on": "2027-05-01", "ends_on": "2027-05-08", "area": "Saronic Gulf, Greece", "boat": "Bavaria C42", "meeting_point": "Alimos Marina, Athens", "price_eur": 1590, "places_total": 4, "places_taken": 2},
+    {"key": "2027-05-22", "course_slug": "bareboat-skipper", "starts_on": "2027-05-22", "ends_on": "2027-05-29", "area": "Saronic Gulf, Greece", "boat": "Bavaria C42", "meeting_point": "Alimos Marina, Athens", "price_eur": 1590, "places_total": 4, "places_taken": 4},
+    {"key": "2027-06-12", "course_slug": "bareboat-skipper", "starts_on": "2027-06-12", "ends_on": "2027-06-19", "area": "Split, Croatia", "boat": "Dufour 430", "meeting_point": "ACI Marina Split", "price_eur": 1690, "places_total": 4, "places_taken": 0},
+    {"key": "2027-09-11", "course_slug": "bareboat-skipper", "starts_on": "2027-09-11", "ends_on": "2027-09-18", "area": "Saronic Gulf, Greece", "boat": "Bavaria C42", "meeting_point": "Alimos Marina, Athens", "price_eur": 1590, "places_total": 4, "places_taken": 1},
+    {"key": "2027-10-02", "course_slug": "bareboat-skipper", "starts_on": "2027-10-02", "ends_on": "2027-10-09", "area": "Split, Croatia", "boat": "Dufour 430", "meeting_point": "ACI Marina Split", "price_eur": 1490, "places_total": 4, "places_taken": 0}
+  ],
+  "passages": [
+    {"key": "2027-04-10", "starts_on": "2027-04-10", "ends_on": "2027-04-17", "from_port": "Fethiye", "to_port": "Bodrum", "leg": "fethiye-bodrum", "waters": "Turquoise Coast and Aegean", "price_eur": 890, "places_total": 4, "return_key": "2027-04-17"},
+    {"key": "2027-04-17", "starts_on": "2027-04-17", "ends_on": "2027-04-24", "from_port": "Bodrum", "to_port": "Fethiye", "leg": "fethiye-bodrum", "waters": "Aegean and Turquoise Coast", "price_eur": 890, "places_total": 4, "return_key": "2027-04-10"},
+    {"key": "2027-05-01", "starts_on": "2027-05-01", "ends_on": "2027-05-08", "from_port": "Fethiye", "to_port": "Northern Cyprus", "leg": "fethiye-cyprus", "waters": "Open-sea crossing", "price_eur": 890, "places_total": 4, "return_key": "2027-05-15"},
+    {"key": "2027-05-15", "starts_on": "2027-05-15", "ends_on": "2027-05-22", "from_port": "Northern Cyprus", "to_port": "Fethiye", "leg": "fethiye-cyprus", "waters": "Open-sea crossing", "price_eur": 890, "places_total": 4, "return_key": "2027-05-01"},
+    {"key": "2027-06-05", "starts_on": "2027-06-05", "ends_on": "2027-06-12", "from_port": "Fethiye", "to_port": "Kuşadası", "leg": "fethiye-kusadasi", "waters": "Aegean coast", "price_eur": 890, "places_total": 4, "return_key": null},
+    {"key": "2027-06-12", "starts_on": "2027-06-12", "ends_on": "2027-06-26", "from_port": "Kuşadası", "to_port": "Istanbul", "leg": "kusadasi-istanbul", "waters": "Aegean, Dardanelles, Sea of Marmara", "price_eur": 1690, "places_total": 4, "return_key": "2027-07-10"},
+    {"key": "2027-07-10", "starts_on": "2027-07-10", "ends_on": "2027-07-17", "from_port": "Istanbul", "to_port": "Kuşadası", "leg": "kusadasi-istanbul", "waters": "Sea of Marmara, Dardanelles, Aegean", "price_eur": 890, "places_total": 4, "return_key": "2027-06-12"},
+    {"key": "2027-07-17", "starts_on": "2027-07-17", "ends_on": "2027-07-24", "from_port": "Kuşadası", "to_port": "Fethiye", "leg": "fethiye-kusadasi", "waters": "Aegean coast", "price_eur": 890, "places_total": 4, "return_key": null},
+    {"key": "2027-08-07", "starts_on": "2027-08-07", "ends_on": "2027-08-14", "from_port": "Fethiye", "to_port": "Kemer", "leg": "fethiye-kemer", "waters": "Lycian coast", "price_eur": 890, "places_total": 4, "return_key": "2027-08-14"},
+    {"key": "2027-08-14", "starts_on": "2027-08-14", "ends_on": "2027-08-21", "from_port": "Kemer", "to_port": "Fethiye", "leg": "fethiye-kemer", "waters": "Lycian coast", "price_eur": 890, "places_total": 4, "return_key": "2027-08-07"},
+    {"key": "2027-09-04", "starts_on": "2027-09-04", "ends_on": "2027-09-11", "from_port": "Fethiye", "to_port": "Kuşadası", "leg": "fethiye-kusadasi", "waters": "Aegean coast", "price_eur": 890, "places_total": 4, "return_key": "2027-09-11"},
+    {"key": "2027-09-11", "starts_on": "2027-09-11", "ends_on": "2027-09-18", "from_port": "Kuşadası", "to_port": "Fethiye", "leg": "fethiye-kusadasi", "waters": "Aegean coast", "price_eur": 890, "places_total": 4, "return_key": "2027-09-04"},
+    {"key": "2027-10-02", "starts_on": "2027-10-02", "ends_on": "2027-10-09", "from_port": "Fethiye", "to_port": "Kekova", "leg": "fethiye-kekova", "waters": "Lycian coast", "price_eur": 890, "places_total": 4, "return_key": "2027-10-09"},
+    {"key": "2027-10-09", "starts_on": "2027-10-09", "ends_on": "2027-10-16", "from_port": "Kekova", "to_port": "Fethiye", "leg": "fethiye-kekova", "waters": "Lycian coast", "price_eur": 890, "places_total": 4, "return_key": "2027-10-02"},
+    {"key": "2027-11-13", "starts_on": "2027-11-13", "ends_on": "2027-11-20", "from_port": "Fenike", "to_port": "Northern Cyprus", "leg": "finike-cyprus", "waters": "Open-sea crossing", "price_eur": 890, "places_total": 4, "return_key": "2027-11-20"},
+    {"key": "2027-11-20", "starts_on": "2027-11-20", "ends_on": "2027-11-24", "from_port": "Northern Cyprus", "to_port": "Fethiye", "leg": "fethiye-cyprus", "waters": "Open-sea crossing", "price_eur": 590, "places_total": 4, "return_key": "2027-11-13"}
+  ],
+  "yachts": [
+    {"sort": 1, "model": "Bavaria C42", "year": 2022, "length_m": 12.4, "cabins": 3, "berths": 8, "base": "Athens, Alimos Marina", "used_for": "Bareboat Skipper courses", "charter_from_eur": 2400, "photo_id": "1540946485063-a40da27545f8", "photo_alt": "A Bavaria sailing yacht under full sail"},
+    {"sort": 2, "model": "Dufour 430", "year": 2023, "length_m": 13.1, "cabins": 3, "berths": 8, "base": "Split, Croatia", "used_for": "Bareboat Skipper courses", "charter_from_eur": 2600, "photo_id": "1542397284385-6010376c5337", "photo_alt": "A sailing yacht at anchor seen from above"},
+    {"sort": 3, "model": "Jeanneau Sun Odyssey 440", "year": 2021, "length_m": 13.4, "cabins": 3, "berths": 8, "base": "Fethiye, Türkiye", "used_for": "Training passages", "charter_from_eur": 2500, "photo_id": "1534447677768-be436bb09401", "photo_alt": "A sailing yacht under a starry sky"},
+    {"sort": 4, "model": "Beneteau Oceanis 46.1", "year": 2022, "length_m": 14.6, "cabins": 4, "berths": 10, "base": "Fethiye, Türkiye", "used_for": "Passages and Yachtmaster", "charter_from_eur": 3100, "photo_id": "1534008897995-27a23e859048", "photo_alt": "Yachts anchored in a bay between cliffs"},
+    {"sort": 5, "model": "Hanse 418", "year": 2021, "length_m": 12.4, "cabins": 3, "berths": 8, "base": "Kuşadası, Türkiye", "used_for": "Introduction to Yachting", "charter_from_eur": 2300, "photo_id": "1506929562872-bb421503ef21", "photo_alt": "Yachts anchored in a turquoise cove"}
+  ]
+}
