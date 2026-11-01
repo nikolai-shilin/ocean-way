@@ -1,5 +1,5 @@
 import { t } from '@/lib/content';
-import type { Skill, Step, Stop } from '@/lib/db';
+import type { Faq as FaqItem, Skill, Step, Stop } from '@/lib/db';
 import type { Lang } from '@/lib/site';
 
 /** Building blocks of the course and passage pages: ticked lists, a day-by-day programme, the stops of a route. */
@@ -42,3 +42,30 @@ export function Skills({ lang, skills }: { lang: Lang; skills: Skill[] }) {
     </div>
   );
 }
+
+/** "Asked before booking": the same two-column list of questions as the Bareboat Skipper page (first one open). */
+export function Faq({ lang, items }: { lang: Lang; items: FaqItem[] }) {
+  const half = Math.ceil(items.length / 2);
+  const col = (xs: FaqItem[], from: number) => (
+    <div className="faq-col">
+      {xs.map((x, i) => (
+        <details className="faq-item" key={from + i} open={from + i === 0}>
+          <summary><span className="faq-q">{t(lang, x.q)}</span><svg className="i"><use href="#i-chev" /></svg></summary>
+          <p className="faq-a">{t(lang, x.a)}</p>
+        </details>
+      ))}
+    </div>
+  );
+  return (
+    <section className="sec" id="faq" style={{ marginTop: 96 }}>
+      <div className="sec-head"><span className="kicker">{t(lang, 'Questions')}</span><h2 className="h2">{t(lang, 'Asked before booking')}</h2></div>
+      <div className="faq-grid">{col(items.slice(0, half), 0)}{col(items.slice(half), half)}</div>
+    </section>
+  );
+}
+
+/** FAQPage structured data for the same questions, in the page language. */
+export const faqLd = (lang: Lang, items: FaqItem[]) => ({
+  '@type': 'FAQPage',
+  mainEntity: items.map((x) => ({ '@type': 'Question', name: t(lang, x.q), acceptedAnswer: { '@type': 'Answer', text: t(lang, x.a) } })),
+});

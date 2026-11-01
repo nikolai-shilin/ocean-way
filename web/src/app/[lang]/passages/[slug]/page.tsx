@@ -5,7 +5,7 @@ import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
 import { catalog, getInstructors, getLegs, getPassages, passageSlug, stopsFor, type Passage } from '@/lib/db';
 import { peopleSection } from '@/lib/people';
-import { List, Program, Stops } from '@/components/Details';
+import { Faq, faqLd, List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
 import { eur, galleryHtml, legMap, range, shortRange } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
@@ -56,7 +56,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
     eventStatus: 'https://schema.org/EventScheduled', organizer: { '@id': `${SITE}/#org` },
     location: { '@type': 'Place', name: t(lang, p.from_port), address: { '@type': 'PostalAddress', addressCountry: p.from_port === 'Northern Cyprus' ? 'CY' : 'TR' } },
     offers: { '@type': 'Offer', price: p.price_eur, priceCurrency: 'EUR', availability: `https://schema.org/${full ? 'SoldOut' : 'InStock'}`, url: SITE + path.passage(lang, slug) },
-  }] };
+  }, ...(leg?.faq?.length ? [faqLd(lang, leg.faq)] : [])] };
   const doList = ['Plan each leg with the instructor: route, shipping and weather windows', 'Stand watches, also at night', 'Skipper legs yourself under supervision', 'Log every mile and night hour, signed by the instructor'];
   const map = legMap(lang, p.leg);
   return (
@@ -115,6 +115,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
           <a className="pill pill-quiet pill-wide" href={path.passages(lang)}>{t(lang, 'All passages')}</a>
         </aside>
       </div>
+      {leg?.faq?.length ? <Faq lang={lang} items={leg.faq} /> : null}
     </Shell>
   );
 }

@@ -143,6 +143,32 @@
           36.622,
           "The course runs in the classroom at our base in Fethiye, next to Ece Marina."
         ]
+      ],
+      "faq": [
+        [
+          "Do I need a VHF licence to sail on a charter?",
+          "Most charter companies ask for at least one person aboard with a VHF operator licence. Not every crew member needs one, but anyone who might have to call for help should know how."
+        ],
+        [
+          "Do I need any sailing experience?",
+          "No. The course is for anyone who sails, as crew or skipper. You need to be 16 or over and have enough English to follow the standard radio phrases; we explain each one."
+        ],
+        [
+          "Will I make real calls on air?",
+          "No. You practise every call, Mayday included, on training radios in the classroom, so nothing goes out on air."
+        ],
+        [
+          "What is the exam like?",
+          "A short written test and a practical test on the radio at the end of the day. You get the result the same day."
+        ],
+        [
+          "How long is the certificate valid?",
+          "Five years. After that you renew it."
+        ],
+        [
+          "Can I take it in the same week as a sailing course?",
+          "Yes. It takes one day in Fethiye, and many students add it to Introduction to Yachting or Flotilla Skipper in the same trip."
+        ]
       ]
     },
     "introduction-to-yachting": {
@@ -332,6 +358,36 @@
           29.103,
           36.622,
           "Ece Marina, where the course starts and finishes."
+        ]
+      ],
+      "faq": [
+        [
+          "I've never been on a sailing boat. Is this course for me?",
+          "Yes. It is for people who have never sailed, or have only been aboard as passengers. Nothing is assumed: the instructor explains every rope and manoeuvre, and you do each one yourself."
+        ],
+        [
+          "Do I need to be able to swim?",
+          "Yes, and you should be fit enough to step on and off a boat and move around the deck."
+        ],
+        [
+          "Can teenagers join?",
+          "The minimum age is 16. Younger sailors can join with a parent aboard; ask us first."
+        ],
+        [
+          "Where do we sleep and eat?",
+          "On the boat, all five days, with up to three other students and the instructor. Nights are in harbours and quiet bays. Food comes from a shared kitty of about €150 per person, which is not in the course price."
+        ],
+        [
+          "What if I get seasick?",
+          "The route stays in the bays around Fethiye and the Göcek islands, which are sheltered. Bring tablets if you need them; most people feel fine after the first day."
+        ],
+        [
+          "What certificate do I get?",
+          "IYT International Crew: active crew on yachts up to 24 m, up to 20 nm offshore, by day and in fair weather. It is the entry requirement for Flotilla and Bareboat Skipper."
+        ],
+        [
+          "What comes after this course?",
+          "With International Crew and a VHF licence you can take Flotilla Skipper, the first skipper course. Or sail as crew on a charter or one of our training passages to build days at sea."
         ]
       ]
     },
@@ -524,6 +580,32 @@
           36.622,
           "Ece Marina, where the course starts and finishes."
         ]
+      ],
+      "faq": [
+        [
+          "What is a flotilla?",
+          "A group of charter yachts that sail the same route with a lead boat. The lead boat has a professional crew who help in harbours and are on the radio if something goes wrong."
+        ],
+        [
+          "What experience do I need?",
+          "IYT International Crew or an equivalent certificate, and a VHF licence. You can take the one-day VHF course in the same week."
+        ],
+        [
+          "Can I charter on my own afterwards?",
+          "Not without a flotilla: this certificate covers skippering as part of one. To charter on your own, log 200 miles and 10 days at sea, then take Bareboat Skipper."
+        ],
+        [
+          "Can I get the ICC with it?",
+          "Yes. Flotilla Skipper is one of the certificates you can apply for the ICC with, without a further exam."
+        ],
+        [
+          "Can I sail at night with this certificate?",
+          "It covers fair weather, and most charter companies only allow flotilla yachts to sail by day."
+        ],
+        [
+          "Who else is on the boat?",
+          "Up to four students and the instructor. Most of the time you are at the helm or giving instructions to your crew, and on the last day you run the whole day as skipper."
+        ]
       ]
     },
     "icc": {
@@ -662,6 +744,32 @@
           29.103,
           36.622,
           "The written exam at our base, then the practical on a yacht in Fethiye bay."
+        ]
+      ],
+      "faq": [
+        [
+          "Who needs an ICC?",
+          "Many charter companies in Croatia, Greece and other European countries ask for it, and in some countries it is the licence the authorities expect to see. Check what the country you plan to sail in accepts."
+        ],
+        [
+          "Can I get the ICC without an exam?",
+          "Yes, if you already hold IYT Flotilla Skipper, Bareboat Skipper or a Yachtmaster certificate. Otherwise you take a written and a practical exam with us."
+        ],
+        [
+          "What is in the exam?",
+          "A written paper on the rules of the road, lights and shapes, buoyage and safety equipment, then a practical part under engine and under sail. It takes half a day."
+        ],
+        [
+          "Can anyone apply?",
+          "You need to be 16 or over and hold a VHF licence. Citizens of a country that issues its own ICC apply there; we check this with you first."
+        ],
+        [
+          "How long is the ICC valid?",
+          "Five years."
+        ],
+        [
+          "Is the ICC enough on its own?",
+          "Some charter companies and insurers also want a skipper certificate, so we recommend holding Flotilla or Bareboat Skipper as well."
         ]
       ]
     },
@@ -863,6 +971,32 @@
           29.103,
           36.622,
           "Ece Marina, where the course starts and finishes."
+        ]
+      ],
+      "faq": [
+        [
+          "How much experience do I need?",
+          "800 miles and 25 days at sea, including 2 days as skipper or watch leader, and 12 hours of sailing at night, all before the exam. You must be 18 or over."
+        ],
+        [
+          "How can I build the miles?",
+          "Our training passages along the Turkish coast. The instructor signs your miles, days and night hours in your logbook."
+        ],
+        [
+          "Will we sail at night?",
+          "Yes. Day 4 is a night passage with watches, lights and identifying lights by their characteristics. Bring a warm layer, even in summer."
+        ],
+        [
+          "What does the exam involve?",
+          "A written theory paper, then an IYT examiner joins the boat for an oral and practical exam on the last day, with you as skipper."
+        ],
+        [
+          "Is Yachtmaster Coastal a commercial licence?",
+          "No. It is for private use only and cannot be upgraded to a commercial licence."
+        ],
+        [
+          "What can I skipper with it?",
+          "Yachts up to 24 m, up to 60 nm offshore, in moderate weather, by day and by night."
         ]
       ]
     },
@@ -1075,6 +1209,36 @@
           36.622,
           "Ece Marina, where the course starts and finishes."
         ]
+      ],
+      "faq": [
+        [
+          "What experience do I need?",
+          "3,000 miles and 50 days at sea, at least 2,000 of those miles along coasts, and 30 hours on watch at night, 6 of them as skipper or watch leader. You also need a VHF licence, a medical certificate and an eyesight test for colour blindness."
+        ],
+        [
+          "How is the course split?",
+          "Five days of theory in the classroom, ending with written exams, then six days aboard: an offshore passage, navigation without electronics, emergency drills and a practical exam with an IYT examiner."
+        ],
+        [
+          "Is accommodation included on the theory days?",
+          "No. During the six days at sea you live on the boat."
+        ],
+        [
+          "Where does the sea part go?",
+          "From Fethiye along the coast to Kaş, across the open sea to Northern Cyprus and back via Kekova, with watches through the night."
+        ],
+        [
+          "Do I need STCW Basic Safety?",
+          "It is recommended, not required."
+        ],
+        [
+          "How can I build the miles and night hours?",
+          "Our training passages are the easiest way: the longer routes, such as Kuşadası–Istanbul and the crossings to Northern Cyprus, add miles and night watches, all signed in your logbook."
+        ],
+        [
+          "Is it a commercial licence?",
+          "No. It is for private use only and cannot be upgraded to a commercial licence."
+        ]
       ]
     },
     "yachtmaster-ocean": {
@@ -1218,6 +1382,32 @@
           36.622,
           "The classroom at our base in Fethiye; sights are taken from the shore of the bay."
         ]
+      ],
+      "faq": [
+        [
+          "Who can take this course?",
+          "Holders of IYT Yachtmaster Offshore, aged 18 or over."
+        ],
+        [
+          "Is there any sailing?",
+          "No, it is six days of theory in a classroom. You take your own sights from the shore. We tell you before you book if sights from a passage are also needed for the exam."
+        ],
+        [
+          "Do I need my own sextant?",
+          "No. We lend sextants, almanacs and sight reduction tables for the course. Bring yours if you have one."
+        ],
+        [
+          "Why learn celestial navigation when there is GPS?",
+          "A sextant works when the electronics fail and needs no power, which is why ocean sailors still carry one."
+        ],
+        [
+          "What should I bring?",
+          "A scientific calculator, pencils, dividers and a plotter, and your Yachtmaster Offshore certificate."
+        ],
+        [
+          "What is not included?",
+          "Accommodation, meals and travel. The course, the use of sextants and tables, the notes, the exam and the certificate fee are included."
+        ]
       ]
     }
   },
@@ -1359,6 +1549,20 @@
             "l",
             "Night watch: lookout, lights and the log."
           ]
+        ],
+        "faq": [
+          [
+            "Is this a good first passage?",
+            "Yes. The route follows the coast, so land is never far and there is a harbour within reach most of the day. It is the easiest way to start logging miles."
+          ],
+          [
+            "Where is it windiest?",
+            "Past Datça and Knidos, where the Aegean meets the Mediterranean. Around Bozburun the wind usually builds in the afternoon, so you learn to reef early."
+          ],
+          [
+            "How many miles will I log?",
+            "About 160 nautical miles, with harbour nights, quiet anchorages in the Göcek islands and at least one long day."
+          ]
         ]
       },
       "fethiye-kusadasi": {
@@ -1445,6 +1649,20 @@
             "1777880652014-feee433c6be0",
             "l",
             "Fresh wind on the open stretch."
+          ]
+        ],
+        "faq": [
+          [
+            "How long are the sailing days?",
+            "A mix: short legs between bays in the south, and longer days on the open stretch north of Bodrum. The crew plans at least one leg that starts before dawn or ends after dark."
+          ],
+          [
+            "Which harbours will we use?",
+            "Busy marinas such as Bodrum and Didim, where you practise entering and mooring, plus quiet anchorages along the way."
+          ],
+          [
+            "How many miles will I log?",
+            "About 225 nautical miles, one of the longest coastal passages of the season."
           ]
         ]
       },
@@ -1539,6 +1757,24 @@
             "l",
             "A swim stop at anchor between legs."
           ]
+        ],
+        "faq": [
+          [
+            "What experience do I need for this route?",
+            "At least one week of passage experience, or a Day Skipper level certificate, on top of the usual crew skills."
+          ],
+          [
+            "How do you handle the Dardanelles?",
+            "The crew times the strait for the current, follows the traffic separation scheme and reports to vessel traffic services on the VHF. The instructor is on deck for every tricky part."
+          ],
+          [
+            "Why does the northbound passage take longer?",
+            "Northbound you often sail against the summer wind, so it is planned over two weeks. Southbound the wind is behind you and the legs are longer and faster."
+          ],
+          [
+            "What should I pack?",
+            "Warm clothes as well as summer kit: nights in the Sea of Marmara can be cool even in summer."
+          ]
         ]
       },
       "fethiye-kemer": {
@@ -1626,6 +1862,20 @@
             "l",
             "Joining the boat at the start marina."
           ]
+        ],
+        "faq": [
+          [
+            "Will we stay in marinas or at anchor?",
+            "Mostly at anchor. The Lycian coast has few marinas and many anchorages beside ancient ruins, so the week builds confidence with ground tackle and lines ashore."
+          ],
+          [
+            "What is special about Cape Gelidonya?",
+            "The wind can accelerate around the headland between Fenike and Kemer. The crew plans that stretch for the right time of day and learns how a cape changes the wind and sea."
+          ],
+          [
+            "How many miles will I log?",
+            "About 140 nautical miles along the coast."
+          ]
         ]
       },
       "fethiye-kekova": {
@@ -1694,6 +1944,20 @@
             "1732267994253-4b9e4fd70a41",
             "l",
             "Long legs out of sight of land."
+          ]
+        ],
+        "faq": [
+          [
+            "Is this route for beginners?",
+            "It suits crew who are new to passages. The legs are the shortest of the season, chosen for practice rather than distance, so you build confidence before a longer route."
+          ],
+          [
+            "What do we do with the extra time?",
+            "Anchor several times a day, try different techniques and moor stern-to in small harbours. There is also time to swim and explore the ruins, including the sunken city at Kekova."
+          ],
+          [
+            "Is it worth it for Yachtmaster miles?",
+            "Every mile and day is signed in your logbook, but at about 75 miles it adds little distance. If miles are the goal, choose a longer route."
           ]
         ]
       },
@@ -1764,6 +2028,24 @@
             "l",
             "Night watch: lookout, lights and the log."
           ]
+        ],
+        "faq": [
+          [
+            "How long are we out of sight of land?",
+            "About a day and a night on the crossing, with a watch system and navigation by log, compass and GPS cross-checked."
+          ],
+          [
+            "What passport do I need?",
+            "A passport valid for at least six months after the trip, for the crossing to Northern Cyprus."
+          ],
+          [
+            "What happens when we arrive in Northern Cyprus?",
+            "There are entry formalities in Girne, and the instructor walks you through them."
+          ],
+          [
+            "What if the forecast is bad?",
+            "The crew checks the forecast carefully before the crossing. The coastal days at the Turkish end are short and easy, so the crew is rested when the right weather comes."
+          ]
         ]
       },
       "finike-cyprus": {
@@ -1827,6 +2109,24 @@
             "l",
             "Fresh wind on the open stretch."
           ]
+        ],
+        "faq": [
+          [
+            "Where is Fenike?",
+            "A marina town on the Lycian coast, between Kekova and Antalya. It is also spelt Finike."
+          ],
+          [
+            "How long is the crossing?",
+            "About a day and a night out of sight of land, with watches through the night. After a short first day along the coast, the crew waits for the right forecast before setting off."
+          ],
+          [
+            "What passport do I need?",
+            "A passport valid for at least six months after the trip, for the crossing to Northern Cyprus."
+          ],
+          [
+            "What happens when we arrive?",
+            "You arrive in Girne, where the instructor walks you through the entry formalities."
+          ]
         ]
       }
     },
@@ -1845,6 +2145,28 @@
       "kusadasi-istanbul": [
         "Warm clothes: nights in the Sea of Marmara can be cool even in summer"
       ]
-    }
+    },
+    "faq": [
+      [
+        "Do the miles count towards Yachtmaster?",
+        "Yes. The instructor signs your miles, days at sea and night hours in your logbook at the end of the passage."
+      ],
+      [
+        "When do I arrive and leave?",
+        "Join the boat at the start marina from 17:00 on the first day. You reach the end marina by the afternoon of the last day, and check-out is the next morning."
+      ],
+      [
+        "Can I sail one way only?",
+        "Yes. Every passage is one way and you travel home from the end marina. Many routes also have a passage in the other direction, so you can sail both ways: twice the miles, one flight."
+      ],
+      [
+        "Who decides where we sail each day?",
+        "The crew plans each leg the evening before, with the forecast, currents and ports of refuge, and the instructor approves the plan. If the weather turns, the plan changes."
+      ],
+      [
+        "Do I need a visa?",
+        "Bring a passport and, if your nationality needs one, a Turkish visa or e-Visa."
+      ]
+    ]
   }
 }
