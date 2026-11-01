@@ -26,8 +26,9 @@ def route(base, lang, rest=''):
 
 LINK = re.compile(r'href="((?:home|bareboat-skipper-course|booking|theory(?:-[a-z-]+)?))(?:\.(ru|de|es))?\.html([^"]*)"')
 
-def relink(s):
+def relink(s, lang='en'):
     s = re.sub(r'<a href="user-flows(?:\.\w\w)?\.html">[^<]*</a>', '', s)
+    s = s.replace('href="instructors.html', f'href="/{lang}/instructors')  # app-only page, same language as the page
     return LINK.sub(lambda m: f'href="{route(m.group(1), m.group(2) or "en", m.group(3).replace("&amp;", "&"))}"', s)
 
 def between(s, a, b):
@@ -50,9 +51,9 @@ def extract(page, base, lang):
         'robots': meta(s, 'robots'),
         'jsonld': [m.replace(OLD_SITE, '{{SITE}}') for m in re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', s, re.S)],
         'sprite': body[:body.index('<div class="wrap">')],
-        'header': relink(between(body, '<header class="site-head">', '</header>')),
-        'main': relink(between(body, '<main>', '</main>')[len('<main>'):-len('</main>')]),
-        'footer': relink(between(body, '<footer class="site-foot">', '</footer>')),
+        'header': relink(between(body, '<header class="site-head">', '</header>'), lang),
+        'main': relink(between(body, '<main>', '</main>')[len('<main>'):-len('</main>')], lang),
+        'footer': relink(between(body, '<footer class="site-foot">', '</footer>'), lang),
         'scripts': [x for x in re.findall(r'<script(?![^>]*ld\+json)[^>]*>(.*?)</script>', body, re.S)],
         'tail': relink(re.split(r'<script', body[body.index('</footer>') + len('</footer>'):], 1)[0].replace('</div>', '', 1).strip()),
     }

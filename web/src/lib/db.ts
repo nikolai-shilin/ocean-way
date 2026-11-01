@@ -83,8 +83,8 @@ export async function getLegs(): Promise<Record<string, PassageLeg>> {
 export async function getInstructors(): Promise<Instructor[]> {
   const c = db();
   if (!c) {
-    const rows = JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', 'instructors.json'), 'utf8')) as Omit<Instructor, 'sample'>[];
-    return rows.map((r) => ({ ...r, sample: true }));
+    const rows = JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', 'instructors.json'), 'utf8')) as (Omit<Instructor, 'sample'> & { sample?: boolean })[];
+    return rows.map((r) => ({ ...r, sample: r.sample ?? true }));
   }
   const { data, error } = await c.from('instructors').select('slug, sort, name, role, photo_id, photo_alt, qualification, seasons, languages, bio, courses, legs, sample').order('sort');
   if (error) throw error;

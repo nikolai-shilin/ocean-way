@@ -1,5 +1,6 @@
 import '@/styles/chrome.css';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import { notFound } from 'next/navigation';
 import { LANGS, SITE, isLang } from '@/lib/site';
 
@@ -31,6 +32,7 @@ export default async function LangLayout({ children, params }: LayoutProps<'/[la
       <body>
         {children}
         <Script id="menu" strategy="afterInteractive">{MENU_JS}</Script>
+        <Analytics />
       </body>
     </html>
   );

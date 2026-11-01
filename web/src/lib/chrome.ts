@@ -24,7 +24,7 @@ export function fixNav(html: string, lang: Lang, active: Section = null): string
 }
 
 const BARS = '<svg class="i bars" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-const ARROW = '<svg class="i"><use href="#i-arrow"/></svg>';
+const ARROW = '<svg class="i"><use href="#ow-arrow"/></svg>';
 
 /** The site name next to the logo mark. */
 export function addWordmark(header: string): string {

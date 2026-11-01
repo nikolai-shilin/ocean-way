@@ -3,6 +3,7 @@
 The English pages are the source. After editing them, regenerate the other files from this folder:
 
 ```
+python3 build_icons.py       # Ocean Way icons: icons/ow-icons.svg, icons/svg/, icons.html, and the sprite in home + course page
 python3 build_theory.py      # theory.html + theory-<slug>.html from theory/<slug>.json|html; theory row on home, links on course page
 python3 build_booking.py     # booking.html from the course page's styles, icons and header
 python3 build_flows.py       # user-flows.html

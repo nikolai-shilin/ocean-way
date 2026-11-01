@@ -123,8 +123,8 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
           </table>
         </div>
         <div className="ow-two">
-          <div className="band"><h3>{t(lang, 'Included')}</h3><ul className="ow-list">{INCLUDED.map((x) => <li key={x}><svg className="i"><use href="#i-check" /></svg><span>{t(lang, x)}</span></li>)}</ul></div>
-          <div className="band"><h3>{t(lang, 'Not included')}</h3><ul className="ow-list">{EXTRA.map((x) => <li key={x}><svg className="i"><use href="#i-minus" /></svg><span>{t(lang, x)}</span></li>)}</ul></div>
+          <div className="band"><h3>{t(lang, 'Included')}</h3><ul className="ow-list">{INCLUDED.map((x) => <li key={x}><svg className="i"><use href="#ow-check" /></svg><span>{t(lang, x)}</span></li>)}</ul></div>
+          <div className="band"><h3>{t(lang, 'Not included')}</h3><ul className="ow-list">{EXTRA.map((x) => <li key={x}><svg className="i"><use href="#ow-minus" /></svg><span>{t(lang, x)}</span></li>)}</ul></div>
         </div>
       </section>
 
@@ -132,11 +132,11 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
         <Head id="payment" kicker={t(lang, 'Payment')} title={t(lang, 'Payment and cancellation')} />
         <div className="ow-two">
           <div className="band"><h3>{t(lang, 'How you pay')}</h3><ul className="ow-list">
-            <li><svg className="i"><use href="#i-check" /></svg><span>{t(lang, '30% deposit to book, the rest 6 weeks before. No card fees.')}</span></li>
-            <li><svg className="i"><use href="#i-check" /></svg><span>{t(lang, 'Card or bank transfer. You can also pay the full price at once.')}</span></li>
+            <li><svg className="i"><use href="#ow-check" /></svg><span>{t(lang, '30% deposit to book, the rest 6 weeks before. No card fees.')}</span></li>
+            <li><svg className="i"><use href="#ow-check" /></svg><span>{t(lang, 'Card or bank transfer. You can also pay the full price at once.')}</span></li>
           </ul></div>
           <div className="band"><h3>{t(lang, 'Cancellation')}</h3><ul className="ow-list">
-            <li><svg className="i"><use href="#i-check" /></svg><span>{t(lang, 'Free cancellation until 6 weeks before the start. After that the deposit is kept, or you can move it to another date in the same year once.')}</span></li>
+            <li><svg className="i"><use href="#ow-check" /></svg><span>{t(lang, 'Free cancellation until 6 weeks before the start. After that the deposit is kept, or you can move it to another date in the same year once.')}</span></li>
           </ul></div>
         </div>
         <div className="ctas" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 32 }}>

@@ -116,7 +116,7 @@ main = r'''
 <main>
   <div class="bk">
     <div>
-      <a class="bk-back" id="back" href="bareboat-skipper-course.html#dates"><svg class="i"><use href="#i-arrow"/></svg><span>Back to the course</span></a>
+      <a class="bk-back" id="back" href="bareboat-skipper-course.html#dates"><svg class="i"><use href="#ow-arrow"/></svg><span>Back to the course</span></a>
       <h1 id="h1">Book your place</h1>
       <ol class="steps" id="steps" aria-label="Booking steps">
         <li data-s="1"><span>1 · Dates</span></li><li data-s="2"><span>2 · Your details</span></li><li data-s="3"><span>3 · Payment</span></li><li data-s="4"><span>4 · Done</span></li>
@@ -159,7 +159,7 @@ main = r'''
           <p class="step-lead">Nothing is charged now. We confirm your place first, then send you a payment link or bank details.</p>
           <fieldset><legend>What you pay first</legend><div class="choices" id="plan"></div></fieldset>
           <fieldset><legend>Method</legend><div class="choices" id="method"></div>
-            <div class="paybox" id="paybox"><svg class="i"><use href="#i-info"/></svg><span id="payboxText">After we confirm your place, we send a secure card payment link. Nothing is charged today.</span></div>
+            <div class="paybox" id="paybox"><svg class="i"><use href="#ow-info"/></svg><span id="payboxText">After we confirm your place, we send a secure card payment link. Nothing is charged today.</span></div>
           </fieldset>
           <fieldset><legend>Cancellation</legend><p style="margin:0 0 14px;font-size:16px">Free cancellation until 6 weeks before the start. After that the deposit is kept, or you can move it to another date in the same year once.</p>
             <label class="tick"><input type="checkbox" id="terms" required> I agree to the <a href="#" style="text-decoration:underline">booking terms</a> and the <a href="#" style="text-decoration:underline">privacy policy</a></label>
@@ -175,7 +175,7 @@ main = r'''
 
       <section id="done" hidden aria-labelledby="t4">
         <div class="done-hero">
-          <span class="done-mark"><svg class="i"><use href="#i-check"/></svg></span>
+          <span class="done-mark"><svg class="i"><use href="#ow-check"/></svg></span>
           <h2 class="step-title" id="t4" tabindex="-1">Request received</h2>
           <p class="step-lead" style="margin:0" id="doneLead"></p>
           <span class="meta">Booking reference <span class="ref" id="ref"></span></span>
@@ -183,8 +183,8 @@ main = r'''
         <h3 class="h3" style="margin:40px 0 4px">What happens next</h3>
         <ol class="timeline" id="timeline"></ol>
         <div class="acts">
-          <a class="pill pill-primary" id="ics" download="ocean-way-booking.ics" href="#"><svg class="i"><use href="#i-cal"/></svg>Add to calendar</a>
-          <a class="pill pill-quiet" href="#"><svg class="i"><use href="#i-tg"/></svg>Join the course chat</a>
+          <a class="pill pill-primary" id="ics" download="ocean-way-booking.ics" href="#"><svg class="i"><use href="#ow-calendar"/></svg>Add to calendar</a>
+          <a class="pill pill-quiet" href="#"><svg class="i"><use href="#ow-telegram"/></svg>Join the course chat</a>
           <a class="pill pill-quiet" id="prep" href="bareboat-skipper-course.html#prepare">What to bring</a>
         </div>
         <div class="band" style="padding:24px 28px;margin-top:40px">
@@ -232,7 +232,7 @@ const LEGS = [
 
 const CATALOG = {
   bareboat: {
-    kind: 'course', title: t('Bareboat Skipper course'), h1: t('Book the Bareboat Skipper course'), img: IMG('1540946485063-a40da27545f8'),
+    kind: 'course', title: t('IYT Bareboat Skipper course'), h1: t('Book the IYT Bareboat Skipper course'), img: IMG('1540946485063-a40da27545f8'),
     back: [link('bareboat-skipper-course.html') + '#dates', t('Back to the course')], lead: t('Saturday to Saturday, living aboard with an instructor and at most four students.'),
     dateLegend: t('Start date'), prep: link('bareboat-skipper-course.html') + '#prepare',
     options: [
@@ -292,7 +292,7 @@ function renderSummary() {
     <div class="line"></div>
     <div class="total"><span>${t('Total')}</span><b>${eur(tt.total)}</b></div>
     ${st.step >= 3 ? `<div class="total" style="margin-top:-6px"><span class="card-meta">${t('Due after confirmation')}</span><span><b style="font-size:20px">${eur(tt.now)}</b></span></div>` : `<span class="card-meta">${t('30% deposit to book, the rest 6 weeks before. No card fees.')}</span>`}
-    <ul class="trust"><li><svg class="i"><use href="#i-check"/></svg>${t('Free cancellation until 6 weeks before')}</li><li><svg class="i"><use href="#i-check"/></svg>${t('Instructor checks your experience before payment')}</li><li><svg class="i"><use href="#i-check"/></svg>${t('Questions? Ask the instructor in Telegram')}</li></ul>`;
+    <ul class="trust"><li><svg class="i"><use href="#ow-check"/></svg>${t('Free cancellation until 6 weeks before')}</li><li><svg class="i"><use href="#ow-check"/></svg>${t('Instructor checks your experience before payment')}</li><li><svg class="i"><use href="#ow-check"/></svg>${t('Questions? Ask the instructor in Telegram')}</li></ul>`;
   $('sumD').innerHTML = html; $('sumM').innerHTML = html;
   $('msumLabel').textContent = `${c.label.split(' – ')[0]} · ${st.ppl === 1 ? t('1 person') : t('{n} people', { n: st.ppl })}`;
   $('msumTotal').textContent = eur(tt.total);

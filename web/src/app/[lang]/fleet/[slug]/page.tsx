@@ -5,6 +5,7 @@ import Shell from '@/components/Shell';
 import { BoatCard } from '@/components/Cards';
 import { t } from '@/lib/content';
 import { getCourseDates, getYachts } from '@/lib/db';
+import { usedForIcon } from '@/lib/icons';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
 import { eur, range, boatSpec } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
@@ -58,8 +59,8 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
         <h1 className="display">{y.model}</h1>
         <p className="lead">{t(lang, y.description)}</p>
         <div className="facts">
-          <span className="fact"><svg className="i"><use href="#i-pin" /></svg>{t(lang, y.base)}</span>
-          <span className="fact"><svg className="i"><use href="#i-sail" /></svg>{t(lang, y.used_for)}</span>
+          <span className="fact"><svg className="i"><use href="#ow-pin" /></svg>{t(lang, y.base)}</span>
+          <span className="fact"><svg className="i"><use href={`#${usedForIcon(y.used_for)}`} /></svg>{t(lang, y.used_for)}</span>
         </div>
       </section>
       <div className="ow-item">
@@ -73,7 +74,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
           <section>
             <h2>{t(lang, 'Sail on this boat')}</h2>
             {weeks.length ? (
-              <ul className="ow-list">{weeks.map((d) => <li key={d.id}><svg className="i"><use href="#i-cal" /></svg><span><a href={`${path.booking(lang)}?item=bareboat&date=${d.key}`}>{t(lang, 'Bareboat Skipper course')}, {range(lang, d.starts_on, d.ends_on)}</a> · {eur(d.price_eur)}</span></li>)}</ul>
+              <ul className="ow-list">{weeks.map((d) => <li key={d.id}><svg className="i"><use href="#ow-calendar" /></svg><span><a href={`${path.booking(lang)}?item=bareboat&date=${d.key}`}>{t(lang, 'IYT Bareboat Skipper course')}, {range(lang, d.starts_on, d.ends_on)}</a> · {eur(d.price_eur)}</span></li>)}</ul>
             ) : (
               <div className="band ow-empty"><p>{t(lang, 'Ask us for the weeks when this boat is free for charter.')}</p></div>
             )}
@@ -90,7 +91,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
       </div>
       <section className="sec" data-row style={{ marginTop: 96 }}>
         <div className="sec-head row-head"><div><span className="kicker">{t(lang, 'Our fleet')}</span><h2 className="h2" style={{ marginTop: 12 }}>{t(lang, 'Other boats')}</h2></div>
-          <div className="row-nav"><button className="round" type="button" data-dir="-1" aria-label={t(lang, 'Previous')}><svg className="i" style={{ transform: 'scaleX(-1)' }}><use href="#i-arrow" /></svg></button><button className="round" type="button" data-dir="1" aria-label={t(lang, 'Next')}><svg className="i"><use href="#i-arrow" /></svg></button></div></div>
+          <div className="row-nav"><button className="round" type="button" data-dir="-1" aria-label={t(lang, 'Previous')}><svg className="i" style={{ transform: 'scaleX(-1)' }}><use href="#ow-arrow" /></svg></button><button className="round" type="button" data-dir="1" aria-label={t(lang, 'Next')}><svg className="i"><use href="#ow-arrow" /></svg></button></div></div>
         <div className="hscroll" tabIndex={0}>{others.map((x) => <BoatCard key={x.slug} lang={lang} y={x} />)}</div>
       </section>
     </Shell>

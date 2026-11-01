@@ -8,6 +8,8 @@ C = os.path.join(HERE, 'theory')
 BASE = 'https://www.rycrentals.com'
 BRAND = 'Ocean Way'
 UPDATED = ('2026-11-01', '1 Nov 2026')
+# Author of every article; the app serves the photo from web/public and the profile at /<lang>/instructors#<slug>.
+AUTHOR = {'slug': 'nikolai', 'name': 'Nikolai Shilin', 'photo': '/people/nikolai.webp', 'job': 'Skipper, IYT Bareboat Skipper'}
 
 ORDER = ['points-of-sail', 'knots', 'tacking-gybing', 'reefing', 'right-of-way', 'navigation-lights', 'buoyage',
          'med-mooring', 'berthing-alongside', 'anchoring', 'weather', 'position-fixing', 'tides', 'passage-planning',
@@ -35,7 +37,7 @@ PHOTO = {'points-of-sail': ('1540946485063-a40da27545f8', 'A sailing yacht close
          'man-overboard': ('1732267994253-4b9e4fd70a41', 'A crew in sailing jackets on deck in open water'),
          'safety-on-board': ('1542405242-8217b4c9e34c', 'A crew in life jackets on deck')}
 IMG = lambda pid, w=900: f'https://images.unsplash.com/photo-{pid}?w={w}&q=80&auto=format&fit=crop'
-COURSE_LINK = {'International Bareboat Skipper': 'bareboat-skipper-course.html'}
+COURSE_LINK = {'IYT International Bareboat Skipper': 'bareboat-skipper-course.html'}
 
 def load():
     arts = []
@@ -165,6 +167,10 @@ CSS = r'''
 .lvl { display: inline-flex; align-self: flex-start; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; background: var(--band); font-family: var(--sans); font-weight: 700; font-size: 12px; color: var(--ink); }
 .art-head { display: flex; flex-direction: column; gap: 22px; padding: 32px 0 8px; max-width: 820px; }
 .art-head .display { font-size: 44px; }
+.art-head .byline { align-items: center; }
+.author { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); text-decoration: none; }
+.author img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--line); }
+.author:hover .meta { text-decoration: underline; }
 .art-grid { display: grid; grid-template-columns: minmax(0, 680px) 300px; gap: 72px; justify-content: space-between; margin-top: 40px; align-items: start; }
 .art-side { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 16px; }
 .toc-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
@@ -258,7 +264,7 @@ def card(a, cls='card th-card'):
     pid, alt = PHOTO[a['slug']]
     return (f'<a class="{cls}" href="theory-{a["slug"]}.html"><div class="photo"><div class="clip"><img src="{IMG(pid)}" alt="{alt}" loading="lazy"></div></div>'
             f'<div class="card-body"><span class="lvl">{a["level"]}</span><span class="card-title">{a["h1"]}</span><span class="card-meta">{a["description"]}</span>'
-            f'<div class="facts"><span class="fact"><svg class="i"><use href="#i-clip"/></svg>{a["read_minutes"]} min read</span></div></div></a>')
+            f'<div class="facts"><span class="fact"><svg class="i"><use href="#ow-read"/></svg>{a["read_minutes"]} min read</span></div></div></a>')
 
 def build_hub(arts):
     by = {t: [a for a in arts if a['topic'] == t] for t, _, _ in TOPICS}
@@ -279,7 +285,7 @@ def build_hub(arts):
 {secs}
     <section class="band tgband" style="margin-top:96px">
       <div><span class="kicker">On the water</span><h2 class="h2" style="margin:12px 0 12px">Theory sticks when you practise it</h2><p>Every article ends with where you practise it. Most of it is part of the Bareboat Skipper week: a skipper's licence in seven days aboard.</p></div>
-      <div><a class="pill pill-primary" href="bareboat-skipper-course.html">See the Bareboat Skipper course</a></div>
+      <div><a class="pill pill-primary" href="bareboat-skipper-course.html">See the IYT Bareboat Skipper course</a></div>
     </section>'''
     ld = [ORG,
           {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': BASE + '/en/'}, {'@type': 'ListItem', 'position': 2, 'name': 'Theory', 'item': BASE + '/en/theory/'}]},
@@ -308,11 +314,11 @@ def build_article(a, arts):
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="home.html">Home</a></li><li><a href="theory.html">Theory</a></li><li aria-current="page">{a["topic"]}</li></ol></nav>
         <h1 class="display">{a["h1"]}</h1>
         <p class="lead">{a["lead"]}</p>
-        <div class="byline"><span class="meta" style="color:var(--ink)">{BRAND} instructors</span><span class="meta">Updated {UPDATED[1]}</span><span class="meta">{a["read_minutes"]} min read</span><span class="lvl">{a["level"]}</span></div>
+        <div class="byline"><a class="author" href="instructors.html#{AUTHOR["slug"]}"><img src="{AUTHOR["photo"]}" alt="{AUTHOR["name"]}" width="28" height="28"><span class="meta" style="color:var(--ink)">{AUTHOR["name"]}</span></a><span class="meta">Updated {UPDATED[1]}</span><span class="meta">{a["read_minutes"]} min read</span><span class="lvl">{a["level"]}</span></div>
       </header>
       <div class="art-grid">
         <div class="art-body">
-          <details class="art-mobile-toc band"><summary>On this page<svg class="i"><use href="#i-chev"/></svg></summary><ol class="toc-list">{toc}</ol></details>
+          <details class="art-mobile-toc band"><summary>On this page<svg class="i"><use href="#ow-chevron"/></svg></summary><ol class="toc-list">{toc}</ol></details>
           <div class="band summary"><span class="kicker">In short</span><ul>{"".join(f"<li>{s}</li>" for s in a["summary"])}</ul></div>
           {body_html}
           <div class="art-mobile-course">{course_card}</div>
@@ -328,7 +334,7 @@ def build_article(a, arts):
     ld = [ORG,
           {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': BASE + '/en/'}, {'@type': 'ListItem', 'position': 2, 'name': 'Theory', 'item': BASE + '/en/theory/'}, {'@type': 'ListItem', 'position': 3, 'name': a['h1'], 'item': url}]},
           {'@type': 'Article', 'headline': a['h1'], 'description': a['description'], 'image': IMG(pid, 1200), 'inLanguage': 'en',
-           'datePublished': UPDATED[0], 'dateModified': UPDATED[0], 'author': {'@id': BASE + '/#org'}, 'publisher': {'@id': BASE + '/#org'},
+           'datePublished': UPDATED[0], 'dateModified': UPDATED[0], 'author': {'@type': 'Person', '@id': BASE + '/#' + AUTHOR['slug'], 'name': AUTHOR['name'], 'jobTitle': AUTHOR['job'], 'image': BASE + AUTHOR['photo'], 'url': BASE + '/en/instructors#' + AUTHOR['slug'], 'worksFor': {'@id': BASE + '/#org'}}, 'publisher': {'@id': BASE + '/#org'},
            'mainEntityOfPage': url, 'educationalLevel': a['level'], 'about': a['topic'],
            'timeRequired': f'PT{a["read_minutes"]}M', 'isPartOf': {'@type': 'CollectionPage', 'url': BASE + '/en/theory/'}}]
     out = page(f'{a["title"]} · {BRAND}', a['description'], f'/en/theory/{a["slug"]}/', IMG(pid, 1200), ld, body)
@@ -338,7 +344,7 @@ def patch_home(arts):
     f = f'{P}/home.html'; s = open(f).read(); assert s, 'home.html is empty'
     sec = f'''
     <section class="sec" id="theory" data-row style="margin-top:96px">
-      <div class="sec-head row-head"><div><span class="kicker">Theory</span><h2 class="h2" style="margin-top:12px">Read before you sail</h2></div><div class="row-nav"><a class="pill pill-quiet" href="theory.html">All theory</a><button class="round" type="button" data-dir="-1" aria-label="Previous"><svg class="i" style="transform:scaleX(-1)"><use href="#i-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="Next"><svg class="i"><use href="#i-arrow"/></svg></button></div></div>
+      <div class="sec-head row-head"><div><span class="kicker">Theory</span><h2 class="h2" style="margin-top:12px">Read before you sail</h2></div><div class="row-nav"><a class="pill pill-quiet" href="theory.html">All theory</a><button class="round" type="button" data-dir="-1" aria-label="Previous"><svg class="i" style="transform:scaleX(-1)"><use href="#ow-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="Next"><svg class="i"><use href="#ow-arrow"/></svg></button></div></div>
       <p class="sec-lead">What our instructors teach on board, in plain words: right of way, mooring, anchoring, weather, radio. Free to read, before a course or after one.</p>
       <div class="hscroll" tabindex="0" aria-label="Theory articles">{"".join(card(a, "card") for a in arts)}</div>
     </section>'''
@@ -352,7 +358,7 @@ def patch_home(arts):
 
 def patch_course(arts):
     f = f'{P}/bareboat-skipper-course.html'; s = open(f).read(); assert s, 'course page is empty'
-    picks = [a for a in arts if a['course'] == 'International Bareboat Skipper']
+    picks = [a for a in arts if a['course'] == 'IYT International Bareboat Skipper']
     block = ('<div class="theory-links"><span class="kicker">Read the theory</span><div class="toc">'
              + ''.join(f'<a href="theory-{a["slug"]}.html"><span class="chip">{a["h1"]}</span></a>' for a in picks) + '</div></div>')
     s = re.sub(r'\s*<div class="theory-links">.*?</div></div>', '', s, flags=re.S)
