@@ -101,7 +101,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <section id="dates">
             <h2>{t(lang, 'Dates')}</h2>
             {dates.length ? (
-              <div className="pp-list">{dates.map((d) => {
+              <div className="pp-list pp-compact">{dates.map((d) => {
                 const pl = places(lang, d.places_left, d.places_total);
                 return (
                   <article key={d.id} className="pp">

@@ -34,6 +34,27 @@
   .pp-act { justify-content: space-between; margin-top: 2px; }
 }
 
+/* Course page dates: one band, one row per date (date over length | area | price | places and Book).
+   Rows share the band's columns (subgrid) so dates, prices and buttons line up. */
+.pp-list.pp-compact { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content max-content; gap: 0 24px; padding: 4px 24px; background: var(--band); border-radius: 28px; }
+@supports (corner-shape: squircle) { .pp-compact { corner-shape: squircle; border-radius: 48px; } }
+.pp-compact > .pp { grid-column: 1 / -1; grid-template-columns: subgrid; grid-template-areas: "when what price act"; gap: 4px 24px; align-items: center; padding: 14px 0; background: none; border-radius: 0; corner-shape: initial; }
+.pp-compact > .pp + .pp { border-top: 1px solid var(--tag-line); }
+.pp-compact .pp-when { gap: 3px; }
+.pp-compact .pp-dates { font-size: 20px; white-space: nowrap; }
+.pp-compact .pp-nights { white-space: nowrap; }
+.pp-compact .pp-route { font-size: 17px; }
+.pp-compact .pp-sub { font-size: 14px; }
+.pp-compact .pp-price b { font-size: 20px; white-space: nowrap; }
+.pp-compact .pp-act { margin-top: 0; }
+@media (max-width: 680px) {
+  .pp-list.pp-compact { display: flex; padding: 2px 18px; }
+  .pp-compact > .pp { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "when price" "what act"; gap: 8px 12px; align-items: start; padding: 14px 0; }
+  .pp-compact .pp-dates, .pp-compact .pp-price b { font-size: 19px; }
+  .pp-compact .pp-what { align-self: center; }
+  .pp-compact .pp-act { justify-content: flex-end; gap: 8px; }
+}
+
 /* Home page: a sideways row of the same cards under the map. */
 .pp-rowhead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 8px 0 16px; }
 .pp-all { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 17px; }
