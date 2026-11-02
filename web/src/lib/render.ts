@@ -97,7 +97,7 @@ export function fleetCards(lang: Lang, rows: Yacht[]) {
 export function bookingData(lang: Lang, dates: CourseDate[], passages: Passage[]) {
   const byId = new Map(passages.map((p) => [p.id, p]));
   return {
-    course: dates.map((c) => ({ id: c.key, db_id: c.id, label: range(lang, c.starts_on, c.ends_on), sub: c.boat ? `${t(lang, c.area)} · ${c.boat}` : t(lang, c.area), price: c.price_eur, left: Math.max(0, c.places_left), place: t(lang, c.meeting_point) })),
+    course: dates.map((c) => ({ id: c.key, db_id: c.id, label: range(lang, c.starts_on, c.ends_on), sub: c.boat ? `${t(lang, c.area)} · ${c.boat}` : t(lang, c.area), price: c.price_eur, left: Math.max(0, c.places_left), place: t(lang, c.meeting_point), classroom: !c.boat })),
     passages: passages.map((p) => {
       const n = nightsOf(p);
       const route = t(lang, `${p.from_port} → ${p.to_port}`);

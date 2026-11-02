@@ -15,8 +15,10 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/booking'>)
   return pageMetadata(loadPage('booking', lang as Lang), path.booking);
 }
 
-/** The prototype's booking script, wired to live dates and places and to the bookings API. */
-function wire(script: string) {
+/** The prototype's booking script, wired to live dates and places and to the bookings API.
+ *  Classroom dates (no boat: VHF, ICC, Yachtmaster Ocean theory) skip the cabin choice and get a classroom first day. */
+function wire(script: string, lang: Lang) {
+  const js = (en: string) => JSON.stringify(t(lang, en));
   const swap = (from: string, to: string) => {
     if (!script.includes(from)) throw new Error(`booking script changed: ${from.slice(0, 60)}`);
     script = script.replace(from, to);
@@ -26,6 +28,17 @@ function wire(script: string) {
   swap("const item = CATALOG[q.get('item')] || CATALOG.bareboat;",
     "if (window.OW_DATA) { CATALOG.bareboat.options = window.OW_DATA.course; CATALOG.passage.options = window.OW_DATA.passages; if (window.OW_DATA.info) Object.assign(CATALOG.bareboat, window.OW_DATA.info); }\nconst item = window.OW_DATA && window.OW_DATA.info ? CATALOG.bareboat : CATALOG[q.get('item')] || CATALOG.bareboat;");
   swap("const ref = 'OW-' + c.id.slice(2)", "const ref = st.ref || 'OW-' + c.id.slice(2)");
+  // Saved progress per course, and never restore a date this course does not have.
+  swap("const KEY = 'ryc-booking-' + (q.get('item') || 'bareboat');", "const KEY = 'ryc-booking-' + (q.get('course') || q.get('item') || 'bareboat');");
+  swap("if (!st.date) st.date =", "if (!st.date || !item.options.some((o) => o.id === st.date)) st.date =");
+  swap("  $('cabins').innerHTML = CABINS.map(",
+    "  const room = !cur().classroom; $('cabins').closest('fieldset').hidden = !room; if (!room) st.cabin = 'shared';\n  $('cabins').innerHTML = CABINS.map(");
+  swap("<dt>${t('Cabin')}</dt><dd>${cab.label}</dd>", "${c.classroom ? '' : `<dt>${t('Cabin')}</dt><dd>${cab.label}</dd>`}");
+  swap("t('We check the boat and the instructor and reply within one working day.')",
+    `(c.classroom ? ${js('We check the classroom and the instructor and reply within one working day.')} : t('We check the boat and the instructor and reply within one working day.'))`);
+  const join = "[t('2 weeks before'), t('Joining instructions'), t('Marina, berth, what to bring, flights and transfers. Meeting point: {place}.', { place })],\n    [t('Day 1'), t('Aboard at 15:00'), t('Safety briefing, cabins, dinner together. You sail on Sunday morning.')],";
+  swap(join, `...(c.classroom ? [[t('2 weeks before'), t('Joining instructions'), ${js('Where we meet, what to bring, flights and transfers. Meeting point: {place}.')}.replace('{place}', place)],
+    [t('Day 1'), ${js('In the classroom')}, ${js('We meet at {place}. Bring your passport or ID card.')}.replace('{place}', place)]] : [${join.replace(/,$/, '')}]),`);
   swap("$('form').addEventListener('submit', (e) => { e.preventDefault(); if (validate(st.step)) go(st.step + 1); });",
     `$('form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -78,9 +91,9 @@ export default async function Booking({ params, searchParams }: PageProps<'/[lan
       title: t(lang, '{name} course', { name: course.name }), h1, lead: course.summary, img: photo(course.photo_id, 600),
       back: [back + '#dates', t(lang, 'Back to the course')], prep: back + '#bring', ...(after ? { after } : {}),
     };
-    return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
+    return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
   }
-  return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
+  return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
 }
 
 function script(lang: Lang, dates: CourseDate[], passages: Passage[], info?: object) {
