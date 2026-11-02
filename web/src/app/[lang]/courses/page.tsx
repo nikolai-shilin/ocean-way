@@ -21,7 +21,7 @@ export default async function Courses({ params }: PageProps<'/[lang]/courses'>) 
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'ItemList', name: t(lang, 'IYT sailing courses'),
     itemListElement: courses.map((c, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + path.courseItem(lang, c.slug),
-      item: { '@type': 'Course', name: c.name, description: t(lang, c.summary), provider: { '@id': `${SITE}/#org` },
+      item: { '@type': 'Course', name: c.name, description: c.summary, provider: { '@id': `${SITE}/#org` },
         offers: { '@type': 'Offer', price: c.price_from_eur, priceCurrency: 'EUR', category: 'Paid' } } })),
   }] };
   return (

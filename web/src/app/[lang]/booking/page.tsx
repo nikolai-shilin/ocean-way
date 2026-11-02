@@ -75,8 +75,8 @@ export default async function Booking({ params, searchParams }: PageProps<'/[lan
     }
     const after = course.after?.[0]?.text;
     const info = {
-      title: t(lang, '{name} course', { name: course.name }), h1, lead: t(lang, course.summary), img: photo(course.photo_id, 600),
-      back: [back + '#dates', t(lang, 'Back to the course')], prep: back + '#bring', ...(after ? { after: t(lang, after) } : {}),
+      title: t(lang, '{name} course', { name: course.name }), h1, lead: course.summary, img: photo(course.photo_id, 600),
+      back: [back + '#dates', t(lang, 'Back to the course')], prep: back + '#bring', ...(after ? { after } : {}),
     };
     return <ProtoPage content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
   }

@@ -1,7 +1,5 @@
-import fs from 'node:fs';
-import nodePath from 'node:path';
 import { t, hasT } from './content';
-import { passageSlug, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
+import { english, passageSlug, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
 import { usedForIcon } from './icons';
 import { responsiveImages } from './images';
 import { path, type Lang } from './site';
@@ -93,8 +91,8 @@ export function fleetCards(lang: Lang, rows: Yacht[]) {
     const spec = boatSpec(lang, y);
     const price = boatPrice(lang, y.charter_from_eur);
     return `<a class="card" href="${path.boat(lang, y.slug)}">
-          <div class="photo"><div class="clip"><img src="${y.photo_id.startsWith('/') ? y.photo_id : `https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop`}" alt="${esc(t(lang, y.photo_alt))}" loading="lazy"></div></div>
-          <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#ow-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#${usedForIcon(y.used_for)}"/></svg>${esc(t(lang, y.used_for))}</span></div></div>
+          <div class="photo"><div class="clip"><img src="${y.photo_id.startsWith('/') ? y.photo_id : `https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop`}" alt="${esc(y.photo_alt)}" loading="lazy"></div></div>
+          <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#ow-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#${usedForIcon(english(y).used_for)}"/></svg>${esc(y.used_for)}</span></div></div>
         </a>`;
   }).join('\n        ');
 }
@@ -134,12 +132,9 @@ export function passagesMap(homeMain: string, leg?: string) {
   return fig;
 }
 
-/** The map of one passage route or course route (drawn by prototypes/_build/build_leg_maps.py): desktop and phone
- *  versions, stop names in the page language. */
-const mapFiles: Record<string, Record<string, { d: string; m: string; nm: number }>> = {};
-function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string, fromDb?: RouteMap | null) {
-  mapFiles[file] ??= JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', `${file}.json`), 'utf8'));
-  const m = fromDb ?? mapFiles[file][key];
+/** The map of one passage route or course route (the map column, drawn by prototypes/_build/build_leg_maps.py):
+ *  desktop and phone versions, stop names in the page language. Empty when the route has no map. */
+export function routeMap(lang: Lang, m: RouteMap | null) {
   if (!m) return '';
   const tr = (svg: string) => svg
     .replace(/(<text class="pm-label"[^>]*>)([^<]+)(<\/text>)/g, (_, a: string, name: string, b: string) => a + esc(t(lang, name)) + b)
@@ -147,13 +142,11 @@ function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string
   const note = m.d.includes('rm-line') ? 'Lines show the usual sea route; the instructor plans each leg to the weather. Coastline: Natural Earth.' : 'Coastline: Natural Earth.';
   return `<figure class="pmap"><div class="rmap-frame">${tr(m.d)}${tr(m.m)}</div><figcaption class="disclaimer">${esc(t(lang, note))}</figcaption></figure>`;
 }
-export const legMap = (lang: Lang, leg: string, map?: RouteMap | null) => mapFigure(lang, 'passage_maps', leg, map);
-export const courseMap = (lang: Lang, slug: string, map?: RouteMap | null) => mapFigure(lang, 'course_maps', slug, map);
 
 /** Sideways photo gallery with captions, the same markup as the Bareboat Skipper page (home.css .gallery). */
 export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 'p'; caption: string }[]) {
   if (!shots.length) return '';
   const src = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
-  const figs = shots.map((s, i) => `<figure class="g-${s.shape}"><div class="photo"><img src="${src(s.photo_id, s.shape === 'l' ? 1200 : 900)}" alt="${esc(t(lang, s.caption))}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption class="hint">${esc(t(lang, s.caption))}</figcaption></figure>`).join('');
+  const figs = shots.map((s, i) => `<figure class="g-${s.shape}"><div class="photo"><img src="${src(s.photo_id, s.shape === 'l' ? 1200 : 900)}" alt="${esc(s.caption)}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption class="hint">${esc(s.caption)}</figcaption></figure>`).join('');
   return responsiveImages(`<div class="gallery-wrap" data-row><div class="gallery-head"><span class="meta">${esc(t(lang, `${shots.length} photos · scroll sideways`))}</span><div class="gallery-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#ow-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#ow-arrow"/></svg></button></div></div><div class="gallery" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${figs}</div></div>`, { priorityFirst: true });
 }

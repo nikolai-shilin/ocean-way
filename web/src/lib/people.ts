@@ -14,12 +14,12 @@ export function personCard(lang: Lang, p: Instructor, extra = '') {
     p.languages.length ? `<span class="fact"><svg class="i"><use href="#ow-globe"/></svg>${p.languages.map((l) => l.toUpperCase()).join(' · ')}</span>` : '',
   ].join('');
   return `<article class="band ow-person" id="${p.slug}">
-  <img class="ow-face" src="${face(p.photo_id)}" alt="${esc(t(lang, p.photo_alt))}" width="112" height="112" loading="lazy">
+  <img class="ow-face" src="${face(p.photo_id)}" alt="${esc(p.photo_alt)}" width="112" height="112" loading="lazy">
   <div class="ow-person-body">
     <b class="ow-person-name">${esc(t(lang, p.name))}</b>
-    <span class="ow-person-role">${esc(t(lang, p.role))}${p.qualification ? ' · ' + esc(t(lang, p.qualification)) : ''}</span>
+    <span class="ow-person-role">${esc(t(lang, p.role))}${p.qualification ? ' · ' + esc(p.qualification) : ''}</span>
     <div class="facts">${facts}</div>
-    <p>${esc(t(lang, p.bio))}</p>${extra}
+    <p>${esc(p.bio)}</p>${extra}
     ${p.sample ? `<span class="ow-sample">${esc(t(lang, 'Sample profile'))}</span>` : ''}
   </div>
 </article>`;

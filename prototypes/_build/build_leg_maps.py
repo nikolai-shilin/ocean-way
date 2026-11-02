@@ -1,6 +1,8 @@
 """One map per training-passage leg (the route with its stops), built with the same ryc-rentals tools as
 build_passages_map.py: Natural Earth 1:10m land, Mercator fitted to the leg, the line routed by sea through the stops.
-Writes web/content/passage_maps.json: {leg: {"d": svg, "m": svg, "nm": distance}}."""
+Writes web/content/passage_maps.json and course_maps.json: {key: {"d": svg, "m": svg, "nm": distance}}, and
+web/supabase/load/route_maps.sql, which puts the same maps into the map columns (the site reads them from there).
+Run it with psql against the project, as with the other files in supabase/load."""
 import json, math, os, sys, time
 RM = '/Users/shilin/Developer/ryc-rentals/hotweb/scripts/route_maps'
 sys.path.insert(0, RM)
@@ -133,3 +135,12 @@ for slug, c in courses.items():
         cout[slug] = build(slug, {'stops': c['route']})
         print(slug, cout[slug]['nm'], 'NM')
 json.dump(cout, open(os.path.join(WEB, 'content', 'course_maps.json'), 'w'), ensure_ascii=False)
+
+def lit(v):
+    return "'" + json.dumps(v, ensure_ascii=False).replace("'", "''") + "'::jsonb"
+sql = ['-- Route maps from prototypes/_build/build_leg_maps.py. Safe to re-run.', 'begin;']
+sql += [f"update public.passage_legs set map = {lit(m)} where leg = '{k}';" for k, m in out.items()]
+sql += [f"update public.courses set map = {lit(m)} where slug = '{k}';" for k, m in cout.items()]
+sql += ['commit;', '']
+os.makedirs(os.path.join(WEB, 'supabase', 'load'), exist_ok=True)
+open(os.path.join(WEB, 'supabase', 'load', 'route_maps.sql'), 'w').write('\n'.join(sql))

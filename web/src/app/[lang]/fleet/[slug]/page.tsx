@@ -5,7 +5,7 @@ import Shell from '@/components/Shell';
 import { BoatCard } from '@/components/Cards';
 import { photoProps } from '@/lib/images';
 import { t } from '@/lib/content';
-import { getCourseDates, getYachts } from '@/lib/db';
+import { english, getCourseDates, getYachts } from '@/lib/db';
 import { usedForIcon } from '@/lib/icons';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
 import { eur, range, boatSpec } from '@/lib/render';
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/fleet/[slu
   const l = lang as Lang;
   const y = (await getYachts(l)).find((x) => x.slug === slug);
   if (!y) return {};
-  return meta(l, { title: `${y.model}, ${t(l, y.base)}`, description: t(l, y.description), pathFor: (x) => path.boat(x, slug), image: photo(y.photo_id, 1200) });
+  return meta(l, { title: `${y.model}, ${t(l, y.base)}`, description: y.description, pathFor: (x) => path.boat(x, slug), image: photo(y.photo_id, 1200) });
 }
 
 const LOC: Record<Lang, string> = { en: 'en-GB', ru: 'ru-RU', de: 'de-DE', es: 'es-ES' };
@@ -37,7 +37,7 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
   const weeks = (await getCourseDates('bareboat-skipper')).filter((d) => d.boat === y.model && d.places_left > 0);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Fleet'), path.fleet(lang)], [y.model, path.boat(lang, slug)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
-    '@type': 'Product', name: y.model, description: t(lang, y.description), image: photo(y.photo_id, 1200), category: 'Sailing yacht charter',
+    '@type': 'Product', name: y.model, description: y.description, image: photo(y.photo_id, 1200), category: 'Sailing yacht charter',
     brand: { '@type': 'Brand', name: y.model.split(' ')[0] },
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Year', value: y.year }, { '@type': 'PropertyValue', name: 'Length', value: Number(y.length_m), unitCode: 'MTR' },
@@ -57,15 +57,15 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
       <section className="ow-hero">
         <Crumbs lang={lang} items={crumbs} current={t(lang, y.base)} />
         <h1 className="display">{y.model}</h1>
-        <p className="lead">{t(lang, y.description)}</p>
+        <p className="lead">{y.description}</p>
         <div className="facts">
           <span className="fact"><svg className="i"><use href="#ow-pin" /></svg>{t(lang, y.base)}</span>
-          <span className="fact"><svg className="i"><use href={`#${usedForIcon(y.used_for)}`} /></svg>{t(lang, y.used_for)}</span>
+          <span className="fact"><svg className="i"><use href={`#${usedForIcon(english(y).used_for)}`} /></svg>{y.used_for}</span>
         </div>
       </section>
       <div className="ow-item">
         <div className="ow-body">
-          <div className="ow-photo"><img {...photoProps(photo(y.photo_id, 1400), 'wide', { priority: true })} alt={t(lang, y.photo_alt)} suppressHydrationWarning /></div>
+          <div className="ow-photo"><img {...photoProps(photo(y.photo_id, 1400), 'wide', { priority: true })} alt={y.photo_alt} suppressHydrationWarning /></div>
           <section>
             <h2>{t(lang, 'Specifications')}</h2>
             <dl className="ow-specs">{specs.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>

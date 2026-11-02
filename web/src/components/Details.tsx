@@ -3,13 +3,14 @@ import type { Faq as FaqItem, Skill, Step, Stop } from '@/lib/db';
 import { skillIcon } from '@/lib/icons';
 import type { Lang } from '@/lib/site';
 
-/** Building blocks of the course and passage pages: ticked lists, a day-by-day programme, the stops of a route. */
-export function List({ lang, items, icon = 'ow-check', cols = false }: { lang: Lang; items: string[]; icon?: string; cols?: boolean }) {
-  return <ul className={cols ? 'ow-list ow-cols' : 'ow-list'}>{items.map((x, i) => <li key={i}><svg className="i"><use href={`#${icon}`} /></svg><span>{t(lang, x)}</span></li>)}</ul>;
+/** Building blocks of the course and passage pages: ticked lists, a day-by-day programme, the stops of a route.
+ *  Text comes in the page language from the database (localize in db.ts); only stop names and labels go through t(). */
+export function List({ items, icon = 'ow-check', cols = false }: { items: string[]; icon?: string; cols?: boolean }) {
+  return <ul className={cols ? 'ow-list ow-cols' : 'ow-list'}>{items.map((x, i) => <li key={i}><svg className="i"><use href={`#${icon}`} /></svg><span>{x}</span></li>)}</ul>;
 }
 
-export function Program({ lang, steps }: { lang: Lang; steps: Step[] }) {
-  return <ol className="ow-prog">{steps.map((s, i) => <li key={i}><b>{t(lang, s.title)}</b><p>{t(lang, s.text)}</p></li>)}</ol>;
+export function Program({ steps }: { steps: Step[] }) {
+  return <ol className="ow-prog">{steps.map((s, i) => <li key={i}><b>{s.title}</b><p>{s.text}</p></li>)}</ol>;
 }
 
 export function Stops({ lang, stops }: { lang: Lang; stops: Stop[] }) {
@@ -21,7 +22,7 @@ export function Stops({ lang, stops }: { lang: Lang; stops: Stop[] }) {
         return (
           <li key={i} className={cls}>
             <b>{t(lang, s.name)}</b>{end ? <span className="ow-end">{t(lang, i === 0 ? 'Departure' : 'Arrival')}</span> : null}
-            {s.note ? <p>{t(lang, s.note)}</p> : null}
+            {s.note ? <p>{s.note}</p> : null}
           </li>
         );
       })}
@@ -30,14 +31,14 @@ export function Stops({ lang, stops }: { lang: Lang; stops: Stop[] }) {
 }
 
 /** Grouped skills, the same blocks as "What you'll learn" on the Bareboat Skipper page (home.css .mods). */
-export function Skills({ lang, skills }: { lang: Lang; skills: Skill[] }) {
+export function Skills({ skills, en = skills }: { skills: Skill[]; en?: Skill[] }) {
   return (
     <div className="mods">
       {skills.map((g, i) => (
         <div className="mod" key={i}>
-          <span className="ico-c"><svg className="i"><use href={`#${skillIcon(g.title, g.icon)}`} /></svg></span>
-          <h3>{t(lang, g.title)}</h3>
-          <ul>{g.items.map((x, j) => <li key={j}>{t(lang, x)}</li>)}</ul>
+          <span className="ico-c"><svg className="i"><use href={`#${skillIcon(en[i]?.title ?? g.title, g.icon)}`} /></svg></span>
+          <h3>{g.title}</h3>
+          <ul>{g.items.map((x, j) => <li key={j}>{x}</li>)}</ul>
         </div>
       ))}
     </div>
@@ -51,8 +52,8 @@ export function Faq({ lang, items }: { lang: Lang; items: FaqItem[] }) {
     <div className="faq-col">
       {xs.map((x, i) => (
         <details className="faq-item" key={from + i} open={from + i === 0}>
-          <summary><span className="faq-q">{t(lang, x.q)}</span><svg className="i"><use href="#ow-chevron" /></svg></summary>
-          <p className="faq-a">{t(lang, x.a)}</p>
+          <summary><span className="faq-q">{x.q}</span><svg className="i"><use href="#ow-chevron" /></svg></summary>
+          <p className="faq-a">{x.a}</p>
         </details>
       ))}
     </div>
@@ -65,8 +66,8 @@ export function Faq({ lang, items }: { lang: Lang; items: FaqItem[] }) {
   );
 }
 
-/** FAQPage structured data for the same questions, in the page language. */
-export const faqLd = (lang: Lang, items: FaqItem[]) => ({
+/** FAQPage structured data for the same questions (already in the page language). */
+export const faqLd = (items: FaqItem[]) => ({
   '@type': 'FAQPage',
-  mainEntity: items.map((x) => ({ '@type': 'Question', name: t(lang, x.q), acceptedAnswer: { '@type': 'Answer', text: t(lang, x.a) } })),
+  mainEntity: items.map((x) => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.a } })),
 });

@@ -1,6 +1,6 @@
 # Plan: move static data into the database
 
-Status: proposal, 1 Nov 2026. Nothing has been migrated yet.
+Status: phase 1 in progress (2 Nov 2026). Catalogue text and route maps are served from the database; see "Phase 1 progress".
 
 ## Where things are today
 
@@ -55,6 +55,18 @@ Make the database the only source for courses, routes, boats, instructors and da
 **Done when:**
 - Every course, passage and fleet page in all 4 languages renders the same text as before.
 - `i18n-app` holds only interface labels.
+
+**Phase 1 progress (2 Nov 2026):**
+- Done: `translations` and `map` columns, filled for 8 courses, 7 routes, 10 boats and 8 instructors, plus 14 route maps.
+- Done: getters return rows in the page language. Pages no longer call `t()` on database text. Port, area, base and stop
+  names, names, roles and boat models stay English in the database and still go through `t()`, because code uses them as keys.
+- Done: icons that are picked by text (scope, used for, skill groups) use the English row through `english()` in `db.ts`.
+- Done: route maps come only from the `map` column. `build_leg_maps.py` also writes `supabase/load/route_maps.sql`.
+- Done: `i18n-app` trimmed from about 870 to about 218 strings per language. The ones left are labels plus that vocabulary.
+- Checked: a before/after comparison of all 248 earlier URLs shows only changes from other commits (new articles, the
+  translated "What you do on board" list). Icons are the same in every language.
+- Left: Bareboat Skipper page onto the generic template. Retiring `catalog_extra.json` and the seed pipeline, which still
+  reads `content/*_maps.json` for distances. Dropping the offline fallbacks (open decision 3).
 
 ## Phase 2: theory articles
 

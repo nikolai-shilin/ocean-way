@@ -7,7 +7,7 @@ import { catalog, getInstructors, getLegs, getPassages, getRouteMap, passageSlug
 import { peopleSection } from '@/lib/people';
 import { Faq, faqLd, List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, galleryHtml, legMap, range, shortRange } from '@/lib/render';
+import { eur, galleryHtml, range, routeMap, shortRange } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/passages/[
   const shot = leg?.gallery?.find((g) => g.shape === 'l') ?? leg?.gallery?.[0];
   return meta(l, {
     title: t(l, 'Training passage {route}, {dates}', { route, dates: shortRange(l, p.starts_on, p.ends_on) }),
-    description: t(l, leg?.summary ?? catalog().legs[p.leg] ?? ''), pathFor: (x) => path.passage(x, slug),
+    description: leg?.summary ?? t(l, catalog().legs[p.leg] ?? ''), pathFor: (x) => path.passage(x, slug),
     image: shot ? photo(shot.photo_id, 1200) : undefined,
   });
 }
@@ -41,7 +41,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   if (!p) notFound();
   const leg = (await getLegs(lang))[p.leg];
   const skippers = (await getInstructors(lang)).filter((x) => x.legs.includes(p.leg));
-  const summary = t(lang, leg?.summary ?? catalog().legs[p.leg] ?? '');
+  const summary = leg?.summary ?? t(lang, catalog().legs[p.leg] ?? '');
   const back = p.return_id ? all.find((x) => x.id === p.return_id) : undefined;
   const route = t(lang, `${p.from_port} → ${p.to_port}`);
   const when = range(lang, p.starts_on, p.ends_on);
@@ -56,9 +56,9 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
     eventStatus: 'https://schema.org/EventScheduled', organizer: { '@id': `${SITE}/#org` },
     location: { '@type': 'Place', name: t(lang, p.from_port), address: { '@type': 'PostalAddress', addressCountry: p.from_port === 'Northern Cyprus' ? 'CY' : 'TR' } },
     offers: { '@type': 'Offer', price: p.price_eur, priceCurrency: 'EUR', availability: `https://schema.org/${full ? 'SoldOut' : 'InStock'}`, url: SITE + path.passage(lang, slug) },
-  }, ...(leg?.faq?.length ? [faqLd(lang, leg.faq)] : [])] };
+  }, ...(leg?.faq?.length ? [faqLd(leg.faq)] : [])] };
   const doList = ['Plan each leg with the instructor: route, shipping and weather windows', 'Stand watches, also at night', 'Skipper legs yourself under supervision', 'Log every mile and night hour, signed by the instructor'];
-  const map = legMap(lang, p.leg, await getRouteMap('passage_legs', p.leg));
+  const map = routeMap(lang, await getRouteMap('passage_legs', p.leg));
   return (
     <Shell lang={lang} section="passages" pathFor={(l) => path.passage(l, slug)} jsonld={ld}>
       <section className="ow-hero">
@@ -76,18 +76,18 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
       <div className="ow-item">
         <div className="ow-body">
           <div className="ow-map" dangerouslySetInnerHTML={{ __html: map }} />
-          {leg?.about.length ? <section className="ow-text"><h2>{t(lang, 'About the route')}</h2>{leg.about.map((x, i) => <p key={i}>{t(lang, x)}</p>)}</section> : null}
+          {leg?.about.length ? <section className="ow-text"><h2>{t(lang, 'About the route')}</h2>{leg.about.map((x, i) => <p key={i}>{x}</p>)}</section> : null}
           {leg?.stops.length ? <section id="route"><h2>{t(lang, 'Route and stops')}</h2><Stops lang={lang} stops={stopsFor(leg, p)} /></section> : null}
-          {leg?.program.length ? <section id="programme"><h2>{t(lang, 'How the passage runs')}</h2><Program lang={lang} steps={leg.program} /></section> : null}
+          {leg?.program.length ? <section id="programme"><h2>{t(lang, 'How the passage runs')}</h2><Program steps={leg.program} /></section> : null}
           <section>
             <h2>{t(lang, 'What you do on board')}</h2>
-            <List lang={lang} items={doList} />
+            <List items={doList.map((x) => t(lang, x))} />
           </section>
           {skippers.length ? <div dangerouslySetInnerHTML={{ __html: peopleSection(lang, skippers, 'passage') }} /> : null}
           {leg ? (
             <div className="ow-two">
-              <div className="band" id="requirements"><h3>{t(lang, 'Requirements')}</h3><List lang={lang} items={leg.requirements} /></div>
-              <div className="band" id="bring"><h3>{t(lang, 'What to bring')}</h3><List lang={lang} items={leg.bring} /></div>
+              <div className="band" id="requirements"><h3>{t(lang, 'Requirements')}</h3><List items={leg.requirements} /></div>
+              <div className="band" id="bring"><h3>{t(lang, 'What to bring')}</h3><List items={leg.bring} /></div>
             </div>
           ) : null}
           {back ? (

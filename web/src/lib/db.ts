@@ -22,13 +22,17 @@ export type RouteMap = { d: string; m: string; nm: number };
 export type Stop = { name: string; lon: number | null; lat: number | null; note: string };
 export type PassageLeg = { leg: string; summary: string; about: string[]; stops: Stop[]; distance_nm: number; program: Step[]; requirements: string[]; bring: string[]; gallery?: Shot[]; faq?: Faq[]; map?: RouteMap | null; translations?: Translations };
 
+const EN = Symbol('en');
+/** The English version of a localized row (the row itself in English). */
+export const english = <T extends object>(row: T): T => (row as T & { [EN]?: T })[EN] ?? row;
+
 /** A row's text in the page language. translations[lang] replaces strings and lists of strings, and merges lists of
  *  objects (program, faq, gallery, stops…) item by item, so photo ids, icons and coordinates stay from the English row.
- *  Anything missing stays English. */
+ *  Anything missing stays English. The English row is kept for english(): code that picks icons by text needs it. */
 export function localize<T extends { translations?: Translations }>(row: T, lang: Lang): T {
   const tr = lang === 'en' ? undefined : row.translations?.[lang];
   if (!tr) return row;
-  const out: Record<string, unknown> = { ...row };
+  const out: Record<string, unknown> = { ...row, [EN]: row };
   for (const [k, v] of Object.entries(tr)) {
     const base = out[k];
     out[k] = Array.isArray(v) && Array.isArray(base) && base.some((x) => x && typeof x === 'object')
@@ -103,7 +107,7 @@ export async function getLegs(lang: Lang = 'en'): Promise<Record<string, Passage
   return Object.fromEntries(rows.map((r) => [r.leg, localize(r, lang)]));
 }
 
-/** The route map of one course or passage route, or null (then the page falls back to content/*_maps.json). */
+/** The route map of one course or passage route, or null when it has none. */
 export async function getRouteMap(table: 'courses' | 'passage_legs', key: string): Promise<RouteMap | null> {
   const c = db();
   if (!c) return null;

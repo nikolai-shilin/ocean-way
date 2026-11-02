@@ -68,9 +68,9 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
             <thead><tr><th>{t(lang, 'Course')}</th><th className="hl">{t(lang, 'Level')}</th><th className="hl">{t(lang, 'Duration')}</th><th className="num">{t(lang, 'From')}</th></tr></thead>
             <tbody>{courses.map((c) => (
               <tr key={c.slug}>
-                <td className="island"><a href={path.courseItem(lang, c.slug)}>{c.name}</a><span className="sub">{t(lang, c.price_unit)}</span></td>
-                <td className="hl">{t(lang, c.level)}</td>
-                <td className="hl">{t(lang, c.duration)}</td>
+                <td className="island"><a href={path.courseItem(lang, c.slug)}>{c.name}</a><span className="sub">{c.price_unit}</span></td>
+                <td className="hl">{c.level}</td>
+                <td className="hl">{c.duration}</td>
                 <td className="num" style={{ color: 'var(--ink)' }}><b>{eur(c.price_from_eur)}</b></td>
               </tr>
             ))}</tbody>
