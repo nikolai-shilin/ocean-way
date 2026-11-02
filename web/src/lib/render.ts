@@ -156,7 +156,7 @@ export function mixShots(galleries: (Shot[] | undefined)[], skip: string[] = [],
   return out;
 }
 
-/** One photo of the cover row (cover.css). `src` is a full address; ProtoPage or Cover adds srcset/sizes. */
+/** One photo of the cover row (cover.css). `src` is a full address; HtmlPage or Cover adds srcset/sizes. */
 export type CoverShot = { src: string; shape: 'l' | 'p'; caption: string; alt?: string };
 export const coverShots = (shots: Shot[]): CoverShot[] => shots.map((s) => ({
   src: s.photo_id.startsWith('/') ? s.photo_id : `https://images.unsplash.com/photo-${s.photo_id}?w=${s.shape === 'l' ? 1400 : 900}&q=80&auto=format&fit=crop`,

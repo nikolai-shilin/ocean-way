@@ -1,5 +1,8 @@
 # Prototype build scripts
 
+The site (`web/`) no longer reads these pages, except the theory articles (`web/scripts/import_theory.py`). Home and
+booking live in `web/src/templates`; edit them there. The other pages here are design references.
+
 The English pages are the source. After editing them, regenerate the other files from this folder:
 
 ```

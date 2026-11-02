@@ -1,23 +1,24 @@
 import '@/styles/home.css';
 import '@/styles/passages.css';
-import ProtoPage from '@/components/ProtoPage';
+import HtmlPage from '@/components/HtmlPage';
 import { articleCard, getArticles } from '@/lib/articles';
-import { loadPage, pageMetadata, t } from '@/lib/content';
+import { pageMetadata, t } from '@/lib/content';
 import { getCourseDates, getCourses, getLegs, getPassages, getYachts } from '@/lib/db';
 import { PASSAGES_JS, passageRow } from '@/lib/passages';
 import { coverHtml, fleetCards, replaceInner, type CoverShot } from '@/lib/render';
 import { path, type Lang } from '@/lib/site';
+import { templatePage } from '@/lib/templates';
 
 export const revalidate = 60;
 
 export async function generateMetadata({ params }: PageProps<'/[lang]'>) {
   const { lang } = await params;
-  return pageMetadata(loadPage('home', lang as Lang), path.home);
+  return pageMetadata(templatePage('home', lang as Lang), path.home);
 }
 
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const lang = (await params).lang as Lang;
-  const content = loadPage('home', lang);
+  const content = templatePage('home', lang);
   const [passages, yachts, courses, legs] = await Promise.all([getPassages(), getYachts(lang), getCourses(lang), getLegs(lang)]);
   const courseDates = (await Promise.all(courses.map((c) => getCourseDates(c.slug)))).flat();
   const today = new Date().toISOString().slice(0, 10);
@@ -51,7 +52,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   }
   // The prototype's arrow script also drives the cover row.
   const scripts = content.scripts.map((js) => js.replace("'.gallery, .hscroll'", "'.gallery, .hscroll, .cv-row'"));
-  return <ProtoPage pathFor={path.home} content={content} main={main} scripts={[...scripts, PASSAGES_JS]} />;
+  return <HtmlPage pathFor={path.home} content={content} main={main} scripts={[...scripts, PASSAGES_JS]} />;
 }
 
 const unesc = (s: string) => s.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'").replace(/&amp;/g, '&');

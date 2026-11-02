@@ -1,17 +1,39 @@
 """Theory articles → the database (theory_topics, articles, article_translations).
 
-Articles are still written in prototypes/_build/theory and built into pages (build_theory.py, i18n_build.py,
-scripts/extract_content.py). This script reads those built pages (content/pages/theory*.<lang>.json) and upserts
-every topic, article and translation, so the site (which reads only the database) shows them.
+Articles are still written in prototypes/_build/theory and built into pages (build_theory.py, then i18n_build.py for
+ru/de/es). This script reads those built pages (prototypes/theory*.html, the reading order from the theory row of
+prototypes/home.html), turns their links into site addresses and upserts every topic, article and translation, so
+the site (which reads only the database) shows them.
 
 Needs SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in web/.env.local. Usage: python3 scripts/import_theory.py [--dry-run]
 """
-import hashlib, html, json, os, re, subprocess, sys, tempfile
+import glob, hashlib, html, json, os, re, subprocess, sys, tempfile
 
 WEB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROTO = os.path.join(os.path.dirname(WEB), 'prototypes')
 LANGS = ('en', 'ru', 'de', 'es')
-page = lambda name, lang: json.load(open(f'{WEB}/content/pages/{name}.{lang}.json'))
 un = html.unescape
+
+# Links between prototype files → site addresses (theory-knots.ru.html → /ru/theory/knots).
+LINK = re.compile(r'href="((?:home|bareboat-skipper-course|booking|theory(?:-[a-z-]+)?))(?:\.(ru|de|es))?\.html([^"]*)"')
+def route(base, lang, rest):
+    p = {'home': f'/{lang}', 'bareboat-skipper-course': f'/{lang}/courses/bareboat-skipper', 'booking': f'/{lang}/booking',
+         'theory': f'/{lang}/theory'}.get(base) or f'/{lang}/theory/{base[7:]}'
+    return p + rest.replace('&amp;', '&')
+def relink(s, lang):
+    s = re.sub(r'<a href="user-flows(?:\.\w\w)?\.html">[^<]*</a>', '', s)
+    s = s.replace('href="instructors.html', f'href="/{lang}/instructors')
+    return LINK.sub(lambda m: f'href="{route(m.group(1), m.group(2) or "en", m.group(3))}"', s)
+
+
+def page(name, lang):
+    """One built prototype page: main (with site links), title, description, image, JSON-LD."""
+    s = open(f'{PROTO}/{name}.html' if lang == 'en' else f'{PROTO}/{name}.{lang}.html').read()
+    meta = lambda k: (re.search(rf'(?:name|property)="{re.escape(k)}" content="([^"]*)"', s) or [None, None])[1]
+    main = s[s.index('<main>') + len('<main>'):s.index('</main>')]
+    return {'main': relink(main, lang), 'title': re.search(r'<title>(.*?)</title>', s, re.S).group(1),
+            'description': meta('description'), 'image': meta('og:image'),
+            'jsonld': re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', s, re.S)}
 
 
 def one(pattern, s, what):
@@ -42,8 +64,8 @@ for lang in LANGS:
 home = page('home', 'en')['main']
 row = one(r'<section class="sec" id="theory".*?<div class="hscroll"[^>]*>(.*?)</section>', home, 'home theory row')
 order = re.findall(r'href="/en/theory/([\w-]+)"', row)
-index = json.load(open(f'{WEB}/content/index.json'))['slugs']
-assert sorted(order) == sorted(index), ('home row and index differ', set(order) ^ set(index))
+built = sorted(os.path.basename(f)[7:-5] for f in glob.glob(f'{PROTO}/theory-*.html') if re.fullmatch(r'theory-[a-z-]+\.html', os.path.basename(f)))
+assert sorted(order) == built, ('home row and built articles differ', set(order) ^ set(built))
 
 articles, translations = [], []
 for sort, slug in enumerate(order, 1):

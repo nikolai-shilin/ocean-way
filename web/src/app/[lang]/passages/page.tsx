@@ -2,13 +2,14 @@ import '@/styles/home.css';
 import '@/styles/app.css';
 import '@/styles/passages.css';
 import Shell from '@/components/Shell';
-import { loadPage, t } from '@/lib/content';
+import { t } from '@/lib/content';
 import { getLegs, getPassages, passageSlug } from '@/lib/db';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
 import { PASSAGES_JS, passageFilter, passageList } from '@/lib/passages';
 import { mixShots, passagesMap } from '@/lib/render';
 import Cover from '@/components/Cover';
 import { path, SITE, type Lang } from '@/lib/site';
+import { templatePage } from '@/lib/templates';
 
 export const revalidate = 60;
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/passages'>
 export default async function Passages({ params }: PageProps<'/[lang]/passages'>) {
   const lang = (await params).lang as Lang;
   const [passages, legs] = await Promise.all([getPassages(), getLegs(lang)]);
-  const home = loadPage('home', lang).main;
+  const home = templatePage('home', lang).main;
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Passages'), path.passages(lang)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'ItemList', name: t(lang, 'Training passages 2027'),

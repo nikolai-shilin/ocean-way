@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Page content (extracted from the prototypes) is read from ./content at render time, also on revalidation.
+  // Dictionaries, the icon sprite and the page templates are read from disk at render time, also on revalidation.
   outputFileTracingIncludes: {
-    "/**": ["./content/**/*"],
+    "/**": ["./content/**/*", "./src/templates/**/*"],
   },
   // Boat and staff photos in /public are resized by /_next/image (src/lib/images.ts); nothing else may be.
   images: {

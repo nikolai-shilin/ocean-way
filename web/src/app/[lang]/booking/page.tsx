@@ -1,10 +1,11 @@
 import '@/styles/booking.css';
-import ProtoPage from '@/components/ProtoPage';
-import { loadPage, pageMetadata, t } from '@/lib/content';
+import HtmlPage from '@/components/HtmlPage';
+import { pageMetadata, t } from '@/lib/content';
 import { getCourseDates, getCourses, getPassages, type CourseDate, type Passage } from '@/lib/db';
 import { ORG, photo } from '@/lib/meta';
 import { bookingData } from '@/lib/render';
 import { path, type Lang } from '@/lib/site';
+import { templatePage } from '@/lib/templates';
 
 const TELEGRAM = ORG.sameAs[0];
 
@@ -12,7 +13,7 @@ export const revalidate = 30;
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/booking'>) {
   const { lang } = await params;
-  return pageMetadata(loadPage('booking', lang as Lang), path.booking);
+  return pageMetadata(templatePage('booking', lang as Lang), path.booking);
 }
 
 /** The prototype's booking script, wired to live dates and places and to the bookings API.
@@ -68,7 +69,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 export default async function Booking({ params, searchParams }: PageProps<'/[lang]/booking'>) {
   const lang = (await params).lang as Lang;
   const asked = (await searchParams).course;
-  const content = loadPage('booking', lang);
+  const content = templatePage('booking', lang);
   const course = typeof asked === 'string' && asked !== 'bareboat-skipper' ? (await getCourses(lang)).find((c) => c.slug === asked) : undefined;
   const [dates, passages] = await Promise.all([getCourseDates(course?.slug ?? 'bareboat-skipper'), getPassages()]);
   const chrome = content.scripts.slice(0, -1);
@@ -84,16 +85,16 @@ export default async function Booking({ params, searchParams }: PageProps<'/[lan
   <p class="step-lead">${esc(t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.'))}</p>
   <div class="ctas"><a class="pill pill-primary" href="${TELEGRAM}">${esc(t(lang, 'Ask in Telegram'))}</a><a class="pill pill-quiet" href="${path.courses(lang)}">${esc(t(lang, 'All courses'))}</a></div>
 </div></div>`;
-      return <ProtoPage pathFor={path.booking} content={content} main={main} scripts={chrome.length ? [chrome.join(';\n')] : []} />;
+      return <HtmlPage pathFor={path.booking} content={content} main={main} scripts={chrome.length ? [chrome.join(';\n')] : []} />;
     }
     const after = course.after?.[0]?.text;
     const info = {
       title: t(lang, '{name} course', { name: course.name }), h1, lead: course.summary, img: photo(course.photo_id, 600),
       back: [back + '#dates', t(lang, 'Back to the course')], prep: back + '#bring', ...(after ? { after } : {}),
     };
-    return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
+    return <HtmlPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
   }
-  return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
+  return <HtmlPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1], lang)).join(';\n')]} />;
 }
 
 function script(lang: Lang, dates: CourseDate[], passages: Passage[], info?: object) {

@@ -1,6 +1,6 @@
 import '@/styles/theory.css';
 import { notFound } from 'next/navigation';
-import ProtoPage from '@/components/ProtoPage';
+import HtmlPage from '@/components/HtmlPage';
 import { articlePage, getArticles } from '@/lib/articles';
 import { pageMetadata } from '@/lib/content';
 import { path, type Lang } from '@/lib/site';
@@ -21,5 +21,5 @@ export default async function Article({ params }: PageProps<'/[lang]/theory/[slu
   const { lang, slug } = await params;
   const page = await articlePage(lang as Lang, slug);
   if (!page) notFound();
-  return <ProtoPage section="theory" pathFor={(l) => path.article(l, slug)} content={page} />;
+  return <HtmlPage section="theory" pathFor={(l) => path.article(l, slug)} content={page} />;
 }

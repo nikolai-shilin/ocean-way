@@ -1,0 +1,82 @@
+
+  <div class="bk">
+    <div>
+      <a class="bk-back" id="back" href="/en/courses/bareboat-skipper#dates"><svg class="i"><use href="#ow-arrow"/></svg><span>Back to the course</span></a>
+      <h1 id="h1">Book your place</h1>
+      <ol class="steps" id="steps" aria-label="Booking steps">
+        <li data-s="1"><span>1 · Dates</span></li><li data-s="2"><span>2 · Your details</span></li><li data-s="3"><span>3 · Payment</span></li><li data-s="4"><span>4 · Done</span></li>
+      </ol>
+      <details class="msum band" id="msum"><summary><span id="msumLabel">Your booking</span><b id="msumTotal"></b></summary><div class="sum" id="sumM"></div></details>
+      <div class="errsum" id="errsum" role="alert" tabindex="-1"><b>Please check these fields</b><ul id="errlist"></ul></div>
+      <form id="form" novalidate>
+        <section data-step="1" aria-labelledby="t1">
+          <h2 class="step-title" id="t1">Choose dates</h2>
+          <p class="step-lead" id="lead1"></p>
+          <fieldset><legend id="dateLegend">Start date</legend><div class="choices" id="dates"></div></fieldset>
+          <fieldset id="addFs" hidden><legend>Add the return leg</legend><div class="choices" id="adds"></div></fieldset>
+          <fieldset><legend>Cabin</legend><div class="choices" id="cabins"></div></fieldset>
+          <fieldset><legend>People</legend>
+            <div class="stepper"><button class="round" type="button" id="minus" aria-label="One person fewer">−</button><output id="ppl" aria-live="polite">1</output><button class="round" type="button" id="plus" aria-label="One more person">+</button></div>
+            <p class="hint" id="pplHint"></p>
+          </fieldset>
+        </section>
+
+        <section data-step="2" aria-labelledby="t2" hidden>
+          <h2 class="step-title" id="t2">Your details</h2>
+          <p class="step-lead">No account needed. We use these to confirm the booking and to put you in touch with your instructor.</p>
+          <fieldset><legend>Lead person</legend>
+            <div class="grid2">
+              <div class="fld"><label for="fname">First name</label><input id="fname" name="fname" autocomplete="given-name" required><span class="err">Enter your first name</span></div>
+              <div class="fld"><label for="lname">Last name</label><input id="lname" name="lname" autocomplete="family-name" required><span class="err">Enter your last name</span></div>
+              <div class="fld"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required><span class="err">Enter an email like name@example.com</span></div>
+              <div class="fld"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required><span class="err">Enter a phone number with country code</span></div>
+              <div class="fld"><label for="tg">Telegram <span class="opt-l">(optional)</span></label><input id="tg" name="tg" autocomplete="off" placeholder="@username"></div>
+              <div class="fld"><label for="country">Country</label><select id="country" name="country" autocomplete="country-name"><option>Cyprus</option><option>Germany</option><option>Israel</option><option>Russia</option><option>Serbia</option><option>Turkey</option><option>United Kingdom</option><option>Other</option></select></div>
+            </div>
+          </fieldset>
+          <fieldset><legend id="expLegend">Sailing experience</legend><div class="choices" id="exp"></div><p class="hint" id="expHint"></p></fieldset>
+          <fieldset id="othersFs"><legend>Other people <span class="opt-l" style="font-weight:400;color:var(--muted)">(you can add names later)</span></legend><div class="grid2" id="others"></div></fieldset>
+          <label class="tick"><input type="checkbox" id="news"> Send me new course dates and free places, about twice a month</label>
+        </section>
+
+        <section data-step="3" aria-labelledby="t3" hidden>
+          <h2 class="step-title" id="t3">Payment</h2>
+          <p class="step-lead">Nothing is charged now. We confirm your place first, then send you a payment link or bank details.</p>
+          <fieldset><legend>What you pay first</legend><div class="choices" id="plan"></div></fieldset>
+          <fieldset><legend>Method</legend><div class="choices" id="method"></div>
+            <div class="paybox" id="paybox"><svg class="i"><use href="#ow-info"/></svg><span id="payboxText">After we confirm your place, we send a secure card payment link. Nothing is charged today.</span></div>
+          </fieldset>
+          <fieldset><legend>Cancellation</legend><p style="margin:0 0 14px;font-size:16px">Free cancellation until 6 weeks before the start. After that the deposit is kept, or you can move it to another date in the same year once.</p>
+            <label class="tick"><input type="checkbox" id="terms" required> I agree to the <a href="#" style="text-decoration:underline">booking terms</a> and the <a href="#" style="text-decoration:underline">privacy policy</a></label>
+            <div class="fld" id="termsFld"><span class="err">Please accept the booking terms</span></div>
+          </fieldset>
+        </section>
+
+        <div class="nav-row" id="navRow">
+          <button class="linkbtn" type="button" id="prev">Back</button>
+          <button class="pill pill-primary" type="submit" id="next">Continue</button>
+        </div>
+      </form>
+
+      <section id="done" hidden aria-labelledby="t4">
+        <div class="done-hero">
+          <span class="done-mark"><svg class="i"><use href="#ow-check"/></svg></span>
+          <h2 class="step-title" id="t4" tabindex="-1">Request received</h2>
+          <p class="step-lead" style="margin:0" id="doneLead"></p>
+          <span class="meta">Booking reference <span class="ref" id="ref"></span></span>
+        </div>
+        <h3 class="h3" style="margin:40px 0 4px">What happens next</h3>
+        <ol class="timeline" id="timeline"></ol>
+        <div class="acts">
+          <a class="pill pill-primary" id="ics" download="ocean-way-booking.ics" href="#"><svg class="i"><use href="#ow-calendar"/></svg>Add to calendar</a>
+          <a class="pill pill-quiet" href="#"><svg class="i"><use href="#ow-telegram"/></svg>Join the course chat</a>
+          <a class="pill pill-quiet" id="prep" href="/en/courses/bareboat-skipper#prepare">What to bring</a>
+        </div>
+        <div class="band" style="padding:24px 28px;margin-top:40px">
+          <span class="kicker">After the course</span>
+          <p style="margin:10px 0 0;font-size:17px" id="afterText"></p>
+        </div>
+      </section>
+    </div>
+    <aside aria-label="Booking summary"><div class="sum band" id="sumD"></div></aside>
+  </div>

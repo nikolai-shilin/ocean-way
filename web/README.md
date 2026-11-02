@@ -7,19 +7,24 @@ Live: https://ocean-way.vercel.app
 
 ## How it is put together
 
-- **Content and design** come from the finished prototypes in `../prototypes` (already translated).
-  `python3 scripts/extract_content.py` turns them into `content/pages/<page>.<lang>.json` (header, main, footer,
-  metadata, JSON-LD, page scripts) and `src/styles/<group>.css`. Re-run it after regenerating the prototypes
-  (`../prototypes/_build`, see its README).
+- **Home and booking** are HTML templates in `src/templates` (`home.html`, `booking.html`, their scripts `*.js`, the
+  English title, description and JSON-LD in `pages.ts`), translated when they render by `src/lib/templates.ts`: text
+  between tags and the `alt`, `aria-label`, `placeholder` and `title` attributes go through the dictionaries, keyed by
+  the English text. Edit the English template; add the translation of any new string to `content/i18n/<lang>.json`
+  (a string without one shows in English). The pages then swap in live rows from the database. Their styles are
+  `src/styles/home.css` and `booking.css`. `../prototypes` is a design reference only, except for theory articles.
 - **Theory articles** are served from the database (`articles`, `article_translations`, `theory_topics`); the hub and
   article pages are rendered by `src/lib/articles.ts`. They are still written in `../prototypes/_build/theory` and
-  built as above; then `python3 scripts/import_theory.py` loads the built pages into the database (needs
+  built there (`build_theory.py`, `i18n_build.py`); then `python3 scripts/import_theory.py` loads the built pages
+  (`../prototypes/theory*.html`) into the database (needs
   `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`). Pages pick up the change within seconds (see Freshness).
   The view `article_translations_stale` lists translations whose English body changed since they were made.
 - **Pages** (`src/app/[lang]/…`) render that content server-side and replace the live parts with database rows:
   passages table and fleet on the home page, course dates and the booking card on the course page, dates and places in
   the booking flow. Pages revalidate every 60 s (booking 30 s).
-- **Translations** for live data (dates, routes, places) use the same dictionaries (`content/i18n/<lang>.json`).
+- **Translations**: interface text, template pages and vocabulary from the database (ports, names) use
+  `t()` with `content/i18n/<lang>.json` and `content/i18n-app/<lang>.json` (the second wins). Database text has
+  its own translations in each row.
 - **SEO**: per-language canonical and `hreflang` (incl. `x-default`), Open Graph, JSON-LD (Course, Article,
   BreadcrumbList, FAQPage, Organization), `sitemap.xml`, `robots.txt`; booking pages are `noindex`.
   `/` and paths without a language redirect by `Accept-Language` (`src/proxy.ts`).

@@ -1,5 +1,5 @@
 import '@/styles/theory.css';
-import ProtoPage from '@/components/ProtoPage';
+import HtmlPage from '@/components/HtmlPage';
 import { hubPage } from '@/lib/articles';
 import { pageMetadata } from '@/lib/content';
 import { path, type Lang } from '@/lib/site';
@@ -13,5 +13,5 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/theory'>) 
 
 export default async function TheoryHub({ params }: PageProps<'/[lang]/theory'>) {
   const lang = (await params).lang as Lang;
-  return <ProtoPage section="theory" pathFor={path.theory} content={await hubPage(lang)} />;
+  return <HtmlPage section="theory" pathFor={path.theory} content={await hubPage(lang)} />;
 }

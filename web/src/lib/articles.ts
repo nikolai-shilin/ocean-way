@@ -1,8 +1,9 @@
 import { cache } from 'react';
-import { hasT, loadPage, t, type PageContent } from './content';
+import { hasT, t, type PageContent } from './content';
 import { english, getInstructors, live, localize, type Translations } from './db';
 import { photo } from './meta';
 import { SITE, path, type Lang } from './site';
+import { theoryScript } from './templates';
 
 /** Theory articles from the database (articles, article_translations, theory_topics; loaded by
  *  scripts/import_theory.py), and the HTML of the hub and article pages, the same markup as the prototype. */
@@ -68,12 +69,12 @@ const crumbLd = (items: [string, string][]) => ({
   itemListElement: items.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + href })),
 });
 
-/** A theory page for ProtoPage: its scripts are the theory hub's (one set for all theory pages). */
+/** A theory page for HtmlPage, with the script all theory pages share. */
 function shell(lang: Lang, o: { page: string; title: string; description: string; image: string; ld: object[]; main: string }): PageContent {
-  const hub = loadPage('theory', lang);
   return {
-    ...hub, page: o.page, title: o.title, description: o.description, image: o.image, main: o.main,
+    lang, page: o.page, title: o.title, description: o.description, image: o.image, robots: null, main: o.main, tail: '',
     jsonld: [JSON.stringify({ '@context': 'https://schema.org', '@graph': o.ld }, null, 1)],
+    scripts: [theoryScript()], styles: 'theory',
   };
 }
 

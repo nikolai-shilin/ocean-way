@@ -1,6 +1,6 @@
 # Plan: move static data into the database
 
-Status: phases 1 and 2 done, phase 3 started, phase 4 live (2 Nov 2026). The catalogue and the theory articles are served from the
+Status: phases 1, 2 and 4 done, phase 3 done except merging the two dictionaries (2 Nov 2026). The catalogue and the theory articles are served from the
 database; the header, footer and icons are the app's own code. See the progress notes under each phase.
 
 ## Where things are today
@@ -142,8 +142,16 @@ theory_topics (key text primary key, sort int, translations jsonb)              
 - Done: the header (`siteHeader` in `src/lib/chrome.ts`), the footer (`FooterNav`, already React) and the icon sprite
   (`content/ow-icons.svg`, written by `build_icons.py`) are shared by every page. Page files no longer carry their own
   copies (`content/pages` went from 8.8 MB to 4.4 MB). Full HTML of all 280 URLs is unchanged.
-- Left, by choice: home and booking stay built from the prototypes for now; `content/pages`, `extract_content.py`
-  and `ProtoPage` stay until they move.
+- Done: home and booking are HTML templates in the app (`src/templates/home.html`, `booking.html`, their scripts and
+  English metadata), translated at render time by `src/lib/templates.ts` with the same rules as the prototype build.
+  Changed from the plan: templates, not React components. The pages already swap their live rows in by code, and
+  the template keeps the markup exactly, so the design does not change.
+- Done: `content/pages`, `content/index.json`, `scripts/extract_content.py` removed; `ProtoPage` is now `HtmlPage`
+  (it also renders the theory pages). `import_theory.py` reads the built prototype pages directly (same output).
+  `content` went from 4.4 MB to 1.9 MB.
+- Checked: the templates give exactly the old page body, scripts, title, description and JSON-LD in all four
+  languages; full HTML of all 280 URLs is unchanged; the Russian booking flow and the German home page run.
+- Left: `i18n` and `i18n-app` are still two files per language (`t()` merges them).
 
 ## Phase 4: editing and freshness
 
