@@ -15,7 +15,7 @@ const plain = (s: string) => s.replace(/&(amp|quot|lt|gt|#39|#x27|nbsp);/g, (_, 
 
 export async function GET() {
   const [courses, passages, yachts, legs, bareboat] = await Promise.all([getCourses(), getPassages(), getYachts(), getLegs(), getCourseDates('bareboat-skipper')]);
-  const bb = loadPage('course-bareboat-skipper', 'en');
+  const bb = courses.find((c) => c.slug === 'bareboat-skipper');
   const out: string[] = [];
   const add = (...lines: string[]) => out.push(...lines);
 
@@ -34,12 +34,11 @@ export async function GET() {
 
   add('## Courses', '');
   for (const c of courses) {
-    const link = c.slug === 'bareboat-skipper' ? path.course('en') : path.courseItem('en', c.slug);
-    add(`- [${c.name} course](${url(link)}): ${c.summary} ${c.duration}; ${c.scope}. From ${eur(c.price_from_eur)} ${c.price_unit}.`);
+    add(`- [${c.name} course](${url(path.courseItem('en', c.slug))}): ${c.summary} ${c.duration}; ${c.scope}. From ${eur(c.price_from_eur)} ${c.price_unit}.`);
   }
   add('');
 
-  add('## Bareboat Skipper course, 2027 dates', '', `${plain(bb.description ?? '')} Details: ${url(path.course('en'))}`, '');
+  add('## Bareboat Skipper course, 2027 dates', '', `${plain(bb?.description ?? '')} Details: ${url(path.courseItem('en', 'bareboat-skipper'))}`, '');
   for (const d of bareboat) {
     add(`- ${day(d.starts_on)} – ${day(d.ends_on)}, ${d.area}, ${d.boat}: ${eur(d.price_eur)}, ${d.places_left > 0 ? `${d.places_left} of ${d.places_total} places left` : 'full'}`);
   }

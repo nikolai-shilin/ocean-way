@@ -717,27 +717,360 @@
    "level": "Bareboat skipper",
    "duration": "5 days",
    "scope": "Up to 20 nm offshore",
-   "price_from_eur": 1490,
+   "price_from_eur": 1590,
    "price_unit": "per person",
    "photo_id": "1780335282813-db330424b1bd",
    "photo_alt": "A skipper at the wheel leaving harbour",
    "summary": "Charter a yacht on your own: mooring, anchoring, navigation.",
    "description": "A week living aboard to learn everything you need to charter a yacht without a professional skipper.",
    "learn": [],
-   "requirements": [],
-   "certificate": "",
-   "theory": [],
-   "about": [],
-   "program": [],
-   "bring": [],
-   "included": [],
-   "not_included": [],
-   "after": [],
-   "gallery": [],
-   "skills": [],
-   "route": [],
-   "route_nm": null,
-   "faq": []
+   "requirements": [
+    "Age 18 or over",
+    "Some sailing experience: you can steer, tack and handle lines. Around five days on a yacht is ideal.",
+    "For RYA Day Skipper: 5 days and 100 nm aboard and Day Skipper theory are suggested"
+   ],
+   "certificate": "IYT International Bareboat Skipper: lets you charter and skipper a yacht up to 20 nm offshore, and is accepted by charter companies across the Mediterranean. You can take the RYA Day Skipper practical on the same course instead; you choose one when you book.",
+   "theory": [
+    "sail-trim",
+    "reefing",
+    "right-of-way",
+    "navigation-lights",
+    "night-sailing",
+    "buoyage",
+    "med-mooring",
+    "berthing-alongside",
+    "anchoring",
+    "dinghy-outboard",
+    "charter-check-in",
+    "engine-checks",
+    "engine-handling",
+    "boat-systems",
+    "skippering",
+    "provisioning",
+    "weather",
+    "pilotage"
+   ],
+   "about": [
+    "Bareboat means you charter the yacht without a professional skipper or crew. The charter company hands you the keys, and from that moment you are legally responsible for the boat, the people on board and every decision about where and when to go.",
+    "To let you do that, charter companies ask for two things: a recognised sailing licence and a short record of your experience, often called a sailing CV. This course gives you both. You spend a week doing the real thing under the eye of an instructor: planning each day, briefing the crew, mooring in busy harbours, anchoring in quiet bays and handling the boat when the wind picks up.",
+    "It is not a classroom course with a bit of sailing on the side. Theory is taught on board, at the chart table and in the cockpit, right before you use it. By the last day you skipper the boat yourself while the instructor watches.",
+    "After dinner you slip the lines and sail in the dark: reading lights of other ships, finding the harbour entrance by its light characteristics, keeping a proper lookout. Most students say it's the moment the week comes together."
+   ],
+   "program": [
+    {
+     "title": "Day 1 · Alimos (Athens)",
+     "text": "Boarding after 17:00, safety briefing, boat systems, provisioning across the road."
+    },
+    {
+     "title": "Day 2 · Alimos → Poros · 30 nm",
+     "text": "The longest leg: first sail, sail trim, helming in open water, alongside the quay in Poros."
+    },
+    {
+     "title": "Day 3 · Poros → Hydra · 12 nm",
+     "text": "Arrive by 14:00 for a quay berth: stern-to on your own anchor in a busy harbour."
+    },
+    {
+     "title": "Day 4 · Hydra → Ermioni · 10 nm",
+     "text": "Short hop: anchoring practice, man overboard drills, swim stop."
+    },
+    {
+     "title": "Day 5 · Ermioni → Spetses · 12 nm",
+     "text": "Skipper of the day, pilotage into the Old Port, night passage after dinner."
+    },
+    {
+     "title": "Day 6 · Spetses → Methana · 25 nm",
+     "text": "Students plan the passage; reefing as the afternoon wind builds in the strait."
+    },
+    {
+     "title": "Day 7 · Methana → Aegina · 15 nm",
+     "text": "Assessment day: you skipper, the instructor watches."
+    },
+    {
+     "title": "Day 8 · Aegina → Alimos · 17 nm",
+     "text": "Morning passage, refuelling, check-out practice, debrief and certificates."
+    }
+   ],
+   "bring": [
+    "Soft bag, no hard suitcase",
+    "Non-marking deck shoes",
+    "Sailing gloves",
+    "Waterproof jacket",
+    "Warm layer for the night passage",
+    "Head torch with a red light",
+    "Sunglasses with a strap, hat",
+    "Reef-safe sunscreen",
+    "Seasickness remedy, just in case",
+    "Passport and a photo for the certificate"
+   ],
+   "included": [
+    "Instructor for the whole week, max 4 students",
+    "Yacht, fuel and marina fees on the course route",
+    "Course book, logbook and assessment",
+    "Certificate fee (IYT or RYA)",
+    "Bed linen, towels and final cleaning"
+   ],
+   "not_included": [
+    "Flights and transfer to the marina",
+    "Food kitty, about €150 per person",
+    "VHF radio (SRC) course, €190, optional",
+    "Travel insurance",
+    "Private cabin supplement, €450"
+   ],
+   "after": [
+    {
+     "title": "Get your certificate",
+     "text": "Issued on the last day for IYT, or sent by post for RYA within a few weeks."
+    },
+    {
+     "title": "Add the VHF licence",
+     "text": "A one-day course. Many charter companies ask for it."
+    },
+    {
+     "title": "Start small",
+     "text": "A flotilla or a familiar area with short hops is the best first charter."
+    },
+    {
+     "title": "Keep logging miles",
+     "text": "Every charter adds to your CV, and opens the way to Coastal Skipper and Yachtmaster."
+    }
+   ],
+   "gallery": [
+    {
+     "photo_id": "1777880652269-ff1dd5e65fbb",
+     "shape": "l",
+     "caption": "Under full sail: trim and helm on the long first leg to Poros."
+    },
+    {
+     "photo_id": "1518837695005-2083093ee35b",
+     "shape": "p",
+     "caption": "Reading the water: wind on the surface shows before it reaches you."
+    },
+    {
+     "photo_id": "1506929562872-bb421503ef21",
+     "shape": "l",
+     "caption": "Anchoring practice: pick the spot, drop, reverse, check the transit."
+    },
+    {
+     "photo_id": "1533105079780-92b9be482077",
+     "shape": "p",
+     "caption": "Ashore after a day on the water: a new harbour every evening."
+    },
+    {
+     "photo_id": "1519801584609-8ee5f072eddd",
+     "shape": "l",
+     "caption": "Lunch stop at anchor in a sheltered bay."
+    },
+    {
+     "photo_id": "1414235077428-338989a2e8c0",
+     "shape": "p",
+     "caption": "Dinner ashore: the crew eats out most nights."
+    },
+    {
+     "photo_id": "1777404380697-6b0725b148a7",
+     "shape": "l",
+     "caption": "Afternoon breeze: reef early, before you need to."
+    },
+    {
+     "photo_id": "1630853239357-2300d9cd562f",
+     "shape": "p",
+     "caption": "Rigging basics: every line has a name and a job."
+    },
+    {
+     "photo_id": "1534447677768-be436bb09401",
+     "shape": "l",
+     "caption": "Open water after dark: lookout on deck, the instructor at the chart table."
+    },
+    {
+     "photo_id": "1528154291023-a6525fabe5b4",
+     "shape": "p",
+     "caption": "Reading lights: a white masthead and a red sidelight mean a ship crossing from your right."
+    }
+   ],
+   "skills": [
+    {
+     "icon": "ow-engine",
+     "title": "Boat handling under engine",
+     "items": [
+      "Prop walk and turning in tight spaces",
+      "Leaving and entering a berth in crosswind",
+      "Springing off, holding position"
+     ]
+    },
+    {
+     "icon": "ow-med-mooring",
+     "title": "Mediterranean mooring",
+     "items": [
+      "Stern-to with lazy lines",
+      "Stern-to on your own anchor",
+      "Briefing the crew before you go in"
+     ]
+    },
+    {
+     "icon": "ow-monohull",
+     "title": "Sailing and sail trim",
+     "items": [
+      "Points of sail, tacking and gybing",
+      "Reefing early and safely",
+      "Heaving-to and sailing short-handed"
+     ]
+    },
+    {
+     "icon": "ow-anchor",
+     "title": "Anchoring",
+     "items": [
+      "Choosing a spot, depth and holding",
+      "Scope, setting and checking the anchor",
+      "Anchor watch and leaving at night"
+     ]
+    },
+    {
+     "icon": "ow-fix",
+     "title": "Navigation and pilotage",
+     "items": [
+      "Paper charts, plotter and phone apps",
+      "Position fixing and dead reckoning",
+      "Pilotage plans for harbour entries"
+     ]
+    },
+    {
+     "icon": "ow-weather",
+     "title": "Weather and passage planning",
+     "items": [
+      "Reading forecasts and the Beaufort scale",
+      "Local winds: the meltemi and afternoon sea breezes",
+      "Go or no-go decisions and bolt holes"
+     ]
+    },
+    {
+     "icon": "ow-lifejacket",
+     "title": "Safety and emergencies",
+     "items": [
+      "Man overboard recovery, under sail and engine",
+      "Fire, flooding, liferaft and flares",
+      "Crew safety briefing and first aid kit"
+     ]
+    },
+    {
+     "icon": "ow-right-of-way",
+     "title": "Rules of the road",
+     "items": [
+      "Who gives way: COLREGs in practice",
+      "Navigation lights, shapes and sound signals",
+      "Night sailing and lookout"
+     ]
+    },
+    {
+     "icon": "ow-tool",
+     "title": "Boat systems",
+     "items": [
+      "Daily engine checks and fuel",
+      "Batteries, water, gas and heads",
+      "Dinghy and outboard"
+     ]
+    },
+    {
+     "icon": "ow-charter",
+     "title": "Charter skills",
+     "items": [
+      "Check-in inventory and damage deposit",
+      "Provisioning and crew management",
+      "Check-out without surprises"
+     ]
+    }
+   ],
+   "route": [
+    {
+     "name": "Alimos (Athens)",
+     "lon": 23.712,
+     "lat": 37.911,
+     "note": "Alimos marina in Athens, where the course starts and finishes. Supermarkets are across the road."
+    },
+    {
+     "name": "Poros",
+     "lon": 23.455,
+     "lat": 37.499,
+     "note": "A town across a narrow channel from the Peloponnese; you moor alongside the town quay."
+    },
+    {
+     "name": "Hydra",
+     "lon": 23.467,
+     "lat": 37.35,
+     "note": "A busy harbour without cars. Arrive by 14:00 for a quay berth, stern-to on your own anchor."
+    },
+    {
+     "name": "Ermioni",
+     "lon": 23.249,
+     "lat": 37.386,
+     "note": "A quiet harbour town after a short hop with anchoring practice and man overboard drills."
+    },
+    {
+     "name": "Spetses",
+     "lon": 23.163,
+     "lat": 37.262,
+     "note": "Pilotage into the Old Port. The night passage starts here after dinner."
+    },
+    {
+     "name": "Methana",
+     "lon": 23.391,
+     "lat": 37.58,
+     "note": "A volcanic peninsula with a small harbour. On the way, the afternoon wind builds in the strait."
+    },
+    {
+     "name": "Aegina",
+     "lon": 23.427,
+     "lat": 37.746,
+     "note": "The last night, after assessment day. A short morning passage back to Alimos follows."
+    },
+    {
+     "name": "Alimos (Athens)",
+     "lon": 23.712,
+     "lat": 37.911,
+     "note": "Alimos marina in Athens, where the course starts and finishes. Supermarkets are across the road."
+    }
+   ],
+   "route_nm": 125,
+   "faq": [
+    {
+     "q": "How much experience do I need?",
+     "a": "You should know how to steer, tack and handle lines. Around five days on a yacht is ideal. If you're not sure, send us your experience and the instructor will advise."
+    },
+    {
+     "q": "How should I prepare?",
+     "a": "Read the course book. We send it after booking. Two evenings are enough for the basics of charts and rules of the road. Learn five knots. Bowline, cleat hitch, clove hitch, round turn and two half hitches, figure of eight. Do the theory online. Optional, but Day Skipper theory makes the week much easier, and RYA expects it. Collect your sea miles. Bring a record of past sailing: dates, boats, miles. It starts your sailing CV."
+    },
+    {
+     "q": "What happens if I don't pass?",
+     "a": "The instructor tells you exactly what to work on. You can finish the assessment on a later course or a shorter training day."
+    },
+    {
+     "q": "IYT or RYA: which should I choose?",
+     "a": "Both are accepted for charter in the Mediterranean. RYA is the route to the ICC for eligible applicants; IYT is issued on the last day and needs no prior theory course."
+    },
+    {
+     "q": "Do we sleep on the boat?",
+     "a": "Yes, all week. Students share double cabins; a private cabin costs extra."
+    },
+    {
+     "q": "Can my partner come as crew?",
+     "a": "Yes, at a reduced crew price, if there's a free berth. They join in everything but aren't assessed."
+    },
+    {
+     "q": "What about seasickness?",
+     "a": "The Saronic Gulf is sheltered. Bring a remedy anyway; most people are fine after the first day."
+    },
+    {
+     "q": "How do meals work?",
+     "a": "The group shares a food kitty for breakfasts and lunches on board. Dinners are usually ashore."
+    },
+    {
+     "q": "How soon can I charter on my own?",
+     "a": "Right away, but we suggest a first charter in a sheltered area with short hops, and an experienced friend as crew."
+    },
+    {
+     "q": "What do charter companies ask for?",
+     "a": "In Greece: a recognised licence such as IYT, RYA or ICC, and a second crew member with sailing experience. A radio certificate is recommended. Elsewhere it varies by country and boat size, so ask the charter company before you book. Requirements change; your charter company confirms what it needs."
+    }
+   ]
   },
   {
    "slug": "icc",

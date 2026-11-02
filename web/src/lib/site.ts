@@ -9,7 +9,6 @@ export const OG_LOCALE: Record<Lang, string> = { en: 'en_GB', ru: 'ru_RU', de: '
 
 export const path = {
   home: (l: Lang) => `/${l}`,
-  course: (l: Lang) => `/${l}/courses/bareboat-skipper`,
   theory: (l: Lang) => `/${l}/theory`,
   article: (l: Lang, slug: string) => `/${l}/theory/${slug}`,
   booking: (l: Lang) => `/${l}/booking`,

@@ -14,9 +14,8 @@ import { CourseCard } from '@/components/Cards';
 import { Faq, faqLd, List, Program, Skills, Stops } from '@/components/Details';
 
 export const revalidate = 300;
-// Bareboat Skipper has its own detailed page (courses/bareboat-skipper); every other course uses this one.
 export async function generateStaticParams() {
-  return (await getCourses()).filter((c) => c.slug !== 'bareboat-skipper').map((c) => ({ slug: c.slug }));
+  return (await getCourses()).map((c) => ({ slug: c.slug }));
 }
 export const dynamicParams = false;
 

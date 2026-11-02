@@ -11,9 +11,10 @@ LANGS = ['en', 'ru', 'de', 'es']
 OLD_SITE = 'https://www.rycrentals.com'
 
 SLUGS = sorted(os.path.basename(f)[len('theory-'):-5] for f in glob.glob(f'{PROTO}/theory-*.html') if re.fullmatch(r'theory-[a-z-]+\.html', os.path.basename(f)))
-PAGES = {'home': 'home', 'course-bareboat-skipper': 'bareboat-skipper-course', 'booking': 'booking', 'theory': 'theory'}
+# Bareboat Skipper is no longer extracted: it uses the shared course template, its content is in the courses row.
+PAGES = {'home': 'home', 'booking': 'booking', 'theory': 'theory'}
 PAGES.update({f'theory-{s}': f'theory-{s}' for s in SLUGS})
-STYLE_GROUP = {'home': 'home', 'course-bareboat-skipper': 'course', 'booking': 'booking'}
+STYLE_GROUP = {'home': 'home', 'booking': 'booking'}
 
 def route(base, lang, rest=''):
     if base == 'home': p = f'/{lang}'
