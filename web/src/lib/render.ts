@@ -1,7 +1,6 @@
 import { t, hasT } from './content';
 import { english, type CourseDate, type Passage, type RouteMap, type Shot, type Yacht } from './db';
 import { usedForIcon } from './icons';
-import { responsiveImages } from './images';
 import { path, type Lang } from './site';
 
 /** HTML for the live parts of the prototype pages, built from database rows in the page's language.
@@ -139,10 +138,9 @@ export function routeMap(lang: Lang, m: RouteMap | null) {
   return `<figure class="pmap"><div class="rmap-frame">${tr(m.d)}${tr(m.m)}</div><figcaption class="disclaimer">${esc(t(lang, note))}</figcaption></figure>`;
 }
 
-/** Sideways photo gallery with captions, the same markup as the Bareboat Skipper page (home.css .gallery). */
 /** A mixed gallery for a list page: takes photos from several galleries in turn (first of each, then second…),
  *  skips repeats and the ids in `skip` (photos already on the page), and alternates landscape and portrait.
- *  8 by default, since "8 photos · scroll sideways" is translated. */
+ *  8 by default. */
 export function mixShots(galleries: (Shot[] | undefined)[], skip: string[] = [], n = 8): Shot[] {
   const pool: Shot[] = [], seen = new Set(skip);
   const lists = galleries.filter((g): g is Shot[] => !!g?.length);
@@ -158,9 +156,31 @@ export function mixShots(galleries: (Shot[] | undefined)[], skip: string[] = [],
   return out;
 }
 
-export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 'p'; caption: string }[]) {
-  if (!shots.length) return '';
-  const src = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
-  const figs = shots.map((s, i) => `<figure class="g-${s.shape}"><div class="photo"><img src="${src(s.photo_id, s.shape === 'l' ? 1200 : 900)}" alt="${esc(s.caption)}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption class="hint">${esc(s.caption)}</figcaption></figure>`).join('');
-  return responsiveImages(`<div class="gallery-wrap" data-row><div class="gallery-head"><span class="meta">${esc(t(lang, `${shots.length} photos · scroll sideways`))}</span><div class="gallery-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#ow-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#ow-arrow"/></svg></button></div></div><div class="gallery" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${figs}</div></div>`, { priorityFirst: true });
+/** One photo of the cover row (cover.css). `src` is a full address; ProtoPage or Cover adds srcset/sizes. */
+export type CoverShot = { src: string; shape: 'l' | 'p'; caption: string; alt?: string };
+export const coverShots = (shots: Shot[]): CoverShot[] => shots.map((s) => ({
+  src: s.photo_id.startsWith('/') ? s.photo_id : `https://images.unsplash.com/photo-${s.photo_id}?w=${s.shape === 'l' ? 1400 : 900}&q=80&auto=format&fit=crop`,
+  shape: s.shape, caption: s.caption,
+}));
+
+/** Text on white strips, one per wrapped line. Two stacked copies (cover.css .st): the back one paints the strips,
+ *  the front one the letters, so strips can overlap with tight line spacing without covering the line above.
+ *  `html` is already escaped. */
+export const stripHtml = (html: string) => `<span class="st"><span class="st-bg" aria-hidden="true"><span class="hl">${html}</span></span><span class="st-fg"><span class="hl">${html}</span></span></span>`;
+
+/** Figures of the cover row: every photo the same height, caption on a strip inside the photo. */
+export function coverFigures(shots: CoverShot[]) {
+  return shots.map((s, i) => `<figure class="cv-ph ${s.shape}"><div class="photo"><img src="${s.src.replace(/&(?!amp;)/g, '&amp;')}" alt="${esc(s.alt ?? s.caption)}"${i > 1 ? ' loading="lazy"' : ''}></div><figcaption>${stripHtml(esc(s.caption))}</figcaption></figure>`).join('');
+}
+
+/** Arrows over the top right of the cover row (hidden on phones). */
+export const coverNav = (lang: Lang) => `<div class="cv-nav"><button class="round" type="button" data-dir="-1" aria-label="${esc(t(lang, 'Previous photos'))}"><svg class="i" style="transform:scaleX(-1)"><use href="#ow-arrow"/></svg></button><button class="round" type="button" data-dir="1" aria-label="${esc(t(lang, 'Next photos'))}"><svg class="i"><use href="#ow-arrow"/></svg></button></div>`;
+
+/** The top of a page as one block: kicker, headline and lead on white strips over a sideways row of photos.
+ *  On phones the lead moves under the photos (.cv-lead-m). All text arguments are HTML (already escaped).
+ *  Used by the prototype home page; React pages use components/Cover.tsx, which renders the same markup. */
+export function coverHtml(lang: Lang, text: { top: string; title: string; lead: string }, shots: CoverShot[]) {
+  return `<section class="cover" data-row><div class="cv-text">${text.top}<h1 class="cv-title">${stripHtml(text.title)}</h1><p class="cv-lead">${stripHtml(text.lead)}</p></div>`
+    + `<div class="cv-row" tabindex="0" aria-label="${esc(t(lang, 'Photo gallery'))}">${coverFigures(shots)}</div>${coverNav(lang)}</section>`
+    + `<p class="cv-lead-m">${text.lead}</p>`;
 }

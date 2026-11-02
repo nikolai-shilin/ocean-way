@@ -10,7 +10,8 @@ import { english, getCourseDates, getCourses, getInstructors, getRouteMap } from
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { courseLength, eur, galleryHtml, places, routeMap } from '@/lib/render';
+import { courseLength, eur, places, routeMap } from '@/lib/render';
+import Cover from '@/components/Cover';
 import { dates as dateRange } from '@/lib/passages';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
@@ -53,24 +54,31 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
     hasCourseInstance: dates.map((d) => ({ '@type': 'CourseInstance', courseMode: 'Onsite', startDate: d.starts_on, endDate: d.ends_on, location: { '@type': 'Place', name: t(lang, d.area) } })),
   }, ...(c.faq?.length ? [faqLd(c.faq)] : [])] };
   const others = courses.filter((x) => x.slug !== slug);
+  const title = t(lang, '{name} course', { name: c.name });
+  const facts = (
+    <div className="facts">
+      <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{c.duration}</span>
+      <span className="fact"><svg className="i"><use href={`#${scopeIcon(english(c).scope)}`} /></svg>{c.scope}</span>
+      <span className="fact"><svg className="i"><use href="#ow-licence" /></svg>IYT</span>
+      <span className="fact"><svg className="i"><use href="#ow-chat" /></svg>{t(lang, 'In English and Russian')}</span>
+      {c.route_nm ? <span className="fact"><svg className="i"><use href="#ow-route" /></svg>{t(lang, '{n} nautical miles', { n: c.route_nm })}</span> : null}
+    </div>
+  );
   return (
     <Shell lang={lang} section="courses" pathFor={(l) => path.courseItem(l, slug)} jsonld={ld}>
-      <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <span className="lvl">{c.level}</span>
-        <h1 className="display">{t(lang, '{name} course', { name: c.name })}</h1>
-        <p className="lead">{c.summary}</p>
-        <div className="facts">
-          <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{c.duration}</span>
-          <span className="fact"><svg className="i"><use href={`#${scopeIcon(english(c).scope)}`} /></svg>{c.scope}</span>
-          <span className="fact"><svg className="i"><use href="#ow-licence" /></svg>IYT</span>
-          <span className="fact"><svg className="i"><use href="#ow-chat" /></svg>{t(lang, 'In English and Russian')}</span>
-          {c.route_nm ? <span className="fact"><svg className="i"><use href="#ow-route" /></svg>{t(lang, '{n} nautical miles', { n: c.route_nm })}</span> : null}
-        </div>
-      </section>
       {c.gallery?.length
-        ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, c.gallery) }} />
-        : <div className="ow-photo" style={{ marginTop: 40 }}><img {...photoProps(photo(c.photo_id, 1400), 'wide', { priority: true })} alt={c.photo_alt} suppressHydrationWarning /></div>}
+        ? <Cover lang={lang} top={<><Crumbs lang={lang} items={crumbs} /><span className="lvl">{c.level}</span></>}
+            title={title} lead={c.summary} shots={c.gallery} after={facts} />
+        : <>
+            <section className="ow-hero">
+              <Crumbs lang={lang} items={crumbs} />
+              <span className="lvl">{c.level}</span>
+              <h1 className="display">{title}</h1>
+              <p className="lead">{c.summary}</p>
+              {facts}
+            </section>
+            <div className="ow-photo" style={{ marginTop: 40 }}><img {...photoProps(photo(c.photo_id, 1400), 'wide', { priority: true })} alt={c.photo_alt} suppressHydrationWarning /></div>
+          </>}
       <div className="ow-item">
         <div className="ow-body">
           <section className="ow-text"><h2>{t(lang, 'About the course')}</h2><p>{c.description}</p>{(c.about ?? []).map((x, i) => <p key={i}>{x}</p>)}</section>

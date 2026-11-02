@@ -7,7 +7,8 @@ import { getInstructors, getLegs, getPassages, getRouteMap, passageSlug, stopsFo
 import { peopleSection } from '@/lib/people';
 import { Faq, faqLd, List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, galleryHtml, range, routeMap, shortRange } from '@/lib/render';
+import { eur, range, routeMap, shortRange } from '@/lib/render';
+import Cover from '@/components/Cover';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -59,20 +60,20 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   }, ...(leg?.faq?.length ? [faqLd(leg.faq)] : [])] };
   const doList = ['Plan each leg with the instructor: route, shipping and weather windows', 'Stand watches, also at night', 'Skipper legs yourself under supervision', 'Log every mile and night hour, signed by the instructor'];
   const map = routeMap(lang, await getRouteMap('passage_legs', p.leg));
+  const crumbLine = <Crumbs lang={lang} items={crumbs} current={<>{t(lang, 'Training passage')} · {when}</>} />;
+  const facts = (
+    <div className="facts">
+      <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{t(lang, `${n} nights`)}</span>
+      {leg?.distance_nm ? <span className="fact"><svg className="i"><use href="#ow-route" /></svg>{t(lang, '{n} nautical miles', { n: leg.distance_nm })}</span> : null}
+      <span className="fact"><svg className="i"><use href="#ow-horizon" /></svg>{t(lang, p.waters)}</span>
+      <span className="fact"><svg className="i"><use href="#ow-crew" /></svg>{places}</span>
+    </div>
+  );
   return (
     <Shell lang={lang} section="passages" pathFor={(l) => path.passage(l, slug)} jsonld={ld}>
-      <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} current={<>{t(lang, 'Training passage')} · {when}</>} />
-        <h1 className="display">{route}</h1>
-        <p className="lead">{summary}</p>
-        <div className="facts">
-          <span className="fact"><svg className="i"><use href="#ow-clock" /></svg>{t(lang, `${n} nights`)}</span>
-          {leg?.distance_nm ? <span className="fact"><svg className="i"><use href="#ow-route" /></svg>{t(lang, '{n} nautical miles', { n: leg.distance_nm })}</span> : null}
-          <span className="fact"><svg className="i"><use href="#ow-horizon" /></svg>{t(lang, p.waters)}</span>
-          <span className="fact"><svg className="i"><use href="#ow-crew" /></svg>{places}</span>
-        </div>
-      </section>
-      {leg?.gallery?.length ? <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, leg.gallery) }} /> : null}
+      {leg?.gallery?.length
+        ? <Cover lang={lang} top={crumbLine} title={route} lead={summary} shots={leg.gallery} after={facts} />
+        : <section className="ow-hero">{crumbLine}<h1 className="display">{route}</h1><p className="lead">{summary}</p>{facts}</section>}
       <div className="ow-item">
         <div className="ow-body">
           <div className="ow-map" dangerouslySetInnerHTML={{ __html: map }} />
