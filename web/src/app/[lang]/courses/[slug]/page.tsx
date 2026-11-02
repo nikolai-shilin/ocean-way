@@ -41,6 +41,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
   const c = courses.find((x) => x.slug === slug);
   if (!c) notFound();
   const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
+  const next = [...dates].sort((a, b) => a.starts_on.localeCompare(b.starts_on))[0];
   const team = (await getInstructors(lang)).filter((p) => p.courses.includes(slug));
   const map = routeMap(lang, await getRouteMap('courses', slug));
   const theory = theoryFor(lang, c.theory);
@@ -143,6 +144,19 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
             : <p className="ow-note">{t(lang, 'Instructor, yacht, fuel and marina fees on the course route, course book and certificate fee included.')}</p>}
           <a className="pill pill-primary pill-wide" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, dates.length ? 'Book a place' : 'Ask about dates')}</a>
           <a className="pill pill-quiet pill-wide" href={path.courses(lang)}>{t(lang, 'All courses')}</a>
+          <dl className="ow-facts">
+            {next ? (
+              <div><svg className="i" aria-hidden="true"><use href="#ow-calendar" /></svg><dt>{t(lang, 'Next start')}</dt>
+                <dd>{dateRange(lang, next.starts_on, next.ends_on)}<span>{places(lang, next.places_left, next.places_total).text}{dates.length > 1 ? <> · <a href="#dates">{t(lang, 'All dates')}</a></> : null}</span></dd></div>
+            ) : null}
+            <div><svg className="i" aria-hidden="true"><use href="#ow-clock" /></svg><dt>{t(lang, 'Duration')}</dt><dd>{c.duration}</dd></div>
+            <div><svg className="i" aria-hidden="true"><use href="#ow-pin" /></svg><dt>{t(lang, 'Where')}</dt>
+              <dd>{next ? <>{t(lang, next.area)}<span>{c.scope}</span></> : c.scope}</dd></div>
+            {next?.boat ? <div><svg className="i" aria-hidden="true"><use href="#ow-monohull" /></svg><dt>{t(lang, 'Boat')}</dt><dd>{next.boat}</dd></div> : null}
+            {next ? <div><svg className="i" aria-hidden="true"><use href="#ow-crew" /></svg><dt>{t(lang, 'Group')}</dt><dd>{t(lang, 'Up to {n} students', { n: next.places_total })}</dd></div> : null}
+            {c.route_nm ? <div><svg className="i" aria-hidden="true"><use href="#ow-route" /></svg><dt>{t(lang, 'Route')}</dt><dd>{t(lang, '{n} nautical miles', { n: c.route_nm })}</dd></div> : null}
+            <div><svg className="i" aria-hidden="true"><use href="#ow-chat" /></svg><dt>{t(lang, 'Language')}</dt><dd>{t(lang, 'English and Russian')}</dd></div>
+          </dl>
         </aside>
       </div>
       {c.faq?.length ? <Faq lang={lang} items={c.faq} /> : null}
