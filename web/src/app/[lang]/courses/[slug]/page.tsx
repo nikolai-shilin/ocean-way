@@ -1,5 +1,6 @@
 import '@/styles/home.css';
 import '@/styles/app.css';
+import '@/styles/passages.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { index, loadPage, t } from '@/lib/content';
@@ -8,7 +9,8 @@ import { english, getCourseDates, getCourses, getInstructors, getRouteMap } from
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, galleryHtml, range, routeMap } from '@/lib/render';
+import { eur, galleryHtml, nightsOf, places, routeMap } from '@/lib/render';
+import { dates as dateRange } from '@/lib/passages';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
 import { Faq, faqLd, List, Program, Skills, Stops } from '@/components/Details';
@@ -100,7 +102,17 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <section id="dates">
             <h2>{t(lang, 'Dates')}</h2>
             {dates.length ? (
-              <ul className="ow-list">{dates.map((d) => <li key={d.id}><svg className="i"><use href="#ow-calendar" /></svg><span>{range(lang, d.starts_on, d.ends_on)} · {t(lang, d.area)} · {eur(d.price_eur)}</span></li>)}</ul>
+              <div className="pp-list">{dates.map((d) => {
+                const pl = places(lang, d.places_left, d.places_total);
+                return (
+                  <article key={d.id} className="pp">
+                    <div className="pp-when"><b className="pp-dates">{dateRange(lang, d.starts_on, d.ends_on)}</b><span className="pp-nights">{t(lang, `${nightsOf(d)} nights`)}</span></div>
+                    <div className="pp-what"><h3 className="pp-route">{t(lang, d.area)}</h3>{d.boat ? <p className="pp-sub">{d.boat}</p> : null}</div>
+                    <p className="pp-price"><b>{eur(d.price_eur)}</b><span>{t(lang, 'per person')}</span></p>
+                    <div className="pp-act"><span className={pl.cls}>{pl.text}</span><a className="pill pill-primary pill-sm" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Book')}</a></div>
+                  </article>
+                );
+              })}</div>
             ) : (
               <div className="band ow-empty"><p>{t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.')}</p></div>
             )}
