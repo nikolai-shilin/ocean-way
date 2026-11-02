@@ -1,5 +1,6 @@
 import '@/styles/chrome.css';
 import '@/styles/motion.css';
+import '@/styles/cover.css';
 import Script from 'next/script';
 import { Carlito, Merriweather } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
@@ -90,9 +91,9 @@ const MOTION_JS = `(() => {
   }, true);
 
   if (!('IntersectionObserver' in window) || !Element.prototype.animate) return;
-  const SEL = 'main section:not(.hero,.ow-hero,.th-hero) > *, .prose > *, .article > .side, .ow-body > *, .ow-box, .card, .fig, .ow-person, .social,'
+  const SEL = 'main section:not(.hero,.ow-hero,.th-hero,.cover) > *, .prose > *, .article > .side, .ow-body > *, .ow-box, .card, .fig, .ow-person, .social,'
     + ' .faq-item, .mod, .ow-two > *, .ow-specs > *, .ow-prog > li, .ow-stops > li, .th-topic-head, .fnav > *';
-  const SKIP = '.hero, .ow-hero, .th-hero, .gallery-wrap, .bk, form';
+  const SKIP = '.hero, .ow-hero, .th-hero, .gallery-wrap, .cover, .bk, form';
   const armed = new Map();
 
   const arm = (el) => {

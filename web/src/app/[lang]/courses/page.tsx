@@ -6,7 +6,8 @@ import { getCourseDates, getCourses } from '@/lib/db';
 import { CourseCard } from '@/components/Cards';
 import { Schedule, scheduleYear } from '@/components/Schedule';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
-import { galleryHtml, mixShots } from '@/lib/render';
+import { mixShots } from '@/lib/render';
+import Cover from '@/components/Cover';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 300;
@@ -30,12 +31,10 @@ export default async function Courses({ params }: PageProps<'/[lang]/courses'>) 
   }] };
   return (
     <Shell lang={lang} section="courses" pathFor={path.courses} jsonld={ld}>
-      <section className="ow-hero">
-        <Crumbs lang={lang} items={crumbs} />
-        <h1 className="display">{t(lang, 'From first crew to Yachtmaster Ocean')}</h1>
-        <p className="lead">{t(lang, 'The IYT course ladder, from entry level up. Most practical courses are a week living aboard with an instructor and at most four students. Start where your experience is.')}</p>
-      </section>
-      <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, mixShots(courses.map((c) => c.gallery), courses.map((c) => c.photo_id))) }} />
+      <Cover lang={lang} top={<Crumbs lang={lang} items={crumbs} />}
+        title={t(lang, 'From first crew to Yachtmaster Ocean')}
+        lead={t(lang, 'The IYT course ladder, from entry level up. Most practical courses are a week living aboard with an instructor and at most four students. Start where your experience is.')}
+        shots={mixShots(courses.map((c) => c.gallery), courses.map((c) => c.photo_id))} />
       <section className="sch-sec" id="all">
         <h2 className="h2">{t(lang, 'All courses')}</h2>
         <p className="lead">{t(lang, 'Each card shows the level, who the course is for, how long it takes and the price per person. Open a course for its programme, requirements and every start date.')}</p>

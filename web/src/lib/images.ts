@@ -3,19 +3,22 @@
  *  (/fleet, /people in /public) go through the Next.js image resizer, which also converts them to AVIF/WebP.
  *
  *  On-screen widths were measured on the live pages (phones below 680 px):
- *  cards ≤ 362 px, gallery 560 / 300 px (landscape) and 432 / 232 px (portrait), detail photo 736 px. */
-export type PhotoKind = 'card' | 'land' | 'port' | 'wide';
+ *  cards ≤ 362 px, gallery 560 / 300 px (landscape) and 432 / 232 px (portrait), detail photo 736 px;
+ *  cover row (cover.css) up to 754 px / 84vw (landscape) and 464 px / 66vw (portrait). */
+export type PhotoKind = 'card' | 'land' | 'port' | 'wide' | 'cvl' | 'cvp';
 
 const SIZES: Record<PhotoKind, string> = {
   card: '(max-width: 680px) calc(100vw - 40px), 362px',
   land: '(max-width: 680px) 300px, 560px',
   port: '(max-width: 680px) 232px, 432px',
   wide: '(max-width: 760px) calc(100vw - 40px), 740px',
+  cvl: '(max-width: 680px) 84vw, 760px',
+  cvp: '(max-width: 680px) 66vw, 470px',
 };
 /** Unsplash takes any width. */
-const UNSPLASH_W: Record<PhotoKind, number[]> = { card: [400, 600, 800], land: [600, 900, 1200], port: [480, 700, 900], wide: [700, 1100, 1480] };
+const UNSPLASH_W: Record<PhotoKind, number[]> = { card: [400, 600, 800], land: [600, 900, 1200], port: [480, 700, 900], wide: [700, 1100, 1480], cvl: [700, 1100, 1500], cvp: [500, 800, 1000] };
 /** The Next.js resizer only takes its configured widths (default imageSizes + deviceSizes). */
-const LOCAL_W: Record<PhotoKind, number[]> = { card: [384, 640, 828], land: [640, 828, 1200], port: [384, 640, 828], wide: [640, 1080, 1920] };
+const LOCAL_W: Record<PhotoKind, number[]> = { card: [384, 640, 828], land: [640, 828, 1200], port: [384, 640, 828], wide: [640, 1080, 1920], cvl: [828, 1200, 1920], cvp: [640, 828, 1080] };
 
 const LOCAL = /^\/(fleet|people)\/[\w.-]+\.(webp|jpe?g|png|avif)$/;
 const unsplashAt = (src: string, w: number) => src.replace(/([?&])w=\d+/, `$1w=${w}`);
@@ -53,7 +56,7 @@ export function photoProps(src: string, kind: PhotoKind, opts: { lazy?: boolean;
 }
 
 /** The photo frame an <img> sits in, from the markup just before it (the prototype and render.ts markup). */
-const FRAMES: [string, PhotoKind][] = [['class="g-l"', 'land'], ['class="g-p"', 'port'], ['class="clip"', 'card'], ['class="ow-photo"', 'wide']];
+const FRAMES: [string, PhotoKind][] = [['class="g-l"', 'land'], ['class="g-p"', 'port'], ['class="clip"', 'card'], ['class="ow-photo"', 'wide'], ['class="cv-ph l"', 'cvl'], ['class="cv-ph p"', 'cvp']];
 function frameOf(before: string): PhotoKind | null {
   let best: PhotoKind | null = null, at = -1;
   for (const [mark, kind] of FRAMES) {
