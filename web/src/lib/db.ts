@@ -40,11 +40,30 @@ export function localize<T extends { translations?: Translations }>(row: T, lang
   return out as T;
 }
 
+/** Cache tag of a database read: the table in the address (/rest/v1/courses → "courses"), or the table a live
+ *  function reads (rpc/passages_live → "passages"). /api/revalidate clears tags when the database changes. */
+const RPC_TAG: Record<string, string> = { course_dates_live: 'course_dates', passages_live: 'passages' };
+export function tagFor(url: string): string | null {
+  const m = /\/rest\/v1\/(?:rpc\/)?([a-z_]+)/.exec(url);
+  return m ? RPC_TAG[m[1]] ?? m[1] : null;
+}
+/** Which cache tags a change to a table clears. Article lists embed their translations; bookings change places left. */
+export const TAGS_FOR: Record<string, string[]> = {
+  courses: ['courses'], course_dates: ['course_dates'], passage_legs: ['passage_legs'], passages: ['passages'],
+  yachts: ['yachts'], instructors: ['instructors'], theory_topics: ['theory_topics'],
+  articles: ['articles', 'article_translations'], article_translations: ['articles', 'article_translations'],
+  bookings: ['course_dates', 'passages'],
+};
+const tagged: typeof fetch = (input, init) => {
+  const tag = tagFor(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
+  return fetch(input, tag ? { ...init, next: { ...init?.next, tags: ['db', tag] } } : init);
+};
+
 let client: SupabaseClient | null | undefined;
 export function db(): SupabaseClient | null {
   if (client !== undefined) return client;
   const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_ANON_KEY;
-  client = url && key ? createClient(url, key, { auth: { persistSession: false } }) : null;
+  client = url && key ? createClient(url, key, { auth: { persistSession: false }, global: { fetch: tagged } }) : null;
   return client;
 }
 /** The client for catalogue reads; a clear error instead of an empty site when the variables are missing. */

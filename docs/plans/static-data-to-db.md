@@ -1,6 +1,6 @@
 # Plan: move static data into the database
 
-Status: phases 1 and 2 done, phase 3 started (2 Nov 2026). The catalogue and the theory articles are served from the
+Status: phases 1 and 2 done, phase 3 started, phase 4 written and waiting to be applied (2 Nov 2026). The catalogue and the theory articles are served from the
 database; the header, footer and icons are the app's own code. See the progress notes under each phase.
 
 ## Where things are today
@@ -153,6 +153,20 @@ theory_topics (key text primary key, sort int, translations jsonb)              
   - **On demand:** a Supabase database webhook calls `POST /api/revalidate` with a secret, which refreshes the affected pages (by tag per table). Edits then appear within seconds.
   - **Safety net:** the current `revalidate` timers stay.
 - **Editing tool.** Start with Supabase Studio. If the person editing is not technical, add a small password-protected `/admin` with forms per table later.
+
+**Phase 4 progress (2 Nov 2026):**
+- Checked: every table has row level security with read-only policies, but `anon` and `authenticated` still held
+  INSERT/UPDATE/DELETE/TRUNCATE. Migration `20261102150000_read_only_public_updated_at.sql` leaves them SELECT on the
+  content tables only (also for tables created later) and adds `updated_at` with a trigger to every content table.
+  The three public functions (`course_dates_live`, `passages_live`, `create_booking`) stay callable by anyone, on purpose.
+- Done in code: every database read is tagged with its table; `POST /api/revalidate` (Bearer `REVALIDATE_SECRET`)
+  clears a table's tags; a booking clears dates and passages itself. Tested on a local build: wrong or missing
+  secret → 401, unknown table → 400, and after a `yachts` change the pages that show boats render fresh on the next
+  visit and are cached again after it.
+- Written, not applied: `20261102150100_revalidate_webhook.sql` (pg_net, the secret and address in Vault, one
+  statement-level trigger per content table). To switch on: apply both migrations, copy the Vault secret into
+  Vercel as `REVALIDATE_SECRET` without printing it, deploy.
+- Editing tool: Supabase Studio for now (open decision 1).
 
 ## Checking each phase
 

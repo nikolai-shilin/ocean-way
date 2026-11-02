@@ -1,4 +1,5 @@
-import { db } from '@/lib/db';
+import { revalidateTag } from 'next/cache';
+import { db, TAGS_FOR } from '@/lib/db';
 
 /** Create a booking. The database function create_booking() checks the input again, prices the booking from the
  *  catalogue and locks the date; this route only does early checks and turns errors into readable messages. */
@@ -35,5 +36,7 @@ export async function POST(req: Request) {
     return bad('Booking failed, please try again or write to us in Telegram', 500);
   }
   const row = Array.isArray(data) ? data[0] : data;
+  // Places left changed: dates and passages render fresh on their next visit.
+  for (const tag of TAGS_FOR.bookings) revalidateTag(tag, { expire: 0 });
   return Response.json({ ref: row.ref, amountTotal: row.amount_total, amountNow: row.amount_now });
 }
