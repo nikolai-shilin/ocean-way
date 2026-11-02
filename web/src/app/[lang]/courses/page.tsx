@@ -6,6 +6,7 @@ import { getCourseDates, getCourses } from '@/lib/db';
 import { CourseCard } from '@/components/Cards';
 import { Schedule, scheduleYear } from '@/components/Schedule';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
+import { galleryHtml, mixShots } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 300;
@@ -34,6 +35,7 @@ export default async function Courses({ params }: PageProps<'/[lang]/courses'>) 
         <h1 className="display">{t(lang, 'From first crew to Yachtmaster Ocean')}</h1>
         <p className="lead">{t(lang, 'The IYT course ladder, from entry level up. Most practical courses are a week living aboard with an instructor and at most four students. Start where your experience is.')}</p>
       </section>
+      <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, mixShots(courses.map((c) => c.gallery), courses.map((c) => c.photo_id))) }} />
       <div className="ow-grid">{courses.map((c) => <CourseCard key={c.slug} lang={lang} c={c} />)}</div>
       <section className="sch-sec" id="schedule">
         <h2 className="h2">{t(lang, 'Course schedule {year}', { year })}</h2>

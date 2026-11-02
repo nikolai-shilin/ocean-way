@@ -6,7 +6,7 @@ import { loadPage, t } from '@/lib/content';
 import { getLegs, getPassages, passageSlug } from '@/lib/db';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
 import { PASSAGES_JS, passageFilter, passageList } from '@/lib/passages';
-import { passagesMap } from '@/lib/render';
+import { galleryHtml, mixShots, passagesMap } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -32,6 +32,7 @@ export default async function Passages({ params }: PageProps<'/[lang]/passages'>
         <h1 className="display">{t(lang, 'Training passages along the Turkish coast')}</h1>
         <p className="lead">{t(lang, 'One-way passages between ports in Turkey and Northern Cyprus, Saturday to Saturday, with an instructor on board. You plan the legs, stand watches and log the sea miles you need for Yachtmaster. Four places on each boat.')}</p>
       </section>
+      <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, mixShots(Object.values(legs).map((l) => l.gallery))) }} />
       <div className="pp-filter" role="group" aria-label={t(lang, 'Filter by route')} dangerouslySetInnerHTML={{ __html: passageFilter(lang, passages) }} />
       <p className="pp-live sr-only" aria-live="polite" data-text={t(lang, 'Passages shown: {n}')} />
       <div className="pp-layout">

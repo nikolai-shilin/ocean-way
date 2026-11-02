@@ -1,5 +1,5 @@
 import { t, hasT } from './content';
-import { english, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
+import { english, type CourseDate, type Passage, type RouteMap, type Shot, type Yacht } from './db';
 import { usedForIcon } from './icons';
 import { responsiveImages } from './images';
 import { path, type Lang } from './site';
@@ -140,6 +140,24 @@ export function routeMap(lang: Lang, m: RouteMap | null) {
 }
 
 /** Sideways photo gallery with captions, the same markup as the Bareboat Skipper page (home.css .gallery). */
+/** A mixed gallery for a list page: takes photos from several galleries in turn (first of each, then second…),
+ *  skips repeats and the ids in `skip` (photos already on the page), and alternates landscape and portrait.
+ *  8 by default, since "8 photos · scroll sideways" is translated. */
+export function mixShots(galleries: (Shot[] | undefined)[], skip: string[] = [], n = 8): Shot[] {
+  const pool: Shot[] = [], seen = new Set(skip);
+  const lists = galleries.filter((g): g is Shot[] => !!g?.length);
+  for (let i = 0; lists.some((g) => i < g.length); i++) {
+    for (const g of lists) { const s = g[i]; if (s && !seen.has(s.photo_id)) { seen.add(s.photo_id); pool.push(s); } }
+  }
+  const out: Shot[] = [];
+  while (out.length < n && pool.length) {
+    const want = out.length % 2 ? 'p' : 'l';
+    const k = Math.max(0, pool.findIndex((s) => s.shape === want));
+    out.push(pool.splice(k, 1)[0]);
+  }
+  return out;
+}
+
 export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 'p'; caption: string }[]) {
   if (!shots.length) return '';
   const src = (id: string, w: number) => `https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
