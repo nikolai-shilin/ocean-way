@@ -27,6 +27,25 @@
 .ow-specs dd { margin: 4px 0 0; font-family: var(--title); font-weight: var(--title-w); font-size: 24px; letter-spacing: var(--title-track); font-variant-numeric: lining-nums; }
 .ow-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .ow-chips a:hover .chip { background: var(--sel-bg); color: var(--sel-ink); }
+.ow-theory { border-top: 1px solid var(--line); }
+.ow-th-topic { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 8px 28px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.ow-th-topic > .kicker { padding-top: 26px; color: var(--muted); text-decoration: none; align-self: start; }
+.ow-th-topic > .kicker:hover { color: var(--accent); }
+.ow-th-topic ul { list-style: none; margin: 0; padding: 0; }
+.ow-th-topic li + li { border-top: 1px solid var(--line); }
+.ow-th-topic li a { display: grid; grid-template-columns: 56px minmax(0, 1fr) 20px; align-items: center; gap: 16px; padding: 12px 0; color: var(--ink); text-decoration: none; }
+.ow-th-topic img { width: 56px; height: 56px; border-radius: 14px; object-fit: cover; display: block; background: var(--photo-bg); }
+.ow-th-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.ow-th-text b { font-family: var(--sans); font-weight: 700; font-size: 17px; line-height: 1.3; }
+.ow-th-text span { font-size: 14px; color: var(--muted); }
+.ow-th-topic li svg.i { width: 18px; height: 18px; color: var(--muted); transition: transform .2s ease, color .2s ease; }
+.ow-th-topic li a:hover b { color: var(--accent); }
+.ow-th-topic li a:hover svg.i { color: var(--accent); transform: translateX(3px); }
+@supports (corner-shape: squircle) { .ow-th-topic img { corner-shape: squircle; border-radius: 24px; } }
+@media (max-width: 680px) {
+  .ow-th-topic { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 18px 0 6px; }
+  .ow-th-topic > .kicker { padding-top: 0; }
+}
 .ow-empty { padding: 22px 24px; }
 .ow-empty p { font-size: 16px; }
 .tbl td.island a { color: inherit; text-decoration: underline; text-decoration-color: var(--tag-line); text-underline-offset: 3px; }
