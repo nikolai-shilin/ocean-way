@@ -4,6 +4,7 @@
 .ow-hero .facts { gap: 8px 18px; }
 .ow-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; margin-top: 40px; }
 .ow-grid .card .photo { aspect-ratio: 16 / 10; }
+.sch-sec > .ow-grid { margin-top: 12px; }
 .ow-item { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; align-items: start; margin-top: 40px; }
 .ow-body { display: flex; flex-direction: column; gap: 40px; min-width: 0; }
 .ow-body h2 { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-2); font-size: 30px; line-height: 1.05; margin: 0 0 16px; }

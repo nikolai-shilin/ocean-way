@@ -36,7 +36,11 @@ export default async function Courses({ params }: PageProps<'/[lang]/courses'>) 
         <p className="lead">{t(lang, 'The IYT course ladder, from entry level up. Most practical courses are a week living aboard with an instructor and at most four students. Start where your experience is.')}</p>
       </section>
       <div dangerouslySetInnerHTML={{ __html: galleryHtml(lang, mixShots(courses.map((c) => c.gallery), courses.map((c) => c.photo_id))) }} />
-      <div className="ow-grid">{courses.map((c) => <CourseCard key={c.slug} lang={lang} c={c} />)}</div>
+      <section className="sch-sec" id="all">
+        <h2 className="h2">{t(lang, 'All courses')}</h2>
+        <p className="lead">{t(lang, 'Each card shows the level, who the course is for, how long it takes and the price per person. Open a course for its programme, requirements and every start date.')}</p>
+        <div className="ow-grid">{courses.map((c) => <CourseCard key={c.slug} lang={lang} c={c} />)}</div>
+      </section>
       <section className="sch-sec" id="schedule">
         <h2 className="h2">{t(lang, 'Course schedule {year}', { year })}</h2>
         <p className="lead">{t(lang, 'Every start date for the year. Most weeks aboard run Saturday to Saturday; the theory courses and exams are held in our classroom at Ece Marina, Fethiye. Tap a date to see it on the course page.')}</p>
