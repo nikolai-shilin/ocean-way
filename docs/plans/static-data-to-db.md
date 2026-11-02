@@ -1,6 +1,6 @@
 # Plan: move static data into the database
 
-Status: phases 1 and 2 done, phase 3 started, phase 4 written and waiting to be applied (2 Nov 2026). The catalogue and the theory articles are served from the
+Status: phases 1 and 2 done, phase 3 started, phase 4 live (2 Nov 2026). The catalogue and the theory articles are served from the
 database; the header, footer and icons are the app's own code. See the progress notes under each phase.
 
 ## Where things are today
@@ -163,9 +163,10 @@ theory_topics (key text primary key, sort int, translations jsonb)              
   clears a table's tags; a booking clears dates and passages itself. Tested on a local build: wrong or missing
   secret → 401, unknown table → 400, and after a `yachts` change the pages that show boats render fresh on the next
   visit and are cached again after it.
-- Written, not applied: `20261102150100_revalidate_webhook.sql` (pg_net, the secret and address in Vault, one
-  statement-level trigger per content table). To switch on: apply both migrations, copy the Vault secret into
-  Vercel as `REVALIDATE_SECRET` without printing it, deploy.
+- Done: `20261102150100_revalidate_webhook.sql` (pg_net, the secret and address in Vault, one statement-level trigger
+  per content table). Both migrations applied; the Vault secret is `REVALIDATE_SECRET` (Production, hidden) in Vercel.
+- Checked live: a write to `yachts` made the database post to `/api/revalidate` (200, `net._http_response`), and the
+  next visit to `/en/fleet` was rebuilt (`x-vercel-cache: REVALIDATED`). The public key's writes are refused (401).
 - Editing tool: Supabase Studio for now (open decision 1).
 
 ## Checking each phase
