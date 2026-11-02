@@ -1,9 +1,9 @@
 """One map per training-passage leg (the route with its stops), built with the same ryc-rentals tools as
 build_passages_map.py: Natural Earth 1:10m land, Mercator fitted to the leg, the line routed by sea through the stops.
-Writes web/content/passage_maps.json and course_maps.json: {key: {"d": svg, "m": svg, "nm": distance}}, and
-web/supabase/load/route_maps.sql, which puts the same maps into the map columns (the site reads them from there).
-Run it with psql against the project, as with the other files in supabase/load."""
-import json, math, os, sys, time
+Reads the stops from the database (passage_legs.stops, courses.route) and writes web/supabase/load/route_maps.sql,
+which sets the map columns ({"d": svg, "m": svg, "nm": distance}) and the distances (distance_nm, route_nm).
+Run that file with psql against the project, as with the other files in supabase/load."""
+import json, math, os, subprocess, sys, time
 RM = '/Users/shilin/Developer/ryc-rentals/hotweb/scripts/route_maps'
 sys.path.insert(0, RM)
 from geo import Proj, land_path, read_polygons, merc  # noqa: E402
@@ -11,7 +11,17 @@ from sea import Sea  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WEB = os.path.join(HERE, '..', '..', 'web')
-SRC = json.load(open(os.path.join(WEB, 'content', 'catalog_extra.json')))['passages']['legs']
+ENV = dict(l.strip().split('=', 1) for l in open(os.path.join(WEB, '.env.local')) if '=' in l and not l.startswith('#'))
+
+
+def rows(table, cols):
+    url, key = ENV['SUPABASE_URL'].strip('"'), ENV['SUPABASE_PUBLISHABLE_KEY'].strip('"')
+    out = subprocess.run(['curl', '-sf', '-K', '-', f'{url}/rest/v1/{table}?select={cols}'],
+                         input=f'header = "apikey: {key}"\n', capture_output=True, text=True, check=True).stdout
+    return json.loads(out)
+
+
+SRC = {r['leg']: r for r in rows('passage_legs', 'leg,stops')}
 NE = RM + '/.ne'
 BBOX = (25.75, 34.95, 33.95, 41.25)
 # keeps the Istanbul leg inside the Dardanelles (same waypoints as the overview map)
@@ -125,22 +135,20 @@ out = {}
 for key, leg in SRC.items():
     out[key] = build(key, leg)
     print(key, out[key]['nm'], 'NM', len(out[key]['d']) + len(out[key]['m']), 'bytes', round(time.time() - t0, 1), 's')
-json.dump(out, open(os.path.join(WEB, 'content', 'passage_maps.json'), 'w'), ensure_ascii=False)
 
 # course routes (loops from the base, or one place for classroom courses)
-courses = json.load(open(os.path.join(WEB, 'content', 'catalog_extra.json')))['courses']
 cout = {}
-for slug, c in courses.items():
+for c in rows('courses', 'slug,route'):
+    slug = c['slug']
     if c.get('route'):
         cout[slug] = build(slug, {'stops': c['route']})
         print(slug, cout[slug]['nm'], 'NM')
-json.dump(cout, open(os.path.join(WEB, 'content', 'course_maps.json'), 'w'), ensure_ascii=False)
 
 def lit(v):
     return "'" + json.dumps(v, ensure_ascii=False).replace("'", "''") + "'::jsonb"
 sql = ['-- Route maps from prototypes/_build/build_leg_maps.py. Safe to re-run.', 'begin;']
-sql += [f"update public.passage_legs set map = {lit(m)} where leg = '{k}';" for k, m in out.items()]
-sql += [f"update public.courses set map = {lit(m)} where slug = '{k}';" for k, m in cout.items()]
+sql += [f"update public.passage_legs set map = {lit(m)}, distance_nm = {m['nm']} where leg = '{k}';" for k, m in out.items()]
+sql += [f"update public.courses set map = {lit(m)}, route_nm = {m['nm']} where slug = '{k}';" for k, m in cout.items()]
 sql += ['commit;', '']
 os.makedirs(os.path.join(WEB, 'supabase', 'load'), exist_ok=True)
 open(os.path.join(WEB, 'supabase', 'load', 'route_maps.sql'), 'w').write('\n'.join(sql))

@@ -3,7 +3,7 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
-import { catalog, getInstructors, getLegs, getPassages, getRouteMap, passageSlug, stopsFor, type Passage } from '@/lib/db';
+import { getInstructors, getLegs, getPassages, getRouteMap, passageSlug, stopsFor, type Passage } from '@/lib/db';
 import { peopleSection } from '@/lib/people';
 import { Faq, faqLd, List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/passages/[
   const shot = leg?.gallery?.find((g) => g.shape === 'l') ?? leg?.gallery?.[0];
   return meta(l, {
     title: t(l, 'Training passage {route}, {dates}', { route, dates: shortRange(l, p.starts_on, p.ends_on) }),
-    description: leg?.summary ?? t(l, catalog().legs[p.leg] ?? ''), pathFor: (x) => path.passage(x, slug),
+    description: leg?.summary ?? '', pathFor: (x) => path.passage(x, slug),
     image: shot ? photo(shot.photo_id, 1200) : undefined,
   });
 }
@@ -41,7 +41,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   if (!p) notFound();
   const leg = (await getLegs(lang))[p.leg];
   const skippers = (await getInstructors(lang)).filter((x) => x.legs.includes(p.leg));
-  const summary = leg?.summary ?? t(lang, catalog().legs[p.leg] ?? '');
+  const summary = leg?.summary ?? '';
   const back = p.return_id ? all.find((x) => x.id === p.return_id) : undefined;
   const route = t(lang, `${p.from_port} → ${p.to_port}`);
   const when = range(lang, p.starts_on, p.ends_on);

@@ -28,12 +28,15 @@ Live: https://ocean-way.vercel.app
 security: the catalogue is public read-only; `bookings` has no policies, so it cannot be read through the API at all.
 Places left are exposed only as numbers via `course_dates_live(slug)` and `passages_live()`.
 `places_held` on dates and passages is for places sold outside the website.
-Sample data: `supabase/seed.sql` (generated from `content/seed.json` by `scripts/make_seed_sql.py`).
+The database is the only source of the catalogue (courses, routes, boats, instructors, dates), with each row's
+Russian, German and Spanish text in its `translations` column and route maps in `map`. Edit it in Supabase Studio.
+One-off data loads go in `supabase/load/` (gitignored) and are run with psql.
 
 ## Environment
 
-See `.env.example`: `NEXT_PUBLIC_SITE_URL`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`. Without the Supabase
-variables the site runs on `content/seed.json` and bookings answer "not open yet".
+See `.env.example`: `NEXT_PUBLIC_SITE_URL`, `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`. The site needs the
+Supabase variables to build and render (`vercel env pull` writes them to `.env.local`). Without them, only the
+bookings endpoint degrades gracefully: it answers "not open yet".
 
 ## Commands
 

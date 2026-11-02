@@ -1,6 +1,6 @@
 # Plan: move static data into the database
 
-Status: phase 1 in progress (2 Nov 2026). Catalogue text and route maps are served from the database; see "Phase 1 progress".
+Status: phase 1 done (2 Nov 2026). The database is the only source of the catalogue; see "Phase 1 progress". Phase 2 is next.
 
 ## Where things are today
 
@@ -65,8 +65,13 @@ Make the database the only source for courses, routes, boats, instructors and da
 - Done: `i18n-app` trimmed from about 870 to about 218 strings per language. The ones left are labels plus that vocabulary.
 - Checked: a before/after comparison of all 248 earlier URLs shows only changes from other commits (new articles, the
   translated "What you do on board" list). Icons are the same in every language.
-- Left: Bareboat Skipper page onto the generic template. Retiring `catalog_extra.json` and the seed pipeline, which still
-  reads `content/*_maps.json` for distances. Dropping the offline fallbacks (open decision 3).
+- Done: Bareboat Skipper is on the shared `/courses/[slug]` template (commit 748453f). The sections the template has no place
+  for were dropped.
+- Done: offline fallbacks removed (`catalog.json`, `fleet.json`, `instructors.json`, `seed.json`). Pages fail with a clear
+  error without the Supabase variables. Only the bookings endpoint still answers "not open yet" without them.
+- Done: seed pipeline removed (`catalog_extra.json`, `build_catalog_extra.py`, `make_seed_sql.py`, `seed*.sql`,
+  `content/*_maps.json`). `build_leg_maps.py` reads stops from the database and writes the maps and distances to
+  `supabase/load/route_maps.sql`.
 
 ## Phase 2: theory articles
 
@@ -135,4 +140,4 @@ theory_topics (key text primary key, sort int, translations jsonb)              
 
 1. **Who edits content, and with what?** Supabase Studio is enough for one technical editor. Otherwise a small admin page.
 2. **Should home-page copy live in the database** so it can change without a deploy, or stay in code?
-3. **Is it acceptable to drop the offline JSON fallbacks?** Local development would then need Supabase (dev branch or local).
+3. ~~Is it acceptable to drop the offline JSON fallbacks?~~ Yes (2 Nov 2026): local development uses the Supabase project.
