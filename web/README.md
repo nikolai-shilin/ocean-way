@@ -11,6 +11,11 @@ Live: https://ocean-way.vercel.app
   `python3 scripts/extract_content.py` turns them into `content/pages/<page>.<lang>.json` (header, main, footer,
   metadata, JSON-LD, page scripts) and `src/styles/<group>.css`. Re-run it after regenerating the prototypes
   (`../prototypes/_build`, see its README).
+- **Theory articles** are served from the database (`articles`, `article_translations`, `theory_topics`); the hub and
+  article pages are rendered by `src/lib/articles.ts`. They are still written in `../prototypes/_build/theory` and
+  built as above; then `python3 scripts/import_theory.py` loads the built pages into the database (needs
+  `SUPABASE_SERVICE_ROLE_KEY` in `.env.local`). Pages pick up the change within 5 minutes.
+  The view `article_translations_stale` lists translations whose English body changed since they were made.
 - **Pages** (`src/app/[lang]/…`) render that content server-side and replace the live parts with database rows:
   passages table and fleet on the home page, course dates and the booking card on the course page, dates and places in
   the booking flow. Pages revalidate every 60 s (booking 30 s).

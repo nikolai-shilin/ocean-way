@@ -1,4 +1,5 @@
-import { index, loadPage, t } from '@/lib/content';
+import { getArticles } from '@/lib/articles';
+import { t } from '@/lib/content';
 import { getCourses, getYachts } from '@/lib/db';
 import { path, type Lang } from '@/lib/site';
 
@@ -6,8 +7,8 @@ const POPULAR = ['right-of-way', 'med-mooring', 'anchoring', 'weather', 'navigat
 
 /** Site map in the footer: every course, the passages, every boat, popular theory, company links; languages in a row below. */
 export default async function FooterNav({ lang, langLinks }: { lang: Lang; langLinks: [string, string, boolean][] }) {
-  const [courses, yachts] = await Promise.all([getCourses(lang), getYachts(lang)]);
-  const articles = POPULAR.filter((s) => index.slugs.includes(s)).map((s) => [s, loadPage(`theory-${s}`, lang).title.replace(/ · Ocean Way$/, '')]);
+  const [courses, yachts, all] = await Promise.all([getCourses(lang), getYachts(lang), getArticles(lang)]);
+  const articles = POPULAR.flatMap((s) => all.filter((a) => a.slug === s)).map((a) => [a.slug, a.title]);
   return (
     <nav className="fnav" aria-label={t(lang, 'Site map')}>
       <div>

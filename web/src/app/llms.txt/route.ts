@@ -1,4 +1,4 @@
-import { index, loadPage } from '@/lib/content';
+import { getArticles } from '@/lib/articles';
 import { getCourseDates, getCourses, getLegs, getPassages, getYachts, passageSlug } from '@/lib/db';
 import { LANGS, SITE, path } from '@/lib/site';
 
@@ -14,7 +14,7 @@ const ENT: Record<string, string> = { amp: '&', quot: '"', lt: '<', gt: '>', '#3
 const plain = (s: string) => s.replace(/&(amp|quot|lt|gt|#39|#x27|nbsp);/g, (_, e: string) => ENT[e]).replace(/ · Ocean Way$/, '').replace(/\s+/g, ' ').trim();
 
 export async function GET() {
-  const [courses, passages, yachts, legs, bareboat] = await Promise.all([getCourses(), getPassages(), getYachts(), getLegs(), getCourseDates('bareboat-skipper')]);
+  const [courses, passages, yachts, legs, bareboat, articles] = await Promise.all([getCourses(), getPassages(), getYachts(), getLegs(), getCourseDates('bareboat-skipper'), getArticles('en')]);
   const bb = courses.find((c) => c.slug === 'bareboat-skipper');
   const out: string[] = [];
   const add = (...lines: string[]) => out.push(...lines);
@@ -60,9 +60,8 @@ export async function GET() {
   add('');
 
   add('## Sailing theory (free articles)', '');
-  for (const s of index.slugs) {
-    const a = loadPage(`theory-${s}`, 'en');
-    add(`- [${plain(a.title)}](${url(path.article('en', s))}): ${plain(a.description ?? '')}`);
+  for (const a of articles) {
+    add(`- [${plain(a.title)}](${url(path.article('en', a.slug))}): ${plain(a.description)}`);
   }
   add('');
 

@@ -1,6 +1,7 @@
 import '@/styles/home.css';
 import '@/styles/passages.css';
 import ProtoPage from '@/components/ProtoPage';
+import { articleCard, getArticles } from '@/lib/articles';
 import { loadPage, pageMetadata, t } from '@/lib/content';
 import { getCourseDates, getCourses, getLegs, getPassages, getYachts } from '@/lib/db';
 import { PASSAGES_JS, passageRow } from '@/lib/passages';
@@ -33,6 +34,8 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   // Passages: the prototype's table becomes a sideways row of cards under the map.
   main = main.replace(/<div class="tbl-wrap">\s*<table class="tbl stack passages">[\s\S]*?<\/table>\s*<\/div>/, () => passageRow(lang, passages, legs));
   main = replaceInner(main, /<section class="sec" id="fleet"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', fleetCards(lang, yachts));
+  // Theory row: every published article, in reading order.
+  main = replaceInner(main, /<section class="sec" id="theory"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', (await getArticles(lang)).map((a) => articleCard(lang, a, 'card')).join(''));
   // Course cards → course pages (names are the official IYT names, the same in every language; the "IYT " prefix is optional so the database and the page text can be renamed separately).
   for (const c of courses) {
     const name = `(?:IYT )?${c.name.replace(/^IYT /, '')}`;

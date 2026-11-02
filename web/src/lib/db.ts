@@ -48,7 +48,7 @@ export function db(): SupabaseClient | null {
   return client;
 }
 /** The client for catalogue reads; a clear error instead of an empty site when the variables are missing. */
-function live(): SupabaseClient {
+export function live(): SupabaseClient {
   const c = db();
   if (!c) throw new Error('Set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (web/.env.local, or `vercel env pull`): the catalogue lives in the database.');
   return c;

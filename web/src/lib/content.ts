@@ -28,8 +28,6 @@ export function loadPage(page: string, lang: Lang): PageContent {
   return read(`pages/${page}.${lang}.json`) as PageContent;
 }
 
-export const index: { slugs: string[]; pages: string[] } = read('index.json');
-
 const dicts: Partial<Record<Lang, Record<string, string>>> = {};
 function dict(lang: Lang): Record<string, string> {
   if (lang === 'en') return {};

@@ -43,7 +43,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
   const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
   const team = (await getInstructors(lang)).filter((p) => p.courses.includes(slug));
   const map = routeMap(lang, await getRouteMap('courses', slug));
-  const theory = theoryFor(lang, c.theory);
+  const theory = await theoryFor(lang, c.theory);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Courses'), path.courses(lang)], [c.name, path.courseItem(lang, slug)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'Course', name: c.name, description: c.description, provider: { '@id': `${SITE}/#org` }, inLanguage: ['en', 'ru'],

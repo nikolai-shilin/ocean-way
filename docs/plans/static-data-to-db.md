@@ -1,6 +1,7 @@
 # Plan: move static data into the database
 
-Status: phase 1 done (2 Nov 2026). The database is the only source of the catalogue; see "Phase 1 progress". Phase 2 is next.
+Status: phases 1 and 2 done (2 Nov 2026). The catalogue and the theory articles are served from the database; see the
+progress notes under each phase. Phase 3 is next.
 
 ## Where things are today
 
@@ -114,6 +115,21 @@ theory_topics (key text primary key, sort int, translations jsonb)              
 **Done when:**
 - All 80 article URLs render the same text as before.
 - `content/pages/theory-*` and `prototypes/_build/theory` are no longer used by the app.
+
+**Phase 2 progress (2 Nov 2026):**
+- Done: `theory_topics`, `articles` and `article_translations` (migration `20261102130000_articles.sql`), with
+  read access for published rows only and the `article_translations_stale` view. 7 topics, 28 articles, 112
+  translations.
+- Done: `scripts/import_theory.py` loads them from the built pages. Articles are still written in
+  `prototypes/_build/theory` with the existing build, so adding one stays the same, plus one import step.
+- Done: `src/lib/articles.ts` renders the hub and the articles with the same markup as before. The home row, the
+  course pages, the footer, the sitemap and llms.txt read the article list from the database.
+- Changed from the plan: diagrams stay inline in each translation's `body_html` (their labels are already translated
+  there), not in a `diagrams` table. The hub's header, footer and scripts still come from `content/pages/theory.*.json`
+  until phase 3.
+- Checked: full HTML of all 280 URLs against the old build. Differences: the Article JSON-LD on non-English pages now
+  has the headline, level and topic in the page language, and six English titles and descriptions no longer show a
+  literal `&#x27;`.
 
 ## Phase 3: home, booking, header and footer (optional, the largest phase)
 
