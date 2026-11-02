@@ -4,7 +4,7 @@ import '@/styles/passages.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
-import { courseTheory, thumb } from '@/lib/theory';
+import { courseTheory } from '@/lib/theory';
 import { photoProps } from '@/lib/images';
 import { english, getCourseDates, getCourses, getInstructors, getRouteMap } from '@/lib/db';
 import { scopeIcon } from '@/lib/icons';
@@ -116,34 +116,16 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
               <div className="band ow-empty"><p>{t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.')}</p></div>
             )}
           </section>
-          {theory.top.length || theory.rest.length ? (
+          {theory.length ? (
             <section id="theory">
               <h2>{t(lang, 'Read the theory')}</h2>
-              {theory.top.length ? (
-                <div className="ow-th-top">
-                  <span className="kicker">{t(lang, 'Start with these')}</span>
-                  <div className="ow-th-cards">{theory.top.map((a) => (
-                    <a key={a.slug} className="card" href={path.article(lang, a.slug)}>
-                      <div className="photo"><div className="clip"><img {...photoProps(a.img, 'card', { lazy: true })} alt={a.alt} suppressHydrationWarning /></div></div>
-                      <div className="card-body"><span className="card-meta">{a.topic}</span><span className="card-title">{a.title}</span><span className="card-meta">{a.read}</span></div>
-                    </a>
-                  ))}</div>
-                </div>
-              ) : null}
-              <div className="ow-theory">
-                {theory.rest.map((tp) => (
-                  <div className="ow-th-topic" key={tp.id}>
-                    <a className="kicker" href={`${path.theory(lang)}#${tp.id}`}>{tp.name}</a>
-                    <ul>{tp.articles.map((a) => (
-                      <li key={a.slug}><a href={path.article(lang, a.slug)}>
-                        <img src={thumb(a.img, 112)} srcSet={`${thumb(a.img, 112)} 1x, ${thumb(a.img, 224)} 2x`} alt="" width={56} height={56} loading="lazy" decoding="async" />
-                        <span className="ow-th-text"><b>{a.title}</b><span>{a.read}</span></span>
-                        <svg className="i" aria-hidden="true"><use href="#ow-arrow" /></svg>
-                      </a></li>
-                    ))}</ul>
-                  </div>
-                ))}
-              </div>
+              <div className="ow-th-cards">{theory.map((a) => (
+                <a key={a.slug} className="card" href={path.article(lang, a.slug)}>
+                  <div className="photo"><div className="clip"><img {...photoProps(a.img, 'card', { lazy: true })} alt={a.alt} suppressHydrationWarning /></div></div>
+                  <div className="card-body"><span className="card-meta">{a.topic}</span><span className="card-title">{a.title}</span><span className="card-meta">{a.read}</span></div>
+                </a>
+              ))}</div>
+              <a className="ow-th-all" href={path.theory(lang)}>{t(lang, 'All theory')}<svg className="i" aria-hidden="true"><use href="#ow-arrow" /></svg></a>
             </section>
           ) : null}
         </div>

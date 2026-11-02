@@ -17,22 +17,8 @@ export async function theoryTopics(lang: Lang): Promise<TheoryTopic[]> {
     .filter((tp) => tp.articles.length);
 }
 
-/** The course's articles, grouped by topic. */
-export async function theoryFor(lang: Lang, slugs: string[]): Promise<TheoryTopic[]> {
-  const want = new Set(slugs);
-  return (await theoryTopics(lang))
-    .map((tp) => ({ ...tp, articles: tp.articles.filter((a) => want.has(a.slug)) }))
-    .filter((tp) => tp.articles.length);
-}
-
-/** A course's articles: the first three in the course's list as "start with these" cards when it has more than
- *  four, the rest grouped by topic. */
+/** The first three of a course's theory articles, with their topic. */
 export async function courseTheory(lang: Lang, slugs: string[]) {
   const all = (await theoryTopics(lang)).flatMap((tp) => tp.articles.map((a) => ({ ...a, topic: tp.name })));
-  const found = slugs.filter((s) => all.some((a) => a.slug === s));
-  const top = found.length > 4 ? found.slice(0, 3).map((s) => all.find((a) => a.slug === s)!) : [];
-  return { top, rest: await theoryFor(lang, found.slice(top.length)) };
+  return slugs.map((s) => all.find((a) => a.slug === s)).filter((a) => a !== undefined).slice(0, 3);
 }
-
-/** A small Unsplash thumbnail at the given width. */
-export const thumb = (src: string, w: number) => src.replace(/([?&])w=\d+/, `$1w=${w}`);
