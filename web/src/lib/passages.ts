@@ -17,11 +17,6 @@ export function dates(lang: Lang, a: string, b: string) {
   return new Intl.DateTimeFormat(LOCALE[lang], { day: 'numeric', month: 'short', timeZone: 'UTC' }).formatRange(day(a), day(b));
 }
 
-/** "1 May" in the page language. */
-export function dayMonth(lang: Lang, iso: string) {
-  return new Intl.DateTimeFormat(LOCALE[lang], { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(day(iso));
-}
-
 /** Out one week, back the next: the dates of both legs together, when the paired passage joins on directly. */
 function bothWays(lang: Lang, p: Passage, pair?: Passage) {
   if (!pair) return '';

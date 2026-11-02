@@ -11,7 +11,7 @@ import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
 import { eur, galleryHtml, nightsOf, places, routeMap } from '@/lib/render';
-import { dates as dateRange, dayMonth } from '@/lib/passages';
+import { dates as dateRange } from '@/lib/passages';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
 import { Faq, faqLd, List, Program, Skills, Stops } from '@/components/Details';
@@ -150,7 +150,11 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
       </div>
       {c.faq?.length ? <Faq lang={lang} items={c.faq} /> : null}
       <div className="mbar">
-        <div><b>{eur(c.price_from_eur)}</b><span className="card-meta">{c.price_unit}{next ? ` · ${t(lang, 'next: {date}', { date: dayMonth(lang, next.starts_on) })}` : ''}</span></div>
+        <div className="ow-mbar">
+          <p><b>{eur(c.price_from_eur)}</b> {c.price_unit}</p>
+          <p>{next ? `${dateRange(lang, next.starts_on, next.ends_on)} · ` : ''}{c.duration}</p>
+          {next ? <p className={places(lang, next.places_left, next.places_total).cls.includes('low') ? 'low' : undefined}>{places(lang, next.places_left, next.places_total).text}</p> : null}
+        </div>
         {next
           ? <a className="pill pill-primary" href="#dates">{t(lang, 'Choose dates')}</a>
           : <a className="pill pill-primary" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Ask about dates')}</a>}
