@@ -82,14 +82,13 @@
 html:root { --sans: var(--ow-sans), 'Carlito', 'Lato', Arial, sans-serif; --title: var(--ow-title), 'Merriweather', Georgia, serif; }
 
 /* Photo skeleton: a light sweep runs across the empty photo frame until the photo arrives, then the photo fades in.
-   Only when the head script in layout.tsx has run (html.ow-sk); it marks each loaded or failed image with data-ld,
-   so without JavaScript photos show as usual. */
+   Only when the head script in layout.tsx has run (html.ow-sk); it adds a rule for each loaded or failed photo (by src)
+   that shows it and stops the sweep, so without JavaScript photos show as usual. */
 :root { --sk-shine: rgba(255, 255, 255, .6); }
 :root[data-theme="night"] { --sk-shine: rgba(255, 255, 255, .07); }
 .ow-photo { position: relative; }
-html.ow-sk :is(.photo, .clip, .ow-photo) > img { transition: opacity .4s ease; }
-html.ow-sk :is(.photo, .clip, .ow-photo) > img:not([data-ld]) { opacity: 0; }
-html.ow-sk :is(.photo, .clip, .ow-photo):has(> img:not([data-ld]))::after {
+html.ow-sk :is(.photo, .clip, .ow-photo) > img { opacity: 0; transition: opacity .4s ease; }
+html.ow-sk :is(.photo, .clip, .ow-photo):has(> img)::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(100deg, transparent 25%, var(--sk-shine) 50%, transparent 75%);
   transform: translateX(-100%); animation: ow-sk 1.5s ease-in-out infinite;
@@ -97,5 +96,5 @@ html.ow-sk :is(.photo, .clip, .ow-photo):has(> img:not([data-ld]))::after {
 @keyframes ow-sk { to { transform: translateX(100%); } }
 @media (prefers-reduced-motion: reduce) {
   html.ow-sk :is(.photo, .clip, .ow-photo) > img { transition: none; }
-  html.ow-sk :is(.photo, .clip, .ow-photo):has(> img:not([data-ld]))::after { animation: none; transform: none; background: none; }
+  html.ow-sk :is(.photo, .clip, .ow-photo):has(> img)::after { animation: none; transform: none; background: none; }
 }

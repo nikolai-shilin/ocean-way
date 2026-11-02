@@ -1,0 +1,115 @@
+/* Motion shared by every page (loaded once from the root layout, after chrome.css).
+   Scroll reveals, route drawing, number count-up and the theme switch are run by MOTION_JS in layout.tsx;
+   everything here is CSS only. Movement is left out for visitors who ask for reduced motion. */
+
+:root {
+  --ow-ease: cubic-bezier(.23, 1, .32, 1);      /* strong ease-out: things arriving, press feedback */
+  --ow-ease-io: cubic-bezier(.77, 0, .175, 1);  /* ease-in-out: things moving or growing on screen */
+}
+
+/* ---------- Press and hover feedback (every visit, so short and small) ---------- */
+.round, .tag, .rmap-chip, .choice, .social, .card, .toc a .chip, .topics a .chip, .ow-chips a .chip {
+  transition: transform .16s var(--ow-ease), border-color .15s ease, background-color .15s ease, color .15s ease;
+}
+html .pill:active { transform: scale(.97); }
+html :is(.round:active:not(:disabled), .tag:active, .rmap-chip:active, .social:active) { transform: scale(.94); }
+html .choice:active:not(:has(input:disabled)) { transform: scale(.985); }
+/* Cards sit in swipe rows: on touch screens a press is usually the start of a swipe, so only with a mouse. */
+@media (hover: hover) and (pointer: fine) { html .card:active { transform: scale(.985); } }
+html :is(.toc, .topics, .ow-chips) a:active .chip { transform: scale(.95); }
+.navl, .fnav a, .crumbs a, .lang-menu a, .mnav a, .tbl td.island a, .bk-back { transition: color .15s ease, background-color .15s ease; }
+
+/* Header links: the underline grows from the left on hover; the current page keeps it full. */
+html .site-nav .navl { border-bottom-color: transparent; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: color .15s ease, background-size .25s var(--ow-ease); }
+html .site-nav .navl.on { background-size: 100% 2px; background-image: linear-gradient(var(--ink), var(--ink)); }
+@media (hover: hover) and (pointer: fine) { html .site-nav .navl:hover { background-size: 100% 2px; } }
+
+/* Booking choices: the radio dot grows in, the tick box fills. */
+@property --ow-dot { syntax: '<length>'; inherits: false; initial-value: 0px; }
+html .choice:not(.check) .dot { background: radial-gradient(circle, var(--ink) 0 var(--ow-dot), transparent calc(var(--ow-dot) + 1px)); transition: --ow-dot .2s var(--ow-ease), border-color .15s ease; }
+html .choice:not(.check):has(input:checked) .dot { --ow-dot: 5px; }
+html .choice.check .dot { transition: background-color .15s ease, box-shadow .15s ease, border-color .15s ease; }
+
+/* ---------- Opening and closing ---------- */
+/* Language menu drops from its button */
+details.lang[open] .lang-menu { transform-origin: top right; animation: ow-pop .18s var(--ow-ease); }
+@keyframes ow-pop { from { opacity: 0; transform: translateY(-4px) scale(.96); } }
+
+/* FAQ answers slide open and closed (browsers without ::details-content just open them) */
+.faq-item { interpolate-size: allow-keywords; }
+@supports selector(::details-content) {
+  .faq-item::details-content { block-size: 0; overflow-y: clip; transition: block-size .3s var(--ow-ease-io), content-visibility .3s allow-discrete; }
+  .faq-item[open]::details-content { block-size: auto; }
+}
+.faq-item[open] .faq-a { animation: ow-fade .35s ease .05s backwards; }
+@keyframes ow-fade { from { opacity: 0; } }
+
+/* Mobile menu: the panel fades down, its links follow one after another; the burger turns into a cross. */
+@media (max-width: 1000px) {
+  .mnav.open { animation: ow-fade .2s ease; }
+  .mnav.open > a { animation: ow-rise .45s var(--ow-ease) backwards; }
+  .mnav.open > a:nth-child(2) { animation-delay: 30ms; }
+  .mnav.open > a:nth-child(3) { animation-delay: 60ms; }
+  .mnav.open > a:nth-child(4) { animation-delay: 90ms; }
+  .mnav.open > a:nth-child(5) { animation-delay: 120ms; }
+  .mnav.open > a:nth-child(6) { animation-delay: 150ms; }
+  .mnav.open > a:nth-child(n+7), .mnav.open .mnav-langs { animation: ow-rise .45s var(--ow-ease) 180ms backwards; }
+  .menu-btn[aria-expanded="true"] .x { animation: ow-turn .25s var(--ow-ease); }
+}
+@keyframes ow-turn { from { opacity: 0; transform: rotate(-90deg) scale(.6); } }
+
+/* ---------- Page entrance: the top of each page rises in, the photo gallery slides in from the right ---------- */
+:is(.hero, .ow-hero, .th-hero) > * { animation: ow-rise .7s var(--ow-ease) backwards; }
+:is(.hero, .ow-hero, .th-hero) > :nth-child(2) { animation-delay: 60ms; }
+:is(.hero, .ow-hero, .th-hero) > :nth-child(3) { animation-delay: 120ms; }
+:is(.hero, .ow-hero, .th-hero) > :nth-child(4) { animation-delay: 180ms; }
+:is(.hero, .ow-hero, .th-hero) > :nth-child(n+5) { animation-delay: 240ms; }
+.gallery-head { animation: ow-fade .6s ease .2s backwards; }
+.gallery > * { animation: ow-slide .9s var(--ow-ease) backwards; }
+.gallery > :nth-child(1) { animation-delay: 150ms; }
+.gallery > :nth-child(2) { animation-delay: 220ms; }
+.gallery > :nth-child(3) { animation-delay: 290ms; }
+.gallery > :nth-child(n+4) { animation-delay: 360ms; }
+.bk > div > h1 { animation: ow-rise .6s var(--ow-ease) backwards; }
+@keyframes ow-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes ow-slide { from { opacity: 0; transform: translateX(40px); } }
+
+/* ---------- Booking ---------- */
+/* Each step (and the "done" screen) slides in when it is shown */
+.bk [data-step]:not([hidden]), .bk #done:not([hidden]) { animation: ow-rise .45s var(--ow-ease); }
+.bk #done:not([hidden]) .done-mark { animation: ow-mark .6s cubic-bezier(.34, 1.4, .64, 1) .15s backwards; }
+@keyframes ow-mark { from { opacity: 0; transform: scale(.5) rotate(-12deg); } }
+/* Step bars fill from the left */
+html .steps li::before { background: var(--line) linear-gradient(var(--ow-fill, var(--ink)), var(--ow-fill, var(--ink))) no-repeat 0 0 / 0 100%; transition: background-size .5s var(--ow-ease-io); }
+html .steps li.now { --ow-fill: var(--accent); }
+html .steps li:is(.now, .done)::before { background-size: 100% 100%; }
+/* Errors appear instead of popping in */
+.errsum.on { animation: ow-drop .25s var(--ow-ease); }
+.fld.bad .err { animation: ow-drop .2s var(--ow-ease); }
+@keyframes ow-drop { from { opacity: 0; transform: translateY(-6px); } }
+
+/* ---------- Page and theme transitions (View Transitions; other browsers switch instantly) ---------- */
+/* Between pages: the old page fades out quickly, the new one fades in while its top rises; the header stays put. */
+@view-transition { navigation: auto; }
+.site-head { view-transition-name: ow-head; }
+::view-transition-old(root) { animation: ow-out .16s ease both; }
+::view-transition-new(root) { animation: ow-fade .3s ease both; }
+@keyframes ow-out { to { opacity: 0; } }
+/* Theme switch: the new theme spreads in a circle from the button (MOTION_JS sets the class and runs the clip). */
+html.ow-vt-theme::view-transition-old(root), html.ow-vt-theme::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+html.ow-vt-theme .site-head { view-transition-name: none; }
+/* Colours switch at once inside the circle (their own transitions would start from the old theme's colours). */
+html.ow-vt-theme, html.ow-vt-theme *, html.ow-vt-theme *::before, html.ow-vt-theme *::after { transition: none !important; }
+
+/* ---------- Reduced motion: keep colour and opacity changes, drop movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :is(.hero, .ow-hero, .th-hero) > *, .gallery > *, .gallery-head, .bk > div > h1, .bk [data-step]:not([hidden]), .bk #done:not([hidden]),
+  .bk #done:not([hidden]) .done-mark, .mnav.open > a, .mnav.open .mnav-langs, .menu-btn[aria-expanded="true"] .x,
+  details.lang[open] .lang-menu, .errsum.on, .fld.bad .err { animation-name: ow-fade; }
+  html :is(.pill, .round, .tag, .rmap-chip, .social, .choice, .card):active, html :is(.toc, .topics, .ow-chips) a:active .chip { transform: none; }
+  @supports selector(::details-content) { .faq-item::details-content { transition: none; } }
+  @view-transition { navigation: none; }
+}
+@media print {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
