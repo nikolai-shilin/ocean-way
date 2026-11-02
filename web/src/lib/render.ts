@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import nodePath from 'node:path';
 import { t, hasT } from './content';
-import { passageSlug, type CourseDate, type Passage, type Yacht } from './db';
+import { passageSlug, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
 import { usedForIcon } from './icons';
 import { responsiveImages } from './images';
 import { path, type Lang } from './site';
@@ -137,9 +137,9 @@ export function passagesMap(homeMain: string, leg?: string) {
 /** The map of one passage route or course route (drawn by prototypes/_build/build_leg_maps.py): desktop and phone
  *  versions, stop names in the page language. */
 const mapFiles: Record<string, Record<string, { d: string; m: string; nm: number }>> = {};
-function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string) {
+function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string, fromDb?: RouteMap | null) {
   mapFiles[file] ??= JSON.parse(fs.readFileSync(nodePath.join(process.cwd(), 'content', `${file}.json`), 'utf8'));
-  const m = mapFiles[file][key];
+  const m = fromDb ?? mapFiles[file][key];
   if (!m) return '';
   const tr = (svg: string) => svg
     .replace(/(<text class="pm-label"[^>]*>)([^<]+)(<\/text>)/g, (_, a: string, name: string, b: string) => a + esc(t(lang, name)) + b)
@@ -147,8 +147,8 @@ function mapFigure(lang: Lang, file: 'passage_maps' | 'course_maps', key: string
   const note = m.d.includes('rm-line') ? 'Lines show the usual sea route; the instructor plans each leg to the weather. Coastline: Natural Earth.' : 'Coastline: Natural Earth.';
   return `<figure class="pmap"><div class="rmap-frame">${tr(m.d)}${tr(m.m)}</div><figcaption class="disclaimer">${esc(t(lang, note))}</figcaption></figure>`;
 }
-export const legMap = (lang: Lang, leg: string) => mapFigure(lang, 'passage_maps', leg);
-export const courseMap = (lang: Lang, slug: string) => mapFigure(lang, 'course_maps', slug);
+export const legMap = (lang: Lang, leg: string, map?: RouteMap | null) => mapFigure(lang, 'passage_maps', leg, map);
+export const courseMap = (lang: Lang, slug: string, map?: RouteMap | null) => mapFigure(lang, 'course_maps', slug, map);
 
 /** Sideways photo gallery with captions, the same markup as the Bareboat Skipper page (home.css .gallery). */
 export function galleryHtml(lang: Lang, shots: { photo_id: string; shape: 'l' | 'p'; caption: string }[]) {

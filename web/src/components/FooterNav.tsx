@@ -6,7 +6,7 @@ const POPULAR = ['right-of-way', 'med-mooring', 'anchoring', 'weather', 'navigat
 
 /** Site map in the footer: every course, the passages, every boat, popular theory, company links; languages in a row below. */
 export default async function FooterNav({ lang, langLinks }: { lang: Lang; langLinks: [string, string, boolean][] }) {
-  const [courses, yachts] = await Promise.all([getCourses(), getYachts()]);
+  const [courses, yachts] = await Promise.all([getCourses(lang), getYachts(lang)]);
   const articles = POPULAR.filter((s) => index.slugs.includes(s)).map((s) => [s, loadPage(`theory-${s}`, lang).title.replace(/ · Ocean Way$/, '')]);
   return (
     <nav className="fnav" aria-label={t(lang, 'Site map')}>

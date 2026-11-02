@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/courses'>)
 
 export default async function Courses({ params }: PageProps<'/[lang]/courses'>) {
   const lang = (await params).lang as Lang;
-  const courses = await getCourses();
+  const courses = await getCourses(lang);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Courses'), path.courses(lang)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'ItemList', name: t(lang, 'IYT sailing courses'),

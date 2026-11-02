@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { index, loadPage, t } from '@/lib/content';
 import { photoProps } from '@/lib/images';
-import { getCourseDates, getCourses, getInstructors } from '@/lib/db';
+import { getCourseDates, getCourses, getInstructors, getRouteMap } from '@/lib/db';
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
@@ -20,13 +20,13 @@ export async function generateStaticParams() {
 }
 export const dynamicParams = false;
 
-async function find(slug: string) {
-  return (await getCourses()).find((c) => c.slug === slug);
+async function find(slug: string, lang: Lang) {
+  return (await getCourses(lang)).find((c) => c.slug === slug);
 }
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/courses/[slug]'>) {
   const { lang, slug } = await params;
-  const c = await find(slug);
+  const c = await find(slug, lang as Lang);
   if (!c) return {};
   const l = lang as Lang;
   return meta(l, { title: t(l, '{name} course', { name: c.name }), description: t(l, c.description), pathFor: (x) => path.courseItem(x, slug), image: photo(c.photo_id, 1200) });
@@ -35,11 +35,12 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/courses/[s
 export default async function CourseItem({ params }: PageProps<'/[lang]/courses/[slug]'>) {
   const { lang: raw, slug } = await params;
   const lang = raw as Lang;
-  const courses = await getCourses();
+  const courses = await getCourses(lang);
   const c = courses.find((x) => x.slug === slug);
   if (!c) notFound();
   const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
-  const team = (await getInstructors()).filter((p) => p.courses.includes(slug));
+  const team = (await getInstructors(lang)).filter((p) => p.courses.includes(slug));
+  const routeMap = await getRouteMap('courses', slug);
   const titles = Object.fromEntries(index.slugs.map((s) => {
     const page = loadPage(`theory-${s}`, lang);
     return [s, page.title.replace(/ · Ocean Way$/, '')];
@@ -80,7 +81,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           {c.route?.length ? (
             <section id="route">
               <h2>{t(lang, c.route.length > 1 ? 'Route and stops' : 'Where the course takes place')}</h2>
-              <div className="ow-map" dangerouslySetInnerHTML={{ __html: courseMap(lang, slug) }} />
+              <div className="ow-map" dangerouslySetInnerHTML={{ __html: courseMap(lang, slug, routeMap) }} />
               <div style={{ marginTop: 24 }}><Stops lang={lang} stops={c.route} /></div>
             </section>
           ) : null}

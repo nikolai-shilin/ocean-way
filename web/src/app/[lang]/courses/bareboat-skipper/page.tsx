@@ -25,7 +25,7 @@ export default async function CoursePage({ params }: PageProps<'/[lang]/courses/
     main = main.replace(/(<a class="pill pill-primary pill-wide" href=")[^"]*("[^>]*>)[^<]*(<\/a>)/,
       `$1${path.booking(lang)}?item=bareboat&date=${next.key}$2${t(lang, `Book ${day('en', next.starts_on)}`)}$3`);
   }
-  const team = (await getInstructors()).filter((p) => p.courses.includes('bareboat-skipper'));
+  const team = (await getInstructors(lang)).filter((p) => p.courses.includes('bareboat-skipper'));
   if (team.length) main = main.replace('<section class="sec" id="after"', `<section class="sec ow-proto-people">${peopleSection(lang, team, 'course').replace(/^<section[^>]*>|<\/section>$/g, '')}</section>\n    <section class="sec" id="after"`);
   return <ProtoPage section="courses" content={content} main={main} />;
 }

@@ -56,7 +56,7 @@ export default async function Booking({ params, searchParams }: PageProps<'/[lan
   const lang = (await params).lang as Lang;
   const asked = (await searchParams).course;
   const content = loadPage('booking', lang);
-  const course = typeof asked === 'string' && asked !== 'bareboat-skipper' ? (await getCourses()).find((c) => c.slug === asked) : undefined;
+  const course = typeof asked === 'string' && asked !== 'bareboat-skipper' ? (await getCourses(lang)).find((c) => c.slug === asked) : undefined;
   const [dates, passages] = await Promise.all([getCourseDates(course?.slug ?? 'bareboat-skipper'), getPassages()]);
   const chrome = content.scripts.slice(0, -1);
 

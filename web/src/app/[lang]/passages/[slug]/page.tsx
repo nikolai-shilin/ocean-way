@@ -3,7 +3,7 @@ import '@/styles/app.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
-import { catalog, getInstructors, getLegs, getPassages, passageSlug, stopsFor, type Passage } from '@/lib/db';
+import { catalog, getInstructors, getLegs, getPassages, getRouteMap, passageSlug, stopsFor, type Passage } from '@/lib/db';
 import { peopleSection } from '@/lib/people';
 import { Faq, faqLd, List, Program, Stops } from '@/components/Details';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/passages/[
   const p = (await getPassages()).find((x) => passageSlug(x) === slug);
   if (!p) return {};
   const route = t(l, `${p.from_port} → ${p.to_port}`);
-  const leg = (await getLegs())[p.leg];
+  const leg = (await getLegs(l))[p.leg];
   const shot = leg?.gallery?.find((g) => g.shape === 'l') ?? leg?.gallery?.[0];
   return meta(l, {
     title: t(l, 'Training passage {route}, {dates}', { route, dates: shortRange(l, p.starts_on, p.ends_on) }),
@@ -39,8 +39,8 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
   const all = await getPassages();
   const p = all.find((x) => passageSlug(x) === slug);
   if (!p) notFound();
-  const leg = (await getLegs())[p.leg];
-  const skippers = (await getInstructors()).filter((x) => x.legs.includes(p.leg));
+  const leg = (await getLegs(lang))[p.leg];
+  const skippers = (await getInstructors(lang)).filter((x) => x.legs.includes(p.leg));
   const summary = t(lang, leg?.summary ?? catalog().legs[p.leg] ?? '');
   const back = p.return_id ? all.find((x) => x.id === p.return_id) : undefined;
   const route = t(lang, `${p.from_port} → ${p.to_port}`);
@@ -58,7 +58,7 @@ export default async function PassageItem({ params }: PageProps<'/[lang]/passage
     offers: { '@type': 'Offer', price: p.price_eur, priceCurrency: 'EUR', availability: `https://schema.org/${full ? 'SoldOut' : 'InStock'}`, url: SITE + path.passage(lang, slug) },
   }, ...(leg?.faq?.length ? [faqLd(lang, leg.faq)] : [])] };
   const doList = ['Plan each leg with the instructor: route, shipping and weather windows', 'Stand watches, also at night', 'Skipper legs yourself under supervision', 'Log every mile and night hour, signed by the instructor'];
-  const map = legMap(lang, p.leg);
+  const map = legMap(lang, p.leg, await getRouteMap('passage_legs', p.leg));
   return (
     <Shell lang={lang} section="passages" pathFor={(l) => path.passage(l, slug)} jsonld={ld}>
       <section className="ow-hero">

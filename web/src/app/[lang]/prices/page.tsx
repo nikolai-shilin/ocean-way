@@ -36,7 +36,7 @@ const EXTRA = ['Food kitty, about â‚¬150 per person', 'VHF radio (SRC) course, â
 
 export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
   const lang = (await params).lang as Lang;
-  const [courses, passages, yachts] = await Promise.all([getCourses(), getPassages(), getYachts()]);
+  const [courses, passages, yachts] = await Promise.all([getCourses(lang), getPassages(), getYachts(lang)]);
   const tiers = passageTiers(passages);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Prices'), path.prices(lang)]];
   const offer = (name: string, price: number, url: string, type: string) => ({ '@type': 'Offer', price, priceCurrency: 'EUR', url: SITE + url, itemOffered: { '@type': type, name } });

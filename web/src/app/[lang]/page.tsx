@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]'>) {
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const lang = (await params).lang as Lang;
   const content = loadPage('home', lang);
-  const [passages, yachts, courses] = await Promise.all([getPassages(), getYachts(), getCourses()]);
+  const [passages, yachts, courses] = await Promise.all([getPassages(), getYachts(lang), getCourses(lang)]);
   const courseDates = (await Promise.all(courses.map((c) => getCourseDates(c.slug)))).flat();
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = [...courseDates, ...passages].filter((d) => d.starts_on >= today).length;

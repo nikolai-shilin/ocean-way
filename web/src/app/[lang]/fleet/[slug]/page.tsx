@@ -20,7 +20,7 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: PageProps<'/[lang]/fleet/[slug]'>) {
   const { lang, slug } = await params;
   const l = lang as Lang;
-  const y = (await getYachts()).find((x) => x.slug === slug);
+  const y = (await getYachts(l)).find((x) => x.slug === slug);
   if (!y) return {};
   return meta(l, { title: `${y.model}, ${t(l, y.base)}`, description: t(l, y.description), pathFor: (x) => path.boat(x, slug), image: photo(y.photo_id, 1200) });
 }
@@ -31,7 +31,7 @@ const numIn = (lang: Lang) => (x: number | null, unit = '') => (x == null ? '–
 export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>) {
   const { lang: raw, slug } = await params;
   const lang = raw as Lang;
-  const yachts = await getYachts();
+  const yachts = await getYachts(lang);
   const y = yachts.find((x) => x.slug === slug);
   if (!y) notFound();
   const weeks = (await getCourseDates('bareboat-skipper')).filter((d) => d.boat === y.model && d.places_left > 0);

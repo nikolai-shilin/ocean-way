@@ -18,7 +18,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 export default async function Instructors({ params }: PageProps<'/[lang]/instructors'>) {
   const lang = (await params).lang as Lang;
-  const [people, courses, legs] = await Promise.all([getInstructors(), getCourses(), getLegs()]);
+  const [people, courses, legs] = await Promise.all([getInstructors(lang), getCourses(lang), getLegs(lang)]);
   const courseName = Object.fromEntries(courses.map((c) => [c.slug, c.name]));
   const chips = (label: string, items: [string, string][]) => items.length
     ? `<div class="ow-person-chips"><span class="ow-person-role">${esc(label)}</span><div class="ow-chips">${items.map(([href, text]) => `<a href="${href}"><span class="chip">${esc(text)}</span></a>`).join('')}</div></div>` : '';
