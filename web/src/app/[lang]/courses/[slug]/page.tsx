@@ -1,14 +1,17 @@
 import '@/styles/home.css';
 import '@/styles/app.css';
+import '@/styles/passages.css';
 import { notFound } from 'next/navigation';
 import Shell from '@/components/Shell';
-import { index, loadPage, t } from '@/lib/content';
+import { t } from '@/lib/content';
+import { theoryFor, thumb } from '@/lib/theory';
 import { photoProps } from '@/lib/images';
 import { english, getCourseDates, getCourses, getInstructors, getRouteMap } from '@/lib/db';
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, galleryHtml, range, routeMap } from '@/lib/render';
+import { eur, galleryHtml, nightsOf, places, routeMap } from '@/lib/render';
+import { dates as dateRange } from '@/lib/passages';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
 import { Faq, faqLd, List, Program, Skills, Stops } from '@/components/Details';
@@ -40,10 +43,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
   const dates = (await getCourseDates(slug)).filter((d) => d.places_left > 0);
   const team = (await getInstructors(lang)).filter((p) => p.courses.includes(slug));
   const map = routeMap(lang, await getRouteMap('courses', slug));
-  const titles = Object.fromEntries(index.slugs.map((s) => {
-    const page = loadPage(`theory-${s}`, lang);
-    return [s, page.title.replace(/ · Ocean Way$/, '')];
-  }));
+  const theory = theoryFor(lang, c.theory);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Courses'), path.courses(lang)], [c.name, path.courseItem(lang, slug)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'Course', name: c.name, description: c.description, provider: { '@id': `${SITE}/#org` }, inLanguage: ['en', 'ru'],
@@ -100,15 +100,38 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <section id="dates">
             <h2>{t(lang, 'Dates')}</h2>
             {dates.length ? (
-              <ul className="ow-list">{dates.map((d) => <li key={d.id}><svg className="i"><use href="#ow-calendar" /></svg><span>{range(lang, d.starts_on, d.ends_on)} · {t(lang, d.area)} · {eur(d.price_eur)}</span></li>)}</ul>
+              <div className="pp-list">{dates.map((d) => {
+                const pl = places(lang, d.places_left, d.places_total);
+                return (
+                  <article key={d.id} className="pp">
+                    <div className="pp-when"><b className="pp-dates">{dateRange(lang, d.starts_on, d.ends_on)}</b><span className="pp-nights">{t(lang, `${nightsOf(d)} nights`)}</span></div>
+                    <div className="pp-what"><h3 className="pp-route">{t(lang, d.area)}</h3>{d.boat ? <p className="pp-sub">{d.boat}</p> : null}</div>
+                    <p className="pp-price"><b>{eur(d.price_eur)}</b><span>{t(lang, 'per person')}</span></p>
+                    <div className="pp-act"><span className={pl.cls}>{pl.text}</span><a className="pill pill-primary pill-sm" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Book')}</a></div>
+                  </article>
+                );
+              })}</div>
             ) : (
               <div className="band ow-empty"><p>{t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.')}</p></div>
             )}
           </section>
-          {c.theory.length ? (
-            <section>
+          {theory.length ? (
+            <section id="theory">
               <h2>{t(lang, 'Read the theory')}</h2>
-              <div className="ow-chips">{c.theory.filter((s) => titles[s]).map((s) => <a key={s} href={path.article(lang, s)}><span className="chip">{titles[s]}</span></a>)}</div>
+              <div className="ow-theory">
+                {theory.map((tp) => (
+                  <div className="ow-th-topic" key={tp.id}>
+                    <a className="kicker" href={`${path.theory(lang)}#${tp.id}`}>{tp.name}</a>
+                    <ul>{tp.articles.map((a) => (
+                      <li key={a.slug}><a href={path.article(lang, a.slug)}>
+                        <img src={thumb(a.img, 112)} srcSet={`${thumb(a.img, 112)} 1x, ${thumb(a.img, 224)} 2x`} alt="" width={56} height={56} loading="lazy" decoding="async" />
+                        <span className="ow-th-text"><b>{a.title}</b><span>{a.read}</span></span>
+                        <svg className="i" aria-hidden="true"><use href="#ow-arrow" /></svg>
+                      </a></li>
+                    ))}</ul>
+                  </div>
+                ))}
+              </div>
             </section>
           ) : null}
         </div>
