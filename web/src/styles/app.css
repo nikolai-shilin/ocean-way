@@ -15,14 +15,12 @@
 .ow-price { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
 .ow-price b { font-family: var(--title); font-weight: var(--title-w); font-variant-numeric: lining-nums; font-size: 34px; letter-spacing: var(--title-track); line-height: 1; }
 .ow-note { font-size: 14px; line-height: 1.35; color: var(--muted); margin: 0; }
-/* Course details in the price box: icon, label over value, thin rules between rows. */
-.ow-facts { margin: 6px 0 0; border-top: 1px solid var(--line); }
-.ow-facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
-.ow-facts > div { display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); }
-.ow-facts svg.i { grid-row: span 2; width: 18px; height: 18px; margin-top: 1px; color: var(--accent); }
-.ow-facts dt { font-family: var(--sans); font-size: 13px; line-height: 1.3; color: var(--muted); }
-.ow-facts dd { margin: 2px 0 0; font-family: var(--sans); font-weight: 700; font-size: 16px; line-height: 1.3; }
-.ow-facts dd span { display: block; margin-top: 2px; font-weight: 400; font-size: 14px; color: var(--muted); }
+/* Course details in the price box: one line per row, label on the left, value on the right. */
+.ow-facts { margin: 4px 0 0; padding-top: 14px; border-top: 1px solid var(--line); display: grid; gap: 9px; }
+.ow-facts > div { display: grid; grid-template-columns: 18px auto minmax(0, 1fr); align-items: baseline; column-gap: 10px; font-family: var(--sans); font-size: 15px; line-height: 1.3; }
+.ow-facts svg.i { width: 16px; height: 16px; align-self: center; color: var(--accent); }
+.ow-facts dt { color: var(--muted); white-space: nowrap; }
+.ow-facts dd { margin: 0; font-weight: 700; text-align: right; }
 .ow-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .ow-list li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; font-size: 17px; line-height: 1.4; }
 .ow-list svg.i { width: 18px; height: 18px; margin-top: 2px; color: var(--accent); }
