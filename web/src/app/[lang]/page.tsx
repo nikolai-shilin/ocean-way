@@ -1,8 +1,10 @@
 import '@/styles/home.css';
+import '@/styles/passages.css';
 import ProtoPage from '@/components/ProtoPage';
 import { loadPage, pageMetadata, t } from '@/lib/content';
-import { getCourseDates, getCourses, getPassages, getYachts } from '@/lib/db';
-import { fleetCards, passagesRows, replaceInner } from '@/lib/render';
+import { getCourseDates, getCourses, getLegs, getPassages, getYachts } from '@/lib/db';
+import { PASSAGES_JS, passageRow } from '@/lib/passages';
+import { fleetCards, replaceInner } from '@/lib/render';
 import { path, type Lang } from '@/lib/site';
 
 export const revalidate = 60;
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<'/[lang]'>) {
 export default async function Home({ params }: PageProps<'/[lang]'>) {
   const lang = (await params).lang as Lang;
   const content = loadPage('home', lang);
-  const [passages, yachts, courses] = await Promise.all([getPassages(), getYachts(lang), getCourses(lang)]);
+  const [passages, yachts, courses, legs] = await Promise.all([getPassages(), getYachts(lang), getCourses(lang), getLegs(lang)]);
   const courseDates = (await Promise.all(courses.map((c) => getCourseDates(c.slug)))).flat();
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = [...courseDates, ...passages].filter((d) => d.starts_on >= today).length;
@@ -28,12 +30,13 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   fig(82, upcoming, t(lang, 'upcoming start dates'));
   fig(14, courses.length, t(lang, 'IYT courses to choose from'));
   fig(5, yachts.length);
-  main = replaceInner(main, /<table class="tbl stack passages">[\s\S]*?<tbody>/, '</tbody>', passagesRows(lang, passages));
+  // Passages: the prototype's table becomes a sideways row of cards under the map.
+  main = main.replace(/<div class="tbl-wrap">\s*<table class="tbl stack passages">[\s\S]*?<\/table>\s*<\/div>/, () => passageRow(lang, passages, legs));
   main = replaceInner(main, /<section class="sec" id="fleet"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', fleetCards(lang, yachts));
   // Course cards → course pages (names are the official IYT names, the same in every language; the "IYT " prefix is optional so the database and the page text can be renamed separately).
   for (const c of courses) {
     const name = `(?:IYT )?${c.name.replace(/^IYT /, '')}`;
     main = main.replace(new RegExp(`<a class="card" href="[^"]*">(\\s*<div class="photo">(?:(?!</a>)[\\s\\S])*?<span class="card-title">${name}</span>)`), `<a class="card" href="${path.courseItem(lang, c.slug)}">$1`);
   }
-  return <ProtoPage content={content} main={main} />;
+  return <ProtoPage content={content} main={main} scripts={[...content.scripts, PASSAGES_JS]} />;
 }

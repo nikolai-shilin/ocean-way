@@ -1,0 +1,84 @@
+/* Passage cards (src/lib/passages.ts): the home page row and the /passages list. Builds on home.css tokens. */
+
+/* Card. Wide: dates | route | price over places and Book. Phone: dates and price, route, places and Book. */
+.pp { position: relative; display: grid; grid-template-columns: 136px minmax(0, 1fr) auto; grid-template-areas: "when what price" "when what act"; gap: 4px 28px; align-items: start; padding: 22px 24px; background: var(--band); border-radius: 28px; transition: box-shadow .2s var(--ease-out); }
+.pp[hidden], .pp-month[hidden] { display: none; }
+.pp-when { grid-area: when; display: flex; flex-direction: column; gap: 6px; }
+.pp-dates { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-variant-numeric: lining-nums; font-size: 24px; line-height: 1.05; }
+.pp-nights { font-family: var(--sans); font-size: 14px; line-height: 1.2; color: var(--muted); }
+.pp-what { grid-area: what; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.pp-route { margin: 0; font-family: var(--sans); font-weight: 700; font-size: 19px; line-height: 1.2; text-wrap: balance; }
+.pp-route a { color: var(--ink); transition: color .15s; }
+.pp-route a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.pp-route a:focus-visible { outline: none; }
+.pp:has(.pp-route a:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; }
+.pp-sub { margin: 0; font-family: var(--sans); font-size: 15px; line-height: 1.35; color: var(--muted); }
+.pp-sub .nw { white-space: nowrap; }
+.pp-pair { margin: 6px 0 0; display: flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: 14px; line-height: 1.3; color: var(--ink); }
+.pp-pair svg.i { width: 16px; height: 16px; flex: none; color: var(--accent); }
+.pp-price { grid-area: price; margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; text-align: right; }
+.pp-price b { font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--title-track); font-variant-numeric: lining-nums; font-size: 26px; line-height: 1; }
+.pp-price span { font-family: var(--sans); font-size: 13px; line-height: 1.2; color: var(--muted); }
+.pp-act { grid-area: act; display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 12px; }
+.pp-act .pill { position: relative; z-index: 1; }
+.pp-act .avail:not(.low, .full) { background: var(--bg); }
+.pp.on { box-shadow: inset 0 0 0 2px var(--accent); }
+.pp.on .pp-route a { color: var(--accent); }
+.pp.is-full .pp-dates, .pp.is-full .pp-price b { color: var(--muted); }
+@supports (corner-shape: squircle) { .pp { corner-shape: squircle; border-radius: 48px; } }
+
+@media (max-width: 680px) {
+  .pp { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "when price" "what what" "act act"; gap: 14px 16px; padding: 18px 20px 18px; }
+  .pp-dates { font-size: 22px; }
+  .pp-price b { font-size: 22px; }
+  .pp-act { justify-content: space-between; margin-top: 2px; }
+}
+
+/* Home page: a sideways row of the same cards under the map. */
+.pp-rowhead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 8px 0 16px; }
+.pp-all { display: inline-flex; align-items: center; gap: 8px; font-family: var(--sans); font-weight: 700; font-size: 17px; }
+.pp-all svg.i { width: 18px; height: 18px; transition: transform .2s var(--ease-out); }
+.pp-all:hover svg.i { transform: translateX(3px); }
+.hscroll.pp-row { align-items: stretch; }
+.pp-row > .pp { flex: none; width: 320px; scroll-snap-align: start; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr auto auto; grid-template-areas: "when" "what" "price" "act"; gap: 14px; }
+.pp-row .pp-price { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 8px; text-align: left; margin-top: 4px; }
+.pp-row .pp-act { justify-content: space-between; margin-top: 0; }
+@media (max-width: 680px) {
+  .pp-row > .pp { width: 282px; }
+}
+
+/* /passages: route buttons, then the list beside a sticky map (map first on narrow screens). */
+.pp-filter { margin-top: 40px; }
+.pp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pp-chips .tag { min-height: 44px; padding: 0 18px; font-size: 16px; transition: background .15s, border-color .15s, color .15s; }
+.pp-chips .tag:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.pp-layout { display: grid; grid-template-columns: minmax(0, 1fr) 420px; grid-template-areas: "list map"; gap: 48px; align-items: start; margin-top: 32px; }
+.pp-map { grid-area: map; position: sticky; top: 24px; }
+.pp-map .pmap { margin: 0; }
+.pp-months { grid-area: list; display: flex; flex-direction: column; gap: 40px; min-width: 0; scroll-margin-top: 96px; }
+.pp-month { display: flex; flex-direction: column; gap: 16px; }
+.pp-mh { margin: 0; font-family: var(--title); font-weight: var(--title-w); letter-spacing: var(--trk-3); font-size: 26px; line-height: 1.1; }
+.pp-list { display: flex; flex-direction: column; gap: 12px; }
+.pm .pm-leg.pick { cursor: pointer; }
+@media (min-width: 1001px) {
+  .pp-layout .pm-d { display: none; }
+  .pp-layout .pm-m { display: block; }
+  .pp-layout .pm-m .pm-label { font-size: 10px; }
+  .pp-layout .pm-m .pm-sea { font-size: 8px; }
+}
+@media (max-width: 1000px) {
+  .pp-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: "map" "list"; gap: 32px; }
+  .pp-map { position: static; }
+  /* The route buttons stay at the top of the screen while you scroll the list, in one sideways line. */
+  .pp-filter { position: sticky; top: 0; z-index: 6; margin: 32px calc(50% - 50vw) 0; padding: 10px 0; background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+  .pp-chips { flex-wrap: nowrap; overflow-x: auto; padding: 0 max(24px, calc((100vw - 1180px) / 2 + 24px)); scroll-padding: 0 24px; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .pp-chips::-webkit-scrollbar { display: none; }
+  .pp-chips .tag { flex: none; }
+  .pp-months { scroll-margin-top: 80px; }
+}
+@media (max-width: 680px) {
+  .pp-chips { padding: 0 20px; scroll-padding: 0 20px; }
+  .pp-chips .tag { min-height: 40px; padding: 0 14px; font-size: 15px; }
+  .pp-months { gap: 32px; }
+  .pp-mh { font-size: 22px; }
+}

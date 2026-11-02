@@ -1,5 +1,5 @@
 import { t, hasT } from './content';
-import { english, passageSlug, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
+import { english, type CourseDate, type Passage, type RouteMap, type Yacht } from './db';
 import { usedForIcon } from './icons';
 import { responsiveImages } from './images';
 import { path, type Lang } from './site';
@@ -37,24 +37,12 @@ export function shortRange(lang: Lang, a: string, b: string) {
   return new Intl.DateTimeFormat(LOCALE[lang], { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).formatRange(d(a), d(b));
 }
 export const eur = (n: number) => '€' + n.toLocaleString('en-US').replace(/,/g, NB);
-const nightsOf = (p: { starts_on: string; ends_on: string }) => Math.round((d(p.ends_on).getTime() - d(p.starts_on).getTime()) / 864e5);
+export const nightsOf = (p: { starts_on: string; ends_on: string }) => Math.round((d(p.ends_on).getTime() - d(p.starts_on).getTime()) / 864e5);
 
-function places(lang: Lang, left: number, total: number) {
+export function places(lang: Lang, left: number, total: number) {
   if (left <= 0) return { cls: 'avail full', text: t(lang, 'Full') };
   if (left === total) return { cls: 'avail', text: t(lang, `${total} places`) };
   return { cls: left <= 2 ? 'avail low' : 'avail', text: left === 1 ? t(lang, '1 of 4 left') : t(lang, '{n} of 4 left', { n: left }) };
-}
-
-export function passagesRows(lang: Lang, rows: Passage[]) {
-  return rows.map((p) => {
-    const route = t(lang, `${p.from_port} → ${p.to_port}`);
-    const pl = places(lang, p.places_left, p.places_total);
-    const book = t(lang, 'Book');
-    const action = p.places_left > 0
-      ? `<a class="pill pill-primary pill-sm" href="${path.booking(lang)}?item=passage&id=${p.key}" aria-label="${esc(t(lang, `Book ${p.from_port} → ${p.to_port}`))}">${esc(book)}</a>`
-      : `<a class="pill pill-quiet pill-sm" href="#">${esc(t(lang, 'Join waitlist'))}</a>`;
-    return `<tr data-leg="${p.leg}"><td data-label="Dates"><b>${esc(range(lang, p.starts_on, p.ends_on, true))}</b></td><td data-label="Route" class="island"><a href="${path.passage(lang, passageSlug(p))}">${esc(route)}</a></td><td data-label="Waters" class="hl">${esc(t(lang, p.waters))}</td><td data-label="Nights" class="num">${nightsOf(p)}</td><td data-label="Places" class="num"><span class="${pl.cls}">${esc(pl.text)}</span></td><td class="book">${action}</td></tr>`;
-  }).join('\n            ');
 }
 
 export function courseRows(lang: Lang, rows: CourseDate[]) {
