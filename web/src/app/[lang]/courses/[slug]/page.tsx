@@ -138,13 +138,9 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
           <a className="pill pill-primary pill-wide" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, dates.length ? 'Book a place' : 'Ask about dates')}</a>
           <a className="pill pill-quiet pill-wide" href={path.courses(lang)}>{t(lang, 'All courses')}</a>
           <dl className="ow-facts">
-            {next ? (
-              <div><svg className="i" aria-hidden="true"><use href="#ow-calendar" /></svg><dt>{t(lang, 'Next start')}</dt>
-                <dd>{dateRange(lang, next.starts_on, next.ends_on)}<span>{places(lang, next.places_left, next.places_total).text}{dates.length > 1 ? <> · <a href="#dates">{t(lang, 'All dates')}</a></> : null}</span></dd></div>
-            ) : null}
+            {next ? <div><svg className="i" aria-hidden="true"><use href="#ow-calendar" /></svg><dt>{t(lang, 'Next start')}</dt><dd>{dateRange(lang, next.starts_on, next.ends_on)}</dd></div> : null}
             <div><svg className="i" aria-hidden="true"><use href="#ow-clock" /></svg><dt>{t(lang, 'Duration')}</dt><dd>{c.duration}</dd></div>
-            <div><svg className="i" aria-hidden="true"><use href="#ow-pin" /></svg><dt>{t(lang, 'Where')}</dt>
-              <dd>{next ? <>{t(lang, next.area)}<span>{c.scope}</span></> : c.scope}</dd></div>
+            <div><svg className="i" aria-hidden="true"><use href="#ow-pin" /></svg><dt>{t(lang, 'Where')}</dt><dd>{next ? t(lang, next.area) : c.scope}</dd></div>
             {next?.boat ? <div><svg className="i" aria-hidden="true"><use href="#ow-monohull" /></svg><dt>{t(lang, 'Boat')}</dt><dd>{next.boat}</dd></div> : null}
             {next ? <div><svg className="i" aria-hidden="true"><use href="#ow-crew" /></svg><dt>{t(lang, 'Group')}</dt><dd>{t(lang, 'Up to {n} students', { n: next.places_total })}</dd></div> : null}
             {c.route_nm ? <div><svg className="i" aria-hidden="true"><use href="#ow-route" /></svg><dt>{t(lang, 'Route')}</dt><dd>{t(lang, '{n} nautical miles', { n: c.route_nm })}</dd></div> : null}
@@ -153,6 +149,16 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
         </aside>
       </div>
       {c.faq?.length ? <Faq lang={lang} items={c.faq} /> : null}
+      <div className="mbar">
+        <div className="ow-mbar">
+          <p><b>{eur(c.price_from_eur)}</b> {c.price_unit}</p>
+          <p>{next ? `${dateRange(lang, next.starts_on, next.ends_on)} · ` : ''}{c.duration}</p>
+          {next ? <p className={places(lang, next.places_left, next.places_total).cls.includes('low') ? 'low' : undefined}>{places(lang, next.places_left, next.places_total).text}</p> : null}
+        </div>
+        {next
+          ? <a className="pill pill-primary" href="#dates">{t(lang, 'Choose dates')}</a>
+          : <a className="pill pill-primary" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Ask about dates')}</a>}
+      </div>
       <section className="sec" data-row style={{ marginTop: 96 }}>
         <div className="sec-head row-head"><div><span className="kicker">{t(lang, 'Courses')}</span><h2 className="h2" style={{ marginTop: 12 }}>{t(lang, 'Other courses')}</h2></div>
           <div className="row-nav"><button className="round" type="button" data-dir="-1" aria-label={t(lang, 'Previous')}><svg className="i" style={{ transform: 'scaleX(-1)' }}><use href="#ow-arrow" /></svg></button><button className="round" type="button" data-dir="1" aria-label={t(lang, 'Next')}><svg className="i"><use href="#ow-arrow" /></svg></button></div></div>
