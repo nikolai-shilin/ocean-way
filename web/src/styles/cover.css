@@ -1,7 +1,7 @@
 /* Page cover: breadcrumbs or kicker, headline and lead on white strips over a sideways row of photos (one block
    instead of a hero followed by a gallery). Markup: coverHtml in lib/render.ts and components/Cover.tsx.
    Prototype: prototypes/cover-compact.html. */
-.cover { --h: clamp(480px, 66vh, 580px); --gap: 16px; --inset: 24px; position: relative; display: grid; margin-top: 8px; }
+.cover { --h: clamp(480px, 66vh, 580px); --gap: 16px; --inset: 24px; position: relative; isolation: isolate; display: grid; margin-top: 8px; }
 .cover > * { grid-area: 1 / 1; }
 
 /* Text strips: each wrapped line gets its own band. Two stacked copies: the back one paints the bands, the front one

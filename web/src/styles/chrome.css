@@ -19,6 +19,10 @@
   body.menu-open .site-head { position: fixed; top: 0; left: 0; right: 0; z-index: 61; background: var(--bg); padding-inline: 20px; }
 }
 
+/* The header (and its language menu) stays above page content: view-transition-name makes it a layer of its own,
+   which would otherwise sit under positioned parts of the page such as the cover text and arrows. */
+.site-head { position: relative; z-index: 40; }
+
 /* Header links: 2px more on top balances the 2px underline; then the whole menu sits on the baseline of the
    "Ocean Way" wordmark (21px mixed case vs 13px capitals: centring them leaves the menu 2.7px above that line). */
 .site-head .navl { padding-top: 8px; }
