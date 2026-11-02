@@ -127,11 +127,13 @@
 .sch-track { position: relative; display: grid; }
 .sch-track > span { border-left: 1px solid var(--line); }
 .sch-track > span:nth-child(even) { background: var(--band); }
-.sch-bar { position: absolute; top: 50%; height: 16px; min-width: 10px; margin-top: -8px; box-sizing: border-box; border-radius: 8px; background: var(--accent); transition: transform .15s var(--ease-out); }
+.sch-bar { position: absolute; top: 50%; height: 16px; min-width: 10px; translate: 0 -50%; box-sizing: border-box; border-radius: 10px; background: var(--accent); transition: height .15s var(--ease-out), min-width .15s var(--ease-out); }
 .sch-bar.is-full { background: var(--faint); }
-.sch-bar.is-day { min-width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
+.sch-bar.is-day { min-width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 3px solid var(--accent); }
 .sch-bar.is-day.is-full { border-color: var(--faint); }
-a.sch-bar:hover, a.sch-bar:focus-visible { transform: scaleY(1.25); z-index: 3; }
+/* Grow on hover by height, not transform: a scale would also stretch the tooltip drawn inside the bar. */
+a.sch-bar:hover, a.sch-bar:focus-visible { height: 20px; z-index: 3; }
+a.sch-bar.is-day:hover, a.sch-bar.is-day:focus-visible { height: 16px; min-width: 16px; margin-left: -2px; }
 a.sch-bar:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 /* Dates and places on hover or keyboard focus. Bars near the ends of the year open their label inwards. */
 a.sch-bar::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; translate: -50% 0; padding: 6px 10px; border-radius: 10px; background: var(--sel-bg); color: var(--sel-ink); font-family: var(--sans); font-weight: 700; font-size: 13px; line-height: 1.2; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease; }
@@ -140,7 +142,7 @@ a.sch-bar.tip-l::after { left: auto; right: 0; translate: 0 0; }
 a.sch-bar:hover::after, a.sch-bar:focus-visible::after { opacity: 1; }
 .sch-key { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 4px 0 0; font-family: var(--sans); font-size: 14px; color: var(--muted); }
 .sch-key span { display: inline-flex; align-items: center; gap: 8px; }
-.sch-key .sch-bar { position: static; display: inline-block; width: 28px; margin: 0; }
+.sch-key .sch-bar { position: static; display: inline-block; width: 28px; margin: 0; translate: none; }
 .sch-key .sch-bar.is-day { width: 12px; }
 @media (max-width: 680px) {
   .sch-sec { margin-top: 64px; }
