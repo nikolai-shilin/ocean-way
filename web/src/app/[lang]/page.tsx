@@ -41,5 +41,5 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
     const name = `(?:IYT )?${c.name.replace(/^IYT /, '')}`;
     main = main.replace(new RegExp(`<a class="card" href="[^"]*">(\\s*<div class="photo">(?:(?!</a>)[\\s\\S])*?<span class="card-title">${name}</span>)`), `<a class="card" href="${path.courseItem(lang, c.slug)}">$1`);
   }
-  return <ProtoPage content={content} main={main} scripts={[...content.scripts, PASSAGES_JS]} />;
+  return <ProtoPage pathFor={path.home} content={content} main={main} scripts={[...content.scripts, PASSAGES_JS]} />;
 }

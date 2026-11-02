@@ -12,10 +12,7 @@ export type PageContent = {
   image: string | null;
   robots: string | null;
   jsonld: string[];
-  sprite: string;
-  header: string;
   main: string;
-  footer: string;
   tail: string;
   scripts: string[];
   styles: string;

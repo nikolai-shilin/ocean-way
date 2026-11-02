@@ -5,6 +5,7 @@ Writes:
   prototypes/icons/svg/<id>.svg   one file per icon (stroke 2, currentColor)
   prototypes/icons.html           study sheet: rules, all icons, where to use them
   the sprite inside home.html and bareboat-skipper-course.html (then run the other builders, see README)
+  web/content/ow-icons.svg        the copy the site uses on every page
 
 Grid rules (the same ones the sheet explains):
   24 x 24 box, 2 px stroke, round caps and joins, content inside 2..22.
@@ -327,6 +328,8 @@ def main():
     sprite = ('<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true">\n'
               f"{symbols}\n</svg>\n")
     open(os.path.join(ROOT, "icons", "ow-icons.svg"), "w").write(sprite)
+    # The app's copy: every page carries this sprite (web/src/lib/chrome.ts).
+    open(os.path.join(ROOT, "..", "web", "content", "ow-icons.svg"), "w").write(sprite)
 
     for _, i, _, b, _ in all_icons:
         open(os.path.join(ROOT, "icons", "svg", f"{i}.svg"), "w").write(

@@ -13,5 +13,5 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/theory'>) 
 
 export default async function TheoryHub({ params }: PageProps<'/[lang]/theory'>) {
   const lang = (await params).lang as Lang;
-  return <ProtoPage section="theory" content={await hubPage(lang)} />;
+  return <ProtoPage section="theory" pathFor={path.theory} content={await hubPage(lang)} />;
 }

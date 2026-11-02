@@ -6,7 +6,7 @@ import { path, type Lang } from '@/lib/site';
 const POPULAR = ['right-of-way', 'med-mooring', 'anchoring', 'weather', 'navigation-lights'];
 
 /** Site map in the footer: every course, the passages, every boat, popular theory, company links; languages in a row below. */
-export default async function FooterNav({ lang, langLinks }: { lang: Lang; langLinks: [string, string, boolean][] }) {
+export default async function FooterNav({ lang, langLinks }: { lang: Lang; langLinks: [Lang, string, boolean][] }) {
   const [courses, yachts, all] = await Promise.all([getCourses(lang), getYachts(lang), getArticles(lang)]);
   const articles = POPULAR.flatMap((s) => all.filter((a) => a.slug === s)).map((a) => [a.slug, a.title]);
   return (

@@ -21,5 +21,5 @@ export default async function Article({ params }: PageProps<'/[lang]/theory/[slu
   const { lang, slug } = await params;
   const page = await articlePage(lang as Lang, slug);
   if (!page) notFound();
-  return <ProtoPage section="theory" content={page} />;
+  return <ProtoPage section="theory" pathFor={(l) => path.article(l, slug)} content={page} />;
 }

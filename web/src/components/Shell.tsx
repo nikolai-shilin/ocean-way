@@ -1,26 +1,20 @@
 import Script from 'next/script';
-import { loadPage, t } from '@/lib/content';
-import { addMobileMenu, fixNav, langLinks, type Section } from '@/lib/chrome';
+import { langLinks, siteHeader, sprite, type Section } from '@/lib/chrome';
 import FooterNav from './FooterNav';
-import { LANGS, type Lang } from '@/lib/site';
+import type { Lang } from '@/lib/site';
 
-/** Header, footer and icons of the site around a page written in React. The header comes from the extracted
- *  prototype (same markup, language switcher and theme button), pointed at this page's addresses. */
+/** Header, footer and icons of the site around a page written in React; the language switcher points at this page. */
 export default function Shell({ lang, section, pathFor, jsonld, children, scripts = [] }: {
   lang: Lang; section: Section; pathFor: (l: Lang) => string; jsonld?: object; children: React.ReactNode; scripts?: string[];
 }) {
-  const chrome = loadPage('theory', lang);
-  let header = fixNav(chrome.header, lang, section);
-  header = header.replace(/<ul class="lang-menu">[\s\S]*?<\/ul>/, (menu) =>
-    menu.replace(/href="\/(en|ru|de|es)\/theory"/g, (_, l: string) => `href="${pathFor((LANGS as readonly string[]).includes(l) ? (l as Lang) : 'en')}"`));
-  header = addMobileMenu(header, t(lang, 'Menu'));
+  const header = siteHeader(lang, section, pathFor);
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: chrome.sprite }} />
+      <div dangerouslySetInnerHTML={{ __html: sprite() }} />
       <div className="wrap">
         <div dangerouslySetInnerHTML={{ __html: header }} />
         <main>{children}</main>
-        <FooterNav lang={lang} langLinks={langLinks(header)} />
+        <FooterNav lang={lang} langLinks={langLinks(lang, pathFor)} />
       </div>
       {jsonld ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonld).replace(/</g, '\\u003c') }} /> : null}
       <Script id="chrome" strategy="afterInteractive">{CHROME_JS}</Script>

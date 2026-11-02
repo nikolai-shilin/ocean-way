@@ -1,7 +1,7 @@
 # Plan: move static data into the database
 
-Status: phases 1 and 2 done (2 Nov 2026). The catalogue and the theory articles are served from the database; see the
-progress notes under each phase. Phase 3 is next.
+Status: phases 1 and 2 done, phase 3 started (2 Nov 2026). The catalogue and the theory articles are served from the
+database; the header, footer and icons are the app's own code. See the progress notes under each phase.
 
 ## Where things are today
 
@@ -137,6 +137,14 @@ theory_topics (key text primary key, sort int, translations jsonb)              
 - **Interface text.** Text on these pages is interface or marketing copy. It moves into the repo dictionaries, with `i18n` and `i18n-app` merged into one, not into the database. The exception is copy the team wants to change without a deploy (for example the hero headline or the deals): that goes in a small `site_texts` table.
 - **Clean-up.** Remove `content/pages`, `scripts/extract_content.py` and `ProtoPage`. The prototypes remain as design references only.
 
+**Phase 3 progress (2 Nov 2026):**
+- Decided: home-page copy stays in code (the repo dictionaries), no `site_texts` table (open decision 2).
+- Done: the header (`siteHeader` in `src/lib/chrome.ts`), the footer (`FooterNav`, already React) and the icon sprite
+  (`content/ow-icons.svg`, written by `build_icons.py`) are shared by every page. Page files no longer carry their own
+  copies (`content/pages` went from 8.8 MB to 4.4 MB). Full HTML of all 280 URLs is unchanged.
+- Left, by choice: home and booking stay built from the prototypes for now; `content/pages`, `extract_content.py`
+  and `ProtoPage` stay until they move.
+
 ## Phase 4: editing and freshness
 
 - **Access rules (RLS).** The public can read published rows only. Writes go through Supabase Studio or the service role, never the public key.
@@ -155,5 +163,5 @@ theory_topics (key text primary key, sort int, translations jsonb)              
 ## Open decisions
 
 1. **Who edits content, and with what?** Supabase Studio is enough for one technical editor. Otherwise a small admin page.
-2. **Should home-page copy live in the database** so it can change without a deploy, or stay in code?
+2. ~~Should home-page copy live in the database?~~ No (2 Nov 2026): it stays in code.
 3. ~~Is it acceptable to drop the offline JSON fallbacks?~~ Yes (2 Nov 2026): local development uses the Supabase project.

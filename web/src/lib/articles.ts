@@ -2,7 +2,7 @@ import { cache } from 'react';
 import { hasT, loadPage, t, type PageContent } from './content';
 import { english, getInstructors, live, localize, type Translations } from './db';
 import { photo } from './meta';
-import { LANGS, SITE, path, type Lang } from './site';
+import { SITE, path, type Lang } from './site';
 
 /** Theory articles from the database (articles, article_translations, theory_topics; loaded by
  *  scripts/import_theory.py), and the HTML of the hub and article pages, the same markup as the prototype. */
@@ -68,14 +68,11 @@ const crumbLd = (items: [string, string][]) => ({
   itemListElement: items.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + href })),
 });
 
-/** The page around the main content: icon sprite, header and scripts are the theory hub's (one set for all theory
- *  pages); the header's language switcher points at this page. */
-function shell(lang: Lang, o: { page: string; pathFor: (l: Lang) => string; title: string; description: string; image: string; ld: object[]; main: string }): PageContent {
+/** A theory page for ProtoPage: its scripts are the theory hub's (one set for all theory pages). */
+function shell(lang: Lang, o: { page: string; title: string; description: string; image: string; ld: object[]; main: string }): PageContent {
   const hub = loadPage('theory', lang);
-  let header = hub.header;
-  for (const l of LANGS) header = header.replace(`href="${path.theory(l)}" hreflang="${l}"`, `href="${o.pathFor(l)}" hreflang="${l}"`);
   return {
-    ...hub, page: o.page, header, title: o.title, description: o.description, image: o.image, main: o.main,
+    ...hub, page: o.page, title: o.title, description: o.description, image: o.image, main: o.main,
     jsonld: [JSON.stringify({ '@context': 'https://schema.org', '@graph': o.ld }, null, 1)],
   };
 }
@@ -112,7 +109,7 @@ ${secs}
     mainEntity: { '@type': 'ItemList', itemListElement: arts.map((a, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + path.article(lang, a.slug), name: a.h1 })) },
   }];
   return shell(lang, {
-    page: 'theory', pathFor: path.theory, title: t(lang, 'Sailing Theory: Rules, Mooring, Weather, Radio · Ocean Way'),
+    page: 'theory', title: t(lang, 'Sailing Theory: Rules, Mooring, Weather, Radio · Ocean Way'),
     description: t(lang, 'Free sailing theory from Ocean Way instructors: points of sail, knots, tacking, reefing, right of way, buoys, mooring, anchoring, tides, weather, navigation, VHF and safety.'),
     image: photo(arts[0]?.photo_id ?? '1540946485063-a40da27545f8', 1200), ld, main,
   });
@@ -167,5 +164,5 @@ export async function articlePage(lang: Lang, slug: string): Promise<PageContent
     publisher: { '@id': `${SITE}/#org` }, mainEntityOfPage: url, educationalLevel: a.level, about: topic?.name,
     timeRequired: `PT${a.read_minutes}M`, isPartOf: { '@type': 'CollectionPage', url: SITE + path.theory(lang) },
   }];
-  return shell(lang, { page: `theory-${slug}`, pathFor: (l) => path.article(l, slug), title: `${a.title} · Ocean Way`, description: a.description, image: photo(a.photo_id, 1200), ld, main });
+  return shell(lang, { page: `theory-${slug}`, title: `${a.title} · Ocean Way`, description: a.description, image: photo(a.photo_id, 1200), ld, main });
 }

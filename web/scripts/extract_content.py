@@ -1,5 +1,6 @@
 """Turn the generated prototype pages (prototypes/*.html, four languages) into content for the Next.js app:
-  content/pages/<page>.<lang>.json  title, description, image, robots, JSON-LD, header, main, footer, sprite, scripts
+  content/pages/<page>.<lang>.json  title, description, image, robots, JSON-LD, main, scripts (the header, footer and icon
+                                    sprite are the app's own: src/lib/chrome.ts, components/FooterNav.tsx)
   src/styles/<group>.css            the page's stylesheet (shared by its languages)
   content/i18n/<lang>.json          English → language dictionary, for strings the app renders from live data
 Links between prototype files become app routes (/ru/courses/bareboat-skipper …). Run from web/: python3 scripts/extract_content.py"""
@@ -51,10 +52,7 @@ def extract(page, base, lang):
         'image': meta(s, 'og:image'),
         'robots': meta(s, 'robots'),
         'jsonld': [m.replace(OLD_SITE, '{{SITE}}') for m in re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', s, re.S)],
-        'sprite': body[:body.index('<div class="wrap">')],
-        'header': relink(between(body, '<header class="site-head">', '</header>'), lang),
         'main': relink(between(body, '<main>', '</main>')[len('<main>'):-len('</main>')], lang),
-        'footer': relink(between(body, '<footer class="site-foot">', '</footer>'), lang),
         'scripts': [x for x in re.findall(r'<script(?![^>]*ld\+json)[^>]*>(.*?)</script>', body, re.S)],
         'tail': relink(re.split(r'<script', body[body.index('</footer>') + len('</footer>'):], 1)[0].replace('</div>', '', 1).strip()),
     }

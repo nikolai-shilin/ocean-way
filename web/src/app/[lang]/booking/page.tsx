@@ -71,16 +71,16 @@ export default async function Booking({ params, searchParams }: PageProps<'/[lan
   <p class="step-lead">${esc(t(lang, 'New dates for this course are published in Telegram first. Ask us and we will tell you the next start dates and find a week that suits you.'))}</p>
   <div class="ctas"><a class="pill pill-primary" href="${TELEGRAM}">${esc(t(lang, 'Ask in Telegram'))}</a><a class="pill pill-quiet" href="${path.courses(lang)}">${esc(t(lang, 'All courses'))}</a></div>
 </div></div>`;
-      return <ProtoPage content={content} main={main} scripts={chrome.length ? [chrome.join(';\n')] : []} />;
+      return <ProtoPage pathFor={path.booking} content={content} main={main} scripts={chrome.length ? [chrome.join(';\n')] : []} />;
     }
     const after = course.after?.[0]?.text;
     const info = {
       title: t(lang, '{name} course', { name: course.name }), h1, lead: course.summary, img: photo(course.photo_id, 600),
       back: [back + '#dates', t(lang, 'Back to the course')], prep: back + '#bring', ...(after ? { after } : {}),
     };
-    return <ProtoPage content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
+    return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages, info) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
   }
-  return <ProtoPage content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
+  return <ProtoPage pathFor={path.booking} content={content} scripts={[script(lang, dates, passages) + chrome.concat(wire(content.scripts[content.scripts.length - 1])).join(';\n')]} />;
 }
 
 function script(lang: Lang, dates: CourseDate[], passages: Passage[], info?: object) {
