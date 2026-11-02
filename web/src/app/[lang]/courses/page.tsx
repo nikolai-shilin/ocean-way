@@ -2,8 +2,9 @@ import '@/styles/home.css';
 import '@/styles/app.css';
 import Shell from '@/components/Shell';
 import { t } from '@/lib/content';
-import { getCourses } from '@/lib/db';
+import { getCourseDates, getCourses } from '@/lib/db';
 import { CourseCard } from '@/components/Cards';
+import { Schedule, scheduleYear } from '@/components/Schedule';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
 import { path, SITE, type Lang } from '@/lib/site';
 
@@ -17,6 +18,8 @@ export async function generateMetadata({ params }: PageProps<'/[lang]/courses'>)
 export default async function Courses({ params }: PageProps<'/[lang]/courses'>) {
   const lang = (await params).lang as Lang;
   const courses = await getCourses(lang);
+  const dates = (await Promise.all(courses.map((c) => getCourseDates(c.slug)))).flat();
+  const year = scheduleYear(dates);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Courses'), path.courses(lang)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'ItemList', name: t(lang, 'IYT sailing courses'),
@@ -32,6 +35,12 @@ export default async function Courses({ params }: PageProps<'/[lang]/courses'>) 
         <p className="lead">{t(lang, 'The IYT course ladder, from entry level up. Most practical courses are a week living aboard with an instructor and at most four students. Start where your experience is.')}</p>
       </section>
       <div className="ow-grid">{courses.map((c) => <CourseCard key={c.slug} lang={lang} c={c} />)}</div>
+      <section className="sch-sec" id="schedule">
+        <h2 className="h2">{t(lang, 'Course schedule {year}', { year })}</h2>
+        <p className="lead">{t(lang, 'Every start date for the year. Most weeks aboard run Saturday to Saturday; the theory courses and exams are held in our classroom at Ece Marina, Fethiye. Tap a date to see it on the course page.')}</p>
+        <Schedule lang={lang} year={year} courses={courses} dates={dates} />
+        <p className="sch-key"><span><i className="sch-bar" /> {t(lang, 'Places free')}</span><span><i className="sch-bar is-full" /> {t(lang, 'Full')}</span><span><i className="sch-bar is-day" /> {t(lang, 'One-day course or exam')}</span></p>
+      </section>
     </Shell>
   );
 }

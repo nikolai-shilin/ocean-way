@@ -10,7 +10,7 @@ import { english, getCourseDates, getCourses, getInstructors, getRouteMap } from
 import { scopeIcon } from '@/lib/icons';
 import { peopleSection } from '@/lib/people';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { eur, galleryHtml, nightsOf, places, routeMap } from '@/lib/render';
+import { courseLength, eur, galleryHtml, places, routeMap } from '@/lib/render';
 import { dates as dateRange } from '@/lib/passages';
 import { path, SITE, type Lang } from '@/lib/site';
 import { CourseCard } from '@/components/Cards';
@@ -105,7 +105,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
                 const pl = places(lang, d.places_left, d.places_total);
                 return (
                   <article key={d.id} className="pp">
-                    <div className="pp-when"><b className="pp-dates">{dateRange(lang, d.starts_on, d.ends_on)}</b><span className="pp-nights">{t(lang, `${nightsOf(d)} nights`)}</span></div>
+                    <div className="pp-when"><b className="pp-dates">{dateRange(lang, d.starts_on, d.ends_on)}</b><span className="pp-nights">{courseLength(lang, d)}</span></div>
                     <div className="pp-what"><h3 className="pp-route">{t(lang, d.area)}</h3>{d.boat ? <p className="pp-sub">{d.boat}</p> : null}</div>
                     <p className="pp-price"><b>{eur(d.price_eur)}</b><span>{t(lang, 'per person')}</span></p>
                     <div className="pp-act"><span className={pl.cls}>{pl.text}</span><a className="pill pill-primary pill-sm" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Book')}</a></div>

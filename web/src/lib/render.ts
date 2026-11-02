@@ -29,6 +29,7 @@ export function day(lang: Lang, iso: string, nbsp = false) {
   return hasT(lang, en) ? t(lang, en) : lang === 'en' ? en : intlDay(lang, iso);
 }
 export function range(lang: Lang, a: string, b: string, nbsp = false) {
+  if (a === b) return day(lang, a, nbsp); // one-day courses and exams
   const en = `${enDay(a, nbsp ? NB : ' ')} – ${enDay(b, nbsp ? NB : ' ')}`;
   return hasT(lang, en) ? t(lang, en) : lang === 'en' ? en : `${intlDay(lang, a)} – ${intlDay(lang, b)}`;
 }
@@ -38,6 +39,13 @@ export function shortRange(lang: Lang, a: string, b: string) {
 }
 export const eur = (n: number) => '€' + n.toLocaleString('en-US').replace(/,/g, NB);
 export const nightsOf = (p: { starts_on: string; ends_on: string }) => Math.round((d(p.ends_on).getTime() - d(p.starts_on).getTime()) / 864e5);
+
+/** "7 nights" for a week aboard; "1 day" or "6 days" for classroom courses and exams (no boat). */
+export function courseLength(lang: Lang, c: { starts_on: string; ends_on: string; boat: string }) {
+  const n = nightsOf(c);
+  if (c.boat && n > 0) return t(lang, `${n} nights`);
+  return t(lang, n === 0 ? '1 day' : `${n + 1} days`);
+}
 
 export function places(lang: Lang, left: number, total: number) {
   if (left <= 0) return { cls: 'avail full', text: t(lang, 'Full') };
@@ -89,7 +97,7 @@ export function fleetCards(lang: Lang, rows: Yacht[]) {
 export function bookingData(lang: Lang, dates: CourseDate[], passages: Passage[]) {
   const byId = new Map(passages.map((p) => [p.id, p]));
   return {
-    course: dates.map((c) => ({ id: c.key, db_id: c.id, label: range(lang, c.starts_on, c.ends_on), sub: t(lang, `${c.area} · ${c.boat}`), price: c.price_eur, left: Math.max(0, c.places_left), place: t(lang, c.meeting_point) })),
+    course: dates.map((c) => ({ id: c.key, db_id: c.id, label: range(lang, c.starts_on, c.ends_on), sub: c.boat ? `${t(lang, c.area)} · ${c.boat}` : t(lang, c.area), price: c.price_eur, left: Math.max(0, c.places_left), place: t(lang, c.meeting_point) })),
     passages: passages.map((p) => {
       const n = nightsOf(p);
       const route = t(lang, `${p.from_port} → ${p.to_port}`);
