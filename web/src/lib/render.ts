@@ -70,24 +70,39 @@ const plural = (n: number, one: string, few: string, many: string) => {
   const a = n % 10, b = n % 100;
   return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many;
 };
-export function boatSpec(lang: Lang, y: Pick<Yacht, 'year' | 'length_m' | 'cabins' | 'berths'>) {
-  const len = String(Number(y.length_m)), c = y.cabins, b = y.berths;
-  if (lang === 'ru') return `${y.year} · ${len.replace('.', ',')} м · ${c} ${plural(c, 'каюта', 'каюты', 'кают')} · ${b} ${plural(b, 'спальное место', 'спальных места', 'спальных мест')}`;
-  if (lang === 'de') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'Kabine' : 'Kabinen'} · ${b} ${b === 1 ? 'Koje' : 'Kojen'}`;
-  if (lang === 'es') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'camarote' : 'camarotes'} · ${b} ${b === 1 ? 'litera' : 'literas'}`;
-  return `${y.year} · ${len} m · ${c} ${c === 1 ? 'cabin' : 'cabins'} · ${b} ${b === 1 ? 'berth' : 'berths'}`;
+export function boatSpec(lang: Lang, y: Pick<Yacht, 'year' | 'length_m' | 'cabins' | 'berths'> & { extra_berths?: number }) {
+  const len = String(Math.round(Number(y.length_m) * 10) / 10), c = y.cabins, extra = y.extra_berths ?? 0;
+  // "8 + 2 berths": cabin berths plus saloon or skipper berths; the plural follows the total.
+  const b = y.berths + extra;
+  const bn = extra ? `${y.berths} + ${extra}` : String(y.berths);
+  if (lang === 'ru') return `${y.year} · ${len.replace('.', ',')} м · ${c} ${plural(c, 'каюта', 'каюты', 'кают')} · ${bn} ${plural(b, 'спальное место', 'спальных места', 'спальных мест')}`;
+  if (lang === 'de') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'Kabine' : 'Kabinen'} · ${bn} ${b === 1 ? 'Koje' : 'Kojen'}`;
+  if (lang === 'es') return `${y.year} · ${len.replace('.', ',')} m · ${c} ${c === 1 ? 'camarote' : 'camarotes'} · ${bn} ${b === 1 ? 'litera' : 'literas'}`;
+  return `${y.year} · ${len} m · ${c} ${c === 1 ? 'cabin' : 'cabins'} · ${bn} ${b === 1 ? 'berth' : 'berths'}`;
 }
 export function boatPrice(lang: Lang, n: number) {
   return { en: `From ${eur(n)} a week to charter`, ru: `Чартер от ${eur(n)} в неделю`, de: `Charter ab ${eur(n)} pro Woche`, es: `Chárter desde ${eur(n)} a la semana` }[lang];
+}
+
+/** Card text of a boat: its name over the model ("Gusto 7" / "Dufour 470"); boats without a name show the model. */
+export const boatTitle = (y: Pick<Yacht, 'name' | 'model'>) => y.name ?? y.model;
+export const boatModel = (y: Pick<Yacht, 'name' | 'model'>) => (y.name ? y.model : '');
+/** The fact under a boat card: what it is used for, or the hull type for charter-only boats. */
+export function boatUse(lang: Lang, y: Yacht): [string, string] {
+  const used = english(y).used_for;
+  if (used !== 'Charter') return [usedForIcon(used), y.used_for];
+  return [y.kind === 'catamaran' ? 'ow-catamaran' : 'ow-monohull', t(lang, y.kind === 'catamaran' ? 'Catamaran' : 'Monohull')];
 }
 
 export function fleetCards(lang: Lang, rows: Yacht[]) {
   return rows.map((y) => {
     const spec = boatSpec(lang, y);
     const price = boatPrice(lang, y.charter_from_eur);
+    const [icon, use] = boatUse(lang, y);
+    const model = boatModel(y);
     return `<a class="card" href="${path.boat(lang, y.slug)}">
           <div class="photo"><div class="clip"><img src="${y.photo_id.startsWith('/') ? y.photo_id : `https://images.unsplash.com/photo-${y.photo_id}?w=900&q=80&auto=format&fit=crop`}" alt="${esc(y.photo_alt)}" loading="lazy"></div></div>
-          <div class="card-body"><span class="card-title">${esc(y.model)}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#ow-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#${usedForIcon(english(y).used_for)}"/></svg>${esc(y.used_for)}</span></div></div>
+          <div class="card-body"><span class="card-title">${esc(boatTitle(y))}${model ? `<span class="card-model">${esc(model)}</span>` : ''}</span><span class="card-meta">${esc(spec)}</span><span class="card-price">${esc(price)}</span><div class="facts"><span class="fact"><svg class="i"><use href="#ow-pin"/></svg>${esc(t(lang, y.base))}</span><span class="fact"><svg class="i"><use href="#${icon}"/></svg>${esc(use)}</span></div></div>
         </a>`;
   }).join('\n        ');
 }

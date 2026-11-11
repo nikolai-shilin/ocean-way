@@ -114,7 +114,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
                 return (
                   <article key={d.id} className="pp">
                     <div className="pp-when"><b className="pp-dates">{dateRange(lang, d.starts_on, d.ends_on)}</b><span className="pp-nights">{courseLength(lang, d)}</span></div>
-                    <div className="pp-what"><h3 className="pp-route">{t(lang, d.area)}</h3>{d.boat ? <p className="pp-sub">{d.boat}</p> : null}</div>
+                    <div className="pp-what"><h3 className="pp-route">{t(lang, d.area)}</h3>{d.boat ? <p className="pp-sub">{d.yacht_slug ? <a href={path.boat(lang, d.yacht_slug)}>{d.boat}</a> : d.boat}</p> : null}</div>
                     <p className="pp-price"><b>{eur(d.price_eur)}</b><span>{t(lang, 'per person')}</span></p>
                     <div className="pp-act"><span className={pl.cls}>{pl.text}</span><a className="pill pill-primary pill-sm" href={`${path.booking(lang)}?course=${slug}`}>{t(lang, 'Book')}</a></div>
                   </article>
@@ -149,7 +149,7 @@ export default async function CourseItem({ params }: PageProps<'/[lang]/courses/
             {next ? <div><svg className="i" aria-hidden="true"><use href="#ow-calendar" /></svg><dt>{t(lang, 'Next start')}</dt><dd>{dateRange(lang, next.starts_on, next.ends_on)}</dd></div> : null}
             <div><svg className="i" aria-hidden="true"><use href="#ow-clock" /></svg><dt>{t(lang, 'Duration')}</dt><dd>{c.duration}</dd></div>
             <div><svg className="i" aria-hidden="true"><use href="#ow-pin" /></svg><dt>{t(lang, 'Where')}</dt><dd>{next ? t(lang, next.area) : c.scope}</dd></div>
-            {next?.boat ? <div><svg className="i" aria-hidden="true"><use href="#ow-monohull" /></svg><dt>{t(lang, 'Boat')}</dt><dd>{next.boat}</dd></div> : null}
+            {next?.boat ? <div><svg className="i" aria-hidden="true"><use href="#ow-monohull" /></svg><dt>{t(lang, 'Boat')}</dt><dd>{next.yacht_slug ? <a href={path.boat(lang, next.yacht_slug)}>{next.boat}</a> : next.boat}</dd></div> : null}
             {next ? <div><svg className="i" aria-hidden="true"><use href="#ow-crew" /></svg><dt>{t(lang, 'Group')}</dt><dd>{t(lang, 'Up to {n} students', { n: next.places_total })}</dd></div> : null}
             {c.route_nm ? <div><svg className="i" aria-hidden="true"><use href="#ow-route" /></svg><dt>{t(lang, 'Route')}</dt><dd>{t(lang, '{n} nautical miles', { n: c.route_nm })}</dd></div> : null}
             <div><svg className="i" aria-hidden="true"><use href="#ow-chat" /></svg><dt>{t(lang, 'Language')}</dt><dd>{t(lang, 'English and Russian')}</dd></div>

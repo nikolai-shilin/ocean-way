@@ -7,7 +7,7 @@ export type TemplateMeta = {
 export const TEMPLATES = {
   "home": {
     "title": "IYT Sailing Courses and Training Passages · Ocean Way",
-    "description": "Learn to sail with Ocean Way: IYT courses from VHF to Yachtmaster, live-aboard training passages along the Turkish coast in 2027, and our own fleet to charter.",
+    "description": "Learn to sail with Ocean Way: IYT courses from VHF to Yachtmaster, live-aboard training passages along the Turkish coast in 2027, and twelve yachts in Fethiye to charter.",
     "image": "https://images.unsplash.com/photo-1563296291-14f26f10c20f?w=1200&h=630&fit=crop&q=80",
     "robots": null,
     "styles": "home",

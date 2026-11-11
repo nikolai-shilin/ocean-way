@@ -4,9 +4,17 @@ import type { Lang } from './site';
 /** Live data from Supabase. The app only needs the project URL and the publishable (public) key: the catalogue is
  *  readable by anyone, places left and bookings go through database functions that decide prices and lock dates.
  *  The database is the only source of the catalogue: pages cannot render without it. */
-export type CourseDate = { id: string; key: string; course_slug: string; starts_on: string; ends_on: string; area: string; boat: string; meeting_point: string; price_eur: number; places_total: number; places_left: number };
+export type CourseDate = { id: string; key: string; course_slug: string; starts_on: string; ends_on: string; area: string; boat: string; meeting_point: string; price_eur: number; places_total: number; places_left: number; yacht_slug?: string | null };
 export type Passage = { id: string; key: string; starts_on: string; ends_on: string; from_port: string; to_port: string; leg: string; waters: string; price_eur: number; places_total: number; places_left: number; return_id: string | null };
-export type Yacht = { id: string; slug: string; sort: number; model: string; year: number; length_m: number; beam_m: number | null; draft_m: number | null; cabins: number; berths: number; heads: number | null; engine_hp: number | null; base: string; used_for: string; charter_from_eur: number; photo_id: string; photo_alt: string; description: string; translations?: Translations };
+export type Yacht = { id: string; slug: string; sort: number; name: string | null; model: string; year: number; length_m: number; beam_m: number | null; draft_m: number | null;
+  cabins: number; berths: number; extra_berths: number; skipper_cabin: boolean; heads: number | null; engines: number; engine_hp: number | null;
+  base: string; marina: string | null; kind: 'monohull' | 'catamaran'; used_for: string; charter_from_eur: number; photo_id: string; photo_alt: string; description: string;
+  max_guests: number | null; water_l: number | null; fuel_l: number | null; highlights: string[]; gallery: Shot[]; layout_photo_id: string | null;
+  service_pack_eur: number | null; deposit_eur: number | null; extras: Extra[]; prices: YachtPrice[]; translations?: Translations };
+/** Something you can add at the base: a skipper, a one-way drop, a SUP. Paid there, in cash. */
+export type Extra = { name: string; note: string; price_eur: number; unit: 'day' | 'week' | 'booking' | 'trip' };
+/** The charter fee for one week in a season (NauSYS list price). */
+export type YachtPrice = { starts_on: string; ends_on: string; week_eur: number };
 export type Course = { id: string; slug: string; sort: number; name: string; level: string; duration: string; scope: string; price_from_eur: number; price_unit: string; photo_id: string; photo_alt: string; summary: string; description: string; learn: string[]; requirements: string[]; certificate: string; theory: string[]; about: string[]; program: Step[]; bring: string[]; included?: string[]; not_included?: string[]; after?: Step[]; gallery?: Shot[]; skills?: Skill[]; route?: Stop[]; route_nm?: number | null; faq?: Faq[]; map?: RouteMap | null; translations?: Translations };
 export type Shot = { photo_id: string; shape: 'l' | 'p'; caption: string };
 export type Skill = { icon: string; title: string; items: string[] };
@@ -50,7 +58,7 @@ export function tagFor(url: string): string | null {
 /** Which cache tags a change to a table clears. Article lists embed their translations; bookings change places left. */
 export const TAGS_FOR: Record<string, string[]> = {
   courses: ['courses'], course_dates: ['course_dates'], passage_legs: ['passage_legs'], passages: ['passages'],
-  yachts: ['yachts'], instructors: ['instructors'], theory_topics: ['theory_topics'],
+  yachts: ['yachts'], yacht_prices: ['yachts'], instructors: ['instructors'], theory_topics: ['theory_topics'],
   articles: ['articles', 'article_translations'], article_translations: ['articles', 'article_translations'],
   bookings: ['course_dates', 'passages'],
 };
@@ -86,9 +94,10 @@ export async function getPassages(): Promise<Passage[]> {
 }
 
 export async function getYachts(lang: Lang = 'en'): Promise<Yacht[]> {
-  const { data, error } = await live().from('yachts').select('*').order('sort');
+  // Prices come in the same read (one request, tagged "yachts"); the public key only sees published boats.
+  const { data, error } = await live().from('yachts').select('*, prices:yacht_prices(starts_on, ends_on, week_eur)').order('sort');
   if (error) throw error;
-  return (data as Yacht[]).map((y) => localize(y, lang));
+  return (data as Yacht[]).map((y) => localize({ ...y, prices: [...(y.prices ?? [])].sort((a, b) => a.starts_on.localeCompare(b.starts_on)) }, lang));
 }
 
 // Every course column except map (large; fetched per page with getRouteMap).

@@ -45,7 +45,7 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
     itemListElement: [
       ...courses.map((c) => offer(c.name, c.price_from_eur, path.courseItem(lang, c.slug), 'Course')),
       ...tiers.map((x) => offer(t(lang, 'Training passage: {nights}', { nights: t(lang, `${x.n} nights`) }), x.price, path.passages(lang), 'Trip')),
-      ...yachts.map((y) => offer(t(lang, '{boat} charter, one week', { boat: y.model }), y.charter_from_eur, path.boat(lang, y.slug), 'Product')),
+      ...yachts.map((y) => offer(t(lang, '{boat} charter, one week', { boat: [y.name, y.model].filter(Boolean).join(', ') }), y.charter_from_eur, path.boat(lang, y.slug), 'Product')),
     ],
   }] };
   const toc: [string, string][] = [['courses', t(lang, 'Courses')], ['passages', t(lang, 'Passages')], ['charter', t(lang, 'Yacht charter')], ['extras', t(lang, 'Cabins and extras')], ['payment', t(lang, 'Payment and cancellation')]];
@@ -101,7 +101,7 @@ export default async function Prices({ params }: PageProps<'/[lang]/prices'>) {
             <thead><tr><th>{t(lang, 'Yacht')}</th><th className="hl">{t(lang, 'Home port')}</th><th className="num">{t(lang, 'Cabins')}</th><th className="num">{t(lang, 'A week from')}</th></tr></thead>
             <tbody>{yachts.map((y) => (
               <tr key={y.slug}>
-                <td className="island"><a href={path.boat(lang, y.slug)}>{y.model}</a><span className="sub">{y.year}</span></td>
+                <td className="island"><a href={path.boat(lang, y.slug)}>{y.name ?? y.model}</a><span className="sub">{y.name ? `${y.model}, ${y.year}` : y.year}</span></td>
                 <td className="hl">{t(lang, y.base)}</td>
                 <td className="num">{y.cabins}</td>
                 <td className="num" style={{ color: 'var(--ink)' }}><b>{eur(y.charter_from_eur)}</b></td>

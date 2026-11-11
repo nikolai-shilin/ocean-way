@@ -1,0 +1,4521 @@
+[
+ {
+  "nausys_id": 1175784,
+  "name": "Solar",
+  "model": "Beneteau Oceanis 38",
+  "builder": "Beneteau",
+  "kind": "monohull",
+  "year": 2015,
+  "length_m": 11.5,
+  "cabins": 3,
+  "berths": "6",
+  "heads": 1,
+  "price_eur": 2500,
+  "discount_pct": 15,
+  "total_eur": 2125,
+  "service_pack_eur": 300,
+  "deposit_eur": 2000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Bénéteau",
+   "Build year": "2015.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "11.5 m (38 ft)",
+   "Beam": "3.99 m",
+   "Draft": "2.05 m",
+   "Cabins": "3",
+   "Berths": "6",
+   "Toilets": "1",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 6",
+   "Recommended guests number": "N/A",
+   "Main sail": "N/A",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "1 x N/A HP (1 x N/A kW)",
+   "Engine builder": "N/A",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "N/A",
+   "Water tank": "N/A",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€2,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Binoculars",
+    "Compass",
+    "Nautical charts",
+    "Parallel ruler"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter -",
+    "24''"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders -",
+    "Side boat fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Entertainment": [
+    "Floating mats"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.png",
+    "genuine": null,
+    "webp": "/fleet/beneteau-oceanis-38-solar/layout.webp"
+   },
+   {
+    "file": "main.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/main.webp"
+   },
+   {
+    "file": "n.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/n.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/n2.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/p.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/p3.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/r2.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/beneteau-oceanis-38-solar/w.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 2300
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 2500
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 2800
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 3000
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 2800
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 2300
+   }
+  ],
+  "slug": "beneteau-oceanis-38-solar",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/1175784/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 300,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 10513927,
+  "name": "Lornia",
+  "model": "Jeanneau Sun Odyssey 440",
+  "builder": "Jeanneau",
+  "kind": "monohull",
+  "year": 2020,
+  "length_m": 13.0,
+  "cabins": 4,
+  "berths": "8",
+  "heads": 2,
+  "price_eur": 3900,
+  "discount_pct": 15,
+  "total_eur": 3315,
+  "service_pack_eur": 300,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Jeanneau",
+   "Build year": "2020.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "13.0 m (44 ft)",
+   "Beam": "4.29 m",
+   "Draft": "2.2 m",
+   "Cabins": "4",
+   "Berths": "8",
+   "Toilets": "2",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 8",
+   "Recommended guests number": "N/A",
+   "Main sail": "furling/roll",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "furling/roll",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 33.0 HP (1 x 24.27 kW)",
+   "Engine builder": "Yanmar",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "200 l",
+   "Water tank": "330 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "Depthsounder",
+    "GPS chart plotter",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Parallel ruler"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "VHF radio",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Interior": [
+    "Convertible table in salon"
+   ],
+   "Entertainment": [
+    "Floating mats",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/layout.webp"
+   },
+   {
+    "file": "main.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/main.webp"
+   },
+   {
+    "file": "n.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/n5.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/p.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/p2.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/r1.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/w.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-lornia/w1.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 3000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 3900
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 4300
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 4500
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 4300
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 3200
+   }
+  ],
+  "slug": "jeanneau-sun-odyssey-440-lornia",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/10513927/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 300,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 10911480,
+  "name": "Anda",
+  "model": "Jeanneau Sun Odyssey 440",
+  "builder": "Jeanneau",
+  "kind": "monohull",
+  "year": 2020,
+  "length_m": 13.0,
+  "cabins": 4,
+  "berths": "8",
+  "heads": 2,
+  "price_eur": 3900,
+  "discount_pct": 15,
+  "total_eur": 3315,
+  "service_pack_eur": 300,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Jeanneau",
+   "Build year": "2020.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "13.0 m (44 ft)",
+   "Beam": "4.29 m",
+   "Draft": "2.2 m",
+   "Cabins": "4",
+   "Berths": "8",
+   "Toilets": "2",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 8",
+   "Recommended guests number": "N/A",
+   "Main sail": "full batten",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 33.0 HP (1 x 24.27 kW)",
+   "Engine builder": "N/A",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "200 l",
+   "Water tank": "330 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Sails": [
+    "Lazy bag"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "GPS chart plotter",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Parallel ruler"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Heating -",
+    "Webasto",
+    "Inverter"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Entertainment": [
+    "Floating mats",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/layout.webp"
+   },
+   {
+    "file": "main.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/main.webp"
+   },
+   {
+    "file": "n.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/n.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/n3.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/p.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/p3.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/r2.webp"
+   },
+   {
+    "file": "r3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/r3.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-440-anda/w.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 3000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 3900
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 4300
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 4500
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 4300
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 3200
+   }
+  ],
+  "slug": "jeanneau-sun-odyssey-440-anda",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/10911480/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 300,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 8454958,
+  "name": "Epoch",
+  "model": "Elan Impression 50",
+  "builder": "Elan",
+  "kind": "monohull",
+  "year": 2015,
+  "length_m": 15.2,
+  "cabins": 4,
+  "berths": "8+2+1",
+  "heads": 3,
+  "price_eur": 3900,
+  "discount_pct": 15,
+  "total_eur": 3315,
+  "service_pack_eur": 400,
+  "deposit_eur": 2500,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Elan Marine",
+   "Build year": "2015.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "15.2 m (50 ft)",
+   "Beam": "4.68 m",
+   "Draft": "2.23 m",
+   "Cabins": "4 + 1",
+   "Berths": "8 + 2 + 1",
+   "Toilets": "3",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 11",
+   "Recommended guests number": "N/A",
+   "Main sail": "furling/roll",
+   "Main sail area": "N/A",
+   "Main sail renewed": "2016.",
+   "Mast length": "N/A",
+   "Genoa": "furling/roll",
+   "Genoa area": "N/A",
+   "Genoa renewed": "2016.",
+   "Steering type": "2 Steering Wheels",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 75.0 HP (1 x 55.16 kW)",
+   "Engine builder": "N/A",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "Diesel",
+   "Fuel tank": "440 l",
+   "Water tank": "780 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€2,500"
+  },
+  "equipment": {
+   "Sails": [
+    "Winch"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Bow thruster",
+    "2 x Compass",
+    "Depthsounder",
+    "GPS chart plotter -",
+    "Raymarine C120",
+    "Hand bearing compass",
+    "Log/speed instrument",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "VHF radio"
+   ],
+   "Yacht electrics": [
+    "Batteries",
+    "Battery charger",
+    "Heating -",
+    "Webasto",
+    "Shore connection 220 V"
+   ],
+   "Deck": [
+    "Bathing platform",
+    "Bimini top",
+    "Cockpit table",
+    "Cockpit/stern, outside shower",
+    "Electric anchor windlass",
+    "Fenders",
+    "Gangway",
+    "Mooring ropes",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Sprayhood",
+    "Swimming ladder",
+    "Teak cockpit"
+   ],
+   "Galley": [
+    "Hot water",
+    "Refrigerator",
+    "Sink",
+    "Stove"
+   ],
+   "Interior": [
+    "Barometer",
+    "Clock"
+   ],
+   "Entertainment": [
+    "Indoor speakers",
+    "Outdoor speakers",
+    "Radio CD player",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/elan-impression-50-epoch/layout.webp"
+   },
+   {
+    "file": "main.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/main.webp"
+   },
+   {
+    "file": "n.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/n.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/n3.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/p.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/p3.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/r2.webp"
+   },
+   {
+    "file": "r3.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/r3.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/w.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/elan-impression-50-epoch/w2.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 3000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 3900
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 4300
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 4500
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 4300
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 3200
+   }
+  ],
+  "slug": "elan-impression-50-epoch",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/8454958/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 52427984,
+  "name": "Alfasyr",
+  "model": "Dufour 44",
+  "builder": "Dufour",
+  "kind": "monohull",
+  "year": 2024,
+  "length_m": 13.91,
+  "cabins": 4,
+  "berths": "8",
+  "heads": 3,
+  "price_eur": 4300,
+  "discount_pct": 15,
+  "total_eur": 3655,
+  "service_pack_eur": 300,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Dufour Yachts",
+   "Build year": "2024.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "13.91 m (44 ft)",
+   "Beam": "4.45 m",
+   "Draft": "2.2 m",
+   "Cabins": "4",
+   "Berths": "8",
+   "Toilets": "3",
+   "Showers": "4",
+   "Max. passengers": "Registered for 8",
+   "Recommended guests number": "N/A",
+   "Main sail": "classic/standard",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "furling/roll",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "2 Steering Wheels",
+   "Number of rudder blades": "1",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 50.99 HP (1 x 37.50 kW)",
+   "Engine builder": "Volvo",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "250 l",
+   "Water tank": "430 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Parallel ruler",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/n4.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/p3.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/r1.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-44-alfasyr/w1.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 3200
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 4300
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 4600
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 4800
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 4600
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 4000
+   }
+  ],
+  "slug": "dufour-44-alfasyr",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/52427984/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 300,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 11160809,
+  "name": "Leo",
+  "model": "Lagoon 40",
+  "builder": "Lagoon",
+  "kind": "catamaran",
+  "year": 2020,
+  "length_m": 12.75,
+  "cabins": 4,
+  "berths": "8",
+  "heads": 4,
+  "price_eur": 4600,
+  "discount_pct": 15,
+  "total_eur": 3910,
+  "service_pack_eur": 400,
+  "deposit_eur": 3500,
+  "seabob": false,
+  "tech": {
+   "Type": "Catamaran",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Lagoon-Bénéteau",
+   "Build year": "2020.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "12.75 m (40 ft)",
+   "Beam": "6.76 m",
+   "Draft": "1.25 m",
+   "Cabins": "4",
+   "Berths": "8",
+   "Toilets": "4",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 8",
+   "Recommended guests number": "N/A",
+   "Main sail": "full batten",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "2 x 45.0 HP (2 x 33.10 kW)",
+   "Engine builder": "Yanmar",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "300 l",
+   "Water tank": "300 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,500"
+  },
+  "equipment": {
+   "Comfort": [
+    "Cockpit cushions"
+   ],
+   "Sails": [
+    "Lazy bag -",
+    "WITH COVER - GRAPHITE"
+   ],
+   "Navigation": [
+    "AIS -",
+    "AIS 500 B&G TRANSCEIVER WITH ANTENNA COUPLING",
+    "Autopilot",
+    "Depthsounder",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "VHF radio"
+   ],
+   "Yacht electrics": [
+    "Battery charger",
+    "Service batteries",
+    "USB sockets"
+   ],
+   "Deck": [
+    "Bimini top",
+    "Davit",
+    "Deck lights",
+    "6 x Fenders",
+    "Main anchor",
+    "Mooring ropes",
+    "Spare anchor (Reserve, Auxiliary anchor)"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)",
+    "Oven",
+    "Refrigerator"
+   ],
+   "Interior": [
+    "Electric fans",
+    "Electric toilet -",
+    "QUIET FLUSH ELECTRICAL TOILETS - 4 CABINS / 4 HEADS VERSION",
+    "Indirect lighting in cabins and cockpit",
+    "Indirect lighting in cabins and salon"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.png",
+    "genuine": null,
+    "webp": "/fleet/lagoon-40-leo/layout.webp"
+   },
+   {
+    "file": "main.jpeg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/main.webp"
+   },
+   {
+    "file": "n.jpeg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n.webp"
+   },
+   {
+    "file": "n1.jpeg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n5.webp"
+   },
+   {
+    "file": "n6.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n6.webp"
+   },
+   {
+    "file": "n7.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/n7.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/p.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/r1.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/w.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-40-leo/w1.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 4300
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 4600
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 5000
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 5900
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 5300
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 4500
+   }
+  ],
+  "slug": "lagoon-40-leo",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/11160809/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece + outboard included"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 23836501,
+  "name": "Elenor",
+  "model": "Jeanneau Sun Odyssey 490",
+  "builder": "Jeanneau",
+  "kind": "monohull",
+  "year": 2020,
+  "length_m": 14.42,
+  "cabins": 5,
+  "berths": "10",
+  "heads": 3,
+  "price_eur": 4900,
+  "discount_pct": 15,
+  "total_eur": 4165,
+  "service_pack_eur": 400,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Jeanneau",
+   "Build year": "2020.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "14.42 m (49 ft)",
+   "Beam": "4.49 m",
+   "Draft": "2.4 m",
+   "Cabins": "5",
+   "Berths": "10",
+   "Toilets": "3",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 10",
+   "Recommended guests number": "N/A",
+   "Main sail": "furling/roll",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "furling/roll",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "2",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 57.0 HP (1 x 41.92 kW)",
+   "Engine builder": "Yanmar",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "240 l",
+   "Water tank": "640 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Parallel ruler",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Entertainment": [
+    "Floating mats",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/layout.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n5.webp"
+   },
+   {
+    "file": "n6.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/n6.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/p3.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/r1.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/jeanneau-sun-odyssey-490-elenor/w2.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 4100
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 4900
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 5200
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 6000
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 5200
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 4700
+   }
+  ],
+  "slug": "jeanneau-sun-odyssey-490-elenor",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/23836501/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 32693642,
+  "name": "Pontika",
+  "model": "Dufour 470",
+  "builder": "Dufour",
+  "kind": "monohull",
+  "year": 2023,
+  "length_m": 14.85,
+  "cabins": 5,
+  "berths": "10",
+  "heads": 3,
+  "price_eur": 4900,
+  "discount_pct": 15,
+  "total_eur": 4165,
+  "service_pack_eur": 400,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Dufour Yachts",
+   "Build year": "2023.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "14.85 m (47 ft)",
+   "Beam": "4.74 m",
+   "Draft": "2.25 m",
+   "Cabins": "5",
+   "Berths": "10",
+   "Toilets": "3",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 10",
+   "Recommended guests number": "N/A",
+   "Main sail": "classic/standard",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "self tacking jib",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "2 Steering Wheels",
+   "Number of rudder blades": "1",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 60.0 HP (1 x 44.13 kW)",
+   "Engine builder": "Volvo",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "250 l",
+   "Water tank": "530 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Parallel ruler",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Entertainment": [
+    "Floating mats",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/dufour-470-pontika/layout.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n5.webp"
+   },
+   {
+    "file": "n6.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n6.webp"
+   },
+   {
+    "file": "n7.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/n7.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/p3.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/r1.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/w2.webp"
+   },
+   {
+    "file": "w3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-pontika/w3.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 4100
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 4900
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 5200
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 6000
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 5200
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 4700
+   }
+  ],
+  "slug": "dufour-470-pontika",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/32693642/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 43486362,
+  "name": "Gusto 7",
+  "model": "Dufour 470",
+  "builder": "Dufour",
+  "kind": "monohull",
+  "year": 2024,
+  "length_m": 14.85,
+  "cabins": 5,
+  "berths": "10",
+  "heads": 3,
+  "price_eur": 5200,
+  "discount_pct": 15,
+  "total_eur": 4420,
+  "service_pack_eur": 400,
+  "deposit_eur": 3000,
+  "seabob": false,
+  "tech": {
+   "Type": "Sailing yacht",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Dufour Yachts",
+   "Build year": "2024.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "14.85 m (47 ft)",
+   "Beam": "4.74 m",
+   "Draft": "2.25 m",
+   "Cabins": "5",
+   "Berths": "10",
+   "Toilets": "3",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 10",
+   "Recommended guests number": "N/A",
+   "Main sail": "classic/standard",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "self tacking jib",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "2 Steering Wheels",
+   "Number of rudder blades": "1",
+   "Propulsion type": "N/A",
+   "Engine": "1 x 60.0 HP (1 x 44.13 kW)",
+   "Engine builder": "Volvo",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "250 l",
+   "Water tank": "530 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,000"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions",
+    "Shower towels"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Bow thruster",
+    "Compass",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Parallel ruler",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Inverter",
+    "Plug 220V, 12 V"
+   ],
+   "Deck": [
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Fenders",
+    "Plastic bucket",
+    "Spare anchor (Reserve, Auxiliary anchor)",
+    "Water hose"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)"
+   ],
+   "Entertainment": [
+    "Floating mats",
+    "TV"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n1.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n4.webp"
+   },
+   {
+    "file": "n41.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n41.webp"
+   },
+   {
+    "file": "n42.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n42.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n5.webp"
+   },
+   {
+    "file": "n7.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n7.webp"
+   },
+   {
+    "file": "n8.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n8.webp"
+   },
+   {
+    "file": "n9.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/n9.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/p3.webp"
+   },
+   {
+    "file": "p4.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/p4.webp"
+   },
+   {
+    "file": "p5.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/p5.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/r2.webp"
+   },
+   {
+    "file": "r3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/r3.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/w2.webp"
+   },
+   {
+    "file": "w3.jpg",
+    "genuine": true,
+    "webp": "/fleet/dufour-470-gusto-7/w3.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 4300
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 5200
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 5500
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 6300
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 5500
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 5000
+   }
+  ],
+  "slug": "dufour-470-gusto-7",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/43486362/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Outboard engine",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 7602247,
+  "name": "Day Dream",
+  "model": "Lagoon 42",
+  "builder": "Lagoon",
+  "kind": "catamaran",
+  "year": 2018,
+  "length_m": 12.8,
+  "cabins": 4,
+  "berths": "8+2",
+  "heads": 4,
+  "price_eur": 6000,
+  "discount_pct": 15,
+  "total_eur": 5100,
+  "service_pack_eur": 400,
+  "deposit_eur": 3500,
+  "seabob": true,
+  "tech": {
+   "Type": "Catamaran",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Lagoon-Bénéteau",
+   "Build year": "2018.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "12.8 m (42 ft)",
+   "Beam": "7.7 m",
+   "Draft": "1.25 m",
+   "Cabins": "4 + 1",
+   "Berths": "8 + 2",
+   "Toilets": "4",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 10",
+   "Recommended guests number": "N/A",
+   "Main sail": "full batten",
+   "Main sail area": "55.00 m2",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "N/A",
+   "Propulsion type": "N/A",
+   "Engine": "2 x 57.0 HP (2 x 41.92 kW)",
+   "Engine builder": "N/A",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "300 l",
+   "Water tank": "300 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€3,500"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions"
+   ],
+   "Sails": [
+    "Lazy bag"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Compass",
+    "Depthsounder",
+    "GPS chart plotter",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "VHF radio",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Air Conditioning",
+    "Generator",
+    "Heating -",
+    "Webasto",
+    "Inverter"
+   ],
+   "Deck": [
+    "Bimini top",
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Electric anchor windlass",
+    "Fenders",
+    "Mooring ropes",
+    "Plastic bucket"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)",
+    "Oven",
+    "Refrigerator"
+   ],
+   "Interior": [
+    "Electric fans",
+    "4 x Electric toilet"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "layout.jpg",
+    "genuine": null,
+    "webp": "/fleet/lagoon-42-day-dream/layout.webp"
+   },
+   {
+    "file": "main.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/main.webp"
+   },
+   {
+    "file": "n.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/n.webp"
+   },
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/n1.webp"
+   },
+   {
+    "file": "p.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/p.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/p3.webp"
+   },
+   {
+    "file": "p4.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/p4.webp"
+   },
+   {
+    "file": "r.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/r.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/r2.webp"
+   },
+   {
+    "file": "w.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/w.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-42-day-dream/w2.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 5000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 6000
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 7000
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 7500
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 6500
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 5000
+   }
+  ],
+  "slug": "lagoon-42-day-dream",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/7602247/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Seabob",
+    "price_eur": 1250,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "+ 1500 EUR Deposit"
+    ]
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece + outboard included"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 23836502,
+  "name": "Dream Life",
+  "model": "Lagoon 46",
+  "builder": "Lagoon",
+  "kind": "catamaran",
+  "year": 2022,
+  "length_m": 13.99,
+  "cabins": 4,
+  "berths": "8+1",
+  "heads": 4,
+  "price_eur": 7000,
+  "discount_pct": 15,
+  "total_eur": 5950,
+  "service_pack_eur": 400,
+  "deposit_eur": 4500,
+  "seabob": true,
+  "tech": {
+   "Type": "Catamaran",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Lagoon-Bénéteau",
+   "Build year": "2022.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "13.99 m (46 ft)",
+   "Beam": "7.96 m",
+   "Draft": "1.3 m",
+   "Cabins": "4",
+   "Berths": "8 + 1",
+   "Toilets": "4",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 9",
+   "Recommended guests number": "N/A",
+   "Main sail": "full batten",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "N/A",
+   "Propulsion type": "N/A",
+   "Engine": "2 x 57.0 HP (2 x 41.92 kW)",
+   "Engine builder": "Yanmar",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "1040 l",
+   "Water tank": "600 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€4,500"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions"
+   ],
+   "Sails": [
+    "Lazy bag"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Compass",
+    "Depthsounder",
+    "GPS chart plotter",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "VHF radio",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Air Conditioning",
+    "Generator",
+    "Heating"
+   ],
+   "Deck": [
+    "Bimini top",
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Electric anchor windlass",
+    "Fenders",
+    "Mooring ropes",
+    "Plastic bucket"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)",
+    "Oven",
+    "Refrigerator"
+   ],
+   "Interior": [
+    "Electric fans",
+    "4 x Electric toilet"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n5.webp"
+   },
+   {
+    "file": "n6.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n6.webp"
+   },
+   {
+    "file": "n7.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n7.webp"
+   },
+   {
+    "file": "n8.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n8.webp"
+   },
+   {
+    "file": "n9.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/n9.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/p2.webp"
+   },
+   {
+    "file": "p3.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/p3.webp"
+   },
+   {
+    "file": "p4.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/p4.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/r1.webp"
+   },
+   {
+    "file": "r2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/r2.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/w1.webp"
+   },
+   {
+    "file": "w2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-dream-life/w2.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 6000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 7000
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 8000
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 9000
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 8000
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 6000
+   }
+  ],
+  "slug": "lagoon-46-dream-life",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/23836502/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Seabob",
+    "price_eur": 1250,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "+ 1500 EUR Deposit"
+    ]
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece + outboard included"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ },
+ {
+  "nausys_id": 52421145,
+  "name": "Blue Dream 48",
+  "model": "Lagoon 46",
+  "builder": "Lagoon",
+  "kind": "catamaran",
+  "year": 2025,
+  "length_m": 13.99,
+  "cabins": 4,
+  "berths": "8+1",
+  "heads": 4,
+  "price_eur": 8800,
+  "discount_pct": 15,
+  "total_eur": 7480,
+  "service_pack_eur": 400,
+  "deposit_eur": 4500,
+  "seabob": false,
+  "tech": {
+   "Type": "Catamaran",
+   "Charter type": "Bareboat",
+   "Yacht Builder": "Lagoon-Bénéteau",
+   "Build year": "2025.",
+   "Launched year": "N/A",
+   "Renewed": "N/A",
+   "Tonnage": "N/A",
+   "Length overall": "13.99 m (46 ft)",
+   "Beam": "7.96 m",
+   "Draft": "1.3 m",
+   "Cabins": "4",
+   "Berths": "8 + 1",
+   "Toilets": "4",
+   "Showers": "N/A",
+   "Max. passengers": "Registered for 9",
+   "Recommended guests number": "N/A",
+   "Main sail": "full batten",
+   "Main sail area": "N/A",
+   "Main sail renewed": "N/A",
+   "Mast length": "N/A",
+   "Genoa": "N/A",
+   "Genoa area": "N/A",
+   "Genoa renewed": "N/A",
+   "Steering type": "N/A",
+   "Number of rudder blades": "N/A",
+   "Propulsion type": "N/A",
+   "Engine": "2 x 57.0 HP (2 x 41.92 kW)",
+   "Engine builder": "Yanmar",
+   "Engine build year": "N/A",
+   "Engine renewed year": "N/A",
+   "Fuel": "N/A",
+   "Fuel tank": "1040 l",
+   "Water tank": "600 l",
+   "Fuel consumption": "N/A",
+   "Max speed": "N/A",
+   "Cruising speed": "N/A",
+   "Hull color": "N/A",
+   "Security Deposit": "€4,500"
+  },
+  "equipment": {
+   "Comfort": [
+    "Deck cushions"
+   ],
+   "Sails": [
+    "Lazy bag"
+   ],
+   "Navigation": [
+    "Autopilot",
+    "Binoculars",
+    "Compass",
+    "Depthsounder",
+    "GPS chart plotter",
+    "Log/speed instrument",
+    "Nautical charts",
+    "Navigation set",
+    "Wind instrument/Anemometer"
+   ],
+   "Safety": [
+    "Distress flare box",
+    "Fire blanket",
+    "Fire extinguisher",
+    "First aid kit",
+    "Flashlight",
+    "Life jackets",
+    "Lifelines",
+    "Liferaft",
+    "Set of tools",
+    "VHF radio",
+    "Wire (shroud) cutter"
+   ],
+   "Yacht electrics": [
+    "Air Conditioning",
+    "Generator",
+    "Heating"
+   ],
+   "Deck": [
+    "Bimini top",
+    "Boat hook",
+    "Deck brush",
+    "Dinghy",
+    "Electric anchor windlass",
+    "Fenders",
+    "Mooring ropes",
+    "Plastic bucket"
+   ],
+   "Galley": [
+    "Kitchen utensils (Galley equipment, cutlery)",
+    "Oven",
+    "Refrigerator"
+   ],
+   "Interior": [
+    "Electric fans",
+    "4 x Electric toilet"
+   ]
+  },
+  "pictures": [
+   {
+    "file": "n1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n1.webp"
+   },
+   {
+    "file": "n2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n2.webp"
+   },
+   {
+    "file": "n3.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n3.webp"
+   },
+   {
+    "file": "n4.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n4.webp"
+   },
+   {
+    "file": "n5.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n5.webp"
+   },
+   {
+    "file": "n6.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/n6.webp"
+   },
+   {
+    "file": "p1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/p1.webp"
+   },
+   {
+    "file": "p2.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/p2.webp"
+   },
+   {
+    "file": "r1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/r1.webp"
+   },
+   {
+    "file": "w1.jpg",
+    "genuine": true,
+    "webp": "/fleet/lagoon-46-blue-dream-48/w1.webp"
+   }
+  ],
+  "prices_2027": [
+   {
+    "from": "2027-01-01",
+    "to": "2027-03-26",
+    "eur": 7000
+   },
+   {
+    "from": "2027-03-27",
+    "to": "2027-05-07",
+    "eur": 8800
+   },
+   {
+    "from": "2027-05-08",
+    "to": "2027-06-04",
+    "eur": 10000
+   },
+   {
+    "from": "2027-06-05",
+    "to": "2027-09-10",
+    "eur": 11000
+   },
+   {
+    "from": "2027-09-11",
+    "to": "2027-10-22",
+    "eur": 10000
+   },
+   {
+    "from": "2027-10-23",
+    "to": "2027-12-31",
+    "eur": 7000
+   }
+  ],
+  "slug": "lagoon-46-blue-dream-48",
+  "source": {
+   "agency": "Mercuri International",
+   "offer": 77,
+   "offer_date": "2026-11-11",
+   "base": "Fethiye, Ece Saray Marina Resort",
+   "nausys_url": "https://ws.nausys.com/CBMS-external/rest/yacht/52421145/html"
+  },
+  "options": [
+   {
+    "name": "Extra bedlinen",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1sheet + 2pillowcase"
+    ]
+   },
+   {
+    "name": "Extra blankets",
+    "price_eur": 10,
+    "unit": "piece",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Towels",
+    "price_eur": 10,
+    "unit": "set",
+    "plus_food": false,
+    "notes": [
+     "1small + 1big"
+    ]
+   },
+   {
+    "name": "Gennaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Spinnaker",
+    "price_eur": 400,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 1000€ deposit"
+    ]
+   },
+   {
+    "name": "Railing net (Safety net)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": []
+   },
+   {
+    "name": "Stand up paddle (SUP)",
+    "price_eur": 100,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "+ 400€ deposit"
+    ]
+   }
+  ],
+  "services": [
+   {
+    "name": "Service Pack",
+    "price_eur": 400,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [
+     "transit log for Turkey, final cleaning, bed linen and towels + 150€ when sail to Greece + outboard included"
+    ],
+    "obligatory": true
+   },
+   {
+    "name": "Base expenses: other charges",
+    "price_eur": 50,
+    "unit": "booking",
+    "plus_food": false,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Cook",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "Hostess",
+    "price_eur": 150,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 250,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Göcek"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 500,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Marmaris"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "One way",
+    "price_eur": 700,
+    "unit": "trip",
+    "plus_food": false,
+    "notes": [
+     "Bodrum"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "Skipper",
+    "price_eur": 200,
+    "unit": "day",
+    "plus_food": true,
+    "notes": [
+     "+ f&b + cabin"
+    ],
+    "obligatory": false
+   },
+   {
+    "name": "WI-FI Internet connection on boat",
+    "price_eur": 80,
+    "unit": "week",
+    "plus_food": false,
+    "notes": [
+     "unlimited"
+    ],
+    "obligatory": false
+   }
+  ]
+ }
+]

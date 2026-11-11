@@ -55,7 +55,7 @@ export async function GET() {
 
   add('## Fleet', '');
   for (const y of yachts) {
-    add(`- [${y.model}](${url(path.boat('en', y.slug))}) (${y.year}, ${Number(y.length_m)} m, ${y.cabins} cabins, ${y.berths} berths), based in ${y.base}: ${y.used_for}. Charter from ${eur(y.charter_from_eur)} a week.`);
+    add(`- [${[y.name, y.model].filter(Boolean).join(', ')}](${url(path.boat('en', y.slug))}) (${y.kind}, ${y.year}, ${Number(y.length_m)} m, ${y.cabins} cabins, ${y.berths + y.extra_berths} berths), based in ${[y.marina, y.base].filter(Boolean).join(', ')}: ${y.used_for}. Charter from ${eur(y.charter_from_eur)} a week.`);
   }
   add('');
 

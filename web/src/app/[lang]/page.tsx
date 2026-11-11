@@ -25,7 +25,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   const upcoming = [...courseDates, ...passages].filter((d) => d.starts_on >= today).length;
   let main = content.main;
   // Hero line and "in numbers": facts a visitor can check against the rest of the site, counted from the database.
-  main = main.replace(/<p class="lead">[^<]*<\/p>/, `<p class="lead">${t(lang, 'Courses from your first knot to Yachtmaster in Greece, Croatia and Türkiye, on yachts we own and look after ourselves. Every route planned day by day.')}</p>`);
+  main = main.replace(/<p class="lead">[^<]*<\/p>/, `<p class="lead">${t(lang, 'Courses from your first knot to Yachtmaster in Greece, Croatia and Türkiye, with a fleet of {n} yachts in Fethiye. Every route planned day by day.', { n: yachts.length })}</p>`);
   // Hero and photo gallery become one cover block: the hero text on white strips over the photo row (cover.css).
   main = main.replace(/<section class="hero">([\s\S]*?)<\/section>\s*<div class="gallery-wrap"[\s\S]*?<div class="gallery"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/, (whole, hero: string, figs: string) => {
     const pick = (re: RegExp) => re.exec(hero)?.[1] ?? '';
@@ -42,6 +42,7 @@ export default async function Home({ params }: PageProps<'/[lang]'>) {
   fig(5, yachts.length);
   // Passages: the prototype's table becomes a sideways row of cards under the map.
   main = main.replace(/<div class="tbl-wrap">\s*<table class="tbl stack passages">[\s\S]*?<\/table>\s*<\/div>/, () => passageRow(lang, passages, legs));
+  main = main.replace(/(<section class="sec" id="fleet"[\s\S]*?<p class="sec-lead">)[^<]*(<\/p>)/, (_, a: string, b: string) => a + t(lang, 'Monohulls and catamarans at Ece Saray Marina in Fethiye. Our courses sail on them; between courses you can charter one, bareboat or with one of our skippers.') + b);
   main = replaceInner(main, /<section class="sec" id="fleet"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', fleetCards(lang, yachts));
   // Theory row: every published article, in reading order.
   main = replaceInner(main, /<section class="sec" id="theory"[\s\S]*?<div class="hscroll"[^>]*>/, '</div>\n    </section>', (await getArticles(lang)).map((a) => articleCard(lang, a, 'card')).join(''));
