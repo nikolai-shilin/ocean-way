@@ -1,6 +1,7 @@
 import { getArticles } from '@/lib/articles';
 import { getCourseDates, getCourses, getLegs, getPassages, getYachts, passageSlug } from '@/lib/db';
 import { LANGS, SITE, path } from '@/lib/site';
+import { discountOf, ourPrice } from '@/lib/render';
 
 /** /llms.txt: a plain-text summary of the site for AI assistants (https://llmstxt.org), built from the same
  *  live rows as the pages, so prices, dates and places left match what visitors see. English only. */
@@ -55,7 +56,7 @@ export async function GET() {
 
   add('## Fleet', '');
   for (const y of yachts) {
-    add(`- [${[y.name, y.model].filter(Boolean).join(', ')}](${url(path.boat('en', y.slug))}) (${y.kind}, ${y.year}, ${Number(y.length_m)} m, ${y.cabins} cabins, ${y.berths + y.extra_berths} berths), based in ${[y.marina, y.base].filter(Boolean).join(', ')}: ${y.used_for}. Charter from ${eur(y.charter_from_eur)} a week.`);
+    add(`- [${[y.name, y.model].filter(Boolean).join(', ')}](${url(path.boat('en', y.slug))}) (${y.kind}, ${y.year}, ${Number(y.length_m)} m, ${y.cabins} cabins, ${y.berths + y.extra_berths} berths), based in ${[y.marina, y.base].filter(Boolean).join(', ')}: ${y.used_for}. Charter from ${eur(ourPrice(y, y.charter_from_eur))} a week${discountOf(y) ? ` (${discountOf(y)}% off the list price of ${eur(y.charter_from_eur)})` : ''}.`);
   }
   add('');
 

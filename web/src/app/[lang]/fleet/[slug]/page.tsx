@@ -9,7 +9,7 @@ import { t } from '@/lib/content';
 import { getCourseDates, getCourses, getYachts } from '@/lib/db';
 import { berthsText, boatSpecs, extraPrice, periodDates, seasonName } from '@/lib/fleet';
 import { breadcrumbs, Crumbs, meta, ORG, photo } from '@/lib/meta';
-import { boatModel, boatSpec, boatTitle, boatUse, eur, range } from '@/lib/render';
+import { boatModel, boatSpec, boatTitle, boatUse, discountOf, eur, ourPrice, range } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 300;
@@ -37,6 +37,10 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
   // Course weeks on this boat, any course, with places left.
   const weeks = (await Promise.all(courses.map(async (c) => (await getCourseDates(c.slug)).map((d) => ({ ...d, course: c })))))
     .flat().filter((d) => d.yacht_slug === slug && d.places_left > 0).sort((a, b) => a.starts_on.localeCompare(b.starts_on));
+  // Our price: the list price less our discount; the list price is shown crossed out next to it.
+  const pct = discountOf(y), from = ourPrice(y, y.charter_from_eur);
+  const year = y.prices[0]?.starts_on.slice(0, 4) ?? '';
+  const was = (list: number) => (pct ? <s className="was">{eur(list)}</s> : null);
   const crumbs: [string, string][] = [[t(lang, 'Home'), path.home(lang)], [t(lang, 'Fleet'), path.fleet(lang)], [boatTitle(y), path.boat(lang, slug)]];
   const ld = { '@context': 'https://schema.org', '@graph': [ORG, breadcrumbs(lang, crumbs), {
     '@type': 'Product', name: fullName(y), description: y.description, image: [photo(y.photo_id, 1200), ...y.gallery.slice(1, 6).map((s) => photo(s.photo_id, 1200))],
@@ -45,8 +49,8 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
       { '@type': 'PropertyValue', name: 'Year', value: y.year }, { '@type': 'PropertyValue', name: 'Length', value: Number(y.length_m), unitCode: 'MTR' },
       { '@type': 'PropertyValue', name: 'Cabins', value: y.cabins }, { '@type': 'PropertyValue', name: 'Berths', value: y.berths + y.extra_berths },
     ],
-    offers: { '@type': 'Offer', price: y.charter_from_eur, priceCurrency: 'EUR', url: SITE + path.boat(lang, slug),
-      priceSpecification: { '@type': 'UnitPriceSpecification', price: y.charter_from_eur, priceCurrency: 'EUR', unitText: 'week' } },
+    offers: { '@type': 'Offer', price: from, priceCurrency: 'EUR', url: SITE + path.boat(lang, slug),
+      priceSpecification: { '@type': 'UnitPriceSpecification', price: from, priceCurrency: 'EUR', unitText: 'week' } },
   }] };
   const [useIcon, use] = boatUse(lang, y);
   const model = boatModel(y);
@@ -109,9 +113,11 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
               <h2>{t(lang, 'Prices in {year}', { year: y.prices[0].starts_on.slice(0, 4) })}</h2>
               <div className="tbl-wrap"><table className="tbl fl-prices">
                 <thead><tr><th>{t(lang, 'Season')}</th><th className="hl">{t(lang, 'Dates')}</th><th className="num">{t(lang, 'A week')}</th></tr></thead>
-                <tbody>{y.prices.map((p) => <tr key={p.starts_on}><td>{seasonName(lang, p)}</td><td className="hl">{periodDates(lang, p)}</td><td className="num" style={{ color: 'var(--ink)' }}><b>{eur(p.week_eur)}</b></td></tr>)}</tbody>
+                <tbody>{y.prices.map((p) => <tr key={p.starts_on}><td>{seasonName(lang, p)}</td><td className="hl">{periodDates(lang, p)}</td><td className="num" style={{ color: 'var(--ink)' }}><b>{eur(ourPrice(y, p.week_eur))}</b>{was(p.week_eur)}</td></tr>)}</tbody>
               </table></div>
-              <p className="disclaimer">{t(lang, 'The boat for one week, Saturday to Saturday. The service pack, deposit and extras are paid at the base.')}</p>
+              <p className="disclaimer">{pct
+                ? t(lang, 'The boat for one week, Saturday to Saturday: our price, {n}% below the list price crossed out under it. The service pack, deposit and extras are paid at the base.', { n: pct })
+                : t(lang, 'The boat for one week, Saturday to Saturday. The service pack, deposit and extras are paid at the base.')}</p>
             </section>
           ) : null}
           {always.length || y.extras.length ? (
@@ -136,7 +142,8 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
         <aside className="band ow-box" aria-label={t(lang, 'Charter')}>
           <div className="card-title">{boatTitle(y)}</div>
           <div className="card-meta">{[model, boatSpec(lang, y)].filter(Boolean).join(' · ')}</div>
-          <div className="ow-price"><b>{eur(y.charter_from_eur)}</b><span className="card-meta">{t(lang, 'a week, from')}</span></div>
+          <div className="ow-price"><b>{eur(from)}</b>{was(y.charter_from_eur)}<span className="card-meta">{t(lang, 'a week, from')}</span></div>
+          {pct ? <p className="ow-off"><svg className="i" aria-hidden="true"><use href="#ow-price" /></svg><span>{t(lang, '{n}% off the list price, every week of {year}.', { n: pct, year })}</span></p> : null}
           {y.service_pack_eur ? (
             <dl className="ow-facts">
               <div><svg className="i" aria-hidden="true"><use href="#ow-calendar" /></svg><dt>{t(lang, 'Check-in')}</dt><dd>{t(lang, 'Sat {time}', { time: '17:00' })}</dd></div>
@@ -152,8 +159,9 @@ export default async function Boat({ params }: PageProps<'/[lang]/fleet/[slug]'>
       </div>
       <div className="mbar">
         <div className="ow-mbar">
-          <p>{fullName(y)}</p>
-          <p><b>{eur(y.charter_from_eur)}</b> {t(lang, 'a week, from')}</p>
+          {/* Too narrow for both prices on one line: the first line says the discount. */}
+          <p>{pct ? <>{boatTitle(y)} · <span className="off">{t(lang, '{n}% off', { n: pct })}</span>{was(y.charter_from_eur)}</> : fullName(y)}</p>
+          <p><b>{eur(from)}</b> {t(lang, 'a week, from')}</p>
         </div>
         <a className="pill pill-primary" href="#">{t(lang, 'Ask about weeks')}</a>
       </div>

@@ -375,6 +375,9 @@ svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-widt
 .card-price b { font-weight: 700; }
 .card-price s { color: var(--muted); font-size: 14px; margin-left: 2px; }
 .card-off { font-weight: 700; font-size: 13px; color: var(--accent); margin-left: 4px; }
+/* Boat cards (home and fleet pages): model under the name, and our discount under the price */
+.card-model { display: block; margin-top: 2px; font-weight: 400; font-size: 15px; color: var(--muted); }
+.card-deal { font-family: var(--sans); font-size: 14px; line-height: 1.2; font-weight: 700; color: var(--accent); }
 
 /* Gallery at the top: mixed landscape and portrait photos on one baseline, scrolls sideways */
 html, body { overflow-x: clip; }

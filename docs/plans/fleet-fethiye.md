@@ -3,6 +3,22 @@
 Status: live since 11 Nov 2026 (migrations fleet_fethiye_schema and fleet_fethiye_data on production, deploy of f4b85fc).
 Still open: Mercuri's OK to publish their photos; deleting the 10 hidden sample rows and their photos.
 
+## Our 10 % charter discount (11 Nov 2026)
+
+- **What:** every week of 2027 on all 12 boats, our charter fee is the list price less 10 % (we keep 5 % of Mercuri's
+  15 %). Service pack, deposit and extras stay at list. The site shows our price with the list price crossed out.
+- **Designs:** `prototypes/fleet-discount/` (fleet, boat, prices, home), built by
+  `prototypes/_build/build_fleet_discount.py` from live pages saved in `_live/`.
+- **Database:** `web/supabase/migrations/20261111120000_fleet_discount.sql` adds `yachts.discount_pct` (0–99.9) and sets
+  10 on the published boats. Applied to production as version 20261111065744; the old code ignores the column.
+  `yacht_prices` and `charter_from_eur` keep list prices; change or end the offer by updating `discount_pct`.
+- **App:** `discountOf`, `ourPrice`, `boatPrice`, `boatDeal` in `src/lib/render.ts`. Cards (home and fleet), the fleet
+  cover fact and "−10 %" band, season table, boat page (price table, box, phone bar, JSON-LD offer), prices page and
+  `llms.txt` show our price. 10 new strings in ru/de/es. Also fixed: home did not load `app.css`, so the model ran into
+  the boat name on home cards; `.card-model` moved to `home.css`.
+- **Tested** with the dev server on production data: home, fleet, a boat page and prices in 4 languages return 200, the
+  expected number of crossed-out prices, no English left in ru/de/es. Not deployed yet.
+
 ## Progress (11 Nov 2026)
 
 - **Migrations:** `web/supabase/migrations/20261111100000_fleet_fethiye_schema.sql` (columns, `yacht_prices`,

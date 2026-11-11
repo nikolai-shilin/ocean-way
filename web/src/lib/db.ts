@@ -10,7 +10,7 @@ export type Yacht = { id: string; slug: string; sort: number; name: string | nul
   cabins: number; berths: number; extra_berths: number; skipper_cabin: boolean; heads: number | null; engines: number; engine_hp: number | null;
   base: string; marina: string | null; kind: 'monohull' | 'catamaran'; used_for: string; charter_from_eur: number; photo_id: string; photo_alt: string; description: string;
   max_guests: number | null; water_l: number | null; fuel_l: number | null; highlights: string[]; gallery: Shot[]; layout_photo_id: string | null;
-  service_pack_eur: number | null; deposit_eur: number | null; extras: Extra[]; prices: YachtPrice[]; translations?: Translations };
+  service_pack_eur: number | null; deposit_eur: number | null; discount_pct: number; extras: Extra[]; prices: YachtPrice[]; translations?: Translations };
 /** Something you can add at the base: a skipper, a one-way drop, a SUP. Paid there, in cash. */
 export type Extra = { name: string; note: string; price_eur: number; unit: 'day' | 'week' | 'booking' | 'trip' };
 /** The charter fee for one week in a season (NauSYS list price). */

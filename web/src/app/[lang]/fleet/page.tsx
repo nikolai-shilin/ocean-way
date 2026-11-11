@@ -7,7 +7,7 @@ import { t } from '@/lib/content';
 import { getYachts } from '@/lib/db';
 import { isSailingSeason, periodDates, seasonName } from '@/lib/fleet';
 import { breadcrumbs, Crumbs, meta, ORG } from '@/lib/meta';
-import { boatModel, boatTitle, eur, mixShots } from '@/lib/render';
+import { boatModel, boatTitle, discountOf, eur, mixShots, ourPrice } from '@/lib/render';
 import { path, SITE, type Lang } from '@/lib/site';
 
 export const revalidate = 300;
@@ -48,6 +48,11 @@ export default async function Fleet({ params }: PageProps<'/[lang]/fleet'>) {
     <button key={group + v} className={`tag${on ? ' tag-on' : ''}`} type="button" data-group={group} data-v={v} aria-pressed={on}>{label}<span className="tag-count">{n}</span></button>
   );
   const one = t(lang, '1 boat'), many = t(lang, '{n} boats');
+  // Our discount, when every boat has the same one: the cover fact and the band say it once for the fleet.
+  const pcts = [...new Set(yachts.map(discountOf))];
+  const pct = pcts.length === 1 ? pcts[0] : 0;
+  const year = periods[0]?.starts_on.slice(0, 4) ?? '';
+  const discounted = yachts.some((y) => discountOf(y) > 0);
   return (
     <Shell lang={lang} section="fleet" pathFor={path.fleet} jsonld={ld} scripts={[FILTER_JS]}>
       <Cover lang={lang} top={<Crumbs lang={lang} items={crumbs} />}
@@ -60,7 +65,16 @@ export default async function Fleet({ params }: PageProps<'/[lang]/fleet'>) {
           {mono ? <span className="fact"><svg className="i"><use href="#ow-monohull" /></svg>{t(lang, '{n} monohulls', { n: mono })}</span> : null}
           {cats ? <span className="fact"><svg className="i"><use href="#ow-catamaran" /></svg>{t(lang, '{n} catamarans', { n: cats })}</span> : null}
           <span className="fact"><svg className="i"><use href="#ow-calendar" /></svg>{t(lang, 'Saturday to Saturday')}</span>
+          {pct ? <span className="fact off"><svg className="i"><use href="#ow-price" /></svg>{t(lang, '{n}% off every charter week', { n: pct })}</span> : null}
         </div>} />
+
+      {pct ? (
+        <div className="band fl-deal">
+          <span className="big">−{t(lang, '{n}%', { n: pct })}</span>
+          <h3>{t(lang, 'Every boat, every week of {year}', { year })}</h3>
+          <p>{t(lang, 'Book a charter with us and the weekly fee is {n}% below the operator’s list price. The service pack, deposit and extras stay as listed.', { n: pct })}</p>
+        </div>
+      ) : null}
 
       <div className="fl-bar">
         <div className="tags" role="group" aria-label={t(lang, 'Filter boats')}>
@@ -76,16 +90,19 @@ export default async function Fleet({ params }: PageProps<'/[lang]/fleet'>) {
 
       {periods.length ? (
         <section className="fl-sec" id="prices">
-          <span className="kicker">{t(lang, 'Season {year}', { year: periods[0].starts_on.slice(0, 4) })}</span>
+          <span className="kicker">{t(lang, 'Season {year}', { year })}</span>
           <h2 className="h2">{t(lang, 'Weekly prices by season')}</h2>
-          <p>{t(lang, 'The charter fee for the boat for one week, Saturday to Saturday. Each boat’s lowest price between April and October is in blue.')}</p>
+          <p>{discounted
+            ? t(lang, 'Our price for the boat for one week, Saturday to Saturday, with the list price crossed out under it. Each boat’s lowest price between April and October is in blue.')
+            : t(lang, 'The charter fee for the boat for one week, Saturday to Saturday. Each boat’s lowest price between April and October is in blue.')}</p>
           <div className="tbl-wrap fl-season-wrap" tabIndex={0}>
             <table className="tbl fl-season">
               <thead><tr><th>{t(lang, 'Boat')}</th>{periods.map((p) => <th key={p.starts_on}>{seasonName(lang, p)}<span>{periodDates(lang, p)}</span></th>)}</tr></thead>
               <tbody>{yachts.filter((y) => y.prices.length).map((y) => (
                 <tr key={y.slug}>
                   <td><a href={path.boat(lang, y.slug)}><b>{boatTitle(y)}</b></a><span>{[boatModel(y), y.year].filter(Boolean).join(', ')}</span></td>
-                  {y.prices.map((p) => <td key={p.starts_on} className={isSailingSeason(p) && p.week_eur === y.charter_from_eur ? 'lo' : undefined}>{eur(p.week_eur)}</td>)}
+                  {y.prices.map((p) => <td key={p.starts_on} className={isSailingSeason(p) && p.week_eur === y.charter_from_eur ? 'lo' : undefined}>
+                    {eur(ourPrice(y, p.week_eur))}{discountOf(y) ? <s className="was">{eur(p.week_eur)}</s> : null}</td>)}
                 </tr>
               ))}</tbody>
             </table>
