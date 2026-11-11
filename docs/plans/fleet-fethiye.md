@@ -17,7 +17,9 @@ Still open: Mercuri's OK to publish their photos; deleting the 10 hidden sample 
   `llms.txt` show our price. 10 new strings in ru/de/es. Also fixed: home did not load `app.css`, so the model ran into
   the boat name on home cards; `.card-model` moved to `home.css`.
 - **Tested** with the dev server on production data: home, fleet, a boat page and prices in 4 languages return 200, the
-  expected number of crossed-out prices, no English left in ru/de/es. Not deployed yet.
+  expected number of crossed-out prices, no English left in ru/de/es.
+- **Live** since 11 Nov 2026 (deploy of 8b3dc7d from a clean export): 20 pages × 4 languages return 200 with our
+  prices, JSON-LD offers carry our price, `llms.txt` lists all 12 discounts.
 
 ## Progress (11 Nov 2026)
 
