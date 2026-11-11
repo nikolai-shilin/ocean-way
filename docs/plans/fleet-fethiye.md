@@ -1,6 +1,7 @@
 # Plan: put the Fethiye fleet (offer 77) on "Our fleet"
 
-Status: built and tested against a local copy of the database; production not touched (11 Nov 2026).
+Status: live since 11 Nov 2026 (migrations fleet_fethiye_schema and fleet_fethiye_data on production, deploy of f4b85fc).
+Still open: Mercuri's OK to publish their photos; deleting the 10 hidden sample rows and their photos.
 
 ## Progress (11 Nov 2026)
 
